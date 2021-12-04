@@ -1,1 +1,59 @@
 @import "_normalize";
+
+.wrapper {
+    height: 100%;
+    overflow: hidden;
+}
+._container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+.main-grid {
+    display: grid;
+    grid-template:
+        [row1] "headerArea headerArea" 50px [row2] "navbarArea contentArea" 1fr [row-end] /
+        [col1] 200px [col2] 1fr [col-end];
+    gap: 10px;
+    &__item {
+    }
+    &__header {
+        grid-area: headerArea;
+    }
+
+    &__navbar {
+        grid-area: navbarArea;
+    }
+
+    &__content {
+        grid-area: contentArea;
+    }
+}
+.header {
+    background-color: grey;
+    &__log {
+        width: 50px;
+        height: 50px;
+    }
+}
+.navbar {
+    background-color: green;
+    &__profile {
+    }
+
+    &__messages {
+    }
+
+    &__news {
+    }
+
+    &__music {
+    }
+
+    &__setting {
+    }
+}
+.content {
+    background-color: pink;
+    &__main {
+    }
+}
