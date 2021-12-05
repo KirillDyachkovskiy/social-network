@@ -1,6 +1,6 @@
 import React from "react";
 
-import avatar from "../../../../../img/avatar_01.jpg"
+import avatar from "../../../../img/avatar_01.jpg"
 
 class Card extends React.Component {
     render() {

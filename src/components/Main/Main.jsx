@@ -1,6 +1,6 @@
 import React from "react";
-import Sidebar from "./components/Sidebar";
-import Profile from "./components/profile/Profile";
+import Sidebar from "./Sidebar/Sidebar";
+import Profile from "./Profile/Profile";
 
 class Main extends React.Component {
     render() {

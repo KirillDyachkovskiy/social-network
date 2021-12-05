@@ -1,6 +1,6 @@
 import React from "react";
 
-import cover from "../../../../../img/cover_01.jpg"
+import cover from "../../../../img/cover_01.jpg"
 
 class Cover extends React.Component {
     render() {

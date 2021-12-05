@@ -1,7 +1,7 @@
 import React from "react";
-import Cover from "./components/Cover";
-import Card from "./components/Card";
-import Posts from "./components/Posts";
+import Cover from "./Cover/Cover";
+import Card from "./Card/Card";
+import Posts from "./Posts/Posts";
 
 class Profile extends React.Component {
     render() {
