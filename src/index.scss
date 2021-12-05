@@ -10,6 +10,17 @@ body {
   line-height: 1em;
   background-color: #e8e8f0;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: 1.2em;
+  line-height: 1em;
+  font-weight: normal;
+}
 ul,
 li,
 ol {
@@ -20,6 +31,11 @@ ol {
 a {
   text-decoration: none;
   color: #000;
+}
+input {
+  border: none;
+  outline: none;
+  background-color: inherit;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;

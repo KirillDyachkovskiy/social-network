@@ -7,7 +7,7 @@ const Profile = () => {
     return (
         <section className={classNames.profile}>
             <Card />
-            {/* <Posts /> */}
+            <Posts />
         </section>
     );
 };

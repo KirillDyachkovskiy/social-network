@@ -1,16 +1,15 @@
-import classNames from "./Posts.module.scss"
+import classNames from "./Posts.module.scss";
+
+import { Title } from "./Title";
+import { New } from "./New/New";
+import { Wall } from "./Wall";
 
 const Posts = () => {
     return (
-        <section>
-            <h2>My posts</h2>
-            <div className={classNames.new}>
-            </div>
-            <div className={classNames.list}>
-                <div className={classNames.list}>Пост 1</div>
-                <div className={classNames.list}>Пост 2</div>
-                <div className={classNames.list}>Пост 3</div>
-            </div>
+        <section className={classNames.posts}>
+            <New />
+            <Title />
+            <Wall />
         </section>
     );
 }

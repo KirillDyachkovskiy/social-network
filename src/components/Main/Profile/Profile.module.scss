@@ -1,8 +1,8 @@
 .profile {
     display: grid;
-    grid-template: auto 1fr / 1fr;
+    grid-template: auto auto 1fr/ 1fr;
     grid-template-areas:
         "card"
         "posts";
-    gap: 30px;
+    gap: 10px;
 }
