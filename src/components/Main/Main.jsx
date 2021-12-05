@@ -1,20 +1,17 @@
-import React from "react";
-import Sidebar from "./Sidebar/Sidebar";
-import Profile from "./Profile/Profile";
+import classNames from "./Main.module.scss";
 
-class Main extends React.Component {
-    render() {
-        return (
-            <main className="main">
-                <div className="main__container _container">
-                    <Sidebar />
-                    <section className="main__content">
-                        <Profile />
-                    </section>
-                </div>
-            </main>
-        );
-    }
+import { Sidebar } from "./Sidebar";
+import { Profile } from "./Profile";
+
+const Main = () => {
+    return (
+        <main className={classNames.main}>
+            <div className={classNames.container}>
+                <Sidebar />
+                <Profile />
+            </div>
+        </main>
+    );
 }
 
-export default Main;
+export { Main };

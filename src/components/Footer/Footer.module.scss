@@ -1,0 +1,18 @@
+@import "../variables.scss";
+
+.footer {
+    grid-area: footer;
+
+    background-color: $footer-color;
+    color: #ffffff;
+    font-size: 0.8em;
+    line-height: 1.5em;
+}
+.container {
+    @include container();
+
+    p {
+        margin: 0;
+        padding: 15px 0;
+    }
+}

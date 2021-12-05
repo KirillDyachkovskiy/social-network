@@ -1,3 +1,11 @@
 .wrapper {
-  background-color: red;
+    min-height: 100vh;
+
+    display: grid;
+    grid-template: 48px 1fr auto/ 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    gap: 10px;
 }

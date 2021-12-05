@@ -1,0 +1,9 @@
+@import "../variables.scss";
+
+.header {
+    grid-area: header;
+    background-color: $main-blue;
+}
+.container {
+    @include container();
+}

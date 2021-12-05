@@ -1,0 +1,13 @@
+@import "../../../../variables.scss";
+
+.info {
+    grid-area: info;
+
+    color: $gray-text;
+    font-size: 0.8em;
+    line-height: 1.5em;
+}
+.row {
+    display: grid;
+    grid-template: 1fr / 150px 1fr;
+}

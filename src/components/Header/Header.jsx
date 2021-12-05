@@ -1,16 +1,15 @@
-import React from "react";
+import classNames from "./Header.module.scss";
 
-class Header extends React.Component {
-    render() {
-        return (
-            <header className="header">
-                <div className="header__container _container">
-                    <div className="header__logo">
-                    </div>
-                </div>
-            </header>
-        );
-    }
-}
+import { Logo } from "./Logo";
 
-export default Header;
+const Header = () => {
+    return (
+        <header className={classNames.header}>
+            <div className={classNames.container}>
+                <Logo />
+            </div>
+        </header>
+    );
+};
+
+export { Header };

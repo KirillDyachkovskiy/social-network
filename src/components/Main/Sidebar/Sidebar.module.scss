@@ -1,0 +1,19 @@
+@import "../../variables.scss";
+
+.menu {
+    @include field();
+}
+
+.item {
+    &:last-child {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        margin: 5px 0 0 0;
+    }
+}
+.link {
+    color: $gray-text;
+    line-height: 30px;
+    &:hover {
+        color: black;
+    }
+}

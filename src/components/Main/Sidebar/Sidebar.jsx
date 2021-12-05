@@ -1,31 +1,29 @@
-import React from "react";
+import classNames from "./Sidebar.module.scss";
 
-class Sidebar extends React.Component {
-    render() {
-        return (
-            <aside className="main__sidebar sidebar">
-                <nav className="sidebar__menu">
-                    <ul className="sidebar__list">
-                        <li className="sidebar__item">
-                            <a href="" className="sidebar__link">Profile</a>
-                        </li>
-                        <li className="sidebar__item">
-                            <a href="" className="sidebar__link">Message</a>
-                        </li>
-                        <li className="sidebar__item">
-                            <a href="" className="sidebar__link">News</a>
-                        </li>
-                        <li className="sidebar__item">
-                            <a href="" className="sidebar__link">Music</a>
-                        </li>
-                        <li className="sidebar__item">
-                            <a href="" className="sidebar__link">Settings</a>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
-        );
-    }
+const Sidebar = () => {
+    return (
+        <aside>
+            <nav className={classNames.menu}>
+                <ul>
+                    <li className={classNames.item}>
+                        <a href="" className={classNames.link}>Profile</a>
+                    </li>
+                    <li className={classNames.item}>
+                        <a href="" className={classNames.link}>Message</a>
+                    </li>
+                    <li className={classNames.item}>
+                        <a href="" className={classNames.link}>News</a>
+                    </li>
+                    <li className={classNames.item}>
+                        <a href="" className={classNames.link}>Music</a>
+                    </li>
+                    <li className={classNames.item}>
+                        <a href="" className={classNames.link}>Settings</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+    );
 }
 
-export default Sidebar;
+export { Sidebar };
