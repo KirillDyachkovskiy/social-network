@@ -1,11 +1,13 @@
 import React from "react";
 
+import avatar from "../../../../../img/avatar_01.jpg"
+
 class Card extends React.Component {
     render() {
         return (
             <div className="profile__card card">
                 <div className="card__avatar">
-                    <img src="img/avatar_01.jpg" alt="" />
+                    <img src={avatar} alt="аватарка профиля" />
                 </div>
                 <h1 className="card__name">Кирилл Мохначевский</h1>
                 <div className="card__info">
