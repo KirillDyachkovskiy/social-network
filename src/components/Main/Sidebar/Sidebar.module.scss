@@ -14,6 +14,9 @@
     color: $gray-text;
     line-height: 30px;
     &:hover {
-        color: black;
+        color: #000000;
+    }
+    &.active {
+        color: #000000;
     }
 }

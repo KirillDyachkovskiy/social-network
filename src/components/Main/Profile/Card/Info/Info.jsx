@@ -17,7 +17,7 @@ const Info = () => {
             </div>
             <div className={classNames.row}>
                 <span>Wed-site:</span>
-                <span>https://github.com/KirillDyachkovskiy</span>
+                <a href="https://github.com/KirillDyachkovskiy">https://github.com/KirillDyachkovskiy</a>
             </div>
         </section>
     );

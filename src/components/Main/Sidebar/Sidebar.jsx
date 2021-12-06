@@ -6,7 +6,7 @@ const Sidebar = () => {
             <nav className={classNames.menu}>
                 <ul>
                     <li className={classNames.item}>
-                        <a href="" className={classNames.link}>Profile</a>
+                        <a href="" className={`${classNames.link} ${classNames.active}`}>Profile</a>
                     </li>
                     <li className={classNames.item}>
                         <a href="" className={classNames.link}>Message</a>
