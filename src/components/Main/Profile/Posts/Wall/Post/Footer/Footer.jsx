@@ -1,10 +1,11 @@
 import classNames from "./Footer.module.scss";
 
-const Footer = () => {
+const Footer = (props) => {
     return (
         <div className={classNames.footer}>
-            <div className={classNames.like}>
-                like
+            <span>❤</span>
+            <div className={classNames.likes}>
+                {props.likes}
             </div>
         </div>
     );

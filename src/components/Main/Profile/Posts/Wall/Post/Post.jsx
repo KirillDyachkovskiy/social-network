@@ -3,14 +3,14 @@ import classNames from "./Post.module.scss";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
-const Post = () => {
+const Post = (props) => {
     return (
         <section className={classNames.post}>
             <Header />
             <div className={classNames.content}>
-                Тут будет контент
+                <p>{props.message}</p>
             </div>
-            <Footer />
+            <Footer likes={props.likes} />
         </section>
     );
 }
