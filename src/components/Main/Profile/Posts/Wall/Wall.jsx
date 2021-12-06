@@ -1,12 +1,14 @@
-import classNames from "./Wall.module.scss"
+import classNames from "./Wall.module.scss";
+
+import { Post } from "./Post/Post";
 
 const Wall = () => {
     return (
-        <div className={classNames.wall}>
-            <div className={classNames.item}>Пост 1</div>
-            <div className={classNames.item}>Пост 2</div>
-            <div className={classNames.item}>Пост 3</div>
-        </div>
+        <section className={classNames.wall}>
+            <Post />
+            <Post />
+            <Post />
+        </section>
     );
 }
 

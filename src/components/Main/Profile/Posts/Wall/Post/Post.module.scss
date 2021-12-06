@@ -1,0 +1,13 @@
+@import "../../../../../variables.scss";
+
+.post {
+    @include field();
+
+    display: grid;
+    grid-template: auto 1fr auto/ 1fr;
+    grid-template-areas:
+        "header"
+        "content"
+        "footer";
+    gap: 20px;
+}
