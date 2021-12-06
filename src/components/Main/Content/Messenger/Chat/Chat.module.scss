@@ -1,0 +1,5 @@
+@import "source/scss/variables.scss";
+
+.chat {
+    @include field();
+}

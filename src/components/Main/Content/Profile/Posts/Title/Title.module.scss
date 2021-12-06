@@ -1,0 +1,13 @@
+@import "source/scss/variables.scss";
+
+.title {
+    grid-area: title;
+    p {
+        margin: 0;
+    }
+
+    @include field();
+    border-radius: 5px 5px 0 0;
+    margin: 0 0 -13px;
+    z-index: 1;
+}

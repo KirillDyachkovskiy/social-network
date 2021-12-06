@@ -1,0 +1,13 @@
+@import "source/scss/variables.scss";
+
+.wall {
+    grid-area: wall;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 10px;
+}
+.item {
+    @include field();
+}

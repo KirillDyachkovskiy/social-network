@@ -1,0 +1,19 @@
+@import "source/scss/variables.scss";
+
+.info {
+    grid-area: info;
+
+    color: $gray-text;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    a {
+        color: $gray-text;
+        &:hover {
+            color: #000000;
+        }
+    }
+}
+.row {
+    display: grid;
+    grid-template: 1fr / 150px 1fr;
+}
