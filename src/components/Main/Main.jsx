@@ -1,14 +1,14 @@
 import classNames from "./Main.module.scss";
 
 import { Sidebar } from "./Sidebar";
-import { Content } from "./Content";
+import { Page } from "./Page";
 
 const Main = () => {
     return (
         <main className={classNames.main}>
             <div className={classNames.container}>
                 <Sidebar />
-                <Content />
+                <Page />
             </div>
         </main>
     );

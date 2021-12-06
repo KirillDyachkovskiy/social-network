@@ -1,0 +1,10 @@
+@import "../../../../../variables.scss";
+
+.avatar {
+    grid-area: avatar;
+
+    width: 160px;
+    height: 160px;
+
+    @include adaptIMG();
+}
