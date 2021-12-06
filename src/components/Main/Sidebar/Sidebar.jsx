@@ -6,19 +6,19 @@ const Sidebar = () => {
             <nav className={classNames.menu}>
                 <ul>
                     <li className={classNames.item}>
-                        <a href="" className={`${classNames.link} ${classNames.active}`}>Profile</a>
+                        <a href="/profile" className={`${classNames.link} ${classNames.active}`}>Profile</a>
                     </li>
                     <li className={classNames.item}>
-                        <a href="" className={classNames.link}>Message</a>
+                        <a href="/im" className={classNames.link}>Messenger</a>
                     </li>
                     <li className={classNames.item}>
-                        <a href="" className={classNames.link}>News</a>
+                        <a href="/feed" className={classNames.link}>News</a>
                     </li>
                     <li className={classNames.item}>
-                        <a href="" className={classNames.link}>Music</a>
+                        <a href="/music" className={classNames.link}>Music</a>
                     </li>
                     <li className={classNames.item}>
-                        <a href="" className={classNames.link}>Settings</a>
+                        <a href="/settings" className={classNames.link}>Settings</a>
                     </li>
                 </ul>
             </nav>

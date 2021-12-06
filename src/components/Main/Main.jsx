@@ -1,16 +1,16 @@
+
+
 import classNames from "./Main.module.scss";
 
 import { Sidebar } from "./Sidebar";
-import { Profile } from "./Profile";
-import { Messenger } from "./Messenger";
+import { Content } from "./Content";
 
 const Main = () => {
     return (
         <main className={classNames.main}>
             <div className={classNames.container}>
                 <Sidebar />
-                {/* <Profile /> */}
-                <Messenger />
+                <Content />
             </div>
         </main>
     );
