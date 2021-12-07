@@ -4,16 +4,12 @@
     @include field();
 }
 
-.item {
-    a {
-        color: $gray-text;
-        line-height: 30px;
-        &:hover {
-            color: #000000;
-        }
-        & .active {
-            color: #000000;
-        }
+a {
+    display: block;
+    color: $gray-text;
+    line-height: 30px;
+    &:hover {
+        color: #000000;
     }
     &:last-child {
         border-top: 1px solid rgba(#000000, 0.1);
