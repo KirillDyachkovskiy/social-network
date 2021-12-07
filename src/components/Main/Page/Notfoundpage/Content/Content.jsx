@@ -4,7 +4,7 @@ const Content = () => {
     return (
         <section className={classNames.content}>
             <div>
-                тут будет текущий диалог
+                Страница не найдена!
             </div>
         </section>
     );

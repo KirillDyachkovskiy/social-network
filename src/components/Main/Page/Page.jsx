@@ -1,21 +1,16 @@
-import {
-    BrowserRouter as Router,
-    NavLink as Link,
-    Routes,
-    Route
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import { Profile } from "./Profile";
 import { Messenger } from "./Messenger";
+import { Notfoundpage } from "./Notfoundpage";
 
 const Page = () => {
     return (
-        <Router>
-            <Routes>
-                <Route exact path="/" element={<Profile />} />
-                <Route path="/messenger" element={<Messenger />} />
-            </Routes>
-        </Router>
+        <Routes>
+            <Route path="/" element={<Profile />} />
+            <Route path="/messenger" element={<Messenger />} />
+            <Route path="*" element={<Notfoundpage />} />
+        </Routes>
     );
 }
 

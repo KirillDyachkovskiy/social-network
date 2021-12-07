@@ -2,9 +2,11 @@ import classNames from "./Menu.module.scss";
 
 const Menu = () => {
     return (
-        <section className={classNames.chat}>
-            тут будет текущий чат
-        </section>
+        <aside className="">
+            <div className={classNames.menu}>
+                тут будет список диалогов
+            </div>
+        </aside>
     );
 }
 
