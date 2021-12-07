@@ -1,11 +1,11 @@
-import classNames from "./Main.module.scss";
+import c from "./Main.module.scss";
 
 import { Sidebar } from "./Sidebar";
 import { Page } from "./Page";
 
 const Main = () => (
-    <main className={classNames.main}>
-        <div className={classNames.container}>
+    <main className={c.main}>
+        <div className={c.container}>
             <Sidebar />
             <Page />
         </div>

@@ -1,12 +1,12 @@
-import classNames from "./Header.module.scss";
+import c from "./Header.module.scss";
 
 const Header = () => (
-    <div className={classNames.header}>
-        <div className={classNames.avatar}>
+    <div className={c.header}>
+        <div className={c.avatar}>
             <img src="img/avatar_01.jpg" />
         </div>
-        <h1 className={classNames.name}>Кирилл Мохначевский</h1>
-        <div className={classNames.time}>
+        <h1 className={c.name}>Кирилл Мохначевский</h1>
+        <div className={c.time}>
             вчера в 10:21
         </div>
     </div>

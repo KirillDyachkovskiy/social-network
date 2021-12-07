@@ -1,7 +1,7 @@
-import classNames from "./Title.module.scss"
+import c from "./Title.module.scss"
 
 const Title = () => (
-    <div className={classNames.title}>
+    <div className={c.title}>
         <p>My posts</p>
     </div>
 );

@@ -2,4 +2,7 @@
 
 .menu {
     @include field();
+    a {
+        @include navbar();
+    }
 }

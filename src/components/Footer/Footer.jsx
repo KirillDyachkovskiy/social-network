@@ -1,8 +1,8 @@
-import classNames from "./Footer.module.scss";
+import c from "./Footer.module.scss";
 
 const Footer = () => (
-    <footer className={classNames.footer}>
-        <div className={classNames.container}>
+    <footer className={c.footer}>
+        <div className={c.container}>
             <p>Все права пока не защищены</p>
             <p>Saloon - российская социальная сеть со штаб-квартирой в Москве.Сайт доступен на 1 языке;
                 особенно популярен среди русскоязычных пользователей.«Saloon» позволяет пользователям

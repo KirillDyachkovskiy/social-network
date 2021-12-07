@@ -1,10 +1,10 @@
-import classNames from "./Header.module.scss";
+import c from "./Header.module.scss";
 
 import { Logo } from "./Logo";
 
 const Header = () => (
-    <header className={classNames.header}>
-        <div className={classNames.container}>
+    <header className={c.header}>
+        <div className={c.container}>
             <Logo />
         </div>
     </header>

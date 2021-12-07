@@ -1,12 +1,12 @@
-import classNames from "./Posts.module.scss";
+import c from "./Posts.module.scss";
 
 import { Title } from "./Title";
-import { Submit } from "./Submit";
+import { SubmitPost } from "./SubmitPost";
 import { Wall } from "./Wall";
 
 const Posts = () => (
-    <section className={classNames.posts}>
-        <Submit />
+    <section className={c.posts}>
+        <SubmitPost />
         <Title />
         <Wall />
     </section>

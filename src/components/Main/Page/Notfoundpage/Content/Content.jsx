@@ -1,7 +1,7 @@
-import classNames from "./Content.module.scss";
+import c from "./Content.module.scss";
 
 const Content = () => (
-    <section className={classNames.content}>
+    <section className={c.content}>
         <div>
             Страница не найдена!
         </div>

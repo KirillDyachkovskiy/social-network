@@ -1,7 +1,7 @@
-import classNames from "./Name.module.scss";
+import c from "./Name.module.scss";
 
 const Name = () => (
-    <h1 className={classNames.name}>Кирилл Мохначевский</h1>
+    <h1 className={c.name}>Кирилл Мохначевский</h1>
 );
 
 export { Name };

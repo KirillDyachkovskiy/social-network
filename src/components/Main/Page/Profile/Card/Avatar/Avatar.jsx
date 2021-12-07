@@ -1,7 +1,7 @@
-import classNames from "./Avatar.module.scss";
+import c from "./Avatar.module.scss";
 
 const Avatar = () => (
-    <div className={classNames.avatar}>
+    <div className={c.avatar}>
         <img src="img/avatar_01.jpg" alt="" />
     </div>
 );

@@ -1,13 +1,13 @@
-import classNames from "./Post.module.scss";
+import c from "./Post.module.scss";
 
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 const Post = (props) => {
     return (
-        <section className={classNames.post}>
+        <section className={c.post}>
             <Header />
-            <div className={classNames.content}>
+            <div className={c.content}>
                 <p>{props.message}</p>
             </div>
             <Footer likes={props.likes} />

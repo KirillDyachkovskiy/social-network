@@ -1,9 +1,9 @@
-import classNames from "./Wall.module.scss";
+import c from "./Wall.module.scss";
 
 import { Post } from "./Post/Post";
 
 const Wall = () => (
-    <section className={classNames.wall}>
+    <section className={c.wall}>
         <Post likes="7" message="Что разум человека может постигнуть и во что он может поверить, того он способен достичь. Наполеон Хилл" />
         <Post likes="11" message="Стремитесь не к успеху, а к ценностям, которые он дает. Альберт Эйнштейн" />
         <Post likes="9" message="Надо любить жизнь больше, чем смысл жизни. Фёдор Достоевский" />

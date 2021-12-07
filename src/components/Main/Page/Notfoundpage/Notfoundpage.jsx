@@ -1,9 +1,9 @@
-import classNames from "./Notfoundpage.module.scss";
+import c from "./Notfoundpage.module.scss";
 
 import { Content } from "./Content";
 
 const Notfoundpage = () => (
-    <section className={classNames.notfoundpage}>
+    <section className={c.notfoundpage}>
         <Content />
     </section>
 );

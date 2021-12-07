@@ -1,10 +1,10 @@
-import classNames from "./Profile.module.scss";
+import c from "./Profile.module.scss";
 
 import { Card } from "./Card";
 import { Posts } from "./Posts";
 
 const Profile = () => (
-    <section className={classNames.profile}>
+    <section className={c.profile}>
         <Card />
         <Posts />
     </section>

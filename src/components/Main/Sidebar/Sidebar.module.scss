@@ -2,20 +2,11 @@
 
 .menu {
     @include field();
-}
-
-a {
-    display: block;
-    color: $gray-text;
-    line-height: 30px;
-    &:hover {
-        color: #000000;
-    }
-    &:last-child {
-        border-top: 1px solid rgba(#000000, 0.1);
-        margin: 5px 0 0 0;
-    }
-    &.active {
-        color: #000000;
+    a {
+        @include navbar();
+        &:last-child {
+            border-top: 1px solid rgba(#000000, 0.1);
+            margin: 5px 0 0 0;
+        }
     }
 }
