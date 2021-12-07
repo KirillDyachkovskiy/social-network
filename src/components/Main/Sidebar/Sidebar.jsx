@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 import classNames from "./Sidebar.module.scss";
@@ -7,23 +7,11 @@ const Sidebar = () => {
     return (
         <aside>
             <nav className={classNames.menu}>
-                <ul>
-                    <li className={classNames.item}>
-                        <Link to="/">Profile</Link>
-                    </li>
-                    <li className={classNames.item}>
-                        <Link to="/messenger">Messenger</Link>
-                    </li>
-                    <li className={classNames.item}>
-                        <Link to="/news">News</Link>
-                    </li>
-                    <li className={classNames.item}>
-                        <Link to="/music">Music</Link>
-                    </li>
-                    <li className={classNames.item}>
-                        <Link to="/setting">Settings</Link>
-                    </li>
-                </ul>
+                <NavLink to="/">Profile</NavLink>
+                <NavLink to="/messenger">Messenger</NavLink>
+                <NavLink to="/news">News</NavLink>
+                <NavLink to="/music">Music</NavLink>
+                <NavLink to="/setting">Settings</NavLink>
             </nav>
         </aside>
     );
