@@ -3,15 +3,13 @@ import classNames from "./Main.module.scss";
 import { Sidebar } from "./Sidebar";
 import { Page } from "./Page";
 
-const Main = () => {
-    return (
-        <main className={classNames.main}>
-            <div className={classNames.container}>
-                <Sidebar />
-                <Page />
-            </div>
-        </main>
-    );
-}
+const Main = () => (
+    <main className={classNames.main}>
+        <div className={classNames.container}>
+            <Sidebar />
+            <Page />
+        </div>
+    </main>
+);
 
 export { Main };

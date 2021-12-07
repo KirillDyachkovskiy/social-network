@@ -1,18 +1,15 @@
 import classNames from "./Posts.module.scss";
 
 import { Title } from "./Title";
-import { New } from "./New/New";
+import { Submit } from "./Submit";
 import { Wall } from "./Wall";
 
-const Posts = () => {
-    return (
-        <section className={classNames.posts}>
-            <New />
-            <Title />
-            <Wall />
-        </section>
-    );
-}
-
+const Posts = () => (
+    <section className={classNames.posts}>
+        <Submit />
+        <Title />
+        <Wall />
+    </section>
+);
 
 export { Posts };
