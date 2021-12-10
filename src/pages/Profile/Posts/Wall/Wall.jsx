@@ -3,7 +3,7 @@ import c from "./Wall.module.scss";
 import { Post } from "./Post/Post";
 
 const Wall = () => {
-    let postsData = [
+    const postsData = [
         { id: 1, likes: Math.ceil(Math.random() * 100), message: "Что разум человека может постигнуть и во что он может поверить, того он способен достичь. Наполеон Хилл" },
         { id: 2, likes: Math.ceil(Math.random() * 100), message: "Стремитесь не к успеху, а к ценностям, которые он дает. Альберт Эйнштейн" },
         { id: 3, likes: Math.ceil(Math.random() * 100), message: "Надо любить жизнь больше, чем смысл жизни. Фёдор Достоевский" },

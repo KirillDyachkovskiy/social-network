@@ -1,20 +1,20 @@
 import c from "./Content.module.scss";
+import { Message } from './Message'
 
-const Message = (props) => {
-    const { text } = props;
+const Content = () => {
+    const messagesData = [
+        { id: 1, sender: 1, text: "Hi" },
+        { id: 2, sender: 2, text: "I'm glad to see you" },
+        { id: 3, sender: 1, text: "We'll go to the gym tomorrow" },
+    ]
+
+    const messages = messagesData.map(m => <Message key={m.id.toString()} id={m.id} sender={m.sender} text={m.text} />)
+
     return (
-        <div className="message">{text}</div>
+        <section className={c.content}>
+            {messages}
+        </section>
     )
-}
-
-const Content = () => (
-    <section className={c.content}>
-        <div className="messages">
-            <Message text="Hi" />
-            <Message text="I'm glad to see you" />
-            <Message text="We'll go to the gym tomorrow" />
-        </div>
-    </section>
-);
+};
 
 export { Content };
