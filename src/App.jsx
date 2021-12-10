@@ -9,7 +9,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />} >
         <Route index element={<Profile />} />
-        <Route path="messenger" element={<Messenger />} />
+        {/* <Route path="messenger" element={<Messenger />} /> */}
+        <Route path="messenger/*" element={<Messenger />} />
         <Route path="*" element={<Notfound />} />
       </Route>
     </Routes>

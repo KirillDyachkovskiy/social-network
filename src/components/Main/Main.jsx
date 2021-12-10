@@ -5,7 +5,7 @@ import c from "./Main.module.scss";
 const setActive = ({ isActive }) => (isActive) ? c.active : '';
 
 const Main = () => (
-    <main className="lol">
+    <main>
         <div className={c.container}>
             <aside>
                 <nav className={c.menu}>
