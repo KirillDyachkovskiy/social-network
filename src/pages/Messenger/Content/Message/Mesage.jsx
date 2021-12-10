@@ -5,12 +5,10 @@ const Message = (props) => {
 
     // const setActive = ({ isActive }) => (isActive) ? c.active : '';
 
-    //     const setStyle = () => (sender === 1) ? c.to : c.from;
-
+    // const setStyle = ({ sender }) => (sender === 1) ? c.to : c.from;
     // console.log(setStyle);
-
     return (
-        <div className={'sdsd'}>{text}</div>
+        <div className={"lorem"}>{text}</div>
     )
 }
 

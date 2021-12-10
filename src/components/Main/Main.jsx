@@ -4,8 +4,6 @@ import c from "./Main.module.scss";
 
 const Main = () => {
     const setActive = ({ isActive }) => (isActive) ? c.active : '';
-    console.log(setActive);
-    console.log("lol");
     return (
         <main>
             <div className={c.container}>
