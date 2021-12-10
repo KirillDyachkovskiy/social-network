@@ -1,22 +1,23 @@
-import { Routes, Route } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
-import { Layout } from './Layout';
-import { Profile } from './pages/Profile';
-import { Messenger } from './pages/Messenger';
-import { Notfound } from './pages/Notfound';
+import c from "./Main.module.scss";
+
+const setActive = ({ isActive }) => (isActive) ? c.active : '';
 
 const Main = () => (
-    <main>
-        <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Profile />} />
-                <Route path="messenger" element={<Messenger />} />
-                {/* <Route path="news" element={<News />} />
-                    <Route path="music" element={<Music />} />
-                    <Route path="setting" element={<Setting />} /> */}
-                <Route path="*" element={<Notfound />} />
-            </Route>
-        </Routes>
+    <main className="lol">
+        <div className={c.container}>
+            <aside>
+                <nav className={c.menu}>
+                    <NavLink className={setActive} to="/">Profile</NavLink>
+                    <NavLink className={setActive} to="/messenger">Messenger</NavLink>
+                    <NavLink className={setActive} to="/news">News</NavLink>
+                    <NavLink className={setActive} to="/music">Music</NavLink>
+                    <NavLink className={setActive} to="/setting">Settings</NavLink>
+                </nav>
+            </aside>
+            <Outlet />
+        </div>
     </main>
 );
 

@@ -40,6 +40,9 @@ input {
   outline: none;
   background-color: inherit;
 }
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+.wrapper {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  gap: 10px;
 }

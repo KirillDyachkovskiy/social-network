@@ -1,0 +1,20 @@
+@import "../../../variables.scss";
+
+.card {
+    display: grid;
+    grid-template: auto 1fr / auto;
+    grid-template-areas:
+        "cover"
+        "box";
+    gap: 10px;
+}
+.box {
+    @include field();
+
+    display: grid;
+    grid-template: auto 1fr / auto 1fr;
+    grid-template-areas:
+        "avatar name"
+        "avatar info";
+    gap: 20px;
+}
