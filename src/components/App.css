@@ -1,0 +1,7 @@
+.wrapper {
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-rows: 48px 1fr auto;
+    gap: 10px;
+}

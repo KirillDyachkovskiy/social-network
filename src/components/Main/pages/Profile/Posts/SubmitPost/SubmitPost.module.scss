@@ -1,0 +1,33 @@
+@import "../../../../../../variables.scss";
+
+.new {
+    grid-area: new;
+
+    @include field();
+
+    display: grid;
+    grid-template: 1fr / 1fr auto;
+    gap: 20px;
+}
+.input {
+    margin: -5px;
+    padding: 10px;
+    &:focus,
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+.button {
+    @include field();
+
+    color: #ffffff;
+    background-color: $main-blue;
+
+    margin: -5px;
+    cursor: pointer;
+
+    padding: 5px 40px;
+    &:hover {
+        background-color: rgba($main-blue, 0.9);
+    }
+}

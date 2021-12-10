@@ -1,14 +1,22 @@
-import c from "./Main.module.scss";
+import { Routes, Route } from "react-router-dom";
 
-import { Sidebar } from "./Sidebar";
-import { Page } from "./Page";
+import { Layout } from './Layout';
+import { Profile } from './pages/Profile';
+import { Messenger } from './pages/Messenger';
+import { Notfound } from './pages/Notfound';
 
 const Main = () => (
-    <main className={c.main}>
-        <div className={c.container}>
-            <Sidebar />
-            <Page />
-        </div>
+    <main>
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<Profile />} />
+                <Route path="messenger" element={<Messenger />} />
+                {/* <Route path="news" element={<News />} />
+                    <Route path="music" element={<Music />} />
+                    <Route path="setting" element={<Setting />} /> */}
+                <Route path="*" element={<Notfound />} />
+            </Route>
+        </Routes>
     </main>
 );
 
