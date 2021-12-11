@@ -8,7 +8,7 @@ const Posts = (props) => {
     const { state } = props;
     return (
         <section className={c.posts}>
-            <SubmitPost />
+            <SubmitPost addPost={state.addPost} />
             <Title />
             <Wall posts={state.posts} />
         </section>

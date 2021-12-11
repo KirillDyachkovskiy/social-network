@@ -1,3 +1,5 @@
+import { render } from '../render';
+
 const state = {
     ui: {
         sidebar: {
@@ -18,6 +20,11 @@ const state = {
                 { id: 3, likes: Math.ceil(Math.random() * 100), message: "Надо любить жизнь больше, чем смысл жизни. Фёдор Достоевский" },
                 { id: 4, likes: Math.ceil(Math.random() * 100), message: "За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан" },
             ],
+            addPost: (message) => {
+                const newPost = { id: state.pages.profile.posts.length + 1, likes: Math.ceil(Math.random() * 100), message, }
+                state.pages.profile.posts.push(newPost);
+                render(state);
+            }
         },
         messenger: {
             dialogs: [
