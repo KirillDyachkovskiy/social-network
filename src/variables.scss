@@ -23,7 +23,7 @@
 }
 @mixin navbar {
   display: block;
-  color: $gray-text;
+  color: $grey-text;
   line-height: 30px;
   &:hover {
     color: #000000;
@@ -32,7 +32,8 @@
     color: #000000;
   }
 }
-$main-blue: #414c9b;
-$gray-text: #6d6d6d;
-$grey-field: #e8e8f0;
+$blue: #414c9b;
+$blue-bubble: rgba(#414c9b, 0.3);
+$grey-text: #6d6d6d;
+$grey-field: #f1f1f1;
 $liked-red: #c42929;

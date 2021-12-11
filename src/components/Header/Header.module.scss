@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 
 .header {
-    background-color: $main-blue;
+    background-color: $blue;
 }
 .container {
     @include container();

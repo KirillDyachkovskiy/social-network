@@ -9,7 +9,7 @@ const Profile = (props) => {
     return (
         <section className={c.profile}>
             <Card />
-            <Posts posts={state.posts} />
+            <Posts state={state} />
         </section>
     )
 };

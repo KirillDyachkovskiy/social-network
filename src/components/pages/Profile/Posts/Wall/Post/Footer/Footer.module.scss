@@ -14,7 +14,7 @@
 
     span {
         cursor: pointer;
-        color: $gray-text;
+        color: $grey-text;
         font-size: 1.4em;
         &:hover {
             color: $liked-red;
@@ -22,5 +22,5 @@
     }
 }
 .likes {
-    color: $gray-text;
+    color: $grey-text;
 }

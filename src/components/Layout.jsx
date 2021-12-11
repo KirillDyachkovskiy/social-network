@@ -1,13 +1,14 @@
 import { Header } from './Header'
 import { Main } from './Main'
 
-const Layout = () => {
+const Layout = (props) => {
+    const { state } = props;
     return (
         <div className="wrapper">
             <Header />
-            <Main />
+            <Main state={state.sidebar} />
         </div>
     )
 }
 
-export default Layout
+export { Layout }

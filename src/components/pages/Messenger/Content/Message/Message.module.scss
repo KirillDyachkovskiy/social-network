@@ -7,10 +7,11 @@
     word-wrap: break-word;
     margin-bottom: 5px;
     &.from {
-        background-color: $grey-field;
+        background-color: $blue-bubble;
         margin-right:auto;
     }
     &.to {
+        background-color: $grey-field;
         margin-left:auto;
     }
 }

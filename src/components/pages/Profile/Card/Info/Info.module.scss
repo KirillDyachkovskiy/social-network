@@ -3,11 +3,11 @@
 .info {
     grid-area: info;
 
-    color: $gray-text;
+    color: $grey-text;
     font-size: 0.8em;
     line-height: 1.5em;
     a {
-        color: $gray-text;
+        color: $grey-text;
         &:hover {
             color: #000000;
         }
