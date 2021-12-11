@@ -5,17 +5,17 @@ import { Notfound } from "./pages/Notfound";
 import { Profile } from "./pages/Profile";
 
 const App = (props) => {
-  const { posts, dialogs, messages } = props;
+  const { state } = props;
   return (
     <Routes>
       <Route path="/" element={<Layout />} >
-        <Route index element={<Profile posts={posts} />} />
-        <Route path="messenger" element={<Messenger dialogs={dialogs} messages={messages} />} />
-        <Route path="messenger/*" element={<Messenger dialogs={dialogs} messages={messages} />} />
+        <Route index element={<Profile state={state.profile} />} />
+        <Route path="messenger" element={<Messenger state={state.messenger} />} />
+        <Route path="messenger/*" element={<Messenger state={state.messenger} />} />
         <Route path="*" element={<Notfound />} />
       </Route>
     </Routes>
   );
 }
 
-export default App;
+export { App };

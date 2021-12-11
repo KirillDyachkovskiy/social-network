@@ -4,12 +4,12 @@ import { Card } from "./Card";
 import { Posts } from "./Posts";
 
 const Profile = (props) => {
-    const { posts } = props;
+    const { state } = props;
 
     return (
         <section className={c.profile}>
             <Card />
-            <Posts posts={posts} />
+            <Posts posts={state.posts} />
         </section>
     )
 };

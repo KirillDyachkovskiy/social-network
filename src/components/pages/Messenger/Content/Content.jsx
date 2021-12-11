@@ -2,13 +2,13 @@ import c from "./Content.module.scss";
 import { Message } from './Message'
 
 const Content = (props) => {
-    const { messages } = props;
+    const { state } = props;
 
-    const messagesElement = messages.map(m => <Message key={m.id.toString()} id={m.id} sender={m.sender} text={m.text} />)
+    const messages = state.messages.map(m => <Message key={m.id.toString()} id={m.id} sender={m.sender} text={m.text} />)
 
     return (
         <section className={c.content}>
-            {messagesElement}
+            {messages}
         </section>
     )
 };

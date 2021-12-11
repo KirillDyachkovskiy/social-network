@@ -4,16 +4,16 @@ import { Content } from "./Content"
 import { Dialog } from './Dialog'
 
 const Messenger = (props) => {
-    const { dialogs, messages } = props;
+    const { state } = props;
 
-    const dialogsElement = dialogs.map(d => (<Dialog key={d.id.toString()} id={d.id} name={d.name} />))
+    const dialogs = state.dialogs.map(d => (<Dialog key={d.id.toString()} id={d.id} name={d.name} />))
 
     return (
         <section className={c.messenger}>
-            <Content messages={messages} />
+            <Content state={state} />
             <aside>
                 <div className={c.menu}>
-                    {dialogsElement}
+                    {dialogs}
                 </div>
             </aside>
         </section>
