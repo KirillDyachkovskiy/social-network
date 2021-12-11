@@ -1,8 +1,0 @@
-@import "../../../../variables.scss";
-
-.cover {
-    grid-area: cover;
-
-    padding: 0 0 25% 0;
-    @include adaptIMG();
-}
