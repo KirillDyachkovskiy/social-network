@@ -2,4 +2,6 @@
 
 .content {
     @include field();
+    display: grid;
+    grid-template-rows: 1fr auto;
 }

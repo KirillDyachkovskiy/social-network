@@ -1,5 +1,6 @@
 import c from "./Content.module.scss";
 import { Message } from './Message'
+import { SubmitMessage } from "./SubmitMessage";
 
 const Content = (props) => {
     const { state } = props;
@@ -8,7 +9,10 @@ const Content = (props) => {
 
     return (
         <section className={c.content}>
-            {messages}
+            <div>
+                {messages}
+            </div>
+            <SubmitMessage />
         </section>
     )
 };
