@@ -2,16 +2,20 @@ import React from "react";
 import c from "./SubmitPost.module.scss"
 
 const SubmitPost = (props) => {
-    const inputRef = React.createRef();
+    let { profile } = props;
 
-    const addPost = () => {
-        props.addPost(inputRef.current.value);
-        inputRef.current.value = '';
+    const inputRef = React.createRef();
+    const onInputChange = () => {
+        profile.editNewPostText(inputRef.current.value);
+    }
+
+    const onButtonClick = () => {
+        profile.addNewPost();
     }
     return (
         <div className={c.new}>
-            <input type="text" ref={inputRef} className={c.input} placeholder="What's new?" />
-            <button type="button" className={c.button} onClick={addPost} >Post</button>
+            <input type="text" ref={inputRef} className={c.input} placeholder="What's new?" value={profile.newPostText} onChange={onInputChange} />
+            <button type="button" className={c.button} onClick={onButtonClick} >Post</button>
         </div>
     )
 }

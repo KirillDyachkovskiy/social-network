@@ -15,16 +15,21 @@ const state = {
     pages: {
         profile: {
             posts: [
-                { id: 1, likes: Math.ceil(Math.random() * 100), message: "Что разум человека может постигнуть и во что он может поверить, того он способен достичь. Наполеон Хилл" },
-                { id: 2, likes: Math.ceil(Math.random() * 100), message: "Стремитесь не к успеху, а к ценностям, которые он дает. Альберт Эйнштейн" },
-                { id: 3, likes: Math.ceil(Math.random() * 100), message: "Надо любить жизнь больше, чем смысл жизни. Фёдор Достоевский" },
-                { id: 4, likes: Math.ceil(Math.random() * 100), message: "За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан" },
+                { id: 1, likes: Math.ceil(Math.random() * 100), text: "Что разум человека может постигнуть и во что он может поверить, того он способен достичь. Наполеон Хилл" },
+                { id: 2, likes: Math.ceil(Math.random() * 100), text: "Стремитесь не к успеху, а к ценностям, которые он дает. Альберт Эйнштейн" },
+                { id: 3, likes: Math.ceil(Math.random() * 100), text: "Надо любить жизнь больше, чем смысл жизни. Фёдор Достоевский" },
+                { id: 4, likes: Math.ceil(Math.random() * 100), text: "За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан" },
             ],
-            addPost: (message) => {
-                const newPost = { id: state.pages.profile.posts.length + 1, likes: Math.ceil(Math.random() * 100), message, }
-                state.pages.profile.posts.push(newPost);
+            newPostText: "",
+            editNewPostText(text) {
+                this.newPostText = text;
                 render(state);
-            }
+            },
+            addNewPost() {
+                this.posts.push({ id: state.pages.profile.posts.length + 1, likes: Math.ceil(Math.random() * 100), text: this.newPostText, });
+                this.newPostText = '';
+                render(state);
+            },
         },
         messenger: {
             dialogs: [

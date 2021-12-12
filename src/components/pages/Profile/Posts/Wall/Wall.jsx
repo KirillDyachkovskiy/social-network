@@ -4,7 +4,7 @@ import { Post } from "./Post/Post";
 
 const Wall = (props) => {
     const { posts } = props;
-    const postsElement = posts.map(p => (<Post key={p.id.toString()} likes={p.likes} message={p.message} />))
+    const postsElement = posts.map(p => (<Post key={p.id.toString()} likes={p.likes} text={p.text} />))
 
     return (
         <section className={c.wall} >

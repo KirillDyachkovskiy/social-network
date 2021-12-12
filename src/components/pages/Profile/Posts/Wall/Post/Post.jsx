@@ -4,12 +4,12 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 const Post = (props) => {
-    const { message, likes } = props;
+    const { text, likes } = props;
     return (
         <section className={c.post}>
             <Header />
             <div className={c.content}>
-                <p>{message}</p>
+                <p>{text}</p>
             </div>
             <Footer likes={likes} />
         </section>
