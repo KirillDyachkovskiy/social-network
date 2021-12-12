@@ -4,17 +4,16 @@ import c from "./SubmitPost.module.scss"
 const SubmitPost = (props) => {
     let { profile } = props;
 
-    const inputRef = React.createRef();
-    const onInputChange = () => {
-        profile.editNewPostText(inputRef.current.value);
+    const onInputChange = (event) => {
+        profile.editNewPostText(event.target.value);
     }
 
     const onButtonClick = () => {
-        profile.addNewPost();
+        profile.addPost();
     }
     return (
         <div className={c.new}>
-            <input type="text" ref={inputRef} className={c.input} placeholder="What's new?" value={profile.newPostText} onChange={onInputChange} />
+            <input type="text" className={c.input} placeholder="What's new?" value={profile.newPostText} onChange={onInputChange} />
             <button type="button" className={c.button} onClick={onButtonClick} >Post</button>
         </div>
     )

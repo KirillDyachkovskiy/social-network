@@ -25,8 +25,8 @@ const state = {
                 this.newPostText = text;
                 render(state);
             },
-            addNewPost() {
-                this.posts.push({ id: state.pages.profile.posts.length + 1, likes: Math.ceil(Math.random() * 100), text: this.newPostText, });
+            addPost() {
+                this.posts.push({ id: this.posts.length + 1, likes: Math.ceil(Math.random() * 100), text: this.newPostText, });
                 this.newPostText = '';
                 render(state);
             },
@@ -44,6 +44,16 @@ const state = {
                 { id: 2, sender: 2, text: "I'm glad to see you" },
                 { id: 3, sender: 1, text: "We'll go to the gym tomorrow" },
             ],
+            newMessageText: "",
+            editNewMessageText(text) {
+                this.newMessageText = text;
+                render(state);
+            },
+            sendMessage() {
+                this.messages.push({ id: this.messages.length + 1, sender: Math.floor(Math.random() * 2), text: this.newMessageText, });
+                this.newMessageText = '';
+                render(state);
+            },
         },
     },
 }

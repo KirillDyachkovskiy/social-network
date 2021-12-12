@@ -1,14 +1,20 @@
 import React from "react";
 import c from "./SubmitMessage.module.scss"
 
-const SubmitMessage = () => {
-    const inputRef = React.createRef();
+const SubmitMessage = (props) => {
+    let { messenger } = props;
 
-    const addPost = () => alert(inputRef.current.value);
+    const onInputChange = (event) => {
+        messenger.editNewMessageText(event.target.value);
+    }
+
+    const onButtonClick = () => {
+        messenger.sendMessage();
+    }
     return (
         <div className={c.new}>
-            <input type="text" ref={inputRef} className={c.input} placeholder="Write a message" />
-            <button type="button" className={c.button} onClick={addPost} >Send</button>
+            <input type="text" className={c.input} placeholder="Write a message" value={messenger.newMessageText} onChange={onInputChange} />
+            <button type="button" className={c.button} onClick={onButtonClick} >Send</button>
         </div>
     )
 }

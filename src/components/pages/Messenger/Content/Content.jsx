@@ -12,7 +12,7 @@ const Content = (props) => {
             <div>
                 {messages}
             </div>
-            <SubmitMessage />
+            <SubmitMessage messenger={state} />
         </section>
     )
 };
