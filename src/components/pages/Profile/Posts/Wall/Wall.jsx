@@ -8,7 +8,7 @@ const Wall = (props) => {
 
     return (
         <section className={c.wall} >
-            {postsElement}
+            {postsElement.reverse()}
         </section >
     );
 };

@@ -1,5 +1,3 @@
-import { render } from '../render';
-
 const state = {
     ui: {
         sidebar: {
@@ -23,12 +21,12 @@ const state = {
             newPostText: "",
             editNewPostText(text) {
                 this.newPostText = text;
-                render(state);
+                state.notify();
             },
             addPost() {
                 this.posts.push({ id: this.posts.length + 1, likes: Math.ceil(Math.random() * 100), text: this.newPostText, });
                 this.newPostText = '';
-                render(state);
+                state.notify();
             },
         },
         messenger: {
@@ -47,14 +45,23 @@ const state = {
             newMessageText: "",
             editNewMessageText(text) {
                 this.newMessageText = text;
-                render(state);
+                state.notify();
             },
             sendMessage() {
                 this.messages.push({ id: this.messages.length + 1, sender: Math.floor(Math.random() * 2), text: this.newMessageText, });
                 this.newMessageText = '';
-                render(state);
+                state.notify();
             },
         },
+    },
+    observers: new Set(),
+    notify() {
+        for (const observer of this.observers) {
+            observer();
+        }
+    },
+    register(func) {
+        this.observers.add(func);
     },
 }
 
