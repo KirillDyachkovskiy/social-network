@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 
-import { state } from './redux/index';
+import { store } from './redux/index';
 import { App } from './components';
 
 const render = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state} />
+            <App state={store.$state} />
         </React.StrictMode >,
         document.getElementById('root')
     );
 }
 
-state.register(render)
-state.notify()
+store.register(render)
+store.notify()

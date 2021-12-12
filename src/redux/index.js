@@ -1,1 +1,1 @@
-export { state } from './state'
+export { store } from './state'

@@ -5,7 +5,7 @@ const SubmitPost = (props) => {
     let { profile } = props;
 
     const onInputChange = (event) => {
-        profile.editNewPostText(event.target.value);
+        profile.newPostText = event.target.value;
     }
 
     const onButtonClick = () => {

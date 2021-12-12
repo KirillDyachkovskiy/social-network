@@ -5,7 +5,7 @@ const SubmitMessage = (props) => {
     let { messenger } = props;
 
     const onInputChange = (event) => {
-        messenger.editNewMessageText(event.target.value);
+        messenger.newMessageText = event.target.value;
     }
 
     const onButtonClick = () => {

@@ -3,7 +3,7 @@ import c from "./Message.module.scss";
 const Message = (props) => {
     const { id, sender, text } = props;
 
-    const setStyle = () => (sender === 1) ? c.to : c.from;
+    const setStyle = () => (sender === 0) ? c.to : c.from;
 
 
     return (
