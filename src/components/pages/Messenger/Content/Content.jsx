@@ -3,7 +3,7 @@ import { Message } from './Message'
 import { SubmitMessage } from "./SubmitMessage";
 
 const Content = (props) => {
-    const { state } = props;
+    const { state, dispatch } = props;
 
     const messages = state.messages.map(m => <Message key={m.id.toString()} id={m.id} sender={m.sender} text={m.text} />)
 
@@ -12,7 +12,7 @@ const Content = (props) => {
             <div>
                 {messages}
             </div>
-            <SubmitMessage messenger={state} />
+            <SubmitMessage messenger={state} dispatch={dispatch} />
         </section>
     )
 };

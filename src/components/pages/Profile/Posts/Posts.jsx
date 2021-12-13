@@ -5,10 +5,10 @@ import { SubmitPost } from "./SubmitPost";
 import { Wall } from "./Wall";
 
 const Posts = (props) => {
-    const { state } = props;
+    const { state, dispatch } = props;
     return (
         <section className={c.posts}>
-            <SubmitPost profile={state} />
+            <SubmitPost profile={state} dispatch={dispatch} />
             <Title />
             <Wall posts={state.posts} />
         </section>

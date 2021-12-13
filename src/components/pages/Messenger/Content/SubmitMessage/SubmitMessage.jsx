@@ -1,16 +1,12 @@
 import React from "react";
+import { sendMessage, updateNewMessage } from "../../../../../redux/state";
 import c from "./SubmitMessage.module.scss"
 
 const SubmitMessage = (props) => {
-    let { messenger } = props;
+    const { messenger, dispatch } = props;
 
-    const onInputChange = (event) => {
-        messenger.newMessageText = event.target.value;
-    }
-
-    const onButtonClick = () => {
-        messenger.sendMessage();
-    }
+    const onInputChange = (event) => dispatch(updateNewMessage(event.target.value));
+    const onButtonClick = () => dispatch(sendMessage());
     return (
         <div className={c.new}>
             <input type="text" className={c.input} placeholder="Write a message" value={messenger.newMessageText} onChange={onInputChange} />
