@@ -69,5 +69,3 @@ class Store extends Observable {
 }
 
 export const store = new Store()
-
-window.state = store.state
