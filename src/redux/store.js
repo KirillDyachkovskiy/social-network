@@ -1,3 +1,6 @@
+import { messengerReducer } from "./reducer/pages/messenger";
+import { profileReducer } from "./reducer/pages/profile";
+
 class Observable {
     #observers = new Set();
     notify() {
@@ -55,40 +58,16 @@ class Store extends Observable {
     get state() {
         return this.#state;
     }
+    set state(value) {
+        this.#state = value;
+    }
     dispatch(action) {
-        switch (action.type) {
-            case UPDATE_NEW_POST:
-                this.state.pages.profile.newPostText = action.text;
-                break;
-            case ADD_POST:
-                this.state.pages.profile.posts.push({ id: this.state.pages.profile.posts.length, likes: Math.ceil(Math.random() * 100), text: this.state.pages.profile.newPostText, });
-                this.state.pages.profile.newPostText = "";
-                break;
-            case UPDATE_NEW_MESSAGE:
-                this.state.pages.messenger.newMessageText = action.text;
-                break;
-            case SEND_MESSAGE:
-                this.state.pages.messenger.messages.push({ id: this.state.pages.messenger.messages.length, sender: Math.round(Math.random()), text: this.state.pages.messenger.newMessageText, });
-                this.state.pages.messenger.newMessageText = "";
-                break;
-            default:
-                console.log("а нет такой команды");
-        }
+        this.state.pages.messenger = messengerReducer(action, this.state.pages.messenger);
+        this.state.pages.profile = profileReducer(action, this.state.pages.profile);
         this.notify();
     }
 }
 
-const UPDATE_NEW_POST = "UPDATE-NEW-POST";
-export const updateNewPost = (text) => ({ type: UPDATE_NEW_POST, text, });
-
-const ADD_POST = "ADD-POST";
-export const addPost = () => ({ type: ADD_POST });
-
-const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE";
-export const updateNewMessage = (text) => ({ type: UPDATE_NEW_MESSAGE, text, });
-
-const SEND_MESSAGE = "SEND-MESSAGE";
-export const sendMessage = () => ({ type: SEND_MESSAGE });
-
-
 export const store = new Store()
+
+window.state = store.state

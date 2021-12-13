@@ -1,12 +1,11 @@
 import React from "react";
+import { addPost, updateNewPostText } from "../../../../../redux/reducer/pages/profile/profile";
 import c from "./SubmitPost.module.scss"
-
-import { addPost, updateNewPost } from '../../../../../redux/state'
 
 const SubmitPost = (props) => {
     const { profile, dispatch } = props;
 
-    const onInputChange = (event) => dispatch(updateNewPost(event.target.value));
+    const onInputChange = (event) => dispatch(updateNewPostText(event.target.value));
     const onButtonClick = () => dispatch(addPost());
     return (
         <div className={c.new}>
