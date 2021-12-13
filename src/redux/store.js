@@ -1,5 +1,5 @@
-import { messengerReducer } from "./reducer/pages/messenger";
-import { profileReducer } from "./reducer/pages/profile";
+import { messengerReducer } from "./reducer/messengerReducer";
+import { profileReducer } from "./reducer/profileReducer";
 
 class Observable {
     #observers = new Set();
@@ -62,8 +62,8 @@ class Store extends Observable {
         this.#state = value;
     }
     dispatch(action) {
-        this.state.pages.messenger = messengerReducer(action, this.state.pages.messenger);
-        this.state.pages.profile = profileReducer(action, this.state.pages.profile);
+        this.state.pages.messenger = messengerReducer(this.state.pages.messenger, action);
+        this.state.pages.profile = profileReducer(this.state.pages.profile, action);
         this.notify();
     }
 }

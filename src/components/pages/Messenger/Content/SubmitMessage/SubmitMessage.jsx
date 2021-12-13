@@ -1,5 +1,5 @@
 import React from "react";
-import { sendMessage, updateNewMessageText } from "../../../../../redux/reducer/pages/messenger/messenger";
+import { sendMessage, updateNewMessageText } from "../../../../../redux/reducer/messengerReducer";
 import c from "./SubmitMessage.module.scss"
 
 const SubmitMessage = (props) => {

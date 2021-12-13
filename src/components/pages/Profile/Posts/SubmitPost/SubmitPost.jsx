@@ -1,5 +1,5 @@
 import React from "react";
-import { addPost, updateNewPostText } from "../../../../../redux/reducer/pages/profile/profile";
+import { addPost, updateNewPostText } from "../../../../../redux/reducer/profileReducer";
 import c from "./SubmitPost.module.scss"
 
 const SubmitPost = (props) => {

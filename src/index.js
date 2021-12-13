@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 
-import { store } from './redux/index';
+import { store } from './redux';
 import { App } from './components';
 
 const { state, dispatch } = store;
 
-const render = () => {
+const render = (state) => {
     ReactDOM.render(
         <React.StrictMode>
             <App state={state} dispatch={dispatch.bind(store)} />
@@ -17,5 +17,7 @@ const render = () => {
     );
 }
 
-store.subscribe(render)
+store.subscribe(() => {
+    render(state)
+})
 store.notify()
