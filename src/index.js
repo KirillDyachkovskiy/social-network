@@ -6,15 +6,10 @@ import './index.css';
 import { store } from './redux';
 import { App } from './components';
 
-
-const MyContext = React.createContext(store);
-
 const render = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <MyContext>
-                <App store={store} />
-            </MyContext>
+            <App store={store} />
         </React.StrictMode >,
         document.getElementById('root')
     );
