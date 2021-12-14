@@ -1,24 +1,14 @@
 import c from "./Posts.module.scss";
 
 import { Post } from "./Post/Post";
-import { StoreContext } from "../../../../../storeContext";
+import { connect } from 'react-redux';
 
-const Posts = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-                store => {
-                    const postsElement = store.getState().profile.posts.map(p => (<Post key={p.id.toString()} likes={p.likes} text={p.text} />))
+const mapStateToProps = (state) => ({ posts: state.profile.posts, })
 
-                    return (
-                        <section className={c.posts} >
-                            {postsElement.reverse()}
-                        </section >
-                    );
-                }
-            }
-        </StoreContext.Consumer>
-    )
-};
+const PostsStateless = ({ posts }) => (
+    <section className={c.posts} >
+        {posts.map(p => <Post key={p.id} likes={p.likes} text={p.text} />).reverse()}
+    </section >
+)
 
-export { Posts };
+export const Posts = connect(mapStateToProps)(PostsStateless);

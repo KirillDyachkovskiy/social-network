@@ -1,21 +1,11 @@
-import { addPost, updateNewPostText } from "../../../../../redux/reducer/profileReducer";
-import { StoreContext } from "../../../../../storeContext";
+import { addPost_ActionCreator, updateNewPostText_ActionCreator } from "../../../../../redux/reducer/profileReducer";
 import { SubmitPostStateless } from "./SubmitPostStateless";
+import { connect } from 'react-redux';
 
-const SubmitPost = () => {
+const mapStateToProps = (state) => ({ text: state.profile.newPostText, });
+const mapDispatchToProps = (dispatch) => ({
+    onInputChange: (event) => dispatch(updateNewPostText_ActionCreator(event.target.value)),
+    onButtonClick: () => dispatch(addPost_ActionCreator()),
+})
 
-    return (
-        <StoreContext.Consumer>
-            {
-                store => {
-                    const onInputChange = (event) => store.dispatch(updateNewPostText(event.target.value));
-                    const onButtonClick = () => store.dispatch(addPost());
-
-                    return <SubmitPostStateless text={store.getState().profile.newPostText} onInputChange={onInputChange} onButtonClick={onButtonClick} />
-                }
-            }
-        </StoreContext.Consumer>
-    )
-}
-
-export { SubmitPost };
+export const SubmitPost = connect(mapStateToProps, mapDispatchToProps)(SubmitPostStateless);

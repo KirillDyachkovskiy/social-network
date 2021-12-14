@@ -1,6 +1,6 @@
 import c from "./SubmitMessage.module.scss"
 
-const SubmitMessageStateless = ({ text, onInputChange, onButtonClick }) => {
+export const SubmitMessageStateless = ({ text, onInputChange, onButtonClick }) => {
     return (
         <div className={c.new}>
             <input type="text" className={c.input} placeholder="Write a message" value={text} onChange={onInputChange} />
@@ -8,5 +8,3 @@ const SubmitMessageStateless = ({ text, onInputChange, onButtonClick }) => {
         </div>
     )
 }
-
-export { SubmitMessageStateless };

@@ -1,8 +1,8 @@
 const UPDATE_NEW_POST = "UPDATE-NEW-POST";
-export const updateNewPostText = (text) => ({ type: UPDATE_NEW_POST, text, });
+export const updateNewPostText_ActionCreator = (text) => ({ type: UPDATE_NEW_POST, text, });
 
 const ADD_POST = "ADD-POST";
-export const addPost = () => ({ type: ADD_POST });
+export const addPost_ActionCreator = () => ({ type: ADD_POST });
 
 const initialState = {
     posts: [
@@ -17,12 +17,16 @@ const initialState = {
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NEW_POST:
-            state.newPostText = action.text;
-            return state;
+            return {
+                ...state,
+                newPostText: action.text,
+            };
         case ADD_POST:
-            state.posts.push({ id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: state.newPostText, });
-            state.newPostText = "";
-            return state;
+            return {
+                ...state,
+                posts: [...state.posts, { id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: state.newPostText, }],
+                newPostText: "",
+            };
         default:
             return state;
     }

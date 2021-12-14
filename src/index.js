@@ -1,23 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
 
 import './index.css';
 
 import { store } from './redux';
 import { App } from './components';
-import { Provider } from './storeContext';
 
-const render = () => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </React.StrictMode >,
-        document.getElementById('root')
-    );
-}
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </React.StrictMode >,
+    document.getElementById('root')
+);
 
-store.subscribe(render);
-
-render();
+window.store = store

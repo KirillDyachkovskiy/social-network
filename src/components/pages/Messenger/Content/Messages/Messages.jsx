@@ -1,24 +1,17 @@
 import c from "./Messages.module.scss";
 
 import { Message } from './Message';
-import { StoreContext } from "../../../../../storeContext";
+import { connect } from 'react-redux';
 
-const Messages = () => {
+const mapStateToProps = (state) => ({ messages: state.messenger.messages, })
+
+const MessagesStateless = ({ messages }) => {
     return (
-        <StoreContext.Consumer>
-            {
-                store => {
-                    const messagesElement = store.getState().messenger.messages.map(m => <Message key={m.id.toString()} id={m.id} sender={m.sender} text={m.text} />)
-                    return (
-                        <section className={c.messages}>
-                            <div></div>
-                            {messagesElement}
-                        </section>
-                    )
-                }
-            }
-        </StoreContext.Consumer>
+        <section className={c.messages}>
+            <div></div>
+            {messages.map(m => <Message key={m.id} id={m.id} sender={m.sender} text={m.text} />)}
+        </section>
     )
 }
 
-export { Messages };
+export const Messages = connect(mapStateToProps)(MessagesStateless);

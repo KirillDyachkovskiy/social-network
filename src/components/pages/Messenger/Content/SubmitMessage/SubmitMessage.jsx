@@ -1,19 +1,11 @@
-import { sendMessage, updateNewMessageText } from "../../../../../redux/reducer/messengerReducer";
-import { StoreContext } from "../../../../../storeContext";
+import { sendMessage_ActionCreator, updateNewMessageText_ActionCreator } from "../../../../../redux/reducer/messengerReducer";
 import { SubmitMessageStateless } from "./SubmitMessageStateless";
+import { connect } from 'react-redux';
 
-const SubmitMessage = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-                store => {
-                    const onInputChange = (event) => store.dispatch(updateNewMessageText(event.target.value));
-                    const onButtonClick = () => store.dispatch(sendMessage());
-                    return <SubmitMessageStateless text={store.getState().messenger.newMessageText} onInputChange={onInputChange} onButtonClick={onButtonClick} />
-                }
-            }
-        </StoreContext.Consumer>
-    )
-}
+const mapStateToProps = (state) => ({ text: state.messenger.newMessageText, });
+const mapDispatchToProps = (dispatch) => ({
+    onInputChange: (event) => dispatch(updateNewMessageText_ActionCreator(event.target.value)),
+    onButtonClick: () => dispatch(sendMessage_ActionCreator()),
+})
 
-export { SubmitMessage };
+export const SubmitMessage = connect(mapStateToProps, mapDispatchToProps)(SubmitMessageStateless);

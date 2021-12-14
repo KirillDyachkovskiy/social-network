@@ -6,7 +6,7 @@ import { Messenger } from "./pages/Messenger";
 import { Notfound } from "./pages/Notfound";
 import { Profile } from "./pages/Profile";
 
-const App = () => {
+export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -19,5 +19,3 @@ const App = () => {
     </BrowserRouter>
   )
 };
-
-export { App };

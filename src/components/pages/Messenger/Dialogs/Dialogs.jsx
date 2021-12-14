@@ -1,25 +1,16 @@
 import c from "./Dialogs.module.scss";
 
 import { Dialog } from './Dialog';
-import { StoreContext } from "../../../../storeContext";
+import { connect } from 'react-redux';
 
-const Dialogs = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-                store => {
-                    const dialogsElement = store.getState().messenger.dialogs.map(d => (<Dialog key={d.id.toString()} id={d.id} name={d.name} />))
-                    return (
-                        <aside>
-                            <div className={c.menu}>
-                                {dialogsElement}
-                            </div>
-                        </aside>
-                    )
-                }
-            }
-        </StoreContext.Consumer>
-    )
-}
+const mapStateToProps = (state) => ({ dialogs: state.messenger.dialogs, })
 
-export { Dialogs };
+const DialogsStateless = ({ dialogs }) => (
+    <aside>
+        <div className={c.menu}>
+            {dialogs.map(d => <Dialog key={d.id} id={d.id} name={d.name} />)}
+        </div>
+    </aside>
+)
+
+export const Dialogs = connect(mapStateToProps)(DialogsStateless);

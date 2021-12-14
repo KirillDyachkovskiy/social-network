@@ -6,7 +6,7 @@ const Dialog = (props) => {
 
     const { id, name } = props;
     return (
-        <NavLink className={setActive} to={id.toString()}>{name}</NavLink>
+        <NavLink className={setActive} to={id}>{name}</NavLink>
     )
 }
 

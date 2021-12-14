@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 
 import c from "./Sidebar.module.scss";
 
-const SidebarStateless = ({ sidebar }) => {
+export const SidebarStateless = ({ sidebar }) => {
 
     const setActive = ({ isActive }) => (isActive) ? c.active : '';
-    const links = sidebar.links.map(l => <NavLink key={l.id.toString()} className={setActive} to={l.to}>{l.text}</NavLink>);
+    const links = sidebar.links.map(l => <NavLink key={l.id} className={setActive} to={l.to}>{l.text}</NavLink>);
 
     return (
         <aside>
@@ -15,5 +15,3 @@ const SidebarStateless = ({ sidebar }) => {
         </aside>
     );
 };
-
-export { SidebarStateless };

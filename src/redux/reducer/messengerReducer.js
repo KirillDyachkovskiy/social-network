@@ -1,8 +1,8 @@
 const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE";
-export const updateNewMessageText = (text) => ({ type: UPDATE_NEW_MESSAGE, text, });
+export const updateNewMessageText_ActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE, text, });
 
 const SEND_MESSAGE = "SEND-MESSAGE";
-export const sendMessage = () => ({ type: SEND_MESSAGE });
+export const sendMessage_ActionCreator = () => ({ type: SEND_MESSAGE });
 
 const initialState = {
     dialogs: [
@@ -23,12 +23,16 @@ const initialState = {
 export const messengerReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE:
-            state.newMessageText = action.text;
-            return state;
+            return {
+                ...state,
+                newMessageText: action.text,
+            };
         case SEND_MESSAGE:
-            state.messages.push({ id: state.messages.length, sender: Math.round(Math.random()), text: state.newMessageText, });
-            state.newMessageText = "";
-            return state;
+            return {
+                ...state,
+                messages: [...state.messages, { id: state.messages.length, sender: Math.round(Math.random()), text: state.newMessageText, }],
+                newMessageText: "",
+            };
         default:
             return state;
     }
