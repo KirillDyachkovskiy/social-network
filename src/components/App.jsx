@@ -9,12 +9,13 @@ import { Profile } from "./pages/Profile";
 
 const App = (props) => {
   const { state, dispatch } = props;
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout state={state.ui} />} >
-          <Route index element={<Profile state={state.pages.profile} dispatch={dispatch} />} />
-          <Route path="messenger/*" element={<Messenger state={state.pages.messenger} dispatch={dispatch} />} />
+        <Route path="/" element={<Layout state={state} />} >
+          <Route index element={<Profile state={state.profile} dispatch={dispatch} />} />
+          <Route path="messenger/*" element={<Messenger state={state.messenger} dispatch={dispatch} />} />
           <Route path="*" element={<Notfound />} />
         </Route>
       </Routes>
