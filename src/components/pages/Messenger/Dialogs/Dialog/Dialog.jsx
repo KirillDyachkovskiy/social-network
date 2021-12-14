@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import c from '../Messenger.module.scss'
+import c from '../Dialogs.module.scss'
 
 const Dialog = (props) => {
     const setActive = ({ isActive }) => (isActive) ? c.active : '';
