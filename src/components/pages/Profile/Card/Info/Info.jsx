@@ -16,7 +16,7 @@ const Info = () => (
         </div>
         <div className={c.row}>
             <span>Wed-site:</span>
-            <a href="https://github.com/KirillDyachkovskiy">https://github.com/KirillDyachkovskiy</a>
+            <a href="https://github.com/KirillDyachkovskiy" target="_blank" rel="noreferrer">https://github.com/KirillDyachkovskiy</a>
         </div>
     </section>
 );
