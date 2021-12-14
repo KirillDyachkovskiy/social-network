@@ -4,12 +4,12 @@ import { Title } from "./Title";
 import { SubmitPost } from "./SubmitPost";
 import { Posts } from "./Posts";
 
-const Wall = ({ store }) => {
+const Wall = () => {
     return (
         <section className={c.wall}>
-            <SubmitPost store={store} />
+            <SubmitPost />
             <Title />
-            <Posts posts={store.getState().profile.posts} />
+            <Posts />
         </section>
     );
 }

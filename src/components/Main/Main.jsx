@@ -4,11 +4,11 @@ import c from "./Main.module.scss";
 
 import { Sidebar } from './Sidebar';
 
-const Main = ({ store }) => {
+const Main = () => {
     return (
         <main>
             <div className={c.container}>
-                <Sidebar sidebar={store.getState().sidebar} />
+                <Sidebar />
                 <Outlet />
             </div>
         </main>

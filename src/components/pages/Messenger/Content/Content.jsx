@@ -2,11 +2,11 @@ import c from "./Content.module.scss";
 import { Messages } from './Messages'
 import { SubmitMessage } from "./SubmitMessage";
 
-const Content = ({ store }) => {
+const Content = () => {
     return (
         <section className={c.content}>
-            <Messages messages={store.getState().messenger.messages} />
-            <SubmitMessage store={store} />
+            <Messages />
+            <SubmitMessage />
         </section>
     )
 };

@@ -1,19 +1,15 @@
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { StoreContext } from '../../../storeContext';
+import { SidebarStateless } from "./SidebarStateless";
 
-import c from "./Sidebar.module.scss";
-
-const Sidebar = ({ sidebar }) => {
-
-    const setActive = ({ isActive }) => (isActive) ? c.active : '';
-    const links = sidebar.links.map(l => <NavLink key={l.id.toString()} className={setActive} to={l.to}>{l.text}</NavLink>);
-
+const Sidebar = () => {
     return (
-        <aside>
-            <nav className={c.menu}>
-                {links}
-            </nav>
-        </aside>
-    );
+        <StoreContext.Consumer>
+            {
+                store => (<SidebarStateless sidebar={store.getState().sidebar} />)
+            }
+        </StoreContext.Consumer>
+    )
 };
 
 export { Sidebar };
