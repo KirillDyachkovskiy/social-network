@@ -1,0 +1,8 @@
+.messages {
+    grid-area: messages;
+
+    display: grid;
+    grid-template: 1fr / 1fr;
+    grid-auto-rows: auto;
+    gap: 10px;
+}

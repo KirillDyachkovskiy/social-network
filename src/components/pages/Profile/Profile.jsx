@@ -1,15 +1,13 @@
 import c from "./Profile.module.scss";
 
 import { Card } from "./Card";
-import { Posts } from "./Posts";
+import { Wall } from "./Wall";
 
-const Profile = (props) => {
-    const { state, dispatch } = props;
-
+const Profile = ({ store }) => {
     return (
         <section className={c.profile}>
             <Card />
-            <Posts state={state} dispatch={dispatch} />
+            <Wall store={store} />
         </section>
     )
 };

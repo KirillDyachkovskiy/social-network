@@ -1,16 +1,15 @@
-import c from "./Wall.module.scss";
+import c from "./Posts.module.scss";
 
 import { Post } from "./Post/Post";
 
-const Wall = (props) => {
-    const { posts } = props;
+const Posts = ({ posts }) => {
     const postsElement = posts.map(p => (<Post key={p.id.toString()} likes={p.likes} text={p.text} />))
 
     return (
-        <section className={c.wall} >
+        <section className={c.posts} >
             {postsElement.reverse()}
         </section >
     );
 };
 
-export { Wall };
+export { Posts };

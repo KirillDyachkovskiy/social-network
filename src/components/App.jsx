@@ -7,20 +7,16 @@ import { Notfound } from "./pages/Notfound";
 import { Profile } from "./pages/Profile";
 
 
-const App = (props) => {
-  const { state, dispatch } = props;
-
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout state={state} />} >
-          <Route index element={<Profile state={state.profile} dispatch={dispatch} />} />
-          <Route path="messenger/*" element={<Messenger state={state.messenger} dispatch={dispatch} />} />
-          <Route path="*" element={<Notfound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-}
+const App = ({ store }) => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout store={store} />} >
+        <Route index element={<Profile store={store} />} />
+        <Route path="messenger/*" element={<Messenger store={store} />} />
+        <Route path="*" element={<Notfound />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+)
 
 export { App };

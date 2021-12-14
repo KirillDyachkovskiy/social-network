@@ -3,8 +3,7 @@ import c from "./Post.module.scss";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
-const Post = (props) => {
-    const { text, likes } = props;
+const Post = ({ text, likes }) => {
     return (
         <section className={c.post}>
             <Header />

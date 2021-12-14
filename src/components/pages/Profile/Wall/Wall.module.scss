@@ -1,9 +1,9 @@
-.posts {
+.wall {
     display: grid;
     grid-template: auto auto 1fr / 1fr;
     grid-template-areas:
-        "new"
+        "submit"
         "title"
-        "wall";
+        "posts";
     gap: 10px;
 }

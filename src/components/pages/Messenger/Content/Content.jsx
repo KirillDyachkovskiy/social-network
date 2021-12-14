@@ -1,18 +1,12 @@
 import c from "./Content.module.scss";
-import { Message } from './Message'
+import { Messages } from './Messages'
 import { SubmitMessage } from "./SubmitMessage";
 
-const Content = (props) => {
-    const { state, dispatch } = props;
-
-    const messages = state.messages.map(m => <Message key={m.id.toString()} id={m.id} sender={m.sender} text={m.text} />)
-
+const Content = ({ store }) => {
     return (
         <section className={c.content}>
-            <div>
-                {messages}
-            </div>
-            <SubmitMessage messenger={state} dispatch={dispatch} />
+            <Messages messages={store.getState().messenger.messages} />
+            <SubmitMessage store={store} />
         </section>
     )
 };
