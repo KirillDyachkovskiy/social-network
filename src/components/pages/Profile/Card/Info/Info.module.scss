@@ -2,8 +2,9 @@
 
 .info {
     grid-area: info;
-
-    color: $grey-text;
+    &:first-child {
+        margin: 0 0 300px 0;
+    }
     font-size: 0.8em;
     line-height: 1.5em;
     a {
@@ -14,6 +15,8 @@
     }
 }
 .row {
+    color: $grey-text;
+
     display: grid;
     grid-template: 1fr / 150px 1fr;
 }
