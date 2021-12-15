@@ -5,7 +5,7 @@ import { Dialogs } from './Dialogs'
 
 const Messenger = () => {
     return (
-        <section className={c.messenger}>
+        <section className={c.section}>
             <Content />
             <Dialogs />
         </section>
