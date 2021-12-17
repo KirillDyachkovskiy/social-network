@@ -6,6 +6,7 @@ import { Messenger } from "./pages/Messenger";
 import { Friends } from "./pages/Friends";
 import { Notfound } from "./pages/Notfound";
 import { Profile } from "./pages/Profile";
+import { SamplePage } from "./pages/SamplePage";
 
 export const App = () => {
   return (

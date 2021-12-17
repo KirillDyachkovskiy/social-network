@@ -1,14 +1,12 @@
-import c from "./Content.module.scss";
+import c from './Content.module.scss'
 import { Messages } from './Messages'
 import { SubmitMessage } from "./SubmitMessage";
 
-const Content = () => {
+export const Content = () => {
     return (
-        <section className={c.content}>
+        <div className={c.content}>
             <Messages />
             <SubmitMessage />
-        </section>
+        </div>
     )
 };
-
-export { Content };

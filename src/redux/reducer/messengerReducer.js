@@ -5,12 +5,12 @@ const SEND_MESSAGE = "SEND-MESSAGE";
 export const sendMessage_ActionCreator = () => ({ type: SEND_MESSAGE });
 
 const initialState = {
-    dialogs: [
-        { id: 0, name: "Алексей Захаров" },
-        { id: 1, name: "Петя Беляшёв" },
-        { id: 2, name: "Айсен Николаев" },
-        { id: 3, name: "Сергей Мальцев" },
-        { id: 4, name: "Николай Колесов" },
+    menu: [
+        { id: 0, text: "Алексей Захаров" },
+        { id: 1, text: "Петя Беляшёв" },
+        { id: 2, text: "Айсен Николаев" },
+        { id: 3, text: "Сергей Мальцев" },
+        { id: 4, text: "Николай Колесов" },
     ],
     messages: [
         { id: 0, sender: 0, text: "Hi" },

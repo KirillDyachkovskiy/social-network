@@ -1,13 +1,10 @@
-import c from "./Friends.module.scss"
+import { connect } from 'react-redux';
+import { SamplePage } from '../SamplePage';
+import { Content } from './Content';
 
-import { Content } from "./Content"
-import { Menu } from './Menu'
+const mapStateToProps = (state) => ({
+    menu: state.users.menu,
+    content: <Content />,
+})
 
-export const Friends = () => {
-    return (
-        <section className={c.section}>
-            <Content />
-            <Menu />
-        </section>
-    )
-};
+export const Friends = connect(mapStateToProps)(SamplePage);

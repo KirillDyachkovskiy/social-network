@@ -1,14 +1,9 @@
-import c from "./Content.module.scss";
-import { Messages } from './Messages'
-import { SubmitMessage } from "./SubmitMessage";
+import { Title } from './Title';
 
-const Content = () => {
+export const Content = () => {
     return (
-        <section className={c.content}>
-            <Messages />
-            <SubmitMessage />
+        <section>
+            <Title>Users</Title>
         </section>
     )
 };
-
-export { Content };

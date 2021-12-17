@@ -1,15 +1,10 @@
-import c from "./Messenger.module.scss"
+import { connect } from 'react-redux';
+import { SamplePage } from '../SamplePage';
+import { Content } from './Content';
 
-import { Content } from "./Content"
-import { Dialogs } from './Dialogs'
+const mapStateToProps = (state) => ({
+    menu: state.messenger.menu,
+    content: <Content />,
+})
 
-const Messenger = () => {
-    return (
-        <section className={c.section}>
-            <Content />
-            <Dialogs />
-        </section>
-    )
-};
-
-export { Messenger };
+export const Messenger = connect(mapStateToProps)(SamplePage);

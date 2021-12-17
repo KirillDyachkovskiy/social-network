@@ -1,1 +1,0 @@
-export { Dialogs } from "./Dialogs";

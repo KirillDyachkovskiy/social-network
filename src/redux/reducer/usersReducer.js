@@ -8,6 +8,10 @@ const CHANGE_STATUS = "CHANGE-STATUS";
 export const changeStatus_ActionCreator = (text) => ({ type: CHANGE_STATUS, text, });
 
 const initialState = {
+    menu: [
+        { id: 0, text: "My friends" },
+        { id: 1, text: "Search" },
+    ],
     list: [
         { id: 0, name: "Кирилл Мохначевский", status: "Samurai", birthday: new Date(2001, 6, 9), location: { city: "Yakuts", country: "Russia" }, education: "РЭУ им. Г.В. Плеханова '23", web_site: "https://github.com/KirillDyachkovskiy" },
         { id: 1, name: "Иван Петров", status: "c a l m", birthday: new Date(1998, 11, 12), location: { city: "Moscow", country: "Russia" }, education: "", web_site: "" },
