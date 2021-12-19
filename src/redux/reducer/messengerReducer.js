@@ -1,8 +1,8 @@
 const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE";
-export const updateNewMessageText_ActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE, text, });
+export const updateNewMessageText_AС = (text) => ({ type: UPDATE_NEW_MESSAGE, text, });
 
 const SEND_MESSAGE = "SEND-MESSAGE";
-export const sendMessage_ActionCreator = () => ({ type: SEND_MESSAGE });
+export const sendMessage_AС = () => ({ type: SEND_MESSAGE });
 
 const initialState = {
     menu: [

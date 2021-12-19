@@ -1,8 +1,8 @@
 const UPDATE_NEW_POST = "UPDATE-NEW-POST";
-export const updateNewPostText_ActionCreator = (text) => ({ type: UPDATE_NEW_POST, text, });
+export const updateNewPostText_AС = (text) => ({ type: UPDATE_NEW_POST, text, });
 
 const ADD_POST = "ADD-POST";
-export const addPost_ActionCreator = () => ({ type: ADD_POST });
+export const addPost_AС = () => ({ type: ADD_POST });
 
 const initialState = {
     posts: [

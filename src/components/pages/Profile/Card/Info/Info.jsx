@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { changeStatus_ActionCreator } from "../../../../../redux/reducer/usersReducer";
+import { changeStatus_AC } from "../../../../../redux/reducer/usersReducer";
 import c from "./Info.module.scss";
 import { Status } from "./Status/Status";
 
@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
     user: state.users.list[state.users.currentUser.id],
 });
 const mapDispatchToProps = (dispatch) => ({
-    onInputChange: (event) => dispatch(changeStatus_ActionCreator(event.target.value)),
+    onInputChange: (event) => dispatch(changeStatus_AC(event.target.value)),
 });
 
 const InfoStateLess = ({ user, onInputChange }) => {

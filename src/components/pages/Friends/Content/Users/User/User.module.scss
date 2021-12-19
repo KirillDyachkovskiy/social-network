@@ -32,7 +32,8 @@
     background-color: $blue;
 
     cursor: pointer;
-    padding: 5px 20px;
+    padding: 5px 0;
+    width: 100px;
     &:hover {
         background-color: rgba($blue, 0.9);
     }
