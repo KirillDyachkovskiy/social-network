@@ -2,8 +2,6 @@ import { User } from './User';
 import c from './Users.module.scss';
 
 export const UsersStateless = ({ users, setUsersList, onButtonClick }) => {
-    debugger;
-    console.log("lol");
     if (users.list.length === 1) {
         setUsersList([
             { id: 1, name: "Иван Петров", status: "c a l m", birthday: new Date(1998, 11, 12), location: { city: "Moscow", country: "Russia" }, education: "", web_site: "" },
