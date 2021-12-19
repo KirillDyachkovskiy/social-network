@@ -1,0 +1,46 @@
+@import "../../../../../../variables.scss";
+
+.user {
+    @include field();
+    display: grid;
+    grid-template: auto 1fr / auto 1fr;
+    grid-template-areas:
+        "avatar box"
+        "button box";
+    justify-items: center;
+    gap: 10px 30px;
+    background-color: $grey-field;
+}
+.avatar {
+    grid-area: avatar;
+
+    width: 64px;
+    height: 64px;
+
+    img {
+        border-radius: 50%;
+        filter: drop-shadow(1px 0 1px #000);
+    }
+    @include adaptIMG();
+}
+.button {
+    grid-area: button;
+
+    @include field();
+
+    color: #ffffff;
+    background-color: $blue;
+
+    cursor: pointer;
+    padding: 5px 20px;
+    &:hover {
+        background-color: rgba($blue, 0.9);
+    }
+}
+.box {
+    grid-area: box;
+    justify-self: start;
+
+    display: grid;
+    gap: 10px;
+}

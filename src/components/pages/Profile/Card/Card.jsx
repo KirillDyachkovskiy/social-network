@@ -5,7 +5,7 @@ import { Avatar } from "./Avatar";
 import { Name } from "./Name";
 import { Info } from "./Info";
 
-const Card = () => (
+export const Card = () => (
     <section className={c.card}>
         <Cover />
         <div className={c.box}>
@@ -15,5 +15,3 @@ const Card = () => (
         </div>
     </section >
 );
-
-export { Card };
