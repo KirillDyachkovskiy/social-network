@@ -5,7 +5,10 @@ const CHANGE_STATUS = "CHANGE-STATUS";
 export const changeStatus_AC = (text) => ({ type: CHANGE_STATUS, text, });
 
 const SET_USERS = "SET-USERS";
-export const setUsersList_AC = (users) => ({ type: SET_USERS, users });
+export const setUsersList_AC = (users, totalCount) => ({ type: SET_USERS, users, totalCount });
+
+const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
+export const setCurrentPage_AC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
 
 const initialState = {
     menu: [
@@ -13,6 +16,9 @@ const initialState = {
         { id: 1, text: "Search" },
     ],
     list: [],
+    pageSize: 4,
+    totalCount: 0,
+    currentPage: 1,
     currentUser:
         { id: 0, name: "Кирилл Мохначевский", status: "Samurai", birthday: new Date(2001, 6, 9), location: { city: "Yakuts", country: "Russia" }, education: "РЭУ им. Г.В. Плеханова '23", web_site: "https://github.com/KirillDyachkovskiy" },
 };
@@ -41,10 +47,16 @@ export const usersReducer = (state = initialState, action) => {
                     status: action.text,
                 }
             };
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage,
+            }
         case SET_USERS:
             return {
                 ...state,
-                list: [...state.list, ...action.users]
+                list: [...action.users],
+                totalCount: action.totalCount,
             }
         default:
             return state;

@@ -9,7 +9,7 @@ export const User = ({ user, onButtonClick }) => {
             <button type="button" className={c.button} onClick={() => onButtonClick(user.id)}>{(user.followed) ? "Unfriend" : "Add friend"}</button>
             <div className={c.box}>
                 <div className={c.name}>{user.name}</div>
-                <div className={c.status}>{user.status ? user.status : "статус"}</div>
+                <div className={c.status}>{user.status ? user.status : "-"}</div>
                 <div className={c.location}>user.location.city, user.location.country</div>
             </div>
         </div>
