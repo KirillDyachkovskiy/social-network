@@ -1,27 +1,27 @@
 import * as axios from 'axios';
-import React from 'react';
 import { User } from './User';
 import c from './Users.module.scss';
+import React, { Component } from 'react'
 
-export const UsersStateless = ({ users, setUsersList, onButtonClick }) => {
-    const getUsers = () => {
-        if (users.length === 0) {
-            axios
-                .get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(({ data }) => {
-                    setUsersList(data.items);
-                });
-        }
-
+export class UsersStateless extends Component {
+    componentDidMount() {
+        axios
+            .get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(({ data }) => {
+                this.props.setUsersList(data.items);
+            });
     }
-    const list = users.map(u => <User key={u.id} user={u} onButtonClick={onButtonClick} />);
-
-    return (
-        <>
-            <button onClick={getUsers}>Найти пользователей</button>
+    componentWillUnmount() {
+        alert("Прощай...")
+    }
+    getList() {
+        return this.props.users.map(u => <User key={u.id} user={u} onButtonClick={this.props.onButtonClick} />);
+    }
+    render() {
+        return (
             <div className={c.users}>
-                {list}
+                {this.getList()}
             </div>
-        </>
-    )
+        )
+    }
 }
