@@ -19,7 +19,6 @@
 
     img {
         border-radius: 50%;
-        filter: drop-shadow(1px 0 1px #000);
     }
     @include adaptIMG();
 }

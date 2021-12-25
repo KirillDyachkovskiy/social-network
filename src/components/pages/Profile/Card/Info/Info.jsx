@@ -4,7 +4,7 @@ import c from "./Info.module.scss";
 import { Status } from "./Status/Status";
 
 const mapStateToProps = (state) => ({
-    user: state.users.list[state.users.currentUser.id],
+    user: state.users.currentUser,
 });
 const mapDispatchToProps = (dispatch) => ({
     onInputChange: (event) => dispatch(changeStatus_AC(event.target.value)),
