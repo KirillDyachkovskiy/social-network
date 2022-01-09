@@ -1,7 +1,15 @@
-@import '../../../variables.scss';
+@import "../../../variables.scss";
 
 .section {
     display: grid;
     grid-template: 1fr / minmax(400px, 1fr) 230px;
     gap: 10px;
+}
+
+.content {
+    @include field();
+    > div {
+        width: 100%;
+        height: 100%;
+    }
 }

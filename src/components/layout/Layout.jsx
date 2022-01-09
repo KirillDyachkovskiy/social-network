@@ -1,13 +1,13 @@
 import { Header } from './Header'
 import { Main } from './Main'
 
-const Layout = () => {
+import s from './Layout.module.scss'
+
+export const Layout = () => {
     return (
-        <div className="wrapper">
+        <div className={s.wrapper}>
             <Header />
             <Main />
         </div>
     )
 }
-
-export { Layout }

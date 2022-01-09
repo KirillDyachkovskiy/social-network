@@ -1,14 +1,13 @@
 import c from "./SamplePage.module.scss"
 
-import { Content } from "./Content"
 import { Menu } from './Menu'
 
 export const SamplePage = ({ content, menu }) => {
     return (
         <section className={c.section}>
-            <Content>
-                {content}
-            </Content>
+            <div className={c.content}>
+                {content()}
+            </div>
             <Menu items={menu} />
         </section>
     )

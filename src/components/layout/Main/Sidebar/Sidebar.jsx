@@ -1,5 +1,5 @@
-import { SidebarStateless } from "./SidebarStateless";
 import { connect } from 'react-redux';
+import { SidebarStateless } from "./SidebarStateless";
 
 const mapStateToProps = (state) => ({ sidebar: state.sidebar, });
 

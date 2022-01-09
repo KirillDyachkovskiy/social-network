@@ -40,9 +40,3 @@ input {
   outline: none;
   background-color: inherit;
 }
-.wrapper {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 48px 1fr;
-  gap: 10px;
-}

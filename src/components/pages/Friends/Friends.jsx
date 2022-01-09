@@ -4,7 +4,7 @@ import { Content } from './Content';
 
 const mapStateToProps = (state) => ({
     menu: state.users.menu,
-    content: <Content />,
+    content: () => <Content />,
 })
 
 export const Friends = connect(mapStateToProps)(SamplePage);

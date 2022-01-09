@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Layout } from "./Layout";
 import { Messenger } from "./pages/Messenger";
 import { Friends } from "./pages/Friends";
 import { Notfound } from "./pages/Notfound";
 import { Profile } from "./pages/Profile";
+import { Layout } from "./layout";
 
 export const App = () => {
   return (

@@ -4,7 +4,7 @@ import { Content } from './Content';
 
 const mapStateToProps = (state) => ({
     menu: state.messenger.menu,
-    content: <Content />,
+    content: () => <Content />,
 })
 
 export const Messenger = connect(mapStateToProps)(SamplePage);

@@ -1,12 +1,11 @@
 import { Outlet } from "react-router-dom";
+import { Sidebar } from './Sidebar';
 
 import c from "./Main.module.scss";
 
-import { Sidebar } from './Sidebar';
-
-const Main = () => {
+export const Main = () => {
     return (
-        <main>
+        <main className={c.main}>
             <div className={c.container}>
                 <Sidebar />
                 <Outlet />
@@ -14,5 +13,3 @@ const Main = () => {
         </main>
     )
 };
-
-export { Main };
