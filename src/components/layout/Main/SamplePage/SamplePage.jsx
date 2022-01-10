@@ -2,11 +2,11 @@ import c from "./SamplePage.module.scss"
 
 import { Menu } from './Menu'
 
-export const SamplePage = ({ content, menu }) => {
+export const SamplePage = ({ children, menu }) => {
     return (
-        <section className={c.section}>
+        <section className={c.sample}>
             <div className={c.content}>
-                {content()}
+                {children}
             </div>
             <Menu items={menu} />
         </section>

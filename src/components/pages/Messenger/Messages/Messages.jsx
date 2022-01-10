@@ -7,10 +7,10 @@ const mapStateToProps = (state) => ({ messages: state.messenger.messages, })
 
 const MessagesStateless = ({ messages }) => {
     return (
-        <div className={c.messages}>
+        <section className={c.messages}>
             <div></div>
             {messages.map(m => <Message key={m.id} id={m.id} sender={m.sender} text={m.text} />)}
-        </div>
+        </section>
     )
 }
 

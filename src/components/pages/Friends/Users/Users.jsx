@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setCurrentPage_AC, setUsersList_AC, toggleFriend_AC } from '../../../../../redux/reducer/usersReducer';
+import { setCurrentPage_AC, setUsersList_AC, toggleFriend_AC } from '../../../../redux/reducer/usersReducer';
 import { UsersStateless } from "./UsersStateless";
 import * as axios from 'axios';
 import React, { Component } from 'react';

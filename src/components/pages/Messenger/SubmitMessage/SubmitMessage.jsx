@@ -1,4 +1,4 @@
-import { sendMessage_AС, updateNewMessageText_AС } from "../../../../../redux/reducer/messengerReducer";
+import { sendMessage_AС, updateNewMessageText_AС } from "../../../../redux/reducer/messengerReducer";
 import { SubmitMessageStateless } from "./SubmitMessageStateless";
 import { connect } from 'react-redux';
 
