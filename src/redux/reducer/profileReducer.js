@@ -22,11 +22,15 @@ export const profileReducer = (state = initialState, action) => {
                 newPostText: action.text,
             };
         case ADD_POST:
-            return {
-                ...state,
-                posts: [...state.posts, { id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: state.newPostText, }],
-                newPostText: "",
-            };
+            if (state.newPostText) {
+                return {
+                    ...state,
+                    posts: [...state.posts, { id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: state.newPostText, }],
+                    newPostText: "",
+                };
+            } else {
+                return state;
+            }
         default:
             return state;
     }

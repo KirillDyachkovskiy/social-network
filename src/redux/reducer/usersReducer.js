@@ -16,11 +16,10 @@ const initialState = {
         { id: 1, text: "Search" },
     ],
     list: [],
-    pageSize: 4,
+    pageSize: 6,
     totalCount: 0,
     currentPage: 1,
-    currentUser:
-        { id: 0, name: "Кирилл Мохначевский", status: "Samurai", birthday: new Date(2001, 6, 9), location: { city: "Yakuts", country: "Russia" }, education: "РЭУ им. Г.В. Плеханова '23", web_site: "https://github.com/KirillDyachkovskiy" },
+    currentUser: { id: 0, name: "Кирилл Мохначевский", status: "Samurai", birthday: new Date(2001, 6, 9), location: { city: "Yakuts", country: "Russia" }, education: "РЭУ им. Г.В. Плеханова '23", web_site: "https://github.com/KirillDyachkovskiy" },
 };
 
 export const usersReducer = (state = initialState, action) => {
