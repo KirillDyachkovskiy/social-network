@@ -1,15 +1,6 @@
-@import "../../../../variables.scss";
+@import "../../../../styles/variables.scss";
 
 .users {
     display: grid;
     gap: 10px;
-}
-.pagination {
-    margin: 10px 0;
-    span {
-        margin: 5px;
-    }
-}
-.selectedPage {
-    font-weight: 700;
 }

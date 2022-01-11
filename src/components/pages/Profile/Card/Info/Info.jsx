@@ -1,10 +1,10 @@
-import { connect } from "react-redux";
-import { changeStatus_AC } from "../../../../../redux/reducer/usersReducer";
-import c from "./Info.module.scss";
-import { Status } from "./Status/Status";
+import { connect } from 'react-redux';
+import { changeStatus_AC } from '../../../../../redux/reducer/friendsReducer';
+import c from './Info.module.scss';
+import { Status } from './Status/Status';
 
 const mapStateToProps = (state) => ({
-    user: state.users.currentUser,
+    user: state.friends.currentUser,
 });
 const mapDispatchToProps = (dispatch) => ({
     onInputChange: (event) => dispatch(changeStatus_AC(event.target.value)),
@@ -28,7 +28,7 @@ const InfoStateLess = ({ user, onInputChange }) => {
             </div>
             <div className={c.row}>
                 <span>Wed-site:</span>
-                <a href={user.web_site} target="_blank" rel="noreferrer">{user.web_site}</a>
+                <a href={user.web_site} target='_blank' rel='noreferrer'>{user.web_site}</a>
             </div>
         </section>
     )

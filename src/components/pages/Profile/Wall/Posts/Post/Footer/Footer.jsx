@@ -1,4 +1,4 @@
-import c from "./Footer.module.scss";
+import c from './Footer.module.scss';
 
 const Footer = (props) => {
     return (

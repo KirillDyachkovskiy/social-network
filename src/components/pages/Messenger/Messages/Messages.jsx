@@ -1,4 +1,4 @@
-import c from "./Messages.module.scss";
+import c from './Messages.module.scss';
 
 import { Message } from './Message';
 import { connect } from 'react-redux';

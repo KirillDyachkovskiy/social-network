@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-import c from "./Sidebar.module.scss";
+import c from './Sidebar.module.scss';
 
 export const SidebarStateless = ({ sidebar }) => {
 

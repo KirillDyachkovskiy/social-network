@@ -1,9 +1,9 @@
-import c from "./Card.module.scss";
+import c from './Card.module.scss';
 
-import { Cover } from "./Cover";
-import { Avatar } from "./Avatar";
-import { Name } from "./Name";
-import { Info } from "./Info";
+import { Cover } from './Cover';
+import { Avatar } from './Avatar';
+import { Name } from './Name';
+import { Info } from './Info';
 
 export const Card = () => (
     <section className={c.card}>

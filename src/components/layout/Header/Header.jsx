@@ -1,6 +1,6 @@
-import c from "./Header.module.scss";
+import c from './Header.module.scss';
 
-import { Logo } from "../../ui/Logo";
+import { Logo } from '../../ui/Logo';
 
 const Header = () => (
     <header className={c.header}>

@@ -1,4 +1,4 @@
-import c from "./Logo.module.scss";
+import c from './Logo.module.scss';
 
 const Logo = () => (
     <div className={c.logo}>

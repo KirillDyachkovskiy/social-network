@@ -1,0 +1,11 @@
+@import "../../../../styles/variables.scss";
+
+.pagination {
+    margin: 10px 0;
+    span {
+        margin: 5px;
+    }
+}
+.selectedPage {
+    font-weight: 700;
+}

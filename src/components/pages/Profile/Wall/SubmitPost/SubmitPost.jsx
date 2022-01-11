@@ -1,5 +1,5 @@
-import { addPost_AС, updateNewPostText_AС } from "../../../../../redux/reducer/profileReducer";
-import { SubmitPostStateless } from "./SubmitPostStateless";
+import { addPost_AС, updateNewPostText_AС } from '../../../../../redux/reducer/profileReducer';
+import { SubmitPostStateless } from './SubmitPostStateless';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({ text: state.profile.newPostText, });

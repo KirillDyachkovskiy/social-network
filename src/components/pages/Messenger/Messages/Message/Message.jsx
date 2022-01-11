@@ -1,4 +1,4 @@
-import c from "./Message.module.scss";
+import c from './Message.module.scss';
 
 const Message = ({ id, sender, text }) => {
 

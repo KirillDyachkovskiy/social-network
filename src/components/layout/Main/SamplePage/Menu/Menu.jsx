@@ -1,4 +1,4 @@
-import c from "./Menu.module.scss";
+import c from './Menu.module.scss';
 
 import { Item } from './Item';
 

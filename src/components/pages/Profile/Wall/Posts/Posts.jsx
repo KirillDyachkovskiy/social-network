@@ -1,6 +1,6 @@
-import c from "./Posts.module.scss";
+import c from './Posts.module.scss';
 
-import { Post } from "./Post/Post";
+import { Post } from './Post/Post';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({ posts: state.profile.posts, })

@@ -1,4 +1,4 @@
-import c from "./SamplePage.module.scss"
+import c from './SamplePage.module.scss'
 
 import { Menu } from './Menu'
 

@@ -1,1 +1,1 @@
-export { SubmitPost } from "./SubmitPost"
+export { SubmitPost } from './SubmitPost'

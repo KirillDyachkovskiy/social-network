@@ -1,6 +1,4 @@
-import c from "./Notfound.module.scss";
-
-import { Preloader } from '../../ui/Preloader'
+import c from './Notfound.module.scss';
 
 const Notfound = () => (
     <section className={c.notfoundpage}>

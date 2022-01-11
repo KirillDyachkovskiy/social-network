@@ -1,1 +1,1 @@
-export { Wall } from "./Wall"
+export { Wall } from './Wall'
