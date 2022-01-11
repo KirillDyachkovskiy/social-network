@@ -1,17 +1,17 @@
 const TOGGLE_FRIEND = 'ADD-FRIEND';
-export const toggleFriend_AC = (id) => ({ type: TOGGLE_FRIEND, id, });
+export const toggleFriend = (id) => ({ type: TOGGLE_FRIEND, id, });
 
 const CHANGE_STATUS = 'CHANGE-STATUS';
-export const changeStatus_AC = (text) => ({ type: CHANGE_STATUS, text, });
+export const changeStatus = (text) => ({ type: CHANGE_STATUS, text, });
 
 const SET_USERS = 'SET-USERS';
-export const setUsersList_AC = (users, totalCount) => ({ type: SET_USERS, users, totalCount, });
+export const setUsersList = (users, totalCount) => ({ type: SET_USERS, users, totalCount, });
 
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
-export const setCurrentPage_AC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
+export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
 
 const TOGGLE_FETCHING = 'TOGGLE-FETCHING';
-export const toggleFetching_AC = () => ({ type: TOGGLE_FETCHING, });
+export const toggleFetching = () => ({ type: TOGGLE_FETCHING, });
 
 const initialState = {
     menu: [
@@ -24,7 +24,13 @@ const initialState = {
     totalCount: 0,
     currentPage: 1,
     currentUser: {
-        id: 0, name: 'Кирилл Мохначевский', status: 'Samurai', birthday: new Date(2001, 6, 9), location: { city: 'Yakuts', country: 'Russia' }, education: "РЭУ им. Г.В. Плеханова '23", web_site: 'https://github.com/KirillDyachkovskiy'
+        id: 0,
+        name: 'Кирилл Мохначевский',
+        status: 'Samurai',
+        birthday: new Date(2001, 6, 9),
+        location: { city: 'Yakuts', country: 'Russia' },
+        education: "РЭУ им. Г.В. Плеханова '23",
+        web_site: 'https://github.com/KirillDyachkovskiy',
     },
 };
 

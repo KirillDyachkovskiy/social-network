@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setCurrentPage_AC, setUsersList_AC, toggleFetching_AC } from '../../../../redux/reducer/friendsReducer';
+import { setCurrentPage, setUsersList, toggleFetching } from '../../../../redux/reducer/friendsReducer';
 import * as axios from 'axios';
 import React, { Component } from 'react';
 import { PaginationStateless } from './PaginationStateless';
@@ -9,22 +9,17 @@ const mapStateToProps = (state) => ({
     totalCount: state.friends.totalCount,
     currentPage: state.friends.currentPage,
 });
-const mapDispatchToProps = (dispatch) => ({
-    setUsersList: (users, totalCount) => dispatch(setUsersList_AC(users, totalCount)),
-    setCurrentPage: (number) => dispatch(setCurrentPage_AC(number)),
-    changeFetchingStatus: () => dispatch(toggleFetching_AC()),
-});
 
 class UsersCombine extends Component {
     onPageChanged(pageNumber) {
         this.props.setUsersList();
         this.props.setCurrentPage(pageNumber);
-        this.props.changeFetchingStatus();
+        this.props.toggleFetching();
 
         axios
             .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(({ data }) => {
-                this.props.changeFetchingStatus();
+                this.props.toggleFetching();
                 this.props.setUsersList(data.items);
             });
     }
@@ -35,4 +30,11 @@ class UsersCombine extends Component {
     }
 }
 
-export const Pagination = connect(mapStateToProps, mapDispatchToProps)(UsersCombine);
+export const Pagination = connect(
+    mapStateToProps,
+    {
+        setUsersList,
+        setCurrentPage,
+        toggleFetching,
+    }
+)(UsersCombine);

@@ -4,6 +4,7 @@
     @include field();
     max-width: 85%;
     width: max-content;
+    height: fit-content;
     word-wrap: break-word;
     &.from {
         background-color: $blue-bubble;
