@@ -3,7 +3,8 @@ import { Component } from 'react';
 import * as axios from 'axios';
 import { connect } from 'react-redux';
 import { ProfileStateless } from './ProfileStateless';
-import { Preloader } from '../../ui/Preloader'
+import { Preloader } from '../../ui/Preloader';
+import { useParams } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
     userProfile: state.profile.userProfile,
@@ -12,7 +13,7 @@ const mapStateToProps = (state) => ({
 class ProfileCombine extends Component {
     componentDidMount() {
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/12`)
+            .get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.id}`)
             .then(({ data }) => {
                 this.props.setUserProfile(data);
             });
@@ -26,9 +27,17 @@ class ProfileCombine extends Component {
     }
 }
 
+export const ProfileRouter = (props) => {
+    const { id = 2 } = useParams();
+
+    return (
+        <ProfileCombine {...props} id={id} />
+    )
+}
+
 export const Profile = connect(
     mapStateToProps,
     {
         setUserProfile,
     }
-)(ProfileCombine);
+)(ProfileRouter);

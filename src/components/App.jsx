@@ -13,10 +13,12 @@ export const App = () => {
       <Routes>
         <Route path='/' element={<Layout />} >
           <Route index element={<Profile />} />
-          <Route path='profile/:id' element={<Profile />} />
+          <Route path='/:id' element={<Profile />} />
           <Route path='messenger/*' element={<Messenger />} />
           <Route path='friends/*' element={<Friends />} />
-          <Route path='*' element={<Notfound />} />
+          <Route path='news/*' element={<Notfound />} />
+          <Route path='music/*' element={<Notfound />} />
+          <Route path='settings/*' element={<Notfound />} />
         </Route>
       </Routes>
     </BrowserRouter>
