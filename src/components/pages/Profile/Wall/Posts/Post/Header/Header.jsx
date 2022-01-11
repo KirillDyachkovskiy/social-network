@@ -1,15 +1,9 @@
-import c from './Header.module.scss';
+import { connect } from 'react-redux';
+import { HeaderStateless } from './HeaderStateless';
 
-const Header = () => (
-    <div className={c.header}>
-        <div className={c.avatar}>
-            <img src='https://avatars.githubusercontent.com/u/81510334?s=400&u=458606c3cfc79e4c291c5025ea2655c90adc6163&v=4' alt='аватарка пользователя в посте' />
-        </div>
-        <h1 className={c.name}>Кирилл Мохначевский</h1>
-        <div className={c.time}>
-            вчера в 10:21
-        </div>
-    </div>
-);
+const mapStateToProps = (state) => ({
+    photo: state.profile.userProfile.photos.small,
+    name: state.profile.userProfile.fullName,
+});
 
-export { Header };
+export const Header = connect(mapStateToProps)(HeaderStateless)

@@ -1,13 +1,34 @@
-import c from './Profile.module.scss';
+import { setUserProfile } from '../../../redux/reducer/profileReducer';
+import { Component } from 'react';
+import * as axios from 'axios';
+import { connect } from 'react-redux';
+import { ProfileStateless } from './ProfileStateless';
+import { Preloader } from '../../ui/Preloader'
 
-import { Card } from './Card';
-import { Wall } from './Wall';
+const mapStateToProps = (state) => ({
+    userProfile: state.profile.userProfile,
+});
 
-export const Profile = () => {
-    return (
-        <section className={c.profile}>
-            <Card />
-            <Wall />
-        </section>
-    )
-};
+class ProfileCombine extends Component {
+    componentDidMount() {
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/profile/12`)
+            .then(({ data }) => {
+                this.props.setUserProfile(data);
+            });
+    }
+    render() {
+        return (
+            <>
+                {(this.props.userProfile) ? <ProfileStateless {...this.props} /> : <Preloader />}
+            </>
+        )
+    }
+}
+
+export const Profile = connect(
+    mapStateToProps,
+    {
+        setUserProfile,
+    }
+)(ProfileCombine);

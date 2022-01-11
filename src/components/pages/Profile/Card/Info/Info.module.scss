@@ -13,10 +13,10 @@
             color: #000000;
         }
     }
-}
-.row {
-    color: $grey-text;
+    div {
+        color: $grey-text;
 
-    display: grid;
-    grid-template: 1fr / 150px 1fr;
+        display: grid;
+        grid-template: 1fr / 150px 1fr;
+    }
 }

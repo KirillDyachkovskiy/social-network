@@ -1,7 +1,7 @@
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+const UPDATE_NEW_MESSAGE = 'UPDATE_NEW_MESSAGE';
 export const updateNewMessageText = (text) => ({ type: UPDATE_NEW_MESSAGE, text, });
 
-const SEND_MESSAGE = 'SEND-MESSAGE';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 export const sendMessage = () => ({ type: SEND_MESSAGE });
 
 const initialState = {

@@ -1,9 +1,9 @@
 import c from './Status.module.scss';
 
-export const Status = ({ text, onChange }) => {
+export const Status = ({ children }) => {
     return (
         <div className={c.status}>
-            <input type='text' className={c.input} value={text} onChange={(e) => onChange(e.target.value)} />
+            <input type='text' className={c.input} value={children} disabled />
         </div>
     );
 }

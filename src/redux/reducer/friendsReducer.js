@@ -1,16 +1,16 @@
-const TOGGLE_FRIEND = 'ADD-FRIEND';
+const TOGGLE_FRIEND = 'ADD_FRIEND';
 export const toggleFriend = (id) => ({ type: TOGGLE_FRIEND, id, });
 
-const CHANGE_STATUS = 'CHANGE-STATUS';
+const CHANGE_STATUS = 'CHANGE_STATUS';
 export const changeStatus = (text) => ({ type: CHANGE_STATUS, text, });
 
-const SET_USERS = 'SET-USERS';
+const SET_USERS = 'SET_USERS';
 export const setUsersList = (users, totalCount) => ({ type: SET_USERS, users, totalCount, });
 
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
 
-const TOGGLE_FETCHING = 'TOGGLE-FETCHING';
+const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 export const toggleFetching = () => ({ type: TOGGLE_FETCHING, });
 
 const initialState = {
@@ -23,15 +23,6 @@ const initialState = {
     pageSize: 6,
     totalCount: 0,
     currentPage: 1,
-    currentUser: {
-        id: 0,
-        name: 'Кирилл Мохначевский',
-        status: 'Samurai',
-        birthday: new Date(2001, 6, 9),
-        location: { city: 'Yakuts', country: 'Russia' },
-        education: "РЭУ им. Г.В. Плеханова '23",
-        web_site: 'https://github.com/KirillDyachkovskiy',
-    },
 };
 
 export const friendsReducer = (state = initialState, action) => {

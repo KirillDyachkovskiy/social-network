@@ -13,6 +13,7 @@ export const App = () => {
       <Routes>
         <Route path='/' element={<Layout />} >
           <Route index element={<Profile />} />
+          <Route path='profile/:id' element={<Profile />} />
           <Route path='messenger/*' element={<Messenger />} />
           <Route path='friends/*' element={<Friends />} />
           <Route path='*' element={<Notfound />} />
