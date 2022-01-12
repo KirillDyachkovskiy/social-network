@@ -1,7 +1,7 @@
 import c from './Posts.module.scss';
 
-import { Post } from './Post/Post';
 import { connect } from 'react-redux';
+import { Post } from './Post';
 
 const mapStateToProps = (state) => ({ posts: state.profile.posts, })
 

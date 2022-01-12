@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { HeaderStateless } from './HeaderStateless';
+import { PostHeaderStateless } from './PostHeaderStateless';
 
 const mapStateToProps = (state) => ({
     photo: state.profile.userProfile.photos.small,
     name: state.profile.userProfile.fullName,
 });
 
-export const Header = connect(mapStateToProps)(HeaderStateless)
+export const PostHeader = connect(mapStateToProps)(PostHeaderStateless);

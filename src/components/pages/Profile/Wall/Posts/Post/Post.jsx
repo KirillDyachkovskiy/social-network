@@ -1,19 +1,15 @@
 import c from './Post.module.scss';
+import { PostFooter } from './PostFooter';
+import { PostHeader } from './PostHeader';
 
-import { Header } from './Header';
-import { Footer } from './Footer';
-
-const Post = ({ text, likes }) => {
+export const Post = ({ text, likes }) => {
     return (
         <section className={c.post}>
-            <Header />
+            <PostHeader />
             <div className={c.content}>
                 <p>{text}</p>
             </div>
-            <Footer likes={likes} />
+            <PostFooter likes={likes} />
         </section>
     );
 }
-
-
-export { Post };

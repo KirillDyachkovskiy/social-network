@@ -1,8 +1,8 @@
-import c from './Footer.module.scss';
+import c from './PostFooter.module.scss';
 
-const Footer = (props) => {
+export const PostFooter = (props) => {
     return (
-        <div className={c.footer}>
+        <div className={c.postFooter}>
             <span>❤</span>
             <div className={c.likes}>
                 {props.likes}
@@ -10,6 +10,3 @@ const Footer = (props) => {
         </div>
     );
 };
-
-
-export { Footer };

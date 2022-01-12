@@ -1,7 +1,7 @@
-import c from './Header.module.scss';
+import c from './PostHeader.module.scss';
 
-export const HeaderStateless = ({ photo, name }) => (
-    <div className={c.header}>
+export const PostHeaderStateless = ({ photo, name }) => (
+    <div className={c.postHeader}>
         <div className={c.avatar}>
             <img src={photo} alt='profile' />
         </div>
