@@ -1,6 +1,6 @@
 import { Title } from './Title';
 import { Users } from './Users';
-import { SamplePage } from '../../layout/Main/SamplePage'
+import { SamplePage } from '../../Auth/Layout/Main/SamplePage'
 import { Pagination } from './Pagination';
 
 export const FriendsStateless = ({ menu }) => {

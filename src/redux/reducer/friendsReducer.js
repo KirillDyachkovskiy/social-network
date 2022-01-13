@@ -1,5 +1,7 @@
-const TOGGLE_FRIEND = 'ADD_FRIEND';
-export const toggleFriend = (id) => ({ type: TOGGLE_FRIEND, id, });
+import { usersAPI } from "../../api/api";
+
+const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
+export const toggleFollowSuccess = (id) => ({ type: TOGGLE_FOLLOW, id, });
 
 const CHANGE_STATUS = 'CHANGE_STATUS';
 export const changeStatus = (text) => ({ type: CHANGE_STATUS, text, });
@@ -10,8 +12,39 @@ export const setUsersList = (users, totalCount) => ({ type: SET_USERS, users, to
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
 
-const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
-export const toggleFetching = () => ({ type: TOGGLE_FETCHING, });
+const CHANGE_FOLLOWING_STATUS = 'CHANGE_FOLLOWING_STATUS';
+export const changeFollowingStatus = (id, isFetching) => ({ type: CHANGE_FOLLOWING_STATUS, id, isFetching });
+
+export const toggleFollow = (id, followed) => (dispatch) => {
+    dispatch(changeFollowingStatus(id, true));
+    if (followed) {
+        usersAPI.unfollow(id)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(toggleFollowSuccess(id));
+                    dispatch(changeFollowingStatus(id, false));
+                }
+            });
+    } else {
+        usersAPI.follow(id)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(toggleFollowSuccess(id));
+                    dispatch(changeFollowingStatus(id, false));
+                }
+            });
+    }
+};
+
+export const changePage = (page, pageSize) => (dispatch) => {
+    dispatch(setUsersList());
+    dispatch(setCurrentPage(page));
+
+    usersAPI.getCurrentPageData(page, pageSize)
+        .then(data => {
+            dispatch(setUsersList(data.items, data.totalCount));
+        });
+};
 
 const initialState = {
     menu: [
@@ -19,15 +52,15 @@ const initialState = {
         { id: 1, text: 'Search' },
     ],
     users: [],
-    isFetching: false,
-    pageSize: 6,
+    pageSize: 4,
     totalCount: 0,
     currentPage: 1,
+    followingInProgress: [],
 };
 
 export const friendsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case TOGGLE_FRIEND:
+        case TOGGLE_FOLLOW:
             return {
                 ...state,
                 users: state.users.map(item => {
@@ -41,10 +74,10 @@ export const friendsReducer = (state = initialState, action) => {
                     }
                 })
             };
-        case TOGGLE_FETCHING:
+        case CHANGE_FOLLOWING_STATUS:
             return {
                 ...state,
-                isFetching: !state.isFetching,
+                followingInProgress: (action.isFetching) ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(item => item !== action.id),
             };
         case CHANGE_STATUS:
             return {

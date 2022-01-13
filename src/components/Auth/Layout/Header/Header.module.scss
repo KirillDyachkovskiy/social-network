@@ -1,0 +1,12 @@
+@import "../../../../styles/variables.scss";
+
+.header {
+    background-color: $blue;
+}
+.container {
+    @include container();
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

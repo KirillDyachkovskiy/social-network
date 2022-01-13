@@ -1,0 +1,12 @@
+@import "../../../../../styles/variables.scss";
+
+.login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p {
+        color: $grey-field;
+        font-weight: 700;
+        margin: 0 10px;
+    }
+}

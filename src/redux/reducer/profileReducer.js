@@ -1,11 +1,22 @@
+import { profileAPI } from "../../api/api";
+
 const UPDATE_NEW_POST = 'UPDATE_NEW_POST';
 export const updateNewPostText = (text) => ({ type: UPDATE_NEW_POST, text, });
 
 const ADD_POST = 'ADD_POST';
 export const addPost = () => ({ type: ADD_POST });
 
-const CHANGE_SELECTED_PROFILE = 'CHANGE_SELECTED_PROFILE';
-export const setUserProfile = (data) => ({ type: CHANGE_SELECTED_PROFILE, data });
+const SET_VISITED_USER_PROFILE = 'SET_VISITED_USER_PROFILE';
+export const setVisitedUserProfile = (data) => ({ type: SET_VISITED_USER_PROFILE, data });
+
+export const getVisitedUserProfile = (id) => {
+    return (dispatch) => {
+        profileAPI.getData(id)
+            .then(data => {
+                dispatch(setVisitedUserProfile(data));
+            });
+    }
+}
 
 const initialState = {
     posts: [
@@ -15,7 +26,7 @@ const initialState = {
         { id: 3, likes: Math.ceil(Math.random() * 100), text: 'За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан' },
     ],
     newPostText: '',
-    userProfile: null,
+    visitedProfile: null,
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -35,10 +46,10 @@ export const profileReducer = (state = initialState, action) => {
             } else {
                 return state;
             };
-        case CHANGE_SELECTED_PROFILE:
+        case SET_VISITED_USER_PROFILE:
             return {
                 ...state,
-                userProfile: action.data,
+                visitedProfile: action.data,
             }
         default:
             return state;

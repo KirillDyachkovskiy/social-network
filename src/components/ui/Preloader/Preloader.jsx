@@ -1,8 +1,8 @@
 import c from './Preloader.module.scss';
 
-export const Preloader = () => {
+export const Preloader = ({ color }) => {
     return (
-        <div className={c.preloader}>
+        <div className={`${c.preloader} ${c[color]}`}>
             <div></div>
             <div></div>
             <div></div>

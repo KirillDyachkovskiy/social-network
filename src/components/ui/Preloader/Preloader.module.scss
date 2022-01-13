@@ -12,8 +12,13 @@
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: $blue;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.blue div {
+    background: $blue;
+}
+.white div {
+    background: $grey-field;
 }
 .preloader div:nth-child(1) {
     left: 8px;

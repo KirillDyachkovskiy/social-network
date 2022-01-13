@@ -5,13 +5,13 @@ import { Messenger } from './pages/Messenger';
 import { Friends } from './pages/Friends';
 import { Notfound } from './pages/Notfound';
 import { Profile } from './pages/Profile';
-import { Layout } from './layout';
+import { Auth } from './Auth';
 
 export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Layout />} >
+        <Route path='/' element={<Auth />} >
           <Route index element={<Profile />} />
           <Route path='/:id' element={<Profile />} />
           <Route path='messenger/*' element={<Messenger />} />

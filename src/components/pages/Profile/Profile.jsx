@@ -1,43 +1,40 @@
-import { setUserProfile } from '../../../redux/reducer/profileReducer';
-import { Component } from 'react';
-import * as axios from 'axios';
+import { setVisitedUserProfile, getVisitedUserProfile } from '../../../redux/reducer/profileReducer';
 import { connect } from 'react-redux';
 import { ProfileStateless } from './ProfileStateless';
 import { Preloader } from '../../ui/Preloader';
 import { useParams } from 'react-router-dom';
+import { Component } from 'react';
 
 const mapStateToProps = (state) => ({
-    userProfile: state.profile.userProfile,
+    visitedProfile: state.profile.visitedProfile,
+    authedUser: state.auth.data,
 });
 
 class ProfileCombine extends Component {
     componentDidMount() {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.id}`)
-            .then(({ data }) => {
-                this.props.setUserProfile(data);
-            });
+        this.props.getVisitedUserProfile(this.props.id)
     }
     render() {
         return (
             <>
-                {(this.props.userProfile) ? <ProfileStateless {...this.props} /> : <Preloader />}
+                {(this.props.visitedProfile) ? <ProfileStateless {...this.props.visitedProfile} /> : <Preloader color='blue' />}
             </>
         )
     }
 }
 
-export const ProfileRouter = (props) => {
-    const { id = 2 } = useParams();
+const ProfileRouter = ({ visitedProfile, authedUser, getVisitedUserProfile }) => {
+    const { id = authedUser.id } = useParams();
 
     return (
-        <ProfileCombine {...props} id={id} />
+        <ProfileCombine visitedProfile={visitedProfile} id={id} getVisitedUserProfile={getVisitedUserProfile} />
     )
 }
 
 export const Profile = connect(
     mapStateToProps,
     {
-        setUserProfile,
+        setVisitedUserProfile,
+        getVisitedUserProfile,
     }
 )(ProfileRouter);

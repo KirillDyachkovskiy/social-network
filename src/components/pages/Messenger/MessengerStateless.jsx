@@ -1,7 +1,7 @@
 import c from './Messenger.module.scss'
 import { Messages } from './Messages'
 import { SubmitMessage } from './SubmitMessage';
-import { SamplePage } from '../../layout/Main/SamplePage'
+import { SamplePage } from '../../Auth/Layout/Main/SamplePage'
 
 export const MessengerStateless = ({ menu }) => {
     return (

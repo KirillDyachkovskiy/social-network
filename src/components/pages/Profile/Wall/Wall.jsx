@@ -4,7 +4,7 @@ import { Title } from './Title';
 import { SubmitPost } from './SubmitPost';
 import { Posts } from './Posts';
 
-export const Wall = (props) => {
+export const Wall = () => {
     return (
         <section className={c.wall}>
             <SubmitPost />
