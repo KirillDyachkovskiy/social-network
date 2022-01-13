@@ -1,15 +1,8 @@
-import { Outlet } from 'react-router-dom';
-import { Sidebar } from './Sidebar';
+import { connect } from 'react-redux';
+import { MainStateless } from './MainStateless';
 
-import c from './Main.module.scss';
+const mapStateToProps = (state) => ({
+    authedUser: state.auth.data,
+})
 
-export const Main = () => {
-    return (
-        <main className={c.main}>
-            <div className={c.container}>
-                <Sidebar />
-                <Outlet />
-            </div>
-        </main>
-    )
-};
+export const Main = connect(mapStateToProps)(MainStateless)

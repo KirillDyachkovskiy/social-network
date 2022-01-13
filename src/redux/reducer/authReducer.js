@@ -1,7 +1,7 @@
 import { authAPI } from "../../api/api";
 
 const SET_AUTHED_USER_DATA = 'SET_USER_DATA';
-export const setAuthedUserData = (data, page) => ({ type: SET_AUTHED_USER_DATA, data, page, });
+export const setAuthedUserData = (data) => ({ type: SET_AUTHED_USER_DATA, data, });
 
 export const authMe = () => (dispatch) => {
     authAPI.authMe()
