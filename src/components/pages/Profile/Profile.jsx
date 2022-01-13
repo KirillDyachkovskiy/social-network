@@ -4,6 +4,7 @@ import { ProfileStateless } from './ProfileStateless';
 import { Preloader } from '../../ui/Preloader';
 import { useParams } from 'react-router-dom';
 import { Component } from 'react';
+import { compose } from 'redux';
 import { HOC } from '../../hoc/hocs';
 
 const mapStateToProps = (state) => ({
@@ -34,10 +35,7 @@ const ProfileRouter = (props) => {
     )
 }
 
-export const Profile = connect(
-    mapStateToProps,
-    {
-        setVisitedUserProfile,
-        getVisitedUserProfile,
-    }
-)(HOC.withRedirect(ProfileRouter));
+export const Profile = compose(
+    connect(mapStateToProps, { setVisitedUserProfile, getVisitedUserProfile, }),
+    HOC.withRedirect
+)(ProfileRouter);

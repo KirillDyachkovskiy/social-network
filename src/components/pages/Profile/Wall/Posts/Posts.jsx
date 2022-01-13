@@ -1,5 +1,5 @@
 import c from './Posts.module.scss';
-
+import { compose } from 'redux'
 import { connect } from 'react-redux';
 import { Post } from './Post';
 
@@ -11,4 +11,6 @@ const PostsStateless = ({ posts }) => (
     </section >
 )
 
-export const Posts = connect(mapStateToProps)(PostsStateless);
+export const Posts = compose(
+    connect(mapStateToProps)
+)(PostsStateless);

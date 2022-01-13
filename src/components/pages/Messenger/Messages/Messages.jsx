@@ -1,5 +1,5 @@
 import c from './Messages.module.scss';
-
+import { compose } from 'redux';
 import { Message } from './Message';
 import { connect } from 'react-redux';
 
@@ -14,4 +14,6 @@ const MessagesStateless = ({ messages }) => {
     )
 }
 
-export const Messages = connect(mapStateToProps)(MessagesStateless);
+export const Messages = compose(
+    connect(mapStateToProps)
+)(MessagesStateless);

@@ -1,5 +1,6 @@
 import { addPost, updateNewPostText } from '../../../../../redux/reducer/profileReducer';
 import { SubmitPostStateless } from './SubmitPostStateless';
+import { compose } from 'redux'
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
@@ -7,10 +8,6 @@ const mapStateToProps = (state) => ({
 });
 
 
-export const SubmitPost = connect(
-    mapStateToProps,
-    {
-        updateNewPostText,
-        addPost,
-    }
+export const SubmitPost = compose(
+    connect(mapStateToProps, { updateNewPostText, addPost, })
 )(SubmitPostStateless);

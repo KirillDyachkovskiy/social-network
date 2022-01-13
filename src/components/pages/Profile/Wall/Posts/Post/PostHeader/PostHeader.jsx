@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { compose } from 'redux'
 import { PostHeaderStateless } from './PostHeaderStateless';
 
 const mapStateToProps = (state) => ({
@@ -6,4 +7,6 @@ const mapStateToProps = (state) => ({
     name: state.profile.visitedProfile?.fullName,
 });
 
-export const PostHeader = connect(mapStateToProps)(PostHeaderStateless);
+export const PostHeader = compose(
+    connect(mapStateToProps)
+)(PostHeaderStateless);

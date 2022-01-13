@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { compose } from 'redux'
 import { changePage, setUsersList, toggleFollow } from '../../../../redux/reducer/friendsReducer';
 import { UsersStateless } from './UsersStateless';
 import { Preloader } from '../../../ui/Preloader'
@@ -32,11 +33,6 @@ class UsersCombine extends Component {
     }
 }
 
-export const Users = connect(
-    mapStateToProps,
-    {
-        changePage,
-        setUsersList,
-        toggleFollow,
-    }
+export const Users = compose(
+    connect(mapStateToProps, { changePage, setUsersList, toggleFollow, })
 )(UsersCombine);

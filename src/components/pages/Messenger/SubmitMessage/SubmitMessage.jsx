@@ -1,5 +1,6 @@
 import { sendMessage, updateNewMessageText } from '../../../../redux/reducer/messengerReducer';
 import { SubmitMessageStateless } from './SubmitMessageStateless';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
@@ -7,10 +8,6 @@ const mapStateToProps = (state) => ({
 });
 
 
-export const SubmitMessage = connect(
-    mapStateToProps,
-    {
-        updateNewMessageText,
-        sendMessage,
-    }
+export const SubmitMessage = compose(
+    connect(mapStateToProps, { updateNewMessageText, sendMessage, })
 )(SubmitMessageStateless);

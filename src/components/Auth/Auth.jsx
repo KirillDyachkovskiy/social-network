@@ -1,4 +1,5 @@
 import { authMe } from '../../redux/reducer/authReducer';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Layout } from './Layout'
 import { Component } from 'react';
@@ -20,9 +21,6 @@ class AuthStateless extends Component {
     }
 }
 
-export const Auth = connect(
-    mapStateToProps,
-    {
-        authMe,
-    }
+export const Auth = compose(
+    connect(mapStateToProps, { authMe }),
 )(AuthStateless);
