@@ -4,11 +4,10 @@ import { ProfileStateless } from './ProfileStateless';
 import { Preloader } from '../../ui/Preloader';
 import { useParams } from 'react-router-dom';
 import { Component } from 'react';
-import { Login } from '../Login';
+import { HOC } from '../../hoc/hocs';
 
 const mapStateToProps = (state) => ({
     visitedProfile: state.profile.visitedProfile,
-    authedUser: state.auth.data,
 });
 
 class ProfileCombine extends Component {
@@ -31,9 +30,7 @@ const ProfileRouter = (props) => {
     const { id = props.authedUser.id } = useParams();
 
     return (
-        <>
-            {(props.authedUser.id) ? <ProfileCombine {...props} id={id} /> : <Login />}
-        </>
+        <ProfileCombine {...props} id={id} />
     )
 }
 
@@ -43,4 +40,4 @@ export const Profile = connect(
         setVisitedUserProfile,
         getVisitedUserProfile,
     }
-)(ProfileRouter);
+)(HOC.withRedirect(ProfileRouter));
