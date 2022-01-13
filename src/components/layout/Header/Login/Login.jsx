@@ -1,6 +1,6 @@
-import c from './Login.module.scss';
+import c from './LoginCard.module.scss';
 
-export const Login = () => (
+export const LoginCard = () => (
     <header className={c.header}>
         <div className={c.container}>
         </div>

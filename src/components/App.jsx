@@ -6,6 +6,7 @@ import { Friends } from './pages/Friends';
 import { Notfound } from './pages/Notfound';
 import { Profile } from './pages/Profile';
 import { Auth } from './Auth';
+import { Login } from './pages/Login';
 
 export const App = () => {
   return (
@@ -19,6 +20,7 @@ export const App = () => {
           <Route path='news/*' element={<Notfound />} />
           <Route path='music/*' element={<Notfound />} />
           <Route path='settings/*' element={<Notfound />} />
+          <Route path='login/*' element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>

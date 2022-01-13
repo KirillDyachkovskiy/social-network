@@ -1,13 +1,13 @@
 import c from './Header.module.scss';
 import { Logo } from '../../../ui/Logo';
-import { Login } from './Login';
+import { LoginCard } from './LoginCard';
 
 export const Header = ({ login }) => {
     return (
         <header className={c.header}>
             <div className={c.container}>
                 <Logo />
-                <Login login={login} />
+                <LoginCard login={login} />
             </div>
         </header>
     )
