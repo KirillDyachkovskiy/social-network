@@ -4,6 +4,7 @@ import { ProfileStateless } from './ProfileStateless';
 import { Preloader } from '../../ui/Preloader';
 import { useParams } from 'react-router-dom';
 import { Component } from 'react';
+import { Login } from '../Login';
 
 const mapStateToProps = (state) => ({
     visitedProfile: state.profile.visitedProfile,
@@ -30,7 +31,9 @@ const ProfileRouter = (props) => {
     const { id = props.authedUser.id } = useParams();
 
     return (
-        <ProfileCombine {...props} id={id} />
+        <>
+            {(props.authedUser.id) ? <ProfileCombine {...props} id={id} /> : <Login />}
+        </>
     )
 }
 

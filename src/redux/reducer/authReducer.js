@@ -11,7 +11,7 @@ export const authMe = () => (dispatch) => {
 }
 
 const initialState = {
-    data: null,
+    data: {},
 };
 
 export const authReducer = (state = initialState, action) => {
