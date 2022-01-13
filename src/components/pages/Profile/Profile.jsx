@@ -14,6 +14,9 @@ class ProfileCombine extends Component {
     componentDidMount() {
         this.props.getVisitedUserProfile(this.props.id)
     }
+    componentWillUnmount() {
+        this.props.setVisitedUserProfile()
+    }
     render() {
         return (
             <>
@@ -23,11 +26,11 @@ class ProfileCombine extends Component {
     }
 }
 
-const ProfileRouter = ({ visitedProfile, authedUser, getVisitedUserProfile }) => {
-    const { id = authedUser.id } = useParams();
+const ProfileRouter = (props) => {
+    const { id = props.authedUser.id } = useParams();
 
     return (
-        <ProfileCombine visitedProfile={visitedProfile} id={id} getVisitedUserProfile={getVisitedUserProfile} />
+        <ProfileCombine {...props} id={id} />
     )
 }
 
