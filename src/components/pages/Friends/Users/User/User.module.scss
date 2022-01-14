@@ -27,5 +27,15 @@
     justify-self: start;
 
     display: grid;
+    grid-template-areas:
+        "name"
+        "status";
     gap: 10px;
+    p {
+        pointer-events: none;
+        cursor: pointer;
+    }
+}
+.name {
+    grid-area: name;
 }

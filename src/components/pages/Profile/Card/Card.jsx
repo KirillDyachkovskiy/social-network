@@ -1,7 +1,8 @@
 import c from './Card.module.scss';
-import { Info } from './Info';
+import { Contacts } from './Contacts';
 import { Avatar } from '../../../ui/Avatar';
 import { ANON_USER_COVER } from '../../../../js/variables';
+import { Status } from '../../../ui/Status';
 
 export const Card = (props) => {
     return (
@@ -10,9 +11,11 @@ export const Card = (props) => {
                 <img src={ANON_USER_COVER} alt='cover' />
             </div>
             <div className={c.box}>
-                <Avatar src={props.photos.large} size='large' />
+                <Avatar src={props.photos?.large} size='large' />
                 <h1 className={c.name}>{props.fullName}</h1>
-                <Info contacts={props.contacts} aboutMe={props.aboutMe} />
+                <Status status={props.status || "АХАХАХ ЭТО Я"} />
+                <p className={c.about}>{`About me: ${props.aboutMe}`}</p>
+                <Contacts contacts={props.contacts} />
             </div>
         </section >
     );

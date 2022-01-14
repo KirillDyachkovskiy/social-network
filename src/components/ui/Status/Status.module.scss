@@ -1,15 +1,18 @@
 @import "../../../styles/variables.scss";
 
 .status {
-    margin: -10px 0 10px;
+    grid-area: status;
 }
-.input {
+.input,
+.label {
     width: max-content;
     max-width: 90%;
     padding: 10px;
-    margin: -5px;
-    margin-left: -10px;
-    // padding-left: 5px;
+    margin: 10px;
+    margin-left: 0;
+    padding-left: 0;
+}
+.input {
     &:focus,
     &:hover {
         background-color: rgba(0, 0, 0, 0.05);

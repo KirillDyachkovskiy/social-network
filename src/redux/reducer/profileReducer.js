@@ -16,7 +16,16 @@ export const getVisitedUserProfile = (id) => {
                 dispatch(setVisitedUserProfile(data));
             });
     }
-}
+};
+
+export const changeAuthedUserStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.changeStatus(status)
+            .then(data => {
+                dispatch(setVisitedUserProfile(data));
+            });
+    }
+};
 
 const initialState = {
     posts: [
@@ -26,7 +35,7 @@ const initialState = {
         { id: 3, likes: Math.ceil(Math.random() * 100), text: 'За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан' },
     ],
     newPostText: '',
-    visitedProfile: null,
+    visitedProfile: {},
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -50,7 +59,7 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 visitedProfile: action.data,
-            }
+            };
         default:
             return state;
     }

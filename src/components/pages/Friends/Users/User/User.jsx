@@ -14,9 +14,7 @@ export const User = ({ user, toggleFollow, followingInProgress }) => {
             </div>
             <div className={c.box}>
                 <div className={c.name}>{user.name}</div>
-                <Status >
-                    {user.status}
-                </Status>
+                <Status status={user.status} />
             </div>
             <Follower
                 id={user.id}

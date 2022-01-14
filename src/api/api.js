@@ -23,6 +23,11 @@ export const profileAPI = {
             .get(`profile/${id}`)
             .then(({ data }) => data)
     },
+    changeStatus(status) {
+        return instance
+            .put('profile/status', 'lol')
+            .then(({ data }) => data)
+    },
 }
 
 export const usersAPI = {

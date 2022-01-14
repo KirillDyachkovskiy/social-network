@@ -1,12 +1,8 @@
-import c from './Info.module.scss';
-import { Status } from '../../../../ui/Status/Status';
+import c from './Contacts.module.scss';
 
-export const Info = ({ aboutMe, contacts }) => {
+export const Contacts = ({ contacts = {} }) => {
     return (
-        <section className={c.info}>
-            <Status>
-                {aboutMe}
-            </Status>
+        <section className={c.contacts}>
             <div>
                 <span>Facebook:</span>
                 <span>{contacts.facebook}</span>
