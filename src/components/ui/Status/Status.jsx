@@ -12,7 +12,7 @@ class StatusCombine extends Component {
     state = {
         editMode: false,
     };
-    toggeEditMode() {
+    toggeEditMode = () => {
         this.setState({
             editMode: !this.state.editMode,
         })
@@ -22,7 +22,7 @@ class StatusCombine extends Component {
             <StatusStateless
                 status={this.props.status}
                 editMode={this.state.editMode}
-                toggeEditMode={this.toggeEditMode.bind(this)}
+                toggeEditMode={this.toggeEditMode}
                 changeAuthedUserStatus={this.props.changeAuthedUserStatus} />
         );
     }
