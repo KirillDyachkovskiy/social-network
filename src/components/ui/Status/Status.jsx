@@ -24,6 +24,7 @@ class StatusCombine extends Component {
     };
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.status !== this.props.status) {
+            debugger
             this.setState({
                 status: this.props.status,
             });
