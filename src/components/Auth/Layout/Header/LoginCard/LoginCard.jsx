@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ANON_USER_NAME } from '../../../../../js/variables';
+import { ANON_USER_NAME } from '../../../../../variables';
 
 import c from './LoginCard.module.scss';
 

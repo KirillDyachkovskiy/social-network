@@ -1,4 +1,4 @@
-import { ANON_USER_AVATAR } from '../../../js/variables';
+import { ANON_USER_AVATAR } from '../../../variables';
 import c from './Avatar.module.scss';
 
 export const Avatar = ({ src, size }) => {

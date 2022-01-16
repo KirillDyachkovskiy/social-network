@@ -1,4 +1,4 @@
-import { usersAPI } from "../../api/api";
+import { usersAPI } from "../../api";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 export const toggleFollowSuccess = (id) => ({ type: TOGGLE_FOLLOW, id, });

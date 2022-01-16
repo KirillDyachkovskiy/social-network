@@ -1,4 +1,4 @@
-import { profileAPI } from "../../api/api";
+import { profileAPI } from "../../api";
 
 const UPDATE_NEW_POST = 'UPDATE_NEW_POST';
 export const updateNewPostText = (text) => ({ type: UPDATE_NEW_POST, text, });

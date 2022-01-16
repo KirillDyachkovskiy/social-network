@@ -8,8 +8,6 @@ import { Profile } from './pages/Profile';
 import { Auth } from './Auth';
 import { Login } from './pages/Login';
 
-// добавить обработку ошибок в промисы
-
 export const App = () => {
   return (
     <BrowserRouter>

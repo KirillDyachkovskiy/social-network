@@ -1,7 +1,7 @@
 import c from './Card.module.scss';
 import { Contacts } from './Contacts';
 import { Avatar } from '../../../ui/Avatar';
-import { ANON_USER_COVER } from '../../../../js/variables';
+import { ANON_USER_COVER } from '../../../../variables';
 import { Status } from '../../../ui/Status';
 
 export const Card = (props) => {
