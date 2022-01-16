@@ -5,9 +5,9 @@ import { FriendsStateless } from './FriendsStateless';
 
 const mapStateToProps = (state) => ({
     menu: state.friends.menu,
-})
+});
 
 export const Friends = compose(
     connect(mapStateToProps),
     HOC.withRedirect,
-)(FriendsStateless)
+)(FriendsStateless);

@@ -12,20 +12,27 @@ export const setVisitedUserProfile = (data) => ({ type: SET_VISITED_USER_PROFILE
 const SET_USER_STATUS = 'SET_USER_STATUS';
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status });
 
+const CHANGE_PROFILE_FETCHING_STATUS = 'CHANGE_PROFILE_FETCHING_STATUS';
+export const changeProfileFetchingStatus = (isFetching) => ({ type: CHANGE_PROFILE_FETCHING_STATUS, isFetching });
+
 export const getVisitedUserProfile = (id) => {
     return (dispatch) => {
+        dispatch(changeProfileFetchingStatus(true));
         profileAPI.getData(id)
             .then(({ data }) => {
                 dispatch(setVisitedUserProfile({ ...data }));
+                dispatch(changeProfileFetchingStatus(false));
             });
     }
 };
 
 export const getUserStatus = (id) => {
     return (dispatch) => {
+        dispatch(changeProfileFetchingStatus(true));
         profileAPI.getStatus(id)
             .then(({ data }) => {
                 dispatch(setUserStatus(data));
+                dispatch(changeProfileFetchingStatus(false));
             });
     }
 }
@@ -48,6 +55,7 @@ const initialState = {
     ],
     newPostText: '',
     visitedProfile: {},
+    isFetching: false,
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -56,6 +64,11 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 newPostText: action.text,
+            };
+        case CHANGE_PROFILE_FETCHING_STATUS:
+            return {
+                ...state,
+                isFetching: action.isFetching,
             };
         case ADD_POST:
             if (state.newPostText) {

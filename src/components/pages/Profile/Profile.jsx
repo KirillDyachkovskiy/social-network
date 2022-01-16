@@ -8,6 +8,7 @@ import { compose } from 'redux';
 import { HOC } from '../../hoc/hocs';
 
 const mapStateToProps = (state) => ({
+    isFetching: state.profile.isFetching,
     visitedProfile: state.profile.visitedProfile,
 });
 
@@ -23,7 +24,9 @@ class ProfileCombine extends Component {
     render() {
         return (
             <>
-                {(this.props.visitedProfile) ? <ProfileStateless {...this.props.visitedProfile} /> : <Preloader color='blue' />}
+                {(this.props.isFetching)
+                    ? <Preloader color='blue' />
+                    : <ProfileStateless {...this.props.visitedProfile} />}
             </>
         )
     }

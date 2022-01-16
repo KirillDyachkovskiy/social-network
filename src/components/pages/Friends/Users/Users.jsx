@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 
 const mapStateToProps = (state) => ({
     users: state.friends.users,
+    isFetching: state.friends.isFetching,
     pageSize: state.friends.pageSize,
     currentPage: state.friends.currentPage,
     followingInProgress: state.friends.followingInProgress,
@@ -22,12 +23,12 @@ class UsersCombine extends Component {
     render() {
         return (
             <>
-                {(this.props.users.length)
-                    ? <UsersStateless
+                {(this.props.isFetching)
+                    ? <Preloader color='blue' />
+                    : <UsersStateless
                         users={this.props.users}
                         toggleFollow={this.props.toggleFollow}
-                        followingInProgress={this.props.followingInProgress} />
-                    : <Preloader color='blue' />}
+                        followingInProgress={this.props.followingInProgress} />}
             </>
         )
     }

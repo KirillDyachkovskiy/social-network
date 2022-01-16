@@ -13,7 +13,10 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
 
 const CHANGE_FOLLOWING_STATUS = 'CHANGE_FOLLOWING_STATUS';
-export const changeFollowingStatus = (id, isFetching) => ({ type: CHANGE_FOLLOWING_STATUS, id, isFetching });
+export const changeFollowingStatus = (id, isFollowing) => ({ type: CHANGE_FOLLOWING_STATUS, id, isFollowing });
+
+const CHANGE_USERS_FETCHING_STATUS = 'CHANGE_USERS_FETCHING_STATUS';
+export const changeUsersFetchingStatus = (isFetching) => ({ type: CHANGE_USERS_FETCHING_STATUS, isFetching });
 
 export const toggleFollow = (id, followed) => (dispatch) => {
     dispatch(changeFollowingStatus(id, true));
@@ -37,12 +40,14 @@ export const toggleFollow = (id, followed) => (dispatch) => {
 };
 
 export const changePage = (page, pageSize) => (dispatch) => {
+    dispatch(changeUsersFetchingStatus(true));
     dispatch(setUsersList());
     dispatch(setCurrentPage(page));
 
     usersAPI.getCurrentPageData(page, pageSize)
         .then(({ data }) => {
             dispatch(setUsersList(data.items, data.totalCount));
+            dispatch(changeUsersFetchingStatus(false));
         });
 };
 
@@ -56,6 +61,7 @@ const initialState = {
     totalCount: 0,
     currentPage: 1,
     followingInProgress: [],
+    isFetching: false,
 };
 
 export const friendsReducer = (state = initialState, action) => {
@@ -74,10 +80,15 @@ export const friendsReducer = (state = initialState, action) => {
                     }
                 })
             };
+        case CHANGE_USERS_FETCHING_STATUS:
+            return {
+                ...state,
+                isFetching: action.isFetching,
+            };
         case CHANGE_FOLLOWING_STATUS:
             return {
                 ...state,
-                followingInProgress: (action.isFetching) ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(item => item !== action.id),
+                followingInProgress: (action.isFollowing) ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(item => item !== action.id),
             };
         case CHANGE_STATUS:
             return {
