@@ -9,7 +9,6 @@ import { Auth } from './Auth';
 import { Login } from './pages/Login';
 
 // добавить обработку ошибок в промисы
-// сделать аксиос как в методичке
 
 export const App = () => {
   return (
