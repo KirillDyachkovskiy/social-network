@@ -21,7 +21,14 @@ class StatusCombine extends Component {
         this.setState({
             status: value,
         })
-    }
+    };
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status,
+            });
+        };
+    };
     render() {
         return (
             <StatusStateless
