@@ -8,6 +8,10 @@ import { Profile } from './pages/Profile';
 import { Auth } from './Auth';
 import { Login } from './pages/Login';
 
+// поменять работу прелоудера на специальное свойство в стейте (уведомить пользователя об ошибке)
+// добавить обработку ошибок в промисы
+// сделать аксиос как в методичке
+
 export const App = () => {
   return (
     <BrowserRouter>

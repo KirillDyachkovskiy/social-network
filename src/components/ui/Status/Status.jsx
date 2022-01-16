@@ -1,11 +1,11 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux'
 import { StatusStateless } from './StatusStateless';
-import { changeAuthedUserStatus } from '../../../redux/reducer/profileReducer';
+// import { changeAuthedUserStatus } from '../../../redux/reducer/profileReducer';
 import { Component } from 'react';
 
 const mapStateToProps = (state) => ({
-
+    // status: state.profile.visitedProfile?.status
 })
 
 class StatusCombine extends Component {
@@ -20,6 +20,7 @@ class StatusCombine extends Component {
     render() {
         return (
             <StatusStateless
+                // status={this.props.status || this.state.status}
                 status={this.props.status}
                 editMode={this.state.editMode}
                 toggeEditMode={this.toggeEditMode}
@@ -28,6 +29,8 @@ class StatusCombine extends Component {
     }
 }
 
+
+// user change status
 export const Status = compose(
-    connect(mapStateToProps, { changeAuthedUserStatus })
+    connect(mapStateToProps)
 )(StatusCombine)

@@ -6,7 +6,7 @@ export const setAuthedUserData = (data) => ({ type: SET_AUTHED_USER_DATA, data, 
 export const authMe = () => (dispatch) => {
     authAPI.authMe()
         .then(({ data }) => {
-            dispatch(setAuthedUserData(data));
+            dispatch(setAuthedUserData(data.data));
         });
 }
 

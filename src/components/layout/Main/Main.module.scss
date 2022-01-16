@@ -1,8 +1,0 @@
-@import "../../../styles/variables.scss";
-
-.container {
-    @include container();
-    display: grid;
-    grid-template: 1fr / minmax(164px, auto) 1fr;
-    gap: 10px;
-}

@@ -9,23 +9,35 @@ export const addPost = () => ({ type: ADD_POST });
 const SET_VISITED_USER_PROFILE = 'SET_VISITED_USER_PROFILE';
 export const setVisitedUserProfile = (data) => ({ type: SET_VISITED_USER_PROFILE, data });
 
+const SET_USER_STATUS = 'SET_USER_STATUS';
+export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status });
+
 export const getVisitedUserProfile = (id) => {
     return (dispatch) => {
         profileAPI.getData(id)
-            .then(data => {
-                dispatch(setVisitedUserProfile(data));
+            .then(({ data }) => {
+                dispatch(setVisitedUserProfile({ ...data }));
             });
     }
 };
 
-export const changeAuthedUserStatus = (status) => {
+export const getUserStatus = (id) => {
     return (dispatch) => {
-        profileAPI.changeStatus(status)
-            .then(data => {
-                dispatch(setVisitedUserProfile(data));
+        profileAPI.getStatus(id)
+            .then(({ data }) => {
+                dispatch(setUserStatus(data));
             });
     }
-};
+}
+
+// export const changeAuthedUserStatus = (status) => {
+//     return (dispatch) => {
+//         profileAPI.changeStatus(status)
+//             .then(data => {
+//                 dispatch(setUserStatus(status));
+//             });
+//     }
+// };
 
 const initialState = {
     posts: [
@@ -58,7 +70,18 @@ export const profileReducer = (state = initialState, action) => {
         case SET_VISITED_USER_PROFILE:
             return {
                 ...state,
-                visitedProfile: action.data,
+                visitedProfile: {
+                    ...action.data,
+                    status: state.visitedProfile.status,
+                }
+            };
+        case SET_USER_STATUS:
+            return {
+                ...state,
+                visitedProfile: {
+                    ...state.visitedProfile,
+                    status: action.status,
+                },
             };
         default:
             return state;

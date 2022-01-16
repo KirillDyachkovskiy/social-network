@@ -19,7 +19,7 @@ export const toggleFollow = (id, followed) => (dispatch) => {
     dispatch(changeFollowingStatus(id, true));
     if (followed) {
         usersAPI.unfollow(id)
-            .then(data => {
+            .then(({ data }) => {
                 if (data.resultCode === 0) {
                     dispatch(toggleFollowSuccess(id));
                     dispatch(changeFollowingStatus(id, false));
@@ -27,7 +27,7 @@ export const toggleFollow = (id, followed) => (dispatch) => {
             });
     } else {
         usersAPI.follow(id)
-            .then(data => {
+            .then(({ data }) => {
                 if (data.resultCode === 0) {
                     dispatch(toggleFollowSuccess(id));
                     dispatch(changeFollowingStatus(id, false));
@@ -41,7 +41,7 @@ export const changePage = (page, pageSize) => (dispatch) => {
     dispatch(setCurrentPage(page));
 
     usersAPI.getCurrentPageData(page, pageSize)
-        .then(data => {
+        .then(({ data }) => {
             dispatch(setUsersList(data.items, data.totalCount));
         });
 };

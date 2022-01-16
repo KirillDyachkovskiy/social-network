@@ -1,4 +1,4 @@
-import { setVisitedUserProfile, getVisitedUserProfile } from '../../../redux/reducer/profileReducer';
+import { setVisitedUserProfile, getVisitedUserProfile, setUserStatus, getUserStatus, } from '../../../redux/reducer/profileReducer';
 import { connect } from 'react-redux';
 import { ProfileStateless } from './ProfileStateless';
 import { Preloader } from '../../ui/Preloader';
@@ -13,10 +13,12 @@ const mapStateToProps = (state) => ({
 
 class ProfileCombine extends Component {
     componentDidMount() {
-        this.props.getVisitedUserProfile(this.props.id)
+        this.props.getVisitedUserProfile(this.props.id);
+        this.props.getUserStatus(this.props.id);
     }
     componentWillUnmount() {
-        this.props.setVisitedUserProfile()
+        this.props.setVisitedUserProfile();
+        this.props.setUserStatus();
     }
     render() {
         return (
@@ -36,6 +38,6 @@ const ProfileRouter = (props) => {
 }
 
 export const Profile = compose(
-    connect(mapStateToProps, { setVisitedUserProfile, getVisitedUserProfile, }),
+    connect(mapStateToProps, { setVisitedUserProfile, getVisitedUserProfile, setUserStatus, getUserStatus, }),
     HOC.withRedirect
 )(ProfileRouter);
