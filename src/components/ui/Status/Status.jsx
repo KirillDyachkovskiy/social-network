@@ -1,36 +1,38 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux'
 import { StatusStateless } from './StatusStateless';
-// import { changeAuthedUserStatus } from '../../../redux/reducer/profileReducer';
+import { changeAuthedUserStatus } from '../../../redux/reducer/profileReducer';
 import { Component } from 'react';
-
-const mapStateToProps = (state) => ({
-    // status: state.profile.visitedProfile?.status
-})
 
 class StatusCombine extends Component {
     state = {
         editMode: false,
+        status: this.props.status,
     };
-    toggeEditMode = () => {
+    toggleEditMode = () => {
+        if (this.state.editMode) {
+            this.props.changeAuthedUserStatus(this.state.status);
+        };
         this.setState({
             editMode: !this.state.editMode,
-        })
+        });
     };
+    onStatusChange = (value) => {
+        this.setState({
+            status: value,
+        })
+    }
     render() {
         return (
             <StatusStateless
-                // status={this.props.status || this.state.status}
-                status={this.props.status}
+                status={this.state.status}
                 editMode={this.state.editMode}
-                toggeEditMode={this.toggeEditMode}
-                changeAuthedUserStatus={this.props.changeAuthedUserStatus} />
+                onChange={this.onStatusChange}
+                toggleEditMode={this.toggleEditMode} />
         );
     }
 }
 
-
-// user change status
 export const Status = compose(
-    connect(mapStateToProps)
+    connect(null, { changeAuthedUserStatus })
 )(StatusCombine)

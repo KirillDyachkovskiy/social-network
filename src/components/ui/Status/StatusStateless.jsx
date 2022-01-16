@@ -1,18 +1,18 @@
 import c from './Status.module.scss';
 import { ANON_USER_STATUS } from '../../../js/variables';
 
-export const StatusStateless = ({ status, changeAuthedUserStatus, editMode, toggeEditMode }) => {
+export const StatusStateless = ({ status, onChange, editMode, toggleEditMode }) => {
     return (
         <div className={c.status}>
             {(editMode)
                 ? <input
                     type='text'
                     className={c.input}
-                    value={status || ANON_USER_STATUS}
                     autoFocus
-                    onDoubleClick={() => toggeEditMode()}
-                    onChange={(e) => changeAuthedUserStatus(e.target.value)} />
-                : <p className={c.label} onDoubleClick={() => toggeEditMode()} >
+                    value={status}
+                    onChange={(e) => onChange(e.target.value)}
+                    onBlur={() => { toggleEditMode() }} />
+                : <p className={c.label} onDoubleClick={() => toggleEditMode()} >
                     {status || ANON_USER_STATUS}
                 </p>}
         </div>

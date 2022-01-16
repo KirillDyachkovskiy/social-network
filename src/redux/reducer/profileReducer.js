@@ -37,14 +37,12 @@ export const getUserStatus = (id) => {
     }
 }
 
-// export const changeAuthedUserStatus = (status) => {
-//     return (dispatch) => {
-//         profileAPI.changeStatus(status)
-//             .then(data => {
-//                 dispatch(setUserStatus(status));
-//             });
-//     }
-// };
+export const changeAuthedUserStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.changeStatus(status)
+            .then(dispatch(setUserStatus(status)));
+    }
+};
 
 const initialState = {
     posts: [

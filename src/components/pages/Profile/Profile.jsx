@@ -42,5 +42,5 @@ const ProfileRouter = (props) => {
 
 export const Profile = compose(
     connect(mapStateToProps, { setVisitedUserProfile, getVisitedUserProfile, setUserStatus, getUserStatus, }),
-    HOC.withRedirect
+    HOC.withRedirect,
 )(ProfileRouter);

@@ -13,7 +13,7 @@ export const Card = (props) => {
             <div className={c.box}>
                 <Avatar src={props.photos?.large} size='large' />
                 <h1 className={c.name}>{props.fullName}</h1>
-                <Status status={props.status || "АХАХАХ ЭТО Я"} />
+                <Status status={props.status} />
                 <p className={c.about}>{`About me: ${props.aboutMe}`}</p>
                 <Contacts contacts={props.contacts} />
             </div>
