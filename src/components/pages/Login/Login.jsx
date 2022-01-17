@@ -1,40 +1,35 @@
 import c from './Login.module.scss';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../ui/Button';
+import { authLogIn } from '../../../redux/reducer/authReducer';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-export const Login = () => {
+export const LoginForm = ({ authLogIn }) => {
   const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm({
     mode: 'onBlur',
   });
   const onSubmit = (data) => {
-    console.log(data);
+    authLogIn(data);
     reset();
   };
   return (
     <div className={c.login}>
       <form
-        autoComplete='off'
         onSubmit={handleSubmit(onSubmit)} >
         <div>
-          <p>Login</p>
+          <p>Email</p>
           <input
-            {...register('login', {
+            {...register('email', {
               required: 'Поле обязательно!',
-              minLength: {
-                value: 3,
-                message: 'Длина псевдонима должна быть от 3 до 20 символов',
-              },
-              maxLength: {
-                value: 20,
-                message: 'Длина псевдонима должна быть от 3 до 20 символов',
-              },
               pattern: {
-                value: /^[а-яА-Я\w-]+$/,
-                message: 'Допустимые символы: буквы, цифры, подчёркивание, дефис',
+                // eslint-disable-next-line no-useless-escape
+                value: /^(([^<>()[\]{}'^?\\.,!|//#%*-+=&;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                message: 'Введите корректный email',
               }
             })}
           />
-          {errors.login && <span>{errors.login?.message || 'Error!'}</span>}
+          {errors.email && <span>{errors.email?.message || 'Error!'}</span>}
         </div>
         <div>
           <p>Password</p>
@@ -56,3 +51,7 @@ export const Login = () => {
     </div>
   )
 };
+
+export const Login = compose(
+  connect(null, { authLogIn })
+)(LoginForm);

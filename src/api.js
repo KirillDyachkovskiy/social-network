@@ -16,13 +16,15 @@ const instance = axios.create({
       } catch (error) {
         throw Error(`[requestClient] Error parsing response JSON data - ${JSON.stringify(error)}`)
       }
-      if (response.resultCode === 0) {
+      if (response?.resultCode === 0) {
         return response.data
-      } else if (response.userId) {
+      } else if (response?.resultCode === 1) {
+        return {}
+      } else if (response?.userId) {
         return { ...response }
-      } else if (response.error === null) {
+      } else if (response?.error === null) {
         return { items: response.items, totalcount: response.totalCount }
-      } else if (typeof response === 'string') {
+      } else if (typeof response === 'string' || response === null) {
         return response
       }
       else {
@@ -34,7 +36,8 @@ const instance = axios.create({
 
 export const authAPI = {
   authMe: () => instance.get('auth/me'),
-  authLogin: () => instance.post('/auth/login'),
+  authLogIn: (data) => instance.post('/auth/login', { ...data }),
+  authLogOut: () => instance.delete('/auth/login'),
 }
 
 export const profileAPI = {

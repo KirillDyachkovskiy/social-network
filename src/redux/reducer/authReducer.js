@@ -8,6 +8,19 @@ export const authMe = () => (dispatch) => {
     .then(({ data }) => dispatch(setAuthedUserData(data)));
 }
 
+export const authLogIn = (formData) => (dispatch) => {
+  authAPI.authLogIn(formData)
+    .then(() => authAPI.authMe()
+      .then(({ data }) => dispatch(setAuthedUserData(data))));
+}
+
+export const authLogOut = () => (dispatch) => {
+  authAPI.authLogOut()
+    .then(() => authAPI.authMe()
+      .then(({ data }) => dispatch(setAuthedUserData(data)))
+    );
+}
+
 const initialState = {
   data: {},
 };

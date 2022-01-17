@@ -14,7 +14,7 @@ class AuthStateless extends Component {
   }
   render() {
     return (
-      <Layout login={this.props.data.login} />
+      <Layout />
     )
   }
 }
