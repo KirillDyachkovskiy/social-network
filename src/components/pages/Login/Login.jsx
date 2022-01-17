@@ -4,13 +4,20 @@ import { Button } from '../../ui/Button';
 import { authLogIn } from '../../../redux/reducer/authReducer';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-export const LoginForm = ({ authLogIn }) => {
+const mapStateToProps = (state) => ({
+  email: state.auth.data.email,
+})
+
+const LoginForm = ({ authLogIn, email }) => {
   const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm({
     mode: 'onBlur',
   });
+  const navigate = useNavigate();
   const onSubmit = (data) => {
-    authLogIn(data);
+    email !== data.email && authLogIn(data);
+    email && navigate('/', { replace: true });
     reset();
   };
   return (
@@ -53,5 +60,5 @@ export const LoginForm = ({ authLogIn }) => {
 };
 
 export const Login = compose(
-  connect(null, { authLogIn })
+  connect(mapStateToProps, { authLogIn })
 )(LoginForm);

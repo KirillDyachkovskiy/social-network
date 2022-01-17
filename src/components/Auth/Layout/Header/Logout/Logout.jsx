@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { ANON_USER_NAME } from '../../../../../variables';
 import { authLogOut } from '../../../../../redux/reducer/authReducer';
-import c from './LoginCard.module.scss';
+import c from './Logout.module.scss';
 
 const mapStateToProps = (state) => ({
   login: state.auth.data.login,
 })
 
-const LoginCardForm = ({ login, authLogOut }) => {
+const LogoutForm = ({ login, authLogOut }) => {
   const { handleSubmit } = useForm({
     mode: 'onBlur',
   });
   const onSubmit = () => {
-    authLogOut();
+    login && authLogOut();
   };
   return (
     <div className={c.loginCard}>
@@ -29,6 +29,6 @@ const LoginCardForm = ({ login, authLogOut }) => {
   )
 }
 
-export const LoginCard = compose(
+export const Logout = compose(
   connect(mapStateToProps, { authLogOut })
-)(LoginCardForm)
+)(LogoutForm)

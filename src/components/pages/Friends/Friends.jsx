@@ -4,10 +4,10 @@ import { HOC } from '../../hoc/hocs';
 import { FriendsStateless } from './FriendsStateless';
 
 const mapStateToProps = (state) => ({
-    menu: state.friends.menu,
+  menu: state.friends.menu,
 });
 
 export const Friends = compose(
-    connect(mapStateToProps),
-    HOC.withRedirect,
+  connect(mapStateToProps),
+  HOC.withRedirectToLogin,
 )(FriendsStateless);

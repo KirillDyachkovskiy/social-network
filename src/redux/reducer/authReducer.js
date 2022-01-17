@@ -10,15 +10,12 @@ export const authMe = () => (dispatch) => {
 
 export const authLogIn = (formData) => (dispatch) => {
   authAPI.authLogIn(formData)
-    .then(() => authAPI.authMe()
-      .then(({ data }) => dispatch(setAuthedUserData(data))));
+    .then(() => dispatch(authMe()));
 }
 
 export const authLogOut = () => (dispatch) => {
   authAPI.authLogOut()
-    .then(() => authAPI.authMe()
-      .then(({ data }) => dispatch(setAuthedUserData(data)))
-    );
+    .then(() => dispatch(authMe()));
 }
 
 const initialState = {
