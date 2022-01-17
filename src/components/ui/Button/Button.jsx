@@ -1,11 +1,10 @@
 import c from './Button.module.scss';
 
-export const Button = ({ children, disabled, onClick, }) => {
+export const Button = ({ children, disabled, }) => {
   return (
     <button
       className={c.button}
-      disabled={disabled}
-      onClick={() => onClick()}>
+      disabled={disabled}>
       {children}
     </button>
   )

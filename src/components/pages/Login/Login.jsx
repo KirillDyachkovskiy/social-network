@@ -1,5 +1,6 @@
 import c from './Login.module.scss';
 import { useForm } from 'react-hook-form';
+import { Button } from '../../ui/Button';
 
 export const Login = () => {
   const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm({
@@ -10,10 +11,12 @@ export const Login = () => {
     reset();
   };
   return (
-    <section className={c.login}>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+    <div className={c.login}>
+      <form
+        autoComplete='off'
+        onSubmit={handleSubmit(onSubmit)} >
         <div>
-          <label htmlFor='login'>Login</label>
+          <p>Login</p>
           <input
             {...register('login', {
               required: 'Поле обязательно!',
@@ -34,7 +37,7 @@ export const Login = () => {
           {errors.login && <span>{errors.login?.message || 'Error!'}</span>}
         </div>
         <div>
-          <label htmlFor='password'>Password</label>
+          <p>Password</p>
           <input type='password'
             {...register('password', {
               required: 'Поле обязательно!',
@@ -43,11 +46,13 @@ export const Login = () => {
           {errors.password && <span>{errors.password?.message || 'Error!'}</span>}
         </div>
         <div>
-          <input type='submit'
-            disabled={!isValid}
-            value='Log In' />
+          <p>Remember Me</p>
+          <input type='checkbox'
+            {...register('rememberMe')}
+          />
         </div>
+        <Button disabled={!isValid} onClick={() => { }}>Log In</Button>
       </form>
-    </section>
+    </div>
   )
 };

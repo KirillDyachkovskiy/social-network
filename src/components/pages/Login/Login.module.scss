@@ -1,39 +1,30 @@
 @import "../../../styles/variables.scss";
 
 .login {
+  @include field();
   form {
-    width: 80%;
+    @include form();
     display: grid;
-    gap: 10px;
+    grid-template: repeat(3, auto) / 1fr;
+    width: 50%;
     div {
-      @include field();
-      background: $blue-bubble;
-
       display: grid;
-      grid-template: 1fr / repeat(3, 1fr);
-      gap: 20px;
+      grid-template: repeat(2, auto) / repeat(2, auto);
+      margin: 20px;
+      p {
+        margin: 0;
+      }
       input {
-        height: 2em;
-        background: white;
-        &:hover,
-        &:focus {
-          background: $grey-field;
-        }
+        @include field();
       }
       span {
         color: $liked-red;
         font-weight: 700;
       }
-      &:last-child {
-        input {
-          grid-column: 3 / 4;
-          &:disabled {
-            color: $grey-text;
-            background: $grey-field;
-          }
-        }
-      }
+    }
+    button {
+      grid-column: 1 / 2;
+      justify-self: center;
     }
   }
-  @include field();
 }
