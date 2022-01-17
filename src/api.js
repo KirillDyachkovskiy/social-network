@@ -1,17 +1,40 @@
 import axios from 'axios';
+import { BASE_URL } from './variables';
 
 const instance = axios.create({
-  baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+  baseURL: BASE_URL,
   withCredentials: true,
   headers: {
     // 'API-KEY': '5cfcc1b0-6a34-4ead-9faa-3fe4ffa94f8f',
     'API-KEY': '5008bf57-62df-4134-b948-641c777e0f16',
   },
+  transformResponse: [
+    (data) => {
+      let response
+      try {
+        response = JSON.parse(data)
+      } catch (error) {
+        throw Error(`[requestClient] Error parsing response JSON data - ${JSON.stringify(error)}`)
+      }
+      if (response.resultCode === 0) {
+        return response.data
+      } else if (response.userId) {
+        return { ...response }
+      } else if (response.error === null) {
+        return { items: response.items, totalcount: response.totalCount }
+      } else if (typeof response === 'string') {
+        return response
+      }
+      else {
+        throw Error(`[requestClient] Request failed with reason -  ${data}`)
+      }
+    }
+  ]
 });
 
 export const authAPI = {
   authMe: () => instance.get('auth/me'),
-  // authLogin = () => instance.get('/auth/login') 
+  authLogin: () => instance.post('/auth/login'),
 }
 
 export const profileAPI = {

@@ -19,97 +19,93 @@ const CHANGE_USERS_FETCHING_STATUS = 'CHANGE_USERS_FETCHING_STATUS';
 export const changeUsersFetchingStatus = (isFetching) => ({ type: CHANGE_USERS_FETCHING_STATUS, isFetching });
 
 export const toggleFollow = (id, followed) => (dispatch) => {
-    dispatch(changeFollowingStatus(id, true));
-    if (followed) {
-        usersAPI.unfollow(id)
-            .then(({ data }) => {
-                if (data.resultCode === 0) {
-                    dispatch(toggleFollowSuccess(id));
-                    dispatch(changeFollowingStatus(id, false));
-                }
-            });
-    } else {
-        usersAPI.follow(id)
-            .then(({ data }) => {
-                if (data.resultCode === 0) {
-                    dispatch(toggleFollowSuccess(id));
-                    dispatch(changeFollowingStatus(id, false));
-                }
-            });
-    }
+  dispatch(changeFollowingStatus(id, true));
+  if (followed) {
+    usersAPI.unfollow(id)
+      .then(() => {
+        dispatch(toggleFollowSuccess(id));
+        dispatch(changeFollowingStatus(id, false));
+      });
+  } else {
+    usersAPI.follow(id)
+      .then(() => {
+        dispatch(toggleFollowSuccess(id));
+        dispatch(changeFollowingStatus(id, false));
+      });
+  }
 };
 
 export const changePage = (page, pageSize) => (dispatch) => {
-    dispatch(changeUsersFetchingStatus(true));
-    dispatch(setUsersList());
-    dispatch(setCurrentPage(page));
+  dispatch(changeUsersFetchingStatus(true));
+  dispatch(setUsersList());
+  dispatch(setCurrentPage(page));
 
-    usersAPI.getCurrentPageData(page, pageSize)
-        .then(({ data }) => {
-            dispatch(setUsersList(data.items, data.totalCount));
-            dispatch(changeUsersFetchingStatus(false));
-        });
+  usersAPI.getCurrentPageData(page, pageSize)
+    .then(({ data }) => {
+      dispatch(setUsersList(data.items, data.totalCount));
+      dispatch(changeUsersFetchingStatus(false));
+    });
 };
 
 const initialState = {
-    menu: [
-        { id: 0, text: 'My friends' },
-        { id: 1, text: 'Search' },
-    ],
-    users: [],
-    pageSize: 4,
-    totalCount: 0,
-    currentPage: 1,
-    followingInProgress: [],
-    isFetching: false,
+  menu: [
+    { id: 0, text: 'My friends' },
+    { id: 1, text: 'Search' },
+  ],
+  users: [],
+  pageSize: 4,
+  totalCount: 0,
+  currentPage: 1,
+  followingInProgress: [],
+  isFetching: false,
 };
 
 export const friendsReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case TOGGLE_FOLLOW:
+  switch (action.type) {
+    case TOGGLE_FOLLOW:
+      return {
+        ...state,
+        users: state.users.map(item => {
+          if (item.id === action.id) {
             return {
-                ...state,
-                users: state.users.map(item => {
-                    if (item.id === action.id) {
-                        return {
-                            ...item,
-                            followed: !item.followed,
-                        }
-                    } else {
-                        return item
-                    }
-                })
-            };
-        case CHANGE_USERS_FETCHING_STATUS:
-            return {
-                ...state,
-                isFetching: action.isFetching,
-            };
-        case CHANGE_FOLLOWING_STATUS:
-            return {
-                ...state,
-                followingInProgress: (action.isFollowing) ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(item => item !== action.id),
-            };
-        case CHANGE_STATUS:
-            return {
-                ...state,
-                currentUser: {
-                    ...state.currentUser,
-                    status: action.text,
-                }
-            };
-        case SET_CURRENT_PAGE:
-            return {
-                ...state,
-                currentPage: action.currentPage,
-            };
-        case SET_USERS:
-            return {
-                ...state,
-                users: (action.users) ? [...action.users] : [],
-                totalCount: (action.totalCount) ? action.totalCount : state.totalCount,
-            };
-        default:
-            return state;
-    }
+              ...item,
+              followed: !item.followed,
+            }
+          } else {
+            return item
+          }
+        })
+      };
+    case CHANGE_USERS_FETCHING_STATUS:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+      };
+    case CHANGE_FOLLOWING_STATUS:
+      return {
+        ...state,
+        followingInProgress: (action.isFollowing) ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(item => item !== action.id),
+      };
+    case CHANGE_STATUS:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          status: action.text,
+        }
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.currentPage,
+      };
+    case SET_USERS:
+      return {
+        ...state,
+        users: (action.users) ? [...action.users] : [],
+        totalCount: (action.totalCount) ? action.totalCount : state.totalCount,
+      };
+    default:
+      return state;
+  }
 }
