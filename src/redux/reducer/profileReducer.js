@@ -37,9 +37,7 @@ export const getUserStatus = (id) => {
 export const changeAuthedUserStatus = (status) => {
   return (dispatch) => {
     profileAPI.changeStatus(status)
-      .then(() => {
-        dispatch(setUserStatus(status))
-      });
+      .then(() => dispatch(setUserStatus(status)));
   }
 };
 
