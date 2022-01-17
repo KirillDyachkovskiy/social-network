@@ -1,9 +1,17 @@
+@import "../../../../styles/variables.scss";
+
 .wall {
-    display: grid;
-    grid-template: auto auto 1fr / 1fr;
-    grid-template-areas:
-        "submit"
-        "title"
-        "posts";
-    gap: 10px;
+  display: grid;
+  grid-template: auto auto 1fr / 1fr;
+  grid-template-areas:
+    "submit"
+    "title"
+    "posts";
+  gap: 10px;
+  > div {
+    @include field();
+  }
+}
+.submit {
+  @include field();
 }

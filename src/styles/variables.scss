@@ -33,35 +33,29 @@
   }
 }
 @mixin form {
-  form {
+  @include field();
+  background-color: $grey-field;
+  input {
+    border-radius: 5px;
+    margin: -10px;
+    padding: 10px;
+    &:focus,
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+  button {
     @include field();
-    background-color: $grey-field;
-
-    display: grid;
-    grid-template: 1fr / 1fr auto;
-    gap: 20px;
-    input {
-      border-radius: 5px;
-      margin: -10px;
-      padding: 10px;
-      &:focus,
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-      }
-      &:last-child {
-        @include field();
-        color: #ffffff;
-        background-color: $blue;
-        cursor: pointer;
-        padding: 5px 40px;
-        margin: -5px;
-        &:hover {
-          background-color: rgba($blue, 0.9);
-        }
-        &:disabled {
-          background: $grey-text;
-        }
-      }
+    color: #ffffff;
+    background-color: $blue;
+    cursor: pointer;
+    padding: 5px 40px;
+    margin: -5px;
+    &:hover {
+      background-color: rgba($blue, 0.9);
+    }
+    &:disabled {
+      background: $grey-text;
     }
   }
 }

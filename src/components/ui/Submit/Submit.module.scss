@@ -1,0 +1,8 @@
+@import "../../../styles/variables.scss";
+
+.form {
+  @include form();
+  display: grid;
+  grid-template: 1fr / 1fr auto;
+  gap: 20px;
+}

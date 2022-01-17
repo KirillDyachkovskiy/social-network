@@ -1,6 +1,5 @@
 import c from './Login.module.scss';
 import { useForm } from 'react-hook-form';
-import { LENGTH_ERROR } from '../../../variables';
 
 export const Login = () => {
   const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm({
@@ -17,18 +16,18 @@ export const Login = () => {
           <label htmlFor='login'>Login</label>
           <input
             {...register('login', {
-              required: 'Required field',
+              required: 'Поле обязательно!',
               minLength: {
                 value: 3,
-                message: LENGTH_ERROR,
+                message: 'Длина псевдонима должна быть от 3 до 20 символов',
               },
               maxLength: {
                 value: 20,
-                message: LENGTH_ERROR,
+                message: 'Длина псевдонима должна быть от 3 до 20 символов',
               },
               pattern: {
                 value: /^[а-яА-Я\w-]+$/,
-                message: LENGTH_ERROR,
+                message: 'Допустимые символы: буквы, цифры, подчёркивание, дефис',
               }
             })}
           />
@@ -38,7 +37,7 @@ export const Login = () => {
           <label htmlFor='password'>Password</label>
           <input type='password'
             {...register('password', {
-              required: 'Required field',
+              required: 'Поле обязательно!',
             })}
           />
           {errors.password && <span>{errors.password?.message || 'Error!'}</span>}

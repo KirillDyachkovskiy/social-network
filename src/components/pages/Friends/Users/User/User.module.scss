@@ -1,41 +1,40 @@
 @import "../../../../../styles/variables.scss";
 
 .user {
-    @include field();
-    display: grid;
-    grid-template: 1fr auto / auto 1fr;
-    grid-template-areas:
-        "avatar box"
-        "avatar button";
-    gap: 10px 20px;
-    background-color: $grey-field;
+  @include field();
+  display: grid;
+  grid-template: 1fr auto / auto 1fr;
+  grid-template-areas:
+    "avatar box"
+    "avatar button";
+  gap: 10px 20px;
+  background-color: $grey-field;
 }
 .avatar {
-    grid-area: avatar;
+  grid-area: avatar;
 
-    margin: 0 10px;
-    width: 96px;
-    height: 96px;
+  margin: 0 10px;
+  width: 96px;
+  height: 96px;
 
-    img {
-        border-radius: 50%;
-    }
-    @include adaptIMG();
+  img {
+    border-radius: 50%;
+  }
+  @include adaptIMG();
 }
 .box {
-    grid-area: box;
-    justify-self: start;
+  grid-area: box;
+  justify-self: start;
 
-    display: grid;
-    grid-template-areas:
-        "name"
-        "status";
-    gap: 10px;
-    p {
-        pointer-events: none;
-        cursor: pointer;
-    }
+  display: grid;
+  grid-template-areas:
+    "name"
+    "status";
+  gap: 10px;
+  p {
+    pointer-events: none;
+  }
 }
 .name {
-    grid-area: name;
+  grid-area: name;
 }

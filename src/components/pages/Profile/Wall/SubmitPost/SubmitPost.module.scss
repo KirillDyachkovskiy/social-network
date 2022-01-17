@@ -1,8 +1,0 @@
-@import "../../../../../styles/variables.scss";
-
-.post {
-  @include field();
-  .submitPost {
-    @include form();
-  }
-}

@@ -1,1 +1,0 @@
-export { SubmitPost } from './SubmitPost'
