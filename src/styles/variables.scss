@@ -44,21 +44,8 @@
       background-color: rgba(0, 0, 0, 0.05);
     }
   }
-  button {
-    @include field();
-    color: #ffffff;
-    background-color: $blue;
-    cursor: pointer;
-    padding: 5px 40px;
-    margin: -5px;
-    &:hover {
-      background-color: rgba($blue, 0.9);
-    }
-    &:disabled {
-      background: $grey-text;
-    }
-  }
 }
+
 $blue: #414c9b;
 $blue-bubble: rgba(#414c9b, 0.3);
 $grey-text: #6d6d6d;

@@ -1,5 +1,6 @@
 import c from './Submit.module.scss'
 import { useForm } from 'react-hook-form';
+import { Button } from '../Button';
 
 export const Submit = ({ placeholder, children, onSubmit }) => {
   const { register, handleSubmit, reset, formState: { isValid } } = useForm({
@@ -15,7 +16,7 @@ export const Submit = ({ placeholder, children, onSubmit }) => {
         {...register('value', {
           required: true,
         })} />
-      <button disabled={!isValid}>{children}</button>
+      <Button disabled={!isValid}>{children}</Button>
     </form>
   )
 };

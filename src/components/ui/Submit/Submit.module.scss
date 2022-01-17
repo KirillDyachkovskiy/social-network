@@ -4,5 +4,6 @@
   @include form();
   display: grid;
   grid-template: 1fr / 1fr auto;
+  grid-template-areas: "input button";
   gap: 20px;
 }
