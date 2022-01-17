@@ -1,13 +1,38 @@
-import { addPost, updateNewPostText } from '../../../../../redux/reducer/profileReducer';
-import { SubmitPostStateless } from './SubmitPostStateless';
-import { compose } from 'redux'
+import { addPost } from '../../../../../redux/reducer/profileReducer';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import c from './SubmitPost.module.scss'
+import { useForm } from 'react-hook-form';
 
-const mapStateToProps = (state) => ({
-    text: state.profile.newPostText,
-});
-
+const PostForm = ({ addPost }) => {
+  const { register, handleSubmit, reset, formState: { isValid } } = useForm({
+    mode: 'onChange',
+  });
+  const onSubmit = ({ postText }) => {
+    addPost(postText);
+    reset();
+  };
+  return (
+    <div className={c.post}>
+      <div className={c.submitPost}>
+        <form
+          autoComplete='off'
+          onSubmit={handleSubmit(onSubmit)} >
+          <input
+            placeholder="What' s new?"
+            {...register('postText', {
+              required: true,
+            })} />
+          <input
+            type='submit'
+            disabled={!isValid}
+            value='Post' />
+        </form>
+      </div>
+    </div>
+  )
+};
 
 export const SubmitPost = compose(
-    connect(mapStateToProps, { updateNewPostText, addPost, })
-)(SubmitPostStateless);
+  connect(null, { addPost, })
+)(PostForm);

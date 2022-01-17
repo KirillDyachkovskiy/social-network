@@ -1,32 +1,5 @@
 @import "../../../../styles/variables.scss";
 
-.new {
-    @include field();
-    background-color: $grey-field;
-
-    display: grid;
-    grid-template: 1fr / 1fr auto;
-    gap: 20px;
-}
-.input {
-    margin: -5px;
-    padding: 10px;
-    &:focus,
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-}
-.button {
-    @include field();
-
-    color: #ffffff;
-    background-color: $blue;
-
-    margin: -5px;
-    cursor: pointer;
-
-    padding: 5px 40px;
-    &:hover {
-        background-color: rgba($blue, 0.9);
-    }
+.message {
+  @include form();
 }

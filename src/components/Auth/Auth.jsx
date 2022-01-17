@@ -5,20 +5,20 @@ import { Layout } from './Layout'
 import { Component } from 'react';
 
 const mapStateToProps = (state) => ({
-    data: state.auth.data,
+  data: state.auth.data,
 });
 
 class AuthStateless extends Component {
-    componentDidMount() {
-        this.props.authMe();
-    }
-    render() {
-        return (
-            <Layout login={this.props.data.login} />
-        )
-    }
+  componentDidMount() {
+    this.props.authMe();
+  }
+  render() {
+    return (
+      <Layout login={this.props.data.login} />
+    )
+  }
 }
 
 export const Auth = compose(
-    connect(mapStateToProps, { authMe }),
+  connect(mapStateToProps, { authMe }),
 )(AuthStateless);
