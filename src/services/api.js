@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from './variables';
+import { BASE_URL } from '../constants';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -23,7 +23,7 @@ const instance = axios.create({
       } else if (response?.userId) {
         return { ...response }
       } else if (response?.error === null) {
-        return { items: response.items, totalcount: response.totalCount }
+        return { items: response.items, totalCount: response.totalCount }
       } else if (typeof response === 'string' || response === null) {
         return response
       }
@@ -48,7 +48,6 @@ export const profileAPI = {
 
 export const usersAPI = {
   getCurrentPageData: (page, count) => instance.get(`users?page=${page}&count=${count}`),
-  hasFollow: (id) => instance.get(`follow/${id}`),
   follow: (id) => instance.post(`follow/${id}`),
   unfollow: (id) => instance.delete(`follow/${id}`),
 }

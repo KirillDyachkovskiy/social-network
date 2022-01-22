@@ -1,7 +1,7 @@
 import c from './Login.module.scss';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../ui/Button';
-import { authLogIn } from '../../../redux/reducer/authReducer';
+import { authLogIn } from '../../../services/redux/reducer/authReducer';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

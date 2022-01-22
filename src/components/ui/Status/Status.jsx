@@ -1,7 +1,7 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux'
 import { StatusStateless } from './StatusStateless';
-import { changeAuthedUserStatus } from '../../../redux/reducer/profileReducer';
+import { changeAuthedUserStatus } from '../../../services/redux/reducer/profileReducer';
 import { Component } from 'react';
 
 class StatusCombine extends Component {

@@ -18,6 +18,9 @@ export const changeFollowingStatus = (id, isFollowing) => ({ type: CHANGE_FOLLOW
 const CHANGE_USERS_FETCHING_STATUS = 'CHANGE_USERS_FETCHING_STATUS';
 export const changeUsersFetchingStatus = (isFetching) => ({ type: CHANGE_USERS_FETCHING_STATUS, isFetching });
 
+const SET_PAGINATION = 'SET_PAGINATION';
+export const setPagination = () => ({ type: SET_PAGINATION });
+
 export const toggleFollow = (id, followed) => (dispatch) => {
   dispatch(changeFollowingStatus(id, true));
   if (followed) {
@@ -43,25 +46,32 @@ export const changePage = (page, pageSize) => (dispatch) => {
   usersAPI.getCurrentPageData(page, pageSize)
     .then(({ data }) => {
       dispatch(setUsersList(data.items, data.totalCount));
+      dispatch(setPagination());
       dispatch(changeUsersFetchingStatus(false));
     });
 };
 
 const initialState = {
-  menu: [
-    { id: 0, text: 'My friends' },
-    { id: 1, text: 'Search' },
-  ],
   users: [],
   pageSize: 4,
   totalCount: 0,
   currentPage: 1,
+  pagination: [],
   followingInProgress: [],
   isFetching: false,
 };
 
 export const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_PAGINATION:
+      const pages = [];
+      for (let i = 1; i <= Math.ceil(state.totalCount / state.pageSize); i++) {
+        pages.push(i)
+      }
+      return {
+        ...state,
+        pagination: pages.filter((item, id, arr) => (id === 0) || (id <= state.currentPage && id >= state.currentPage - 2) || (id === arr.length - 1)).map(item => ({id: item, text: item.toString()}))
+      };
     case TOGGLE_FOLLOW:
       return {
         ...state,

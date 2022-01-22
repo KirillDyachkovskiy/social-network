@@ -1,10 +1,10 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/variables";
 
 .content {
-    display: grid;
-    grid-template: 1fr auto / 1fr;
-    grid-template-areas:
+  display: grid;
+  grid-template: 1fr auto / 1fr;
+  grid-template-areas:
         "messages"
         "submit";
-    gap: 10px;
+  gap: 10px;
 }

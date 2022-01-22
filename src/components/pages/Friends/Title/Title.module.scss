@@ -1,7 +1,0 @@
-@import "../../../../styles/variables.scss";
-
-.title {
-    grid-area: title;
-    @include field();
-    background-color: $grey-field;
-}

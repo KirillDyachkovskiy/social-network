@@ -1,4 +1,4 @@
-@import "../../../../styles/variables.scss";
+@import "../../../../styles/variables";
 
 .wall {
   display: grid;
@@ -7,11 +7,13 @@
     "submit"
     "title"
     "posts";
-  gap: 10px;
-  > div {
+
+  > div:first-child {
     @include field();
+    margin-bottom: 10px;
   }
 }
+
 .submit {
   @include field();
 }

@@ -1,4 +1,4 @@
-import { authMe } from '../../redux/reducer/authReducer';
+import { authMe } from '../../services/redux/reducer/authReducer';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Layout } from './Layout'

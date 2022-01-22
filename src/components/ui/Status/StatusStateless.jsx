@@ -1,5 +1,5 @@
 import c from './Status.module.scss';
-import { ANON_USER_STATUS } from '../../../variables';
+import { ANON_USER_STATUS } from '../../../constants';
 
 export const StatusStateless = ({ status, onChange, editMode, toggleEditMode }) => {
   return (

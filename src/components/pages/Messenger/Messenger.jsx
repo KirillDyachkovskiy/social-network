@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { HOC } from '../../hoc/hocs';
+import { HOC } from '../../hoc';
 import { compose } from 'redux';
-import { sendMessage } from '../../../redux/reducer/messengerReducer';
+import { sendMessage } from '../../../services/redux/reducer/messengerReducer';
 import c from './Messenger.module.scss'
 import { Messages } from './Messages'
 import { SamplePage } from '../../Auth/Layout/Main/SamplePage'

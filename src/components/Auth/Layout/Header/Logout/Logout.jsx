@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { ANON_USER_NAME } from '../../../../../variables';
-import { authLogOut } from '../../../../../redux/reducer/authReducer';
+import { ANON_USER_NAME } from '../../../../../constants';
+import { authLogOut } from '../../../../../services/redux/reducer/authReducer';
 import c from './Logout.module.scss';
 
 const mapStateToProps = (state) => ({

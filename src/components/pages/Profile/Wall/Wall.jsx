@@ -1,6 +1,6 @@
 import c from './Wall.module.scss';
-import { Title } from './Title';
 import { Posts } from './Posts';
+import {Title} from "../../../ui/Title";
 
 export const Wall = ({ renderSubmit }) => {
   return (
@@ -8,7 +8,7 @@ export const Wall = ({ renderSubmit }) => {
       <div>
         {renderSubmit()}
       </div>
-      <Title>My posts</Title>
+        <Title>My posts</Title>
       <Posts />
     </section>
   );
