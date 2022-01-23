@@ -2,25 +2,19 @@ import {authMe} from '../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {Layout} from './Layout'
-import {Component} from 'react';
+import {useEffect} from 'react';
 import {getData} from "../../services/selectors";
 
 const mapStateToProps = (state) => ({
   data: getData(state),
 });
 
-class AuthStateless extends Component {
-  componentDidMount() {
-    this.props.authMe();
-  }
+const AuthStateless = ({authMe, data}) => {
+  useEffect(() => {
+    authMe();
+  }, [])
 
-  render() {
-    return (
-      <>
-        {this.props.data ? <Layout/> : null}
-      </>
-    )
-  }
+  return <>{data ? <Layout/> : null}</>
 }
 
 export const Auth = compose(

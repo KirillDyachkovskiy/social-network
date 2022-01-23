@@ -7,7 +7,7 @@ const CHANGE_STATUS = 'CHANGE_STATUS';
 export const changeStatus = (text) => ({ type: CHANGE_STATUS, text, });
 
 const SET_USERS = 'SET_USERS';
-export const setUsersList = (users, totalCount) => ({ type: SET_USERS, users, totalCount, });
+const setUsersList = (users, totalCount) => ({ type: SET_USERS, users, totalCount, });
 
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
@@ -40,7 +40,6 @@ export const toggleFollow = (id, followed) => (dispatch) => {
 
 export const changePage = (page, pageSize) => (dispatch) => {
   dispatch(changeUsersFetchingStatus(true));
-  dispatch(setUsersList());
   dispatch(setCurrentPage(page));
 
   usersAPI.getCurrentPageData(page, pageSize)
@@ -112,8 +111,8 @@ export const friendsReducer = (state = initialState, action) => {
     case SET_USERS:
       return {
         ...state,
-        users: (action.users) ? [...action.users] : [],
-        totalCount: (action.totalCount) ? action.totalCount : state.totalCount,
+        users: [...action.users],
+        totalCount: action.totalCount,
       };
     default:
       return state;

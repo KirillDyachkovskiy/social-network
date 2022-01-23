@@ -1,10 +1,13 @@
 import {
-  setVisitedUserProfile, getVisitedUserProfile, setUserStatus, getUserStatus, addPost,
+  getVisitedUserProfile,
+  getUserStatus,
+  addPost,
+  changeProfileFetchingStatus
 } from '../../../services/redux/reducer/profileReducer';
 import {connect} from 'react-redux';
 import Preloader from '../../ui/Preloader';
 import {useParams} from 'react-router-dom';
-import {Component} from 'react';
+import {useEffect} from 'react';
 import {compose} from 'redux';
 import {HOC} from '../../hoc';
 import {Submit} from '../../ui/Submit';
@@ -18,27 +21,34 @@ const mapStateToProps = (state) => ({
   visitedProfile: getVisitedProfile(state),
 });
 
-class ProfileCombine extends Component {
-  componentDidMount() {
-    this.props.getVisitedUserProfile(this.props.id);
-    this.props.getUserStatus(this.props.id);
-  }
+const ProfileCombine = ({
+                          id,
+                          isFetching,
+                          visitedProfile,
+                          getVisitedUserProfile,
+                          getUserStatus,
+                          addPost,
+                          changeProfileFetchingStatus
+                        }) => {
 
-  componentWillUnmount() {
-    this.props.setVisitedUserProfile();
-    this.props.setUserStatus();
-  }
+  useEffect(() => {
+    changeProfileFetchingStatus(true)
+    getVisitedUserProfile(id)
+    getUserStatus(id)
+  }, [id])
 
-  render() {
-    return <>
-      {(this.props.isFetching) ? <Preloader color='blue'/> : <section className={c.profile}>
-        <Card {...this.props.visitedProfile} />
-        <Wall renderSubmit={() => (<Submit onSubmit={this.props.addPost} placeholder="What's new?">
-          Post
-        </Submit>)}/>
-      </section>}
-    </>
-  }
+  useEffect(()=> ()=> {
+    changeProfileFetchingStatus(true)
+  }, [])
+
+  return <>
+    {(isFetching) ? <Preloader color='blue'/> : <section className={c.profile}>
+      <Card {...visitedProfile} />
+      <Wall renderSubmit={() => (<Submit onSubmit={addPost} placeholder="What's new?">
+        Post
+      </Submit>)}/>
+    </section>}
+  </>
 }
 
 const ProfileRouter = (props) => {
@@ -49,9 +59,8 @@ const ProfileRouter = (props) => {
 
 export const Profile = compose(
   connect(mapStateToProps, {
-    setVisitedUserProfile,
+    changeProfileFetchingStatus,
     getVisitedUserProfile,
-    setUserStatus,
     getUserStatus,
     addPost,
   }),

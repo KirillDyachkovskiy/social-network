@@ -14,7 +14,6 @@ export const changeProfileFetchingStatus = (isFetching) => ({type: CHANGE_PROFIL
 
 export const getVisitedUserProfile = (id) => {
   return (dispatch) => {
-    dispatch(changeProfileFetchingStatus(true));
     profileAPI.getData(id)
       .then(({data}) => {
         dispatch(setVisitedUserProfile({...data}));
@@ -25,7 +24,6 @@ export const getVisitedUserProfile = (id) => {
 
 export const getUserStatus = (id) => {
   return (dispatch) => {
-    dispatch(changeProfileFetchingStatus(true));
     profileAPI.getStatus(id)
       .then(({data}) => {
         dispatch(setUserStatus(data));
@@ -37,12 +35,7 @@ export const getUserStatus = (id) => {
 export const changeAuthedUserStatus = (status) => {
   return (dispatch) => {
     profileAPI.changeStatus(status)
-      .then(() => {
-          dispatch(setUserStatus(status));
-          console.log('nenf');
-        }
-      )
-    ;
+      .then(() => dispatch(setUserStatus(status)));
   }
 };
 
