@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { sendMessage } from '../../../services/redux/reducer/messengerReducer';
 import c from './Messenger.module.scss'
 import { Messages } from './Messages'
-import { SamplePage } from '../../Auth/Layout/Main/SamplePage'
+import { SamplePage } from '../../Auth/Layout/SamplePage'
 import { Submit } from '../../ui/Submit';
 
 const mapStateToProps = (state) => ({

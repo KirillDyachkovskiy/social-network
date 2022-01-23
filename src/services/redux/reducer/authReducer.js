@@ -1,11 +1,13 @@
-import { authAPI } from "../../api";
+import {authAPI} from "../../api";
 
 const SET_AUTHED_USER_DATA = 'SET_USER_DATA';
 export const setAuthedUserData = (data) => ({ type: SET_AUTHED_USER_DATA, data, });
 
 export const authMe = () => (dispatch) => {
   authAPI.authMe()
-    .then(({ data }) => dispatch(setAuthedUserData(data)));
+    .then(({ data }) => {
+      dispatch(setAuthedUserData(data));
+    });
 }
 
 export const authLogIn = (formData) => (dispatch) => {
@@ -19,7 +21,7 @@ export const authLogOut = () => (dispatch) => {
 }
 
 const initialState = {
-  data: {},
+  data: null,
 };
 
 export const authReducer = (state = initialState, action) => {

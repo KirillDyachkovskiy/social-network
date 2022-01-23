@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
-  email: state.auth.data.email,
+  email: state.auth.data?.email,
 })
 
 const LoginForm = ({ authLogIn, email }) => {

@@ -19,7 +19,7 @@ const CHANGE_USERS_FETCHING_STATUS = 'CHANGE_USERS_FETCHING_STATUS';
 export const changeUsersFetchingStatus = (isFetching) => ({ type: CHANGE_USERS_FETCHING_STATUS, isFetching });
 
 const SET_PAGINATION = 'SET_PAGINATION';
-export const setPagination = () => ({ type: SET_PAGINATION });
+export const setPagination = (pagination) => ({ type: SET_PAGINATION, pagination });
 
 export const toggleFollow = (id, followed) => (dispatch) => {
   dispatch(changeFollowingStatus(id, true));
@@ -46,7 +46,11 @@ export const changePage = (page, pageSize) => (dispatch) => {
   usersAPI.getCurrentPageData(page, pageSize)
     .then(({ data }) => {
       dispatch(setUsersList(data.items, data.totalCount));
-      dispatch(setPagination());
+      const pages = [];
+      for (let i = 1; i <= Math.ceil(data.totalCount / pageSize); i++) {
+        pages.push(i)
+      }
+      dispatch(setPagination(pages.filter((item, id, arr) => (id === 0) || (id <= page && id >= page - 2) || (id === arr.length - 1)).map(item => ({id: item, text: item.toString()}))));
       dispatch(changeUsersFetchingStatus(false));
     });
 };
@@ -64,13 +68,9 @@ const initialState = {
 export const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PAGINATION:
-      const pages = [];
-      for (let i = 1; i <= Math.ceil(state.totalCount / state.pageSize); i++) {
-        pages.push(i)
-      }
       return {
         ...state,
-        pagination: pages.filter((item, id, arr) => (id === 0) || (id <= state.currentPage && id >= state.currentPage - 2) || (id === arr.length - 1)).map(item => ({id: item, text: item.toString()}))
+        pagination: action.pagination,
       };
     case TOGGLE_FOLLOW:
       return {

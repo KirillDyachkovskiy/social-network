@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
-import { Navigate } from "react-router-dom";
+import {connect} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 export const HOC = {
   withRedirectToLogin(Component) {
@@ -9,7 +9,7 @@ export const HOC = {
     const redirectedComponent = (props) => {
       return (
         <>
-          {(props.authedUser.id) ? <Component {...props} /> : <Navigate to='/login' />}
+          {(props.authedUser.id) ? <Component {...props} /> : <Navigate to='/login'/>}
         </>
       )
     };

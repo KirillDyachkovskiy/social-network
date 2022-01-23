@@ -1,6 +1,30 @@
-.wrapper {
-    height: 100vh;
-    display: grid;
-    grid-template-rows: 48px 1fr;
-    gap: 10px;
+@import "../../../styles/variables";
+
+.layout {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  gap: 10px;
 }
+
+.header {
+  background-color: $blue;
+
+  .container {
+    @include container();
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.main {
+  .container {
+    @include container();
+    display: grid;
+    grid-template: 1fr / minmax(164px, auto) 1fr;
+    gap: 10px;
+  }
+}
+
