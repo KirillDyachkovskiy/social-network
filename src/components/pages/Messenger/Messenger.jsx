@@ -6,9 +6,10 @@ import c from './Messenger.module.scss'
 import { Messages } from './Messages'
 import { SamplePage } from '../../Auth/Layout/SamplePage'
 import { Submit } from '../../ui/Submit';
+import {getMenu} from "../../../services/selectors";
 
 const mapStateToProps = (state) => ({
-  menu: state.messenger.menu,
+  menu: getMenu(state),
 })
 
 const MessengerStateless = ({ menu, sendMessage }) => {

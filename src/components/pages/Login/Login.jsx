@@ -5,9 +5,10 @@ import { authLogIn } from '../../../services/redux/reducer/authReducer';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {getData} from "../../../services/selectors";
 
 const mapStateToProps = (state) => ({
-  email: state.auth.data?.email,
+  email: getData(state)?.email,
 })
 
 const LoginForm = ({ authLogIn, email }) => {

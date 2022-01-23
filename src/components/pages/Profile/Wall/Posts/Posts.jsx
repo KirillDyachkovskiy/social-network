@@ -2,8 +2,11 @@ import c from './Posts.module.scss';
 import { compose } from 'redux'
 import { connect } from 'react-redux';
 import { Post } from './Post';
+import {getPosts} from "../../../../../services/selectors";
 
-const mapStateToProps = (state) => ({ posts: state.profile.posts, })
+const mapStateToProps = (state) => ({
+    posts: getPosts(state),
+})
 
 const PostsStateless = ({ posts }) => (
     <section className={c.posts} >

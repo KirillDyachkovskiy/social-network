@@ -5,11 +5,12 @@ import {SamplePage} from "../../Auth/Layout/SamplePage";
 import {Users} from "./Users";
 import {Title} from "../../ui/Title";
 import {changePage} from "../../../services/redux/reducer/friendsReducer";
+import {getCurrentPage, getPageSize, getPagination} from "../../../services/selectors";
 
 const mapStateToProps = (state) => ({
-  pagination: state.friends.pagination,
-  pageSize: state.friends.pageSize,
-  currentPage: state.friends.currentPage,
+  pagination: getPagination(state),
+  pageSize: getPageSize(state),
+  currentPage: getCurrentPage(state),
 });
 
 const FriendsStateless = ({pagination, changePage, pageSize, currentPage}) => {

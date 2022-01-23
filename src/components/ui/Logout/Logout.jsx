@@ -4,9 +4,10 @@ import { compose } from 'redux';
 import { ANON_USER_NAME } from '../../../constants';
 import { authLogOut } from '../../../services/redux/reducer/authReducer';
 import c from './Logout.module.scss';
+import {getData} from "../../../services/selectors";
 
 const mapStateToProps = (state) => ({
-  login: state.auth.data?.login,
+  login: getData(state)?.login,
 })
 
 const LogoutForm = ({ login, authLogOut }) => {

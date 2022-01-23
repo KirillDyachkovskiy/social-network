@@ -3,9 +3,10 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {Layout} from './Layout'
 import {Component} from 'react';
+import {getData} from "../../services/selectors";
 
 const mapStateToProps = (state) => ({
-  data: state.auth.data,
+  data: getData(state),
 });
 
 class AuthStateless extends Component {

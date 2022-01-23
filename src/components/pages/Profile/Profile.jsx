@@ -11,9 +11,11 @@ import {Submit} from '../../ui/Submit';
 import c from "./Profile.module.scss";
 import {Card} from "./Card";
 import {Wall} from "./Wall";
+import {getProfileIsFetching, getVisitedProfile} from "../../../services/selectors";
 
 const mapStateToProps = (state) => ({
-  isFetching: state.profile.isFetching, visitedProfile: state.profile.visitedProfile,
+  isFetching: getProfileIsFetching(state),
+  visitedProfile: getVisitedProfile(state),
 });
 
 class ProfileCombine extends Component {

@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux'
 import { PostHeaderStateless } from './PostHeaderStateless';
+import {getVisitedProfile} from "../../../../../../../services/selectors";
 
 const mapStateToProps = (state) => ({
-    photo: state.profile.visitedProfile.photos?.small,
-    name: state.profile.visitedProfile.fullName,
+    photo: getVisitedProfile(state).photos?.small,
+    name: getVisitedProfile(state).fullName,
 });
 
 export const PostHeader = compose(

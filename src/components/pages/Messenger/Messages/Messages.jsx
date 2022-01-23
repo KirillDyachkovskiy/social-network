@@ -1,8 +1,11 @@
 import c from './Messages.module.scss';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
+import {getMessages} from "../../../../services/selectors";
 
-const mapStateToProps = (state) => ({messages: state.messenger.messages,})
+const mapStateToProps = (state) => ({
+  messages: getMessages(state),
+})
 
 const MessagesStateless = ({messages}) => {
     return (

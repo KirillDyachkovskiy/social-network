@@ -5,13 +5,20 @@ import Preloader from '../../../ui/Preloader'
 import React, {Component} from 'react';
 import c from "./Users.module.scss";
 import {User} from "./User";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getFriendsIsFetching,
+    getPageSize,
+    getUsers
+} from "../../../../services/selectors";
 
 const mapStateToProps = (state) => ({
-    users: state.friends.users,
-    isFetching: state.friends.isFetching,
-    pageSize: state.friends.pageSize,
-    currentPage: state.friends.currentPage,
-    followingInProgress: state.friends.followingInProgress,
+    users: getUsers(state),
+    isFetching: getFriendsIsFetching(state),
+    pageSize: getPageSize(state),
+    currentPage: getCurrentPage(state),
+    followingInProgress: getFollowingInProgress(state),
 });
 
 class UsersCombine extends Component {
