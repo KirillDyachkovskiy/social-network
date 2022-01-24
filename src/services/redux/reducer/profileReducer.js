@@ -3,6 +3,9 @@ import {profileAPI} from "../../api";
 const ADD_POST = 'ADD_POST';
 export const addPost = (text) => ({type: ADD_POST, text});
 
+const DELETE_POST = 'DELETE_POST';
+export const deletePost = (id) => ({type: DELETE_POST, id});
+
 const SET_VISITED_USER_PROFILE = 'SET_VISITED_USER_PROFILE';
 export const setVisitedUserProfile = (data) => ({type: SET_VISITED_USER_PROFILE, data});
 
@@ -71,7 +74,11 @@ export const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...state.posts, {id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: action.text,}],
-
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((item, id) => id !== action.id),
       };
     case SET_VISITED_USER_PROFILE:
       return {

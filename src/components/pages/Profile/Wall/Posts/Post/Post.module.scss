@@ -10,6 +10,17 @@
         "content"
         "postFooter";
   gap: 15px;
+
+  position: relative;
+}
+
+.deleter {
+  cursor: pointer;
+  color: $grey-text;
+  font-size: 40px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .content {

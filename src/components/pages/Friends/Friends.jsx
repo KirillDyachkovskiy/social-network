@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
   pagination: getPagination(state),
 });
 
-const FriendsStateless = ({pagination, currentPage, pageSize, changePage, isFetching, ...usersProps}) => {
+const FriendsStateless = ({pagination, currentPage, pageSize, changePage, isFetching, changeUsersFetchingStatus, ...usersProps}) => {
   useEffect(() => {
     changePage(currentPage, pageSize);
   }, [])
@@ -45,6 +45,6 @@ const FriendsStateless = ({pagination, currentPage, pageSize, changePage, isFetc
 };
 
 export const Friends = compose(
-  connect(mapStateToProps, {changePage, toggleFollow}),
-  HOC.withRedirectToLogin,
+  connect(mapStateToProps, {changePage, toggleFollow, changeUsersFetchingStatus}),
+  HOC.withRedirect('/login'),
 )(FriendsStateless);

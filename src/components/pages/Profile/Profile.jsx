@@ -1,7 +1,7 @@
 import {
   changeVisitedProfile,
   addPost,
-  changeProfileFetchingStatus
+  changeProfileFetchingStatus, deletePost
 } from '../../../services/redux/reducer/profileReducer';
 import {connect} from 'react-redux';
 import Preloader from '../../ui/Preloader';
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => ({
   posts: getPosts(state),
 });
 
-const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, changeProfileFetchingStatus}) => {
+const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, deletePost, changeProfileFetchingStatus}) => {
   useEffect(() => () => {
     changeProfileFetchingStatus(true)
   }, [])
@@ -34,7 +34,7 @@ const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, changeProfi
   return <section className={c.profile}>
     <Card {...visitedProfile} />
     <Wall renderSubmit={() => <Submit onSubmit={addPost} placeholder="What's new?">Post</Submit>}
-      renderPosts={() => <Posts posts={posts} photo={visitedProfile.photos?.small} name={visitedProfile.fullName}/>}/>
+      renderPosts={() => <Posts posts={posts} photo={visitedProfile.photos?.small} name={visitedProfile.fullName} onClick={deletePost}/>}/>
   </section>
 }
 
@@ -51,5 +51,5 @@ const ProfileRouter = (props) => {
 }
 
 export const Profile = compose(connect(mapStateToProps, {
-  changeProfileFetchingStatus, changeVisitedProfile, addPost,
-}), HOC.withRedirectToLogin)(ProfileRouter);
+  changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost,
+}), HOC.withRedirect('/login'))(ProfileRouter);

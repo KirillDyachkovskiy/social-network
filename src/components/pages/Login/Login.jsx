@@ -4,22 +4,22 @@ import {Button} from '../../ui/Button';
 import {authLogIn} from '../../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
 import {getData} from "../../../services/selectors";
+import {HOC} from "../../hoc";
 
 const mapStateToProps = (state) => ({
   email: getData(state)?.email,
 })
 
 const LoginForm = ({authLogIn, email}) => {
-  const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({
+  const {register, handleSubmit, formState: {errors, isValid}} = useForm({
     mode: 'onBlur',
   });
-  const navigate = useNavigate();
+
   const onSubmit = (data) => {
-    email !== data.email && authLogIn(data);
-    email && navigate('/', {replace: true});
-    reset();
+    if (email !== data.email) {
+      authLogIn(data);
+    }
   };
   return (
     <div className={c.login}>
@@ -62,5 +62,6 @@ const LoginForm = ({authLogIn, email}) => {
 };
 
 export const Login = compose(
-  connect(mapStateToProps, {authLogIn})
+  connect(mapStateToProps, {authLogIn}),
+  HOC.withRedirect('/'),
 )(LoginForm);

@@ -1,7 +1,8 @@
 import c from './Post.module.scss';
 
-export const Post = ({text, likes, renderPostHeader}) => {
+export const Post = ({id, text, likes, onClick, renderPostHeader}) => {
   return <section className={c.post}>
+    <div className={c.deleter} onClick={() => onClick(id)}>×</div>
     {renderPostHeader()}
     <div className={c.content}>
       <p>{text}</p>

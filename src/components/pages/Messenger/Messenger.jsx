@@ -28,5 +28,5 @@ const MessengerStateless = ({menu, messages, sendMessage}) => {
 
 export const Messenger = compose(
   connect(mapStateToProps, {sendMessage}),
-  HOC.withRedirectToLogin
+  HOC.withRedirect('/login'),
 )(MessengerStateless);
