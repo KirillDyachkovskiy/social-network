@@ -15,7 +15,7 @@ export const HOC = {
         </>
       } else if (to === '/') {
         return <>
-          {(!props.authedUser.id) ? <Component {...props} /> : <Navigate to={to}/>}
+          {(!props.authedUser.id) ? <Component {...props} /> : <Navigate to={-1}/>}
         </>
       }
     };
