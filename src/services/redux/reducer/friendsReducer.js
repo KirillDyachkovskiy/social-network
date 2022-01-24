@@ -1,25 +1,25 @@
-import { usersAPI } from "../../api";
+import {usersAPI} from "../../api";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
-export const toggleFollowSuccess = (id) => ({ type: TOGGLE_FOLLOW, id, });
+export const toggleFollowSuccess = (id) => ({type: TOGGLE_FOLLOW, id,});
 
 const CHANGE_STATUS = 'CHANGE_STATUS';
-export const changeStatus = (text) => ({ type: CHANGE_STATUS, text, });
+export const changeStatus = (text) => ({type: CHANGE_STATUS, text,});
 
 const SET_USERS = 'SET_USERS';
-const setUsersList = (users, totalCount) => ({ type: SET_USERS, users, totalCount, });
+const setUsersList = (users, totalCount) => ({type: SET_USERS, users, totalCount,});
 
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage,});
 
 const CHANGE_FOLLOWING_STATUS = 'CHANGE_FOLLOWING_STATUS';
-export const changeFollowingStatus = (id, isFollowing) => ({ type: CHANGE_FOLLOWING_STATUS, id, isFollowing });
+export const changeFollowingStatus = (id, isFollowing) => ({type: CHANGE_FOLLOWING_STATUS, id, isFollowing});
 
 const CHANGE_USERS_FETCHING_STATUS = 'CHANGE_USERS_FETCHING_STATUS';
-export const changeUsersFetchingStatus = (isFetching) => ({ type: CHANGE_USERS_FETCHING_STATUS, isFetching });
+export const changeUsersFetchingStatus = (isFetching) => ({type: CHANGE_USERS_FETCHING_STATUS, isFetching});
 
 const SET_PAGES = 'SET_PAGES';
-export const setPages = (pages) => ({ type: SET_PAGES, pages });
+export const setPages = (pages) => ({type: SET_PAGES, pages});
 
 export const toggleFollow = (id, followed) => (dispatch) => {
   dispatch(changeFollowingStatus(id, true));
@@ -43,7 +43,7 @@ export const changePage = (page, pageSize) => (dispatch) => {
   dispatch(setCurrentPage(page));
 
   usersAPI.getCurrentPageData(page, pageSize)
-    .then(({ data }) => {
+    .then(({data}) => {
       dispatch(setUsersList(data.items, data.totalCount));
       const pages = [];
       for (let i = 1; i <= Math.ceil(data.totalCount / pageSize); i++) {
@@ -56,12 +56,12 @@ export const changePage = (page, pageSize) => (dispatch) => {
 
 const initialState = {
   users: [],
-  pageSize: 4,
+  pageSize: 10,
   totalCount: 0,
   currentPage: 1,
   pages: [],
   followingInProgress: [],
-  isFetching: false,
+  isFetching: true,
 };
 
 export const friendsReducer = (state = initialState, action) => {

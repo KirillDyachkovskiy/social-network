@@ -4,12 +4,14 @@
   margin: 0 auto;
   height: 100%;
 }
+
 @mixin field {
   background-color: #ffffff;
   border: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
   border-radius: 7px;
   padding: 12px;
 }
+
 @mixin adaptIMG {
   position: relative;
   img {
@@ -21,6 +23,7 @@
     object-fit: cover;
   }
 }
+
 @mixin navbar {
   cursor: pointer;
   display: block;
@@ -33,6 +36,7 @@
     color: #000000;
   }
 }
+
 @mixin form {
   @include field();
   background-color: $grey-field;
@@ -40,6 +44,7 @@
     border-radius: 5px;
     margin: -10px;
     padding: 10px;
+
     &:focus,
     &:hover {
       background-color: rgba(0, 0, 0, 0.05);

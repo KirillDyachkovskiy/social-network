@@ -1,15 +1,16 @@
 import c from './Post.module.scss';
-import { PostFooter } from './PostFooter';
-import { PostHeader } from './PostHeader';
 
-export const Post = ({ text, likes }) => {
-    return (
-        <section className={c.post}>
-            <PostHeader />
-            <div className={c.content}>
-                <p>{text}</p>
-            </div>
-            <PostFooter likes={likes} />
-        </section>
-    );
+export const Post = ({text, likes, renderPostHeader}) => {
+  return <section className={c.post}>
+    {renderPostHeader()}
+    <div className={c.content}>
+      <p>{text}</p>
+    </div>
+    <div className={c.postFooter}>
+      <span>❤</span>
+      <div className={c.likes}>
+        {likes}
+      </div>
+    </div>
+  </section>
 }

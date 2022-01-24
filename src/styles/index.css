@@ -3,16 +3,18 @@
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: greyscale;
+  -moz-osx-font-smoothing: grayscale;
 
   font-size: 18px;
   line-height: 1em;
   background-color: #e8e8f0;
 }
+
 h1,
 h2,
 h3,
@@ -24,6 +26,7 @@ h6 {
   line-height: 1em;
   font-weight: normal;
 }
+
 ul,
 li,
 ol {
@@ -31,10 +34,12 @@ ol {
   padding: 0;
   list-style: none;
 }
+
 a {
   text-decoration: none;
   color: #000;
 }
+
 input {
   border: none;
   outline: none;

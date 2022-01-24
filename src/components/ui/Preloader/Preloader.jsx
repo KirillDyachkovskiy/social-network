@@ -1,12 +1,12 @@
 import c from './Preloader.module.scss';
 
-export default function Preloader({ color }) {
-    return (
-        <div className={`${c.preloader} ${c[color]}`}>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    )
+export default function Preloader({color = 'blue'}) {
+  return (
+    <div className={`${c.preloader} ${c[color]}`}>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  )
 };

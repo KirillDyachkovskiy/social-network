@@ -1,47 +1,53 @@
 @import "../../../../styles/variables";
 
 .cover {
-    grid-area: cover;
+  grid-area: cover;
 
-    padding: 0 0 25% 0;
-    @include adaptIMG();
+  padding: 0 0 25% 0;
+  @include adaptIMG();
 }
+
 .card {
-    display: grid;
-    grid-template: auto 1fr / auto;
-    grid-template-areas:
+  display: grid;
+  grid-template: auto 1fr / auto;
+  grid-template-areas:
         "cover"
         "box";
-    gap: 10px;
-    p {
-        font-size: 0.8em;
-        line-height: 1em;
-        color: $grey-text;
-    }
+  gap: 10px;
+
+  p {
+    font-size: 0.8em;
+    line-height: 1em;
+    color: $grey-text;
+  }
 }
+
 .about {
-    grid-area: about;
+  grid-area: about;
 }
+
 .avatar {
-    grid-area: avatar;
+  grid-area: avatar;
 
-    width: 160px;
-    height: 160px;
+  width: 160px;
+  height: 160px;
 
-    @include adaptIMG();
+  @include adaptIMG();
 }
-.box {
-    @include field();
 
-    display: grid;
-    grid-template: auto auto 1fr / auto 1fr;
-    grid-template-areas:
+.box {
+  @include field();
+
+  display: grid;
+  grid-template: auto auto 1fr / auto 1fr;
+  grid-template-areas:
         "avatar name"
         "avatar status"
         "avatar about"
         "avatar contacts";
-    gap: 0 20px;
+  gap: 0 20px;
 }
+
 .name {
-    grid-area: name;
+  grid-area: name;
 }

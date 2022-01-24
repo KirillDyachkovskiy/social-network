@@ -12,25 +12,19 @@ export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 const CHANGE_PROFILE_FETCHING_STATUS = 'CHANGE_PROFILE_FETCHING_STATUS';
 export const changeProfileFetchingStatus = (isFetching) => ({type: CHANGE_PROFILE_FETCHING_STATUS, isFetching});
 
-export const getVisitedUserProfile = (id) => {
+export const changeVisitedProfile = (id) => {
   return (dispatch) => {
-    profileAPI.getData(id)
-      .then(({data}) => {
-        dispatch(setVisitedUserProfile({...data}));
-        dispatch(changeProfileFetchingStatus(false));
-      });
+    Promise.all([
+      profileAPI.getData(id),
+      profileAPI.getStatus(id)
+    ])
+      .then(([profileInfo, status]) => {
+        dispatch(setVisitedUserProfile({...profileInfo.data}))
+        dispatch(setUserStatus(status.data))
+        dispatch(changeProfileFetchingStatus(false))
+      })
   }
 };
-
-export const getUserStatus = (id) => {
-  return (dispatch) => {
-    profileAPI.getStatus(id)
-      .then(({data}) => {
-        dispatch(setUserStatus(data));
-        dispatch(changeProfileFetchingStatus(false));
-      });
-  }
-}
 
 export const changeAuthedUserStatus = (status) => {
   return (dispatch) => {
@@ -63,7 +57,7 @@ const initialState = {
     },
   ],
   visitedProfile: {},
-  isFetching: false,
+  isFetching: true,
 };
 
 export const profileReducer = (state = initialState, action) => {

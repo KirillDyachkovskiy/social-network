@@ -1,7 +1,7 @@
 @import "../../../styles/variables.scss";
 
 .title {
-    grid-area: title;
+  grid-area: title;
 
-    @include field();
+  @include field();
 }

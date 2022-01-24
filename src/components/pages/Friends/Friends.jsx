@@ -4,27 +4,47 @@ import {HOC} from '../../hoc';
 import {SamplePage} from "../../Auth/Layout/SamplePage";
 import {Users} from "./Users";
 import {Title} from "../../ui/Title";
-import {changePage} from "../../../services/redux/reducer/friendsReducer";
-import {getCurrentPage, getPageSize, getPagination} from "../../../services/selectors";
+import {changePage, changeUsersFetchingStatus, toggleFollow} from "../../../services/redux/reducer/friendsReducer";
+import {
+  getCurrentPage,
+  getFollowingInProgress,
+  getFriendsIsFetching,
+  getPageSize,
+  getPagination,
+  getUsers
+} from "../../../services/selectors";
+import {useEffect} from "react";
+import Preloader from "../../ui/Preloader";
 
 const mapStateToProps = (state) => ({
-  pagination: getPagination(state),
+  isFetching: getFriendsIsFetching(state),
+  users: getUsers(state),
+  followingInProgress: getFollowingInProgress(state),
   pageSize: getPageSize(state),
   currentPage: getCurrentPage(state),
+  pagination: getPagination(state),
 });
 
-const FriendsStateless = ({pagination, changePage, pageSize, currentPage}) => {
+const FriendsStateless = ({pagination, currentPage, pageSize, changePage, isFetching, ...usersProps}) => {
+  useEffect(() => {
+    changePage(currentPage, pageSize);
+  }, [])
+
+  useEffect(() => () => {
+    changeUsersFetchingStatus(true)
+  }, [])
+
   return (
     <SamplePage menu={pagination} onClick={(page) => changePage(page, pageSize)} currentPage={currentPage}>
       <div>
         <Title>Users</Title>
-        <Users/>
+        {isFetching ? <Preloader /> : <Users {...usersProps}/>}
       </div>
     </SamplePage>
   )
 };
 
 export const Friends = compose(
-  connect(mapStateToProps, {changePage}),
+  connect(mapStateToProps, {changePage, toggleFollow}),
   HOC.withRedirectToLogin,
 )(FriendsStateless);

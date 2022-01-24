@@ -1,19 +1,22 @@
 @import "../../../../../styles/variables";
 
 .contacts {
-    grid-area: contacts;
-    font-size: 0.8em;
-    line-height: 1.5em;
-    a {
-        color: $grey-text;
-        &:hover {
-            color: #000000;
-        }
-    }
-    div {
-        color: $grey-text;
+  grid-area: contacts;
+  font-size: 0.8em;
+  line-height: 1.5em;
 
-        display: grid;
-        grid-template: 1fr / 150px 1fr;
+  a {
+    color: $grey-text;
+
+    &:hover {
+      color: #000000;
     }
+  }
+
+  div {
+    color: $grey-text;
+
+    display: grid;
+    grid-template: 1fr / 150px 1fr;
+  }
 }

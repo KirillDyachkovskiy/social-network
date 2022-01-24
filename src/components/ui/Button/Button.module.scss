@@ -11,9 +11,11 @@
   cursor: pointer;
   padding: 5px 0;
   width: 100px;
+
   &:hover {
     background-color: rgba($blue, 0.9);
   }
+
   &:disabled {
     background-color: $grey-text;
   }

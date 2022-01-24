@@ -1,41 +1,47 @@
 @import "../../../styles/variables";
 
 .large {
-    grid-area: avatar;
+  grid-area: avatar;
 
-    width: 160px;
-    height: 160px;
+  width: 160px;
+  height: 160px;
 
-    @include adaptIMG();
+  @include adaptIMG();
 }
+
 .medium {
-    grid-area: avatar;
+  grid-area: avatar;
 
-    width: 96px;
-    height: 96px;
+  width: 96px;
+  height: 96px;
 
-    img {
-        border-radius: 50%;
-    }
-    @include adaptIMG();
+  img {
+    border-radius: 50%;
+  }
+
+  @include adaptIMG();
 }
+
 .small {
-    grid-area: avatar;
+  grid-area: avatar;
 
-    width: 64px;
-    height: 64px;
+  width: 64px;
+  height: 64px;
 
-    img {
-        border-radius: 50%;
-    }
-    @include adaptIMG();
+  img {
+    border-radius: 50%;
+  }
+
+  @include adaptIMG();
 }
-.login {
-    width: 40px;
-    height: 40px;
 
-    img {
-        border-radius: 50%;
-    }
-    @include adaptIMG();
+.login {
+  width: 40px;
+  height: 40px;
+
+  img {
+    border-radius: 50%;
+  }
+
+  @include adaptIMG();
 }

@@ -1,19 +1,10 @@
 import c from './Posts.module.scss';
-import { compose } from 'redux'
-import { connect } from 'react-redux';
-import { Post } from './Post';
-import {getPosts} from "../../../../../services/selectors";
+import {Post} from './Post';
+import {PostHeader} from "./PostHeader";
 
-const mapStateToProps = (state) => ({
-    posts: getPosts(state),
-})
-
-const PostsStateless = ({ posts }) => (
-    <section className={c.posts} >
-        {posts.map(p => <Post key={p.id} likes={p.likes} text={p.text} />).reverse()}
-    </section >
-)
-
-export const Posts = compose(
-    connect(mapStateToProps)
-)(PostsStateless);
+export const Posts = ({posts, photo, name}) => {
+  return <section className={c.posts}>
+    {posts.map(p => <Post key={p.id} likes={p.likes} text={p.text}
+                          renderPostHeader={() => <PostHeader photo={photo} name={name}/>}/>).reverse()}
+  </section>
+}

@@ -10,6 +10,7 @@
   gap: 10px 20px;
   background-color: $grey-field;
 }
+
 .avatar {
   grid-area: avatar;
 
@@ -20,8 +21,10 @@
   img {
     border-radius: 50%;
   }
+
   @include adaptIMG();
 }
+
 .box {
   grid-area: box;
   justify-self: start;
@@ -31,10 +34,12 @@
     "name"
     "status";
   gap: 10px;
+
   p {
     pointer-events: none;
   }
 }
+
 .name {
   grid-area: name;
 }

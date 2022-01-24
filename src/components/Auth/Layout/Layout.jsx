@@ -9,14 +9,14 @@ export const Layout = () => {
     <div className={c.layout}>
       <header className={c.header}>
         <div className={c.container}>
-          <Logo />
-          <Logout />
+          <Logo/>
+          <Logout/>
         </div>
       </header>
       <main className={c.main}>
         <div className={c.container}>
-          <Sidebar />
-          <Outlet />
+          <Sidebar/>
+          <Outlet/>
         </div>
       </main>
     </div>

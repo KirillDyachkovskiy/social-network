@@ -1,30 +1,30 @@
 import c from './Login.module.scss';
-import { useForm } from 'react-hook-form';
-import { Button } from '../../ui/Button';
-import { authLogIn } from '../../../services/redux/reducer/authReducer';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import {useForm} from 'react-hook-form';
+import {Button} from '../../ui/Button';
+import {authLogIn} from '../../../services/redux/reducer/authReducer';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import {getData} from "../../../services/selectors";
 
 const mapStateToProps = (state) => ({
   email: getData(state)?.email,
 })
 
-const LoginForm = ({ authLogIn, email }) => {
-  const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm({
+const LoginForm = ({authLogIn, email}) => {
+  const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({
     mode: 'onBlur',
   });
   const navigate = useNavigate();
   const onSubmit = (data) => {
     email !== data.email && authLogIn(data);
-    email && navigate('/', { replace: true });
+    email && navigate('/', {replace: true});
     reset();
   };
   return (
     <div className={c.login}>
       <form
-        onSubmit={handleSubmit(onSubmit)} >
+        onSubmit={handleSubmit(onSubmit)}>
         <div>
           <p>Email</p>
           <input
@@ -42,24 +42,25 @@ const LoginForm = ({ authLogIn, email }) => {
         <div>
           <p>Password</p>
           <input type='password'
-            {...register('password', {
-              required: 'Поле обязательно!',
-            })}
+                 {...register('password', {
+                   required: 'Поле обязательно!',
+                 })}
           />
           {errors.password && <span>{errors.password?.message || 'Error!'}</span>}
         </div>
         <div>
           <p>Remember Me</p>
           <input type='checkbox'
-            {...register('rememberMe')}
+                 {...register('rememberMe')}
           />
         </div>
-        <Button disabled={!isValid} onClick={() => { }}>Log In</Button>
+        <Button disabled={!isValid} onClick={() => {
+        }}>Log In</Button>
       </form>
     </div>
   )
 };
 
 export const Login = compose(
-  connect(mapStateToProps, { authLogIn })
+  connect(mapStateToProps, {authLogIn})
 )(LoginForm);

@@ -1,6 +1,5 @@
 import {
-  getVisitedUserProfile,
-  getUserStatus,
+  changeVisitedProfile,
   addPost,
   changeProfileFetchingStatus
 } from '../../../services/redux/reducer/profileReducer';
@@ -14,55 +13,43 @@ import {Submit} from '../../ui/Submit';
 import c from "./Profile.module.scss";
 import {Card} from "./Card";
 import {Wall} from "./Wall";
-import {getProfileIsFetching, getVisitedProfile} from "../../../services/selectors";
+import {getPosts, getProfileIsFetching, getVisitedProfile} from "../../../services/selectors";
+import {Posts} from "./Wall/Posts";
 
 const mapStateToProps = (state) => ({
   isFetching: getProfileIsFetching(state),
   visitedProfile: getVisitedProfile(state),
+  posts: getPosts(state),
 });
 
-const ProfileCombine = ({
-                          id,
-                          isFetching,
-                          visitedProfile,
-                          getVisitedUserProfile,
-                          getUserStatus,
-                          addPost,
-                          changeProfileFetchingStatus
-                        }) => {
-
-  useEffect(() => {
-    changeProfileFetchingStatus(true)
-    getVisitedUserProfile(id)
-    getUserStatus(id)
-  }, [id])
-
-  useEffect(()=> ()=> {
+const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, changeProfileFetchingStatus}) => {
+  useEffect(() => () => {
     changeProfileFetchingStatus(true)
   }, [])
 
-  return <>
-    {(isFetching) ? <Preloader color='blue'/> : <section className={c.profile}>
-      <Card {...visitedProfile} />
-      <Wall renderSubmit={() => (<Submit onSubmit={addPost} placeholder="What's new?">
-        Post
-      </Submit>)}/>
-    </section>}
-  </>
+  if (isFetching) {
+    return <Preloader />
+  }
+
+  return <section className={c.profile}>
+    <Card {...visitedProfile} />
+    <Wall renderSubmit={() => <Submit onSubmit={addPost} placeholder="What's new?">Post</Submit>}
+      renderPosts={() => <Posts posts={posts} photo={visitedProfile.photos?.small} name={visitedProfile.fullName}/>}/>
+  </section>
 }
 
 const ProfileRouter = (props) => {
-  const {id = props.authedUser.id} = useParams();
+  const {changeVisitedProfile, authedUser, ...childProps} = props;
 
-  return (<ProfileCombine {...props} id={id}/>)
+  const {id = authedUser.id} = useParams();
+
+  useEffect(() => {
+    changeVisitedProfile(id)
+  }, [id])
+
+  return <ProfileCombine {...childProps}/>
 }
 
-export const Profile = compose(
-  connect(mapStateToProps, {
-    changeProfileFetchingStatus,
-    getVisitedUserProfile,
-    getUserStatus,
-    addPost,
-  }),
-  HOC.withRedirectToLogin,
-)(ProfileRouter);
+export const Profile = compose(connect(mapStateToProps, {
+  changeProfileFetchingStatus, changeVisitedProfile, addPost,
+}), HOC.withRedirectToLogin)(ProfileRouter);

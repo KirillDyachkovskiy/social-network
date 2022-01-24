@@ -11,7 +11,8 @@ export const SamplePage = ({children, menu, onClick, currentPage}) => {
         <div className={c.menu}>
           {
             onClick ?
-              menu.map(d => <span className={(d === currentPage) ? c.active : ''} key={d} onClick={() => onClick(d)}>{d}</span>)
+              menu.map(d => <span className={(d === currentPage) ? c.active : ''} key={d}
+                                  onClick={() => onClick(d)}>{d}</span>)
               : menu.map(d => <NavLink className={({isActive}) => (isActive) ? c.active : ''} to={d.id.toString()}
                                        key={d.id}>{d.text}</NavLink>)
           }
