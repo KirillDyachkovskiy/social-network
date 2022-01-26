@@ -1,0 +1,11 @@
+@import "../../../styles/variables";
+
+.sidebar {
+  grid-area: aside;
+
+  @include field();
+
+  a, span {
+    @include navbar();
+  }
+}

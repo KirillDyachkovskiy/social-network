@@ -1,7 +1,11 @@
 import {
-  changeVisitedProfile,
   addPost,
-  changeProfileFetchingStatus, deletePost
+  changeProfileFetchingStatus,
+  changeVisitedProfile,
+  deletePost,
+  getPosts,
+  getProfileIsFetching,
+  getVisitedProfile,
 } from '../../../services/redux/reducer/profileReducer';
 import {connect} from 'react-redux';
 import Preloader from '../../ui/Preloader';
@@ -13,7 +17,6 @@ import {Submit} from '../../ui/Submit';
 import c from "./Profile.module.scss";
 import {Card} from "./Card";
 import {Wall} from "./Wall";
-import {getPosts, getProfileIsFetching, getVisitedProfile} from "../../../services/selectors";
 import {Posts} from "./Wall/Posts";
 
 const mapStateToProps = (state) => ({
@@ -22,29 +25,27 @@ const mapStateToProps = (state) => ({
   posts: getPosts(state),
 });
 
-const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, deletePost, changeProfileFetchingStatus}) => {
-  useEffect(() => () => {
-    changeProfileFetchingStatus(true)
-  }, [])
-
+const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, deletePost}) => {
   if (isFetching) {
-    return <Preloader />
+    return <Preloader/>
   }
 
   return <section className={c.profile}>
     <Card {...visitedProfile} />
     <Wall renderSubmit={() => <Submit onSubmit={addPost} placeholder="What's new?">Post</Submit>}
-      renderPosts={() => <Posts posts={posts} photo={visitedProfile.photos?.small} name={visitedProfile.fullName} onClick={deletePost}/>}/>
+          renderPosts={() => <Posts posts={posts} photo={visitedProfile.photos?.small} name={visitedProfile.fullName}
+                                    onClick={deletePost}/>}/>
   </section>
 }
 
 const ProfileRouter = (props) => {
-  const {changeVisitedProfile, authedUser, ...childProps} = props;
+  const {changeProfileFetchingStatus, changeVisitedProfile, authedUser, ...childProps} = props;
 
   const {id = authedUser.id} = useParams();
 
   useEffect(() => {
-    changeVisitedProfile(id)
+    changeProfileFetchingStatus(true);
+    changeVisitedProfile(id);
   }, [id])
 
   return <ProfileCombine {...childProps}/>

@@ -1,7 +1,7 @@
 import {compose} from 'redux';
 import {connect} from 'react-redux'
 import {changeAuthedUserStatus} from '../../../services/redux/reducer/profileReducer';
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import c from "./Status.module.scss";
 import {ANON_USER_STATUS} from "../../../constants";
 

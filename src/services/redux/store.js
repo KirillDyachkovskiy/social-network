@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {authReducer} from './reducer/authReducer';
 import {friendsReducer} from './reducer/friendsReducer';
 import {messengerReducer} from './reducer/messengerReducer';

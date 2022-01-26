@@ -1,5 +1,10 @@
 @import "../../../styles/variables";
 
-.notfoundpage {
+.notfound {
+}
+
+.content {
   @include field();
+
+  height: 50%;
 }

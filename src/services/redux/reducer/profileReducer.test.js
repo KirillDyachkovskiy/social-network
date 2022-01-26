@@ -1,4 +1,4 @@
-import {profileReducer, addPost, deletePost} from "./profileReducer";
+import {addPost, deletePost, profileReducer} from "./profileReducer";
 
 const state = {
   posts: [

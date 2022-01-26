@@ -2,9 +2,8 @@ import {useForm} from 'react-hook-form';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {ANON_USER_NAME} from '../../../constants';
-import {authLogOut} from '../../../services/redux/reducer/authReducer';
+import {authLogOut, getData} from '../../../services/redux/reducer/authReducer';
 import c from './Logout.module.scss';
-import {getData} from "../../../services/selectors";
 
 const mapStateToProps = (state) => ({
   login: getData(state)?.login,

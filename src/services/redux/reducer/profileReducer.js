@@ -1,39 +1,31 @@
 import {profileAPI} from "../../api";
 
-const ADD_POST = 'ADD_POST';
+const ADD_POST = 'profile/addPost';
 export const addPost = (text) => ({type: ADD_POST, text});
 
-const DELETE_POST = 'DELETE_POST';
+const DELETE_POST = 'profile/deletePost';
 export const deletePost = (id) => ({type: DELETE_POST, id});
 
-const SET_VISITED_USER_PROFILE = 'SET_VISITED_USER_PROFILE';
+const SET_VISITED_USER_PROFILE = 'profile/setVisitedUserProfile';
 export const setVisitedUserProfile = (data) => ({type: SET_VISITED_USER_PROFILE, data});
 
-const SET_USER_STATUS = 'SET_USER_STATUS';
+const SET_USER_STATUS = 'profile/setUserStatus';
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 
-const CHANGE_PROFILE_FETCHING_STATUS = 'CHANGE_PROFILE_FETCHING_STATUS';
+const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
 export const changeProfileFetchingStatus = (isFetching) => ({type: CHANGE_PROFILE_FETCHING_STATUS, isFetching});
 
-export const changeVisitedProfile = (id) => {
-  return (dispatch) => {
-    Promise.all([
-      profileAPI.getData(id),
-      profileAPI.getStatus(id)
-    ])
-      .then(([profileInfo, status]) => {
-        dispatch(setVisitedUserProfile({...profileInfo.data}))
-        dispatch(setUserStatus(status.data))
-        dispatch(changeProfileFetchingStatus(false))
-      })
-  }
+export const changeVisitedProfile = (id) => async (dispatch) => {
+  const dataResponse = await profileAPI.getData(id);
+  const statusResponse = await profileAPI.getStatus(id);
+  dispatch(setVisitedUserProfile({...dataResponse.data}));
+  dispatch(setUserStatus(statusResponse.data));
+  dispatch(changeProfileFetchingStatus(false));
 };
 
-export const changeAuthedUserStatus = (status) => {
-  return (dispatch) => {
-    profileAPI.changeStatus(status)
-      .then(() => dispatch(setUserStatus(status)));
-  }
+export const changeAuthedUserStatus = (status) => async (dispatch) => {
+  await profileAPI.changeStatus(status);
+  dispatch(setUserStatus(status));
 };
 
 const initialState = {
@@ -62,6 +54,10 @@ const initialState = {
   visitedProfile: {},
   isFetching: true,
 };
+
+export const getVisitedProfile = (state) => state.profile.visitedProfile;
+export const getProfileIsFetching = (state) => state.profile.isFetching;
+export const getPosts = (state) => state.profile.posts;
 
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {

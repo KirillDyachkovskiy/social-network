@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
-import {getData} from "../../services/selectors";
+import {getData} from "../../services/redux/reducer/authReducer";
 
 export const HOC = {
   withRedirect: (to) => (Component) => {
@@ -10,12 +10,12 @@ export const HOC = {
 
     const RedirectedComponent = (props) => {
       if (to === '/login') {
-      return <>
+        return <>
           {(props.authedUser.id) ? <Component {...props} /> : <Navigate to={to}/>}
         </>
-      } else if (to === '/') {
+      } else if (to === -1) {
         return <>
-          {(!props.authedUser.id) ? <Component {...props} /> : <Navigate to={-1}/>}
+          {(!props.authedUser.id) ? <Component {...props} /> : <Navigate to={to}/>}
         </>
       }
     };

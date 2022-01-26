@@ -1,68 +1,74 @@
+import {createSelector} from "reselect";
 import {usersAPI} from "../../api";
 
-const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
+const TOGGLE_FOLLOW = 'friends/toggleFollow';
 export const toggleFollowSuccess = (id) => ({type: TOGGLE_FOLLOW, id,});
 
-const CHANGE_STATUS = 'CHANGE_STATUS';
+const CHANGE_STATUS = 'friends/changeStatus';
 export const changeStatus = (text) => ({type: CHANGE_STATUS, text,});
 
-const SET_USERS = 'SET_USERS';
+const SET_USERS = 'friends/setUsers';
 const setUsersList = (users, totalCount) => ({type: SET_USERS, users, totalCount,});
 
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_CURRENT_PAGE = 'friends/setCurrentPage';
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage,});
 
-const CHANGE_FOLLOWING_STATUS = 'CHANGE_FOLLOWING_STATUS';
+const CHANGE_FOLLOWING_STATUS = 'friends/setFollowingStatus';
 export const changeFollowingStatus = (id, isFollowing) => ({type: CHANGE_FOLLOWING_STATUS, id, isFollowing});
 
-const CHANGE_USERS_FETCHING_STATUS = 'CHANGE_USERS_FETCHING_STATUS';
+const CHANGE_USERS_FETCHING_STATUS = 'friends/changeUsersFetchingStatus';
 export const changeUsersFetchingStatus = (isFetching) => ({type: CHANGE_USERS_FETCHING_STATUS, isFetching});
 
-const SET_PAGES = 'SET_PAGES';
+const SET_PAGES = 'friends/setPages';
 export const setPages = (pages) => ({type: SET_PAGES, pages});
 
-export const toggleFollow = (id, followed) => (dispatch) => {
+export const toggleFollow = (id, followed) => async (dispatch) => {
   dispatch(changeFollowingStatus(id, true));
   if (followed) {
-    usersAPI.unfollow(id)
-      .then(() => {
-        dispatch(toggleFollowSuccess(id));
-        dispatch(changeFollowingStatus(id, false));
-      });
+    await usersAPI.unfollow(id);
+    dispatch(toggleFollowSuccess(id));
   } else {
-    usersAPI.follow(id)
-      .then(() => {
-        dispatch(toggleFollowSuccess(id));
-        dispatch(changeFollowingStatus(id, false));
-      });
+    await usersAPI.follow(id)
+    dispatch(toggleFollowSuccess(id));
   }
+  dispatch(changeFollowingStatus(id, false));
 };
 
-export const changePage = (page, pageSize) => (dispatch) => {
+export const changePage = (page, pageSize) => async (dispatch) => {
   dispatch(changeUsersFetchingStatus(true));
+
   dispatch(setCurrentPage(page));
 
-  usersAPI.getCurrentPageData(page, pageSize)
-    .then(({data}) => {
-      dispatch(setUsersList(data.items, data.totalCount));
-      const pages = [];
-      for (let i = 1; i <= Math.ceil(data.totalCount / pageSize); i++) {
-        pages.push(i)
-      }
-      dispatch(setPages(pages));
-      dispatch(changeUsersFetchingStatus(false));
-    });
+  const response = await usersAPI.getCurrentPageData(page, pageSize);
+  dispatch(setUsersList(response.data.items, response.data.totalCount));
+
+  const pages = [];
+  for (let i = 1; i <= Math.ceil(response.data.totalCount / pageSize); i++) {
+    pages.push(i)
+  }
+  dispatch(setPages(pages));
+
+  dispatch(changeUsersFetchingStatus(false));
 };
 
 const initialState = {
   users: [],
-  pageSize: 10,
+  pageSize: 2,
   totalCount: 0,
   currentPage: 1,
   pages: [],
   followingInProgress: [],
   isFetching: true,
 };
+
+export const getUsers = (state) => state.friends.users;
+export const getPageSize = (state) => state.friends.pageSize;
+export const getTotalCount = (state) => state.friends.totalCount;
+export const getCurrentPage = (state) => state.friends.currentPage;
+const getPages = (state) => state.friends.pages;
+export const getPagination = createSelector([getPages, getCurrentPage], (pages, currentPage) => pages.filter((item, id, arr) => (id === 0) || (id <= currentPage && id >= currentPage - 2) || (id === arr.length - 1)));
+export const getFollowingInProgress = (state) => state.friends.followingInProgress;
+export const getFriendsIsFetching = (state) => state.friends.isFetching;
 
 export const friendsReducer = (state = initialState, action) => {
   switch (action.type) {

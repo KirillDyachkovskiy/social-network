@@ -1,20 +1,22 @@
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {HOC} from '../../hoc';
-import {SamplePage} from "../../Auth/Layout/SamplePage";
 import {Users} from "./Users";
-import {Title} from "../../ui/Title";
-import {changePage, changeUsersFetchingStatus, toggleFollow} from "../../../services/redux/reducer/friendsReducer";
 import {
+  changePage,
+  changeUsersFetchingStatus,
   getCurrentPage,
   getFollowingInProgress,
   getFriendsIsFetching,
   getPageSize,
   getPagination,
-  getUsers
-} from "../../../services/selectors";
+  getUsers,
+  toggleFollow
+} from "../../../services/redux/reducer/friendsReducer";
 import {useEffect} from "react";
 import Preloader from "../../ui/Preloader";
+import c from "./Friends.module.scss";
+import {Sidebar} from "../../ui/Sidebar";
 
 const mapStateToProps = (state) => ({
   isFetching: getFriendsIsFetching(state),
@@ -25,7 +27,15 @@ const mapStateToProps = (state) => ({
   pagination: getPagination(state),
 });
 
-const FriendsStateless = ({pagination, currentPage, pageSize, changePage, isFetching, changeUsersFetchingStatus, ...usersProps}) => {
+const FriendsStateless = ({
+                            pagination,
+                            currentPage,
+                            pageSize,
+                            changePage,
+                            isFetching,
+                            changeUsersFetchingStatus,
+                            ...usersProps
+                          }) => {
   useEffect(() => {
     changePage(currentPage, pageSize);
   }, [])
@@ -35,12 +45,12 @@ const FriendsStateless = ({pagination, currentPage, pageSize, changePage, isFetc
   }, [])
 
   return (
-    <SamplePage menu={pagination} onClick={(page) => changePage(page, pageSize)} currentPage={currentPage}>
-      <div>
-        <Title>Users</Title>
-        {isFetching ? <Preloader /> : <Users {...usersProps}/>}
+    <section className={c.friends}>
+      <div className={c.content}>
+        {isFetching ? <Preloader/> : <Users {...usersProps}/>}
       </div>
-    </SamplePage>
+      <Sidebar items={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize} />
+    </section>
   )
 };
 

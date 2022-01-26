@@ -9,6 +9,8 @@ const initialState = {
   ]
 };
 
+export const getLinks = (state) => state.sidebar.links;
+
 export const sidebarReducer = (state = initialState, action) => {
   switch (action.type) {
     default:

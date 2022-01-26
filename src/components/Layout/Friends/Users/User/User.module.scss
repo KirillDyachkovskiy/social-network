@@ -2,6 +2,7 @@
 
 .user {
   @include field();
+  height: min-content;
   display: grid;
   grid-template: 1fr auto / auto 1fr;
   grid-template-areas:

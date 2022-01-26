@@ -1,0 +1,47 @@
+@import "../../styles/variables";
+
+.layout {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  gap: 10px;
+}
+
+.header {
+  background-color: $blue;
+
+  .container {
+    @include container();
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.main {
+  .container {
+    @include container();
+    display: grid;
+    grid-template: auto 1fr / minmax(164px, auto) 1fr;
+    grid-template-areas:
+      "sidebar content"
+      "x content";
+    gap: 10px;
+
+    .content {
+      grid-area: content;
+      > section {
+        height: 100%;
+      }
+    }
+
+    >aside {
+      grid-area: sidebar;
+      a:last-child {
+        border-top: 1px solid rgba(#000000, 0.1);
+        margin: 5px 0 0 0;
+      }
+    }
+  }
+}

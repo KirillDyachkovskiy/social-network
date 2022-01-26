@@ -1,0 +1,16 @@
+@import '../../../styles/variables';
+
+.friends {
+  display: grid;
+  grid-template: auto 1fr / minmax(400px, 1fr) 230px;
+  grid-template-areas:
+        "content aside"
+        "content x";
+  gap: 10px;
+}
+
+.content {
+  grid-area: content;
+
+  @include field();
+}

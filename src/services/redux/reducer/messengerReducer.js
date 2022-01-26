@@ -1,4 +1,4 @@
-const SEND_MESSAGE = 'SEND_MESSAGE';
+const SEND_MESSAGE = 'messenger/sendMessage';
 export const sendMessage = (text) => ({type: SEND_MESSAGE, text});
 
 const initialState = {
@@ -15,6 +15,9 @@ const initialState = {
     {id: 2, sender: 0, text: "We'll go to the gym tomorrow"},
   ],
 };
+
+export const getMenu = (state) => state.messenger.menu;
+export const getMessages = (state) => state.messenger.messages;
 
 export const messengerReducer = (state = initialState, action) => {
   switch (action.type) {

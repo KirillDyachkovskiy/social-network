@@ -1,10 +1,9 @@
 import c from './Login.module.scss';
 import {useForm} from 'react-hook-form';
 import {Button} from '../../ui/Button';
-import {authLogIn} from '../../../services/redux/reducer/authReducer';
+import {authLogIn, getData} from '../../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {getData} from "../../../services/selectors";
 import {HOC} from "../../hoc";
 
 const mapStateToProps = (state) => ({
@@ -31,8 +30,7 @@ const LoginForm = ({authLogIn, email}) => {
             {...register('email', {
               required: 'Поле обязательно!',
               pattern: {
-                // eslint-disable-next-line no-useless-escape
-                value: /^(([^<>()[\]{}'^?\\.,!|//#%*-+=&;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: 'Введите корректный email',
               }
             })}
@@ -63,5 +61,5 @@ const LoginForm = ({authLogIn, email}) => {
 
 export const Login = compose(
   connect(mapStateToProps, {authLogIn}),
-  HOC.withRedirect('/'),
+  HOC.withRedirect(-1),
 )(LoginForm);
