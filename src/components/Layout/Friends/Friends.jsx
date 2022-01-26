@@ -13,10 +13,10 @@ import {
   getUsers,
   toggleFollow
 } from "../../../services/redux/reducer/friendsReducer";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Preloader from "../../ui/Preloader";
 import c from "./Friends.module.scss";
-import {Sidebar} from "../../ui/Sidebar";
+import {Paginator} from "../../ui/Paginator";
 
 const mapStateToProps = (state) => ({
   isFetching: getFriendsIsFetching(state),
@@ -36,6 +36,8 @@ const FriendsStateless = ({
                             changeUsersFetchingStatus,
                             ...usersProps
                           }) => {
+  const [currentPage1, setCurrentPage] = useState(1);
+
   useEffect(() => {
     changePage(currentPage, pageSize);
   }, [])
@@ -49,7 +51,7 @@ const FriendsStateless = ({
       <div className={c.content}>
         {isFetching ? <Preloader/> : <Users {...usersProps}/>}
       </div>
-      <Sidebar items={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize} />
+      <Paginator pagination={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize} />
     </section>
   )
 };
