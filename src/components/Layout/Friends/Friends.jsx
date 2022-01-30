@@ -13,7 +13,7 @@ import {
   getUsers,
   toggleFollow
 } from "../../../services/redux/reducer/friendsReducer";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Preloader from "../../ui/Preloader";
 import c from "./Friends.module.scss";
 import {Paginator} from "../../ui/Paginator";
@@ -36,8 +36,6 @@ const FriendsStateless = ({
                             changeUsersFetchingStatus,
                             ...usersProps
                           }) => {
-  const [currentPage1, setCurrentPage] = useState(1);
-
   useEffect(() => {
     changePage(currentPage, pageSize);
   }, [])

@@ -53,7 +53,7 @@ export const changePage = (page, pageSize) => async (dispatch) => {
 
 const initialState = {
   users: [],
-  pageSize: 2,
+  pageSize: 5,
   totalCount: 0,
   currentPage: 1,
   pages: [],
@@ -66,7 +66,7 @@ export const getPageSize = (state) => state.friends.pageSize;
 export const getTotalCount = (state) => state.friends.totalCount;
 export const getCurrentPage = (state) => state.friends.currentPage;
 const getPages = (state) => state.friends.pages;
-export const getPagination = createSelector([getPages, getCurrentPage], (pages, currentPage) => pages.filter((item, id, arr) => (id === 0) || (id <= currentPage && id >= currentPage - 2) || (id === arr.length - 1)));
+export const getPagination = createSelector([getPages, getCurrentPage], (pages, currentPage) => pages.filter((item, id, arr) => item === 1 || item === arr.length || (item >= currentPage - 5) && (item <= currentPage + 5) ));
 export const getFollowingInProgress = (state) => state.friends.followingInProgress;
 export const getFriendsIsFetching = (state) => state.friends.isFetching;
 
