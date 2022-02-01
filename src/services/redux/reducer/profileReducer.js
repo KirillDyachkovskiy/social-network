@@ -12,6 +12,9 @@ export const setVisitedUserProfile = (data) => ({type: SET_VISITED_USER_PROFILE,
 const SET_USER_STATUS = 'profile/setUserStatus';
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 
+const SET_USER_AVATAR = 'profile/setUserAvatar';
+export const setUserAvatar = (avatar) => ({type: SET_USER_AVATAR, avatar});
+
 const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
 export const changeProfileFetchingStatus = (isFetching) => ({type: CHANGE_PROFILE_FETCHING_STATUS, isFetching});
 
@@ -26,6 +29,11 @@ export const changeVisitedProfile = (id) => async (dispatch) => {
 export const changeAuthedUserStatus = (status) => async (dispatch) => {
   await profileAPI.changeStatus(status);
   dispatch(setUserStatus(status));
+};
+
+export const changeAuthedUserAvatar = (avatar) => async (dispatch) => {
+  let response = await profileAPI.changeAvatar(avatar);
+  window.location.reload();
 };
 
 const initialState = {

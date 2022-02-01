@@ -1,13 +1,10 @@
 @import "../../../styles/variables";
 
 .button {
-  grid-area: button;
-
-  @include field();
-
+  border: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
+  border-radius: 7px;
   color: #ffffff;
   background-color: $blue;
-
   cursor: pointer;
   padding: 5px 0;
   width: 100px;

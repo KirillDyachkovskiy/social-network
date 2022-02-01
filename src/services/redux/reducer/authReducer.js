@@ -19,10 +19,19 @@ export const authLogOut = () => async (dispatch) => {
 }
 
 const initialState = {
+  sidebar: [
+    {id: 0, to: '/', text: 'Profile'},
+    {id: 1, to: '/messenger', text: 'Messenger'},
+    {id: 2, to: '/news', text: 'News'},
+    {id: 3, to: '/music', text: 'Music'},
+    {id: 4, to: '/friends', text: 'Friends'},
+    {id: 5, to: '/settings', text: 'Settings'},
+  ],
   data: null,
 };
 
 export const getData = (state) => state.auth.data;
+export const getSidebar = (state) => state.auth.sidebar;
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {

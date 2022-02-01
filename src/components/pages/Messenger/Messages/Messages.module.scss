@@ -1,0 +1,33 @@
+@import "../../../../styles/variables";
+
+.messages {
+  grid-area: messages;
+
+  display: grid;
+  grid-template: 1fr / 1fr;
+  grid-auto-rows: auto;
+  gap: 5px;
+}
+
+.message {
+  max-width: 85%;
+  width: max-content;
+  height: fit-content;
+  word-wrap: break-word;
+
+  &.from {
+    margin-right: auto !important;
+
+    div {
+      background-color: $blue-bubble !important;
+    }
+  }
+
+  &.to {
+    margin-left: auto !important;
+
+    div {
+      background-color: $grey-field !important;
+    }
+  }
+}

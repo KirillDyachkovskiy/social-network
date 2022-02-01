@@ -11,3 +11,43 @@
     margin: 0 10px;
   }
 }
+
+.layout {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  gap: 10px;
+}
+
+.header {
+  background-color: $blue;
+
+  .container {
+    max-width: 990px;
+    padding: 0 15px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.main {
+  .container {
+    max-width: 990px;
+    padding: 0 15px;
+    margin: 0 auto;
+    height: 100%;
+    display: grid;
+    grid-template: auto 1fr / minmax(164px, auto) 1fr;
+    grid-template-areas:
+      "sidebar content"
+      "x content";
+    gap: 10px;
+
+    .content {
+      grid-area: content;
+    }
+  }
+}

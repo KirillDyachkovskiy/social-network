@@ -1,11 +1,16 @@
 @import "../../../styles/variables";
 
 .sidebar {
-  grid-area: aside;
-
-  @include field();
-
   a, span {
-    @include navbar();
+    cursor: pointer;
+    display: block;
+    color: $grey-text;
+    line-height: 30px;
+    &:hover {
+      color: #000000;
+    }
+    &.active {
+      color: #000000;
+    }
   }
 }

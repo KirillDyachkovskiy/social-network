@@ -43,6 +43,15 @@ export const profileAPI = {
   getData: (id) => instance.get(`profile/${id}`),
   getStatus: (id) => instance.get(`profile/status/${id}`),
   changeStatus: (status) => instance.put('profile/status', {status}),
+  changeAvatar: (avatar) => {
+    const formData = new FormData();
+    formData.append('image', avatar);
+    return instance.put('profile/photo', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    })
+  },
 }
 
 export const usersAPI = {

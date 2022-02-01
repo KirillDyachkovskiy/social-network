@@ -1,25 +1,33 @@
-import React from 'react';
-import {Route, Routes} from 'react-router-dom';
-import {Messenger} from './components/Layout/Messenger';
-import {Friends} from './components/Layout/Friends';
-import {Notfound} from './components/Layout/Notfound';
-import {Profile} from './components/Layout/Profile';
+import React, {Suspense} from 'react';
+import {Route, Routes, Navigate} from 'react-router-dom';
 import {Auth} from './components/Auth';
-import {Login} from './components/Layout/Login';
+// import Messenger from './components/Messenger';
+// import Friends from './components/Friends';
+// import Profile from './components/Profile';
+// import Login from './components/Login';
+import Preloader from "./components/ui/Preloader";
+import Notfound from "./components/pages/Notfound";
+const Messenger = React.lazy(() => import('./components/pages/Messenger'));
+const Friends = React.lazy(() => import('./components/pages/Friends'));
+const Profile = React.lazy(() => import('./components/pages/Profile'));
+const Login = React.lazy(() => import('./components/pages/Login'));
 
 export const App = () => {
   return (
+    <Suspense fallback={<Preloader/>}>
       <Routes>
         <Route path='/' element={<Auth/>}>
           <Route index element={<Profile/>}/>
           <Route path='/:id' element={<Profile/>}/>
           <Route path='messenger/*' element={<Messenger/>}/>
           <Route path='friends/*' element={<Friends/>}/>
-          <Route path='news/*' element={<Notfound/>}/>
-          <Route path='music/*' element={<Notfound/>}/>
-          <Route path='settings/*' element={<Notfound/>}/>
+          <Route path='news/*' element={<Navigate to="/not-found"/>}/>
+          <Route path='music/*' element={<Navigate to="/not-found"/>}/>
+          <Route path='settings/*' element={<Navigate to="/not-found"/>}/>
           <Route path='login/*' element={<Login/>}/>
+          <Route path='not-found' element={<Notfound/>}/>
         </Route>
       </Routes>
+    </Suspense>
   )
 };
