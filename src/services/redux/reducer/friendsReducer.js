@@ -53,7 +53,7 @@ export const changePage = (page, pageSize) => async (dispatch) => {
 
 const initialState = {
   users: [],
-  pageSize: 1,
+  pageSize: 6,
   totalCount: 0,
   currentPage: 1,
   pages: [],

@@ -1,9 +1,13 @@
 @import "../../../../../styles/variables";
 
-.contacts {
+.info {
   grid-area: contacts;
   font-size: 0.8em;
   line-height: 1.5em;
+
+  .subtitle {
+    color: black;
+  }
 
   a {
     color: $grey-text;
@@ -17,6 +21,12 @@
     color: $grey-text;
 
     display: grid;
-    grid-template: 1fr / 150px 1fr;
+    grid-template: 1fr / 200px 1fr;
+  }
+
+  input {
+    background-color: $grey-field;
+    margin: 3px 0;
+    width: 200px;
   }
 }

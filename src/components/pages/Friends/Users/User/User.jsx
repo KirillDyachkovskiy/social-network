@@ -1,18 +1,20 @@
 import {Link} from 'react-router-dom';
-import {Avatar} from '../../../../ui/Avatar';
 import {Button} from '../../../../ui/Button';
 import {useForm} from 'react-hook-form';
 import c from './User.module.scss';
 import {Field} from "../../../../ui/Field";
+import {Image} from "../../../../ui/Image";
+import {ANON_USER_AVATAR} from "../../../../../constants";
 
 export const User = ({user, toggleFollow, followingInProgress}) => {
   const {handleSubmit} = useForm();
   return (
     <Field style={{backgroundColor: '#f1f1f1', overflow: 'hidden'}}>
       <div className={c.user}>
-        <div className={c.avatar}>
+        <div style={{gridArea: 'avatar'}}>
           <Link to={"/" + user.id}>
-            <Avatar src={user.photos.small}/>
+            <Image src={user.photos.small || ANON_USER_AVATAR}
+                   style={{width: '96px', height: '96px', borderRadius: '50%'}}/>
           </Link>
         </div>
         <div className={c.box}>

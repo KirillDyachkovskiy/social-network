@@ -5,8 +5,7 @@ const instance = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
   headers: {
-    // 'API-KEY': '5cfcc1b0-6a34-4ead-9faa-3fe4ffa94f8f',
-    'API-KEY': 'e92e5554-eb4a-4d52-b37b-b0c24bcf8696',
+    'API-KEY': '424c0ee4-c304-416a-a23a-5fcbb6feb690',
   },
   transformResponse: [
     (data) => {
@@ -52,6 +51,7 @@ export const profileAPI = {
       }
     })
   },
+  changeInfo: (info) => instance.put('profile', info),
 }
 
 export const usersAPI = {

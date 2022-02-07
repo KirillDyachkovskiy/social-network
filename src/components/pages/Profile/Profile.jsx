@@ -1,5 +1,5 @@
 import {
-  addPost, changeAuthedUserAvatar,
+  addPost, changeAuthedUserAvatar, changeAuthedUserInfo,
   changeProfileFetchingStatus,
   changeVisitedProfile,
   deletePost,
@@ -24,14 +24,14 @@ const mapStateToProps = (state) => ({
   posts: getPosts(state),
 });
 
-const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, deletePost, isOwner, changeAuthedUserAvatar}) => {
+const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, deletePost, authedUserId, changeAuthedUserAvatar, changeAuthedUserInfo}) => {
   if (isFetching) {
     return <Preloader/>
   }
 
   return (
     <>
-      <Card {...visitedProfile} isOwner={isOwner} changeAuthedUserAvatar={changeAuthedUserAvatar}/>
+      <Card visitedProfile={visitedProfile} authedUserId={authedUserId} changeAuthedUserAvatar={changeAuthedUserAvatar} changeAuthedUserInfo={changeAuthedUserInfo} />
       <Wall renderSubmit={() => <Submit onSubmit={addPost} placeholder="What's new?">Post</Submit>}
             renderPosts={() => <Posts posts={posts} photo={visitedProfile.photos?.small} name={visitedProfile.fullName}
                                       onClick={deletePost}/>}/>
@@ -49,9 +49,9 @@ const ProfileRouter = (props) => {
     changeVisitedProfile(id);
   }, [id])
 
-  return <ProfileCombine {...childProps} isOwner={+id === authedUser.id}/>
+  return <ProfileCombine {...childProps} authedUserId={authedUser.id} />
 }
 
 export const Profile = compose(connect(mapStateToProps, {
-  changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost, changeAuthedUserAvatar,
+  changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost, changeAuthedUserAvatar, changeAuthedUserInfo,
 }), HOC.withRedirect('/login'))(ProfileRouter);

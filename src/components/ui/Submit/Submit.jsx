@@ -7,6 +7,7 @@ export const Submit = ({placeholder, children, onSubmit}) => {
   const {register, handleSubmit, reset, formState: {isValid}} = useForm({
     mode: 'onChange',
   });
+
   return (
     <Field style={{backgroundColor: '#f1f1f1'}}>
       <form

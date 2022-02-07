@@ -1,20 +1,6 @@
 @import "../../../../styles/variables";
 
-.cover {
-  grid-area: cover;
-
-  padding: 0 0 25% 0;
-  @include adaptIMG();
-}
-
 .card {
-  display: grid;
-  grid-template: auto 1fr / auto;
-  grid-template-areas:
-        "cover"
-        "box";
-  gap: 10px;
-
   p {
     font-size: 0.8em;
     line-height: 1em;
@@ -24,10 +10,6 @@
 
 .about {
   grid-area: about;
-}
-
-.avatar {
-  @include adaptIMG();
 }
 
 .avatarBox {

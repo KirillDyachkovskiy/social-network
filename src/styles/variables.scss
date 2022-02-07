@@ -1,15 +1,3 @@
-@mixin adaptIMG {
-  position: relative;
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
 $blue: #414c9b;
 $blue-bubble: rgba(#414c9b, 0.3);
 $grey-text: #6d6d6d;

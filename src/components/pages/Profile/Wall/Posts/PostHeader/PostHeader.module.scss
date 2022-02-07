@@ -13,18 +13,6 @@
   font-size: 0.9em;
 }
 
-.avatar {
-  grid-area: avatar;
-
-  width: 64px;
-  height: 64px;
-
-  img {
-    border-radius: 50%;
-  }
-
-  @include adaptIMG();
-}
 
 .name {
   grid-area: name;
