@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+
+.user {
+  height: min-content;
+  display: grid;
+  grid-template: 1fr auto / auto 1fr;
+  grid-template-areas:
+    "avatar box"
+    "avatar button";
+  gap: 10px 20px;
+}
+
+.box {
+  grid-area: box;
+  justify-self: start;
+
+  display: grid;
+  grid-template-areas:
+    "name"
+    "status";
+  gap: 10px;
+}
+
+.name {
+  grid-area: name;
+}

@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+
+.sidebar {
+  a, span {
+    cursor: pointer;
+    display: block;
+    color: $grey-text;
+    line-height: 30px;
+    &:hover {
+      color: #000000;
+    }
+    &.active {
+      color: #000000;
+    }
+  }
+}

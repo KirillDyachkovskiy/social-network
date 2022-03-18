@@ -3,9 +3,9 @@ import {HOC} from '../../hoc';
 import {compose} from 'redux';
 import {getMenu, getMessages, sendMessage} from '../../../services/redux/reducer/messengerReducer';
 import {Messages} from './Messages'
-import {Submit} from '../../ui/Submit';
-import {Sidebar} from "../../ui/Sidebar";
-import {Field} from "../../ui/Field";
+import {Submit} from '../../../ui/Submit';
+import {Sidebar} from "../../../ui/Sidebar";
+import {Field} from "../../../ui/Field";
 
 const mapStateToProps = (state) => ({
   menu: getMenu(state),

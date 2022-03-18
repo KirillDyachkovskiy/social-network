@@ -8,12 +8,12 @@ import {
   getVisitedProfile,
 } from '../../../services/redux/reducer/profileReducer';
 import {connect} from 'react-redux';
-import Preloader from '../../ui/Preloader';
+import Preloader from '../../../ui/Preloader';
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {compose} from 'redux';
 import {HOC} from '../../hoc';
-import {Submit} from '../../ui/Submit';
+import {Submit} from '../../../ui/Submit';
 import {Card} from "./Card";
 import {Wall} from "./Wall";
 import {Posts} from "./Wall/Posts";

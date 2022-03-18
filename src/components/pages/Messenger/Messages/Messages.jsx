@@ -1,5 +1,5 @@
 import c from './Messages.module.scss';
-import {Field} from "../../../ui/Field";
+import {Field} from "../../../../ui/Field";
 
 export const Messages = ({messages}) => {
   return (

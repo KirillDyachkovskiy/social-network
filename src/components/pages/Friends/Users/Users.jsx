@@ -1,11 +1,11 @@
-import {User} from "./User";
+import {UserCard} from "../../../User";
 import {memo} from "react";
 
 export const Users = memo(({users, followingInProgress, toggleFollow}) => {
   return <div style={{display: 'grid', gap: '10px'}}>
-    {users.map(u => <User key={u.id}
-                          user={u}
-                          toggleFollow={toggleFollow}
-                          followingInProgress={followingInProgress}/>)}
+    {users.map(u => <UserCard key={u.id}
+                              user={u}
+                              toggleFollow={toggleFollow}
+                              followingInProgress={followingInProgress}/>)}
   </div>
 })

@@ -34,7 +34,7 @@ const instance = axios.create({
 
 export const authAPI = {
   authMe: () => instance.get('auth/me'),
-  authLogIn: (data) => instance.post('/auth/login', {...data}),
+  authLogIn: (data) => instance.post('/auth/login', data),
   authLogOut: () => instance.delete('/auth/login'),
 }
 
@@ -56,6 +56,7 @@ export const profileAPI = {
 
 export const usersAPI = {
   getCurrentPageData: (page, count) => instance.get(`users?page=${page}&count=${count}`),
+  // getOnlyFollowingUsers: () => instance.get('users?friend=true'),
   follow: (id) => instance.post(`follow/${id}`),
   unfollow: (id) => instance.delete(`follow/${id}`),
 }

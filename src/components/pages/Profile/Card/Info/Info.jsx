@@ -1,6 +1,6 @@
 import c from './Info.module.scss';
 import {useState} from "react";
-import {Button} from "../../../../ui/Button";
+import {Button} from "../../../../../ui/Button";
 import {useForm} from "react-hook-form";
 
 export const Info = ({userInfo, isOwner, id, changeAuthedUserInfo}) => {
@@ -15,9 +15,9 @@ export const Info = ({userInfo, isOwner, id, changeAuthedUserInfo}) => {
   const {fullName, contacts, ...mainInfo} = userInfo;
 
   if (editMode) {
-    const onSubmit = (formData) => {
-      changeAuthedUserInfo(id, formData);
-      setEditMode(false)
+    const onSubmit = async (formData) => {
+      await changeAuthedUserInfo(id, formData);
+      setEditMode(false);
     }
 
     return (

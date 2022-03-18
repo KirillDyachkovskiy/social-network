@@ -14,9 +14,9 @@ import {
   toggleFollow
 } from "../../../services/redux/reducer/friendsReducer";
 import {useEffect} from "react";
-import Preloader from "../../ui/Preloader";
-import {Paginator} from "../../ui/Paginator";
-import {Field} from "../../ui/Field";
+import Preloader from "../../../ui/Preloader";
+import {Paginator} from "../../../ui/Paginator";
+import {Field} from "../../../ui/Field";
 
 const mapStateToProps = (state) => ({
   isFetching: getFriendsIsFetching(state),
@@ -50,7 +50,7 @@ const FriendsStateless = ({
         {isFetching ? <Preloader/> : <Users {...usersProps}/>}
       </Field>
       <Field style={{width: '230px', alignSelf: 'flex-start'}}>
-        <Paginator pagination={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize} />
+        <Paginator pagination={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
       </Field>
     </section>
   )

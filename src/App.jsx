@@ -1,16 +1,16 @@
 import React, {Suspense} from 'react';
 import {Route, Routes, Navigate} from 'react-router-dom';
-import {Auth} from './components/Auth';
+import {Auth} from './Auth';
 // import Messenger from './components/Messenger';
 // import Friends from './components/Friends';
 // import Profile from './components/Profile';
 // import Login from './components/Login';
-import Preloader from "./components/ui/Preloader";
-import Notfound from "./components/pages/Notfound";
+import Preloader from "./ui/Preloader";
+import Notfound from "./pages/Notfound";
 const Messenger = React.lazy(() => import('./components/pages/Messenger'));
 const Friends = React.lazy(() => import('./components/pages/Friends'));
 const Profile = React.lazy(() => import('./components/pages/Profile'));
-const Login = React.lazy(() => import('./components/pages/Login'));
+const Login = React.lazy(() => import('./pages/Login'));
 
 export const App = () => {
   return (
