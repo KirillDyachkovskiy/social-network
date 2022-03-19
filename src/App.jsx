@@ -7,8 +7,8 @@ import {Auth} from './Auth';
 // import Login from './components/Login';
 import Preloader from "./ui/Preloader";
 import Notfound from "./pages/Notfound";
-const Messenger = React.lazy(() => import('./components/pages/Messenger'));
-const Friends = React.lazy(() => import('./components/pages/Friends'));
+const Messenger = React.lazy(() => import('./pages/Messenger'));
+const Friends = React.lazy(() => import('./pages/Friends'));
 const Profile = React.lazy(() => import('./components/pages/Profile'));
 const Login = React.lazy(() => import('./pages/Login'));
 

@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {HOC} from '../../../hoc';
-import {Users} from "./Users";
+import {HOC} from '../../hoc';
 import {
   changePage,
   changeUsersFetchingStatus,
@@ -12,11 +11,13 @@ import {
   getPagination,
   getUsers,
   toggleFollow
-} from "../../../services/redux/reducer/friendsReducer";
+} from "../../services/redux/reducer/friendsReducer";
 import {useEffect} from "react";
-import Preloader from "../../../ui/Preloader";
-import {Paginator} from "../../../ui/Paginator";
-import {Field} from "../../../ui/Field";
+import Preloader from "../../ui/Preloader";
+import {Paginator} from "../../ui/Paginator";
+import {Field} from "../../ui/Field";
+import s from './friends.module.scss';
+import {UserCard} from "../../components/UserCard";
 
 const mapStateToProps = (state) => ({
   isFetching: getFriendsIsFetching(state),
@@ -34,7 +35,8 @@ const FriendsStateless = ({
                             changePage,
                             isFetching,
                             changeUsersFetchingStatus,
-                            ...usersProps
+                            followingInProgress,
+                            users,
                           }) => {
   useEffect(() => {
     changePage(currentPage, pageSize);
@@ -45,14 +47,19 @@ const FriendsStateless = ({
   }, [])
 
   return (
-    <section style={{display: 'inline-flex', height: '100%'}}>
-      <div style={{width: '576px', marginRight: '10px'}}>
-        <Field>
-          {isFetching ? <Preloader/> : <Users {...usersProps}/>}
-        </Field>
-      </div>
-      <div style={{width: '230px', alignSelf: 'flex-start'}}>
-          <Paginator pagination={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
+    <section className={s.friends}>
+      <Field>
+        <div className={s.friends__content}>
+          {isFetching ? <Preloader/> :
+            users.map(u => <UserCard key={u.id}
+                                     user={u}
+                                     toggleFollow={toggleFollow}
+                                     followingInProgress={followingInProgress}/>)
+          }
+        </div>
+      </Field>
+      <div className={s.friends__aside}>
+        <Paginator pagination={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
       </div>
     </section>
   )

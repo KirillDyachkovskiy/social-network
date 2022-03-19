@@ -1,8 +1,10 @@
 :root {
-  --blue: #414c9b;
+  --blue: rgb(65, 76, 155);
   --blue-bubble: rgba(65, 76, 155, .3);
+  --blue-hover: rgba(65, 76, 155, .9);
   --grey-text: #6d6d6d;
-  --grey-field: #f1f1f1;
+  --field: #f1f1f1;
+  --field-hover: #d5d5d5;
   --liked-red: #c42929;
   --white: #ffffff;
   --black: #000000;

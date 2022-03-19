@@ -1,34 +1,29 @@
 import {Link} from 'react-router-dom';
 import {Button} from '../../ui/Button';
-import {useForm} from 'react-hook-form';
 import s from './userCard.module.scss';
 import {Field} from "../../ui/Field";
-import {ANON_USER_AVATAR} from "../../constants";
 import {Avatar} from "../../ui/Avatar";
 
 export const UserCard = ({user, toggleFollow, followingInProgress}) => {
-  const {handleSubmit} = useForm();
   return (
-    <Field color='grey'>
-      <div className={s.user}>
-        <div style={{gridArea: 'avatar'}}>
+    <div className={s.user}>
+      <Field color='grey'>
+        <div className={s.user__content}>
           <Link to={"/" + user.id}>
-            <Avatar size='medium' src={user.photos.small || ANON_USER_AVATAR}/>
+            <Avatar size='medium' src={user.photos.small}/>
           </Link>
+          <div className={s.user__box}>
+            <p>{user.name}</p>
+            <p>{user.status}</p>
+            <Button
+              onClick={() => toggleFollow(user.id, user.followed)}
+              disabled={followingInProgress.some(item => item === user.id)}
+            >
+              {(user.followed) ? 'Unfollow' : 'Follow'}
+            </Button>
+          </div>
         </div>
-        <div className={s.box}>
-          <div className={s.name}>{user.name}</div>
-          <p>{user.status}</p>
-        </div>
-        <form
-          autoComplete='off'
-          onSubmit={handleSubmit(() => toggleFollow(user.id, user.followed))}>
-          <Button
-            disabled={followingInProgress.some(item => item === user.id)}>
-            {(user.followed) ? 'Unfollow' : 'Follow'}
-          </Button>
-        </form>
-      </div>
-    </Field>
-  )
+      </Field>
+    </div>
+)
 }

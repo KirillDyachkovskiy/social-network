@@ -10,6 +10,10 @@
   }
 
   &_color_grey {
-    background-color: var(--grey-field);
+    background-color: var(--field);
+  }
+
+  &_color_blue {
+    background-color: var(--blue-bubble);
   }
 }

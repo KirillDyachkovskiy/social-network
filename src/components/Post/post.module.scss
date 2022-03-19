@@ -1,70 +1,28 @@
 .post {
-  display: grid;
-  grid-template: auto 1fr auto/ 1fr;
-  grid-template-areas:
-        "postHeader"
-        "content"
-        "postFooter";
+  display: flex;
+  flex-direction: column;
   gap: 15px;
   position: relative;
 
   &__deleter {
     position: absolute;
-    right: 20px;
-    top: 20px;
-  }
-
-  &__content {
-    p {
-      margin: 0;
-      line-height: 1.2em;
-    }
-  }
-
-  &__footer {
-    grid-area: postFooter;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    font-size: 0.9em;
-    padding: 10px 0 0 0;
-    display: grid;
-    grid-template: 1fr / auto 1fr;
-    align-items: center;
-    gap: 10px;
-
-    span {
-      cursor: pointer;
-      color: var(--grey-text);
-      font-size: 1.4em;
-
-      &:hover {
-        color: var(--liked-red);
-      }
-    }
-  }
-
-  &__likes {
-    color: var(--grey-text);
+    right: 10px;
+    top: 10px;
   }
 
   &__header {
-    grid-area: postHeader;
-    display: grid;
-    grid-template: auto 1fr / auto 1fr;
-    grid-template-areas:
-        "avatar name"
-        "avatar time";
-    gap: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__footer {
+    border-top: 1px solid var(--field);
+  }
+
+  &__likes {
+    margin-top: 10px;
     font-size: 0.9em;
-  }
-
-
-  &__name {
-    grid-area: name;
-    padding: 5px 0 0 0;
-  }
-
-  &__time {
-    grid-area: time;
     color: var(--grey-text);
   }
 }

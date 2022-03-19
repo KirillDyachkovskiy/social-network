@@ -1,0 +1,61 @@
+.loginCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__nickname {
+    color: var(--field);
+    font-weight: 700;
+    margin-right: 10px;
+  }
+
+  &__logout {
+    width: 36px;
+    height: 36px;
+    background: var(--field);
+    border-radius: 50%;
+
+    &:hover {
+      background-color: var(--field-hover);
+    }
+  }
+
+  &__icon {
+    left: 20px;
+    box-sizing: border-box;
+    position: relative;
+    width: 6px;
+    height: 16px;
+    border: 2px solid;
+    border-right: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    margin-left: -10px;
+
+    &::after,
+    &::before {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+    }
+
+    &::after {
+      border-top: 2px solid;
+      border-left: 2px solid;
+      transform: rotate(-45deg);
+      width: 8px;
+      height: 8px;
+      left: 4px;
+      bottom: 2px;
+    }
+
+    &::before {
+      border-radius: 3px;
+      width: 10px;
+      height: 2px;
+      background: currentColor;
+      left: 5px;
+      bottom: 5px;
+    }
+  }
+}
