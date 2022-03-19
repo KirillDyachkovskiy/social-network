@@ -1,4 +1,4 @@
-import {UserCard} from "../../../User";
+import {UserCard} from "../../../UserCard";
 import {memo} from "react";
 
 export const Users = memo(({users, followingInProgress, toggleFollow}) => {

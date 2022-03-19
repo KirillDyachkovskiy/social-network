@@ -1,9 +1,15 @@
-@import "../../styles/variables";
-
 .field {
-  border: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
+  width: 100%;
+  height: 100%;
   border-radius: 7px;
   padding: 12px;
-  background-color: white;
   box-sizing: border-box;
+
+  &_color_white {
+    background-color: var(--white);
+  }
+
+  &_color_grey {
+    background-color: var(--grey-field);
+  }
 }

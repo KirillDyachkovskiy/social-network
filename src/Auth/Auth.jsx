@@ -32,9 +32,7 @@ const AuthStateless = ({authMe, data, sidebar}) => {
     </header>
     <main className={c.main}>
       <div className={c.container}>
-        <Field>
           <Sidebar items={sidebar}/>
-        </Field>
         <div className={c.content}>
           <Outlet/>
         </div>

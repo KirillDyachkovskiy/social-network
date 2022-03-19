@@ -1,19 +1,14 @@
-@import "../../styles/variables";
-
 .button {
-  border: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
   border-radius: 7px;
-  color: #ffffff;
-  background-color: $blue;
-  cursor: pointer;
-  padding: 5px 0;
-  width: 100px;
+  color: var(--white);
+  background-color: var(--blue);
+  padding: 3px 15px;
 
   &:hover {
-    background-color: rgba($blue, 0.9);
+    background-color: rgba(var(--blue), 0.9);
   }
 
   &:disabled {
-    background-color: $grey-text;
+    background-color: var(--grey-text);
   }
 }

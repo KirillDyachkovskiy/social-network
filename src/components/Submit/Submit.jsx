@@ -1,7 +1,7 @@
 import s from './submit.module.scss'
 import {useForm} from 'react-hook-form';
-import {Button} from '../Button';
-import {Field} from "../Field";
+import {Button} from '../../ui/Button';
+import {Field} from "../../ui/Field";
 
 export const Submit = ({placeholder, children, onSubmit}) => {
   const {register, handleSubmit, reset, formState: {isValid}} = useForm({
@@ -9,7 +9,7 @@ export const Submit = ({placeholder, children, onSubmit}) => {
   });
 
   return (
-    <Field style={{backgroundColor: '#f1f1f1'}}>
+    <Field color='grey'>
       <form
         className={s.form}
         autoComplete='off'

@@ -1,6 +1,4 @@
-@import "../../styles/variables";
-
 .deleter {
-  color: $grey-text;
+  color: var(--grey-text);
   font-size: 40px;
 }

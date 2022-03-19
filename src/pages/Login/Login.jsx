@@ -4,7 +4,7 @@ import {Button} from '../../ui/Button';
 import {authLogIn, getData} from '../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {HOC} from "../../components/hoc";
+import {HOC} from "../../hoc";
 import {Field} from "../../ui/Field";
 
 const mapStateToProps = (state) => ({
@@ -26,7 +26,7 @@ const LoginForm = ({authLogIn, email}) => {
   };
   return (
     <Field>
-      <Field style={{backgroundColor: '#f1f1f1'}}>
+      <Field color='grey'>
         <form className={c.form}
               onSubmit={handleSubmit(onSubmit)}>
           <div>

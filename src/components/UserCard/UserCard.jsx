@@ -9,7 +9,7 @@ import {Avatar} from "../../ui/Avatar";
 export const UserCard = ({user, toggleFollow, followingInProgress}) => {
   const {handleSubmit} = useForm();
   return (
-    <Field style={{backgroundColor: '#f1f1f1', overflow: 'hidden'}}>
+    <Field color='grey'>
       <div className={s.user}>
         <div style={{gridArea: 'avatar'}}>
           <Link to={"/" + user.id}>

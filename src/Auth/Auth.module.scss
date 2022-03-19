@@ -1,12 +1,10 @@
-@import "../styles/variables";
-
 .auth {
   display: flex;
   flex-direction: row;
   align-items: center;
 
   p {
-    color: $grey-field;
+    color: var(--grey-field);
     font-weight: 700;
     margin: 0 10px;
   }
@@ -20,7 +18,7 @@
 }
 
 .header {
-  background-color: $blue;
+  background-color: var(--blue);
 
   .container {
     max-width: 990px;

@@ -1,7 +1,9 @@
 import {Field} from "../../ui/Field";
 
 export const Notfound = () => (
-  <Field style={{height: '50%'}}>
+  <div style={{height: '50%'}}>
+    <Field>
       Страница не найдена!
-  </Field>
+    </Field>
+  </div>
 );

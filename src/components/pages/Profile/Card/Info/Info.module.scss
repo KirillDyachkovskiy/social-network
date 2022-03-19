@@ -1,5 +1,3 @@
-@import "../../../../../styles/variables";
-
 .info {
   grid-area: contacts;
   font-size: 0.8em;
@@ -10,7 +8,7 @@
   }
 
   a {
-    color: $grey-text;
+    color: var(--grey-text);
 
     &:hover {
       color: #000000;
@@ -18,14 +16,14 @@
   }
 
   div {
-    color: $grey-text;
+    color: var(--grey-text);
 
     display: grid;
     grid-template: 1fr / 200px 1fr;
   }
 
   input {
-    background-color: $grey-field;
+    background-color: var(--grey-field);
     margin: 3px 0;
     width: 200px;
   }

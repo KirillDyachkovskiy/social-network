@@ -1,16 +1,16 @@
-@import "../../styles/variables";
+.paginator {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-.sidebar {
   a, span {
     cursor: pointer;
-    display: block;
-    color: $grey-text;
-    line-height: 30px;
+    color: var(--grey-text);
     &:hover {
-      color: #000000;
+      color: var(--black);
     }
     &.active {
-      color: #000000;
+      color: var(--black);
     }
   }
 }

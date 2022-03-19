@@ -1,9 +1,9 @@
 import c from './Card.module.scss';
 import {Info} from './Info';
-import {ANON_USER_AVATAR, ANON_USER_COVER, ANON_USER_STATUS} from '../../../../constants';
+import {ANON_USER_AVATAR, ANON_USER_STATUS} from '../../../../constants';
 import {Status} from '../../../../ui/Status';
 import {Field} from "../../../../ui/Field";
-import {Image} from "../../../../ui/Image";
+import {Cover} from "../../../../ui/Cover";
 import {Avatar} from "../../../../ui/Avatar";
 
 export const Card = ({visitedProfile, authedUserId, changeAuthedUserAvatar, changeAuthedUserInfo}) => {
@@ -16,7 +16,7 @@ export const Card = ({visitedProfile, authedUserId, changeAuthedUserAvatar, chan
   }
   return (
     <section className={c.card}>
-      <Image src={ANON_USER_COVER} alt='cover' style={{padding: '0 0 25% 0', marginBottom: '10px'}}/>
+      <Cover />
       <Field>
         <div className={c.box}>
           <div className={c.avatarBox}>

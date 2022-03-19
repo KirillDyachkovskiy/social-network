@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {HOC} from '../../hoc';
+import {HOC} from '../../../hoc';
 import {Users} from "./Users";
 import {
   changePage,
@@ -46,12 +46,14 @@ const FriendsStateless = ({
 
   return (
     <section style={{display: 'inline-flex', height: '100%'}}>
-      <Field style={{width: '576px', marginRight: '10px'}}>
-        {isFetching ? <Preloader/> : <Users {...usersProps}/>}
-      </Field>
-      <Field style={{width: '230px', alignSelf: 'flex-start'}}>
-        <Paginator pagination={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
-      </Field>
+      <div style={{width: '576px', marginRight: '10px'}}>
+        <Field>
+          {isFetching ? <Preloader/> : <Users {...usersProps}/>}
+        </Field>
+      </div>
+      <div style={{width: '230px', alignSelf: 'flex-start'}}>
+          <Paginator pagination={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
+      </div>
     </section>
   )
 };

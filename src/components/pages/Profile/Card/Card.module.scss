@@ -1,10 +1,8 @@
-@import "../../../../styles/variables";
-
 .card {
   p {
     font-size: 0.8em;
     line-height: 1em;
-    color: $grey-text;
+    color: var(--grey-text);
   }
 }
 
