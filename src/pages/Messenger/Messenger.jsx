@@ -27,26 +27,22 @@ const MessengerStateless = ({menu, messages, sendMessage}) => {
   return (
     <section className={s.messenger}>
       <div className={s.messenger__content}>
-        <div className={s.messenger__correspondence}>
-          <Field>
-            <div className={s.messenger__messages}>
-              {messages.map(m => (
-                  <div key={m.id}
-                       className={`${s.messenger__message} ${(m.sender === 0) ? s.messenger__message_to : s.messenger__message_from}`}>
-                    <Field color={m.sender === 0 ? 'grey' : 'blue'}>{m.text}</Field>
-                  </div>
-                )
-              )}
-            </div>
-            <div ref={messagesEndRef}/>
-          </Field>
-        </div>
+        <Field>
+          <div className={s.messenger__messages}>
+            {messages.map(m => (
+                <div key={m.id}
+                     className={`${s.messenger__message} ${(m.sender === 0) ? s.messenger__message_to : s.messenger__message_from}`}>
+                  <Field color={m.sender === 0 ? 'grey' : 'blue'}>{m.text}</Field>
+                </div>
+              )
+            )}
+          </div>
+          <div ref={messagesEndRef}/>
+        </Field>
         <div className={s.messenger__submit}>
-          <Field>
-            <Submit placeholder='Write a message' onSubmit={sendMessage}>
-              Send
-            </Submit>
-          </Field>
+          <Submit placeholder='Write a message' onSubmit={sendMessage}>
+            Send
+          </Submit>
         </div>
       </div>
       <div className={s.messenger__sidebar}>

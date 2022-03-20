@@ -9,7 +9,7 @@ import Preloader from "./ui/Preloader";
 import Notfound from "./pages/Notfound";
 const Messenger = React.lazy(() => import('./pages/Messenger'));
 const Friends = React.lazy(() => import('./pages/Friends'));
-const Profile = React.lazy(() => import('./components/pages/Profile'));
+const Profile = React.lazy(() => import('./pages/Profile'));
 const Login = React.lazy(() => import('./pages/Login'));
 
 export const App = () => {

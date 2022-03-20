@@ -34,6 +34,7 @@ const FriendsStateless = ({
                             pageSize,
                             changePage,
                             isFetching,
+                            toggleFollow,
                             changeUsersFetchingStatus,
                             followingInProgress,
                             users,

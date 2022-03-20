@@ -6,17 +6,17 @@ import {
   getPosts,
   getProfileIsFetching,
   getVisitedProfile,
-} from '../../../services/redux/reducer/profileReducer';
+} from '../../services/redux/reducer/profileReducer';
 import {connect} from 'react-redux';
-import Preloader from '../../../ui/Preloader';
+import Preloader from '../../ui/Preloader';
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {compose} from 'redux';
-import {HOC} from '../../../hoc';
-import {Submit} from '../../../ui/Submit';
-import {Card} from "./Card";
-import {Wall} from "./Wall";
-import {Posts} from "./Wall/Posts";
+import {HOC} from '../../hoc';
+import {ProfileCard} from "../../components/ProfileCard";
+import {Cover} from "../../ui/Cover";
+import {ProfileWall} from "../../components/ProfileWall";
+import s from './profile.module.scss';
 
 const mapStateToProps = (state) => ({
   isFetching: getProfileIsFetching(state),
@@ -24,17 +24,16 @@ const mapStateToProps = (state) => ({
   posts: getPosts(state),
 });
 
-const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, deletePost, authedUserId, changeAuthedUserAvatar, changeAuthedUserInfo}) => {
+const ProfileCombine = ({isFetching, visitedProfile, posts, authedUserId, changeAuthedUserAvatar, changeAuthedUserInfo}) => {
   if (isFetching) {
     return <Preloader/>
   }
 
   return (
-    <section>
-      <Card visitedProfile={visitedProfile} authedUserId={authedUserId} changeAuthedUserAvatar={changeAuthedUserAvatar} changeAuthedUserInfo={changeAuthedUserInfo} />
-      <Wall renderSubmit={() => <Submit onSubmit={addPost} placeholder="What's new?">Post</Submit>}
-            renderPosts={() => <Posts posts={posts} photo={visitedProfile.photos?.small} name={visitedProfile.fullName}
-                                      onClick={deletePost}/>}/>
+    <section className={s.profile}>
+      <Cover />
+      <ProfileCard visitedProfile={visitedProfile} authedUserId={authedUserId} changeAuthedUserAvatar={changeAuthedUserAvatar} changeAuthedUserInfo={changeAuthedUserInfo} />
+      <ProfileWall visitedProfile={visitedProfile} posts={posts} />
     </section>
   )
 }

@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 import s from "./status.module.scss";
 import {ANON_USER_STATUS} from "../../constants";
 
-const StatusCombine = ({status, changeAuthedUserStatus}) => {
+const StatusCombine = ({status, changeAuthedUserStatus, isOwner = false}) => {
   const [editMode, setEditMode] = useState(false);
   const [localStatus, setLocalStatus] = useState(status);
 
@@ -26,20 +26,20 @@ const StatusCombine = ({status, changeAuthedUserStatus}) => {
   );
 
   return <div className={s.status}>
-    {(editMode)
-      ? <input
-        className={s.input}
-        autoFocus
-        value={localStatus}
-        onChange={(e) => onChange(e.target.value)}
-        onBlur={() => {
-          toggleEditMode()
-        }}/>
-      : <p
-        className={s.label}
-        onDoubleClick={() => toggleEditMode()}>
-        {status || ANON_USER_STATUS}
-      </p>}
+    {(isOwner)
+      ? (editMode) ? <input
+          className={s.input}
+          autoFocus
+          value={localStatus}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={() => {
+            toggleEditMode()
+          }}/>
+        : <p
+          className={s.label}
+          onDoubleClick={() => toggleEditMode()}>
+          {status || ANON_USER_STATUS}
+        </p> : <p className={s.label}>{status || ANON_USER_STATUS}</p>}
   </div>
 }
 

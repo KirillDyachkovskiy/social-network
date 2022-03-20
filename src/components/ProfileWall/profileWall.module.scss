@@ -1,0 +1,11 @@
+.wall {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__posts {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+}

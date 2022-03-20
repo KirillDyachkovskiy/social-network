@@ -6,7 +6,7 @@ import s from "./mainLayout.module.scss";
 
 export const MainLayout = ({sidebar}) => {
   return (
-    <div className={s.layout}>
+    <section className={s.layout}>
       <header className={s.layout__header}>
         <div className={s.layout__container}>
           <Logo/>
@@ -21,6 +21,6 @@ export const MainLayout = ({sidebar}) => {
           <Outlet/>
         </div>
       </main>
-    </div>
+    </section>
   )
 }

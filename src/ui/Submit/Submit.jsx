@@ -9,19 +9,21 @@ export const Submit = ({placeholder, children, onSubmit}) => {
   });
 
   return (
-    <Field color='grey'>
-      <form
-        className={s.form}
-        autofocus
-        autoComplete='off'
-        onSubmit={handleSubmit(({value}) => onSubmit(value) && reset())}>
-        <input
-          placeholder={placeholder}
-          {...register('value', {
-            required: true,
-          })} />
-        <Button disabled={!isValid}>{children}</Button>
-      </form>
+    <Field>
+      <Field color='grey'>
+        <form
+          className={s.form}
+          autoFocus
+          autoComplete='off'
+          onSubmit={handleSubmit(({value}) => onSubmit(value) && reset())}>
+          <input
+            placeholder={placeholder}
+            {...register('value', {
+              required: true,
+            })} />
+          <Button disabled={!isValid}>{children}</Button>
+        </form>
+      </Field>
     </Field>
   )
 };

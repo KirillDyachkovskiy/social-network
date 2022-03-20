@@ -6,24 +6,22 @@ import {Avatar} from "../../ui/Avatar";
 
 export const UserCard = ({user, toggleFollow, followingInProgress}) => {
   return (
-    <div className={s.user}>
-      <Field color='grey'>
-        <div className={s.user__content}>
-          <Link to={"/" + user.id}>
-            <Avatar size='medium' src={user.photos.small}/>
-          </Link>
-          <div className={s.user__box}>
-            <p>{user.name}</p>
-            <p>{user.status}</p>
-            <Button
-              onClick={() => toggleFollow(user.id, user.followed)}
-              disabled={followingInProgress.some(item => item === user.id)}
-            >
-              {(user.followed) ? 'Unfollow' : 'Follow'}
-            </Button>
-          </div>
+    <Field color='grey'>
+      <div className={s.user}>
+        <Link to={"/" + user.id}>
+          <Avatar size='medium' src={user.photos.small}/>
+        </Link>
+        <div className={s.user__box}>
+          <p>{user.name}</p>
+          <p>{user.status}</p>
+          <Button
+            onClick={() => toggleFollow(user.id, user.followed)}
+            disabled={followingInProgress.some(item => item === user.id)}
+          >
+            {(user.followed) ? 'Unfollow' : 'Follow'}
+          </Button>
         </div>
-      </Field>
-    </div>
-)
+      </div>
+    </Field>
+  )
 }

@@ -1,6 +1,6 @@
 import c from './Info.module.scss';
 import {useState} from "react";
-import {Button} from "../../../../../ui/Button";
+import {Button} from "../../ui/Button";
 import {useForm} from "react-hook-form";
 
 export const Info = ({userInfo, isOwner, id, changeAuthedUserInfo}) => {
@@ -28,12 +28,12 @@ export const Info = ({userInfo, isOwner, id, changeAuthedUserInfo}) => {
           <input {...register('fullName')} />
         </div>
         <span className={c.subtitle}>Main info</span>
-        {Object.keys(mainInfo).map(key => <div>
+        {Object.keys(mainInfo).map(key => <div key={key}>
           <span>{key}:</span>
           <input {...register(key)} />
         </div>)}
         <span className={c.subtitle}>Contacts</span>
-        {Object.keys(contacts).map(key => <div>
+        {Object.keys(contacts).map(key => <div key={key}>
           <span>{key}:</span>
           <input {...register(`contacts.${key}`, {
             pattern: {
@@ -49,12 +49,12 @@ export const Info = ({userInfo, isOwner, id, changeAuthedUserInfo}) => {
   return (
     <section className={c.info}>
       <span className={c.subtitle}>Main info</span>
-      {Object.keys(mainInfo).map(key => <div>
+      {Object.keys(mainInfo).map(key => <div key={key}>
         <span>{key}:</span>
         <span>{mainInfo[key]}</span>
       </div>)}
       <span className={c.subtitle}>Contacts</span>
-      {Object.keys(contacts).map(key => <div>
+      {Object.keys(contacts).map(key => <div key={key}>
         <span>{key}:</span>
         <span>{contacts[key]}</span>
       </div>)}
