@@ -13,7 +13,7 @@ import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {compose} from 'redux';
 import {HOC} from '../../../hoc';
-import {Submit} from '../../Submit';
+import {Submit} from '../../../ui/Submit';
 import {Card} from "./Card";
 import {Wall} from "./Wall";
 import {Posts} from "./Wall/Posts";
@@ -30,12 +30,12 @@ const ProfileCombine = ({isFetching, visitedProfile, posts, addPost, deletePost,
   }
 
   return (
-    <>
+    <section>
       <Card visitedProfile={visitedProfile} authedUserId={authedUserId} changeAuthedUserAvatar={changeAuthedUserAvatar} changeAuthedUserInfo={changeAuthedUserInfo} />
       <Wall renderSubmit={() => <Submit onSubmit={addPost} placeholder="What's new?">Post</Submit>}
             renderPosts={() => <Posts posts={posts} photo={visitedProfile.photos?.small} name={visitedProfile.fullName}
                                       onClick={deletePost}/>}/>
-    </>
+    </section>
   )
 }
 

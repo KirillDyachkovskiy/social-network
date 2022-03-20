@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {HOC} from '../../hoc';
 import {compose} from 'redux';
 import {getMenu, getMessages, sendMessage} from '../../services/redux/reducer/messengerReducer';
-import {Submit} from '../../components/Submit';
+import {Submit} from '../../ui/Submit';
 import {Sidebar} from "../../ui/Sidebar";
 import {Field} from "../../ui/Field";
 import s from './messenger.module.scss';
@@ -17,7 +17,7 @@ const MessengerStateless = ({menu, messages, sendMessage}) => {
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
   };
 
   useEffect(() => {
@@ -26,26 +26,30 @@ const MessengerStateless = ({menu, messages, sendMessage}) => {
 
   return (
     <section className={s.messenger}>
-      <Field>
-        <div className={s.messenger__content}>
-          <section className={s.messenger__correspondence}>
-            {messages.map(m => (
-                <div key={m.id}
-                     className={`${s.messenger__message} ${(m.sender === 0) ? s.messenger__message_to : s.messenger__message_from}`}>
-                  <Field color={m.sender === 0 ? 'grey' : 'blue'}>{m.text}</Field>
-                </div>
-              )
-            )}
-            <div ref={messagesEndRef} />
-          </section>
-          <div className={s.messenger__submit}>
+      <div className={s.messenger__content}>
+        <div className={s.messenger__correspondence}>
+          <Field>
+            <div className={s.messenger__messages}>
+              {messages.map(m => (
+                  <div key={m.id}
+                       className={`${s.messenger__message} ${(m.sender === 0) ? s.messenger__message_to : s.messenger__message_from}`}>
+                    <Field color={m.sender === 0 ? 'grey' : 'blue'}>{m.text}</Field>
+                  </div>
+                )
+              )}
+            </div>
+            <div ref={messagesEndRef}/>
+          </Field>
+        </div>
+        <div className={s.messenger__submit}>
+          <Field>
             <Submit placeholder='Write a message' onSubmit={sendMessage}>
               Send
             </Submit>
-          </div>
+          </Field>
         </div>
-      </Field>
-      <div className={s.messenger__aside}>
+      </div>
+      <div className={s.messenger__sidebar}>
         <Sidebar items={menu}/>
       </div>
     </section>

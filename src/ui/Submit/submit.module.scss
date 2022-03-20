@@ -1,4 +1,10 @@
 .form {
+  max-height: 64px;
+  display: grid;
+  grid-template: 1fr / 1fr auto;
+  grid-template-areas: "input button";
+  gap: 20px;
+
   input {
     border-radius: 5px;
     margin: -10px;
@@ -9,10 +15,6 @@
       background-color: rgba(0, 0, 0, 0.05);
     }
   }
-  display: grid;
-  grid-template: 1fr / 1fr auto;
-  grid-template-areas: "input button";
-  gap: 20px;
 
   button {
     margin: -8px;

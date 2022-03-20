@@ -1,23 +1,23 @@
 .messenger {
   display: flex;
   gap: 10px;
-  height: calc(100vh - 60px);
-  max-height: 1920px;
 
   &__content {
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    min-width: 360px;
+    min-height: calc(100vh - 58px - 74px);
   }
 
   &__correspondence {
+    height: 100%;
+  }
+
+
+  &__messages {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 5px;
-    overflow-y: auto;
-    height: 100%;
   }
 
   &__message {
@@ -34,11 +34,15 @@
   }
 
   &__submit {
-    height: min-content;
+    padding-top: 10px;
+    bottom: 0;
+    position: sticky;
   }
 
-  &__aside {
-    align-self: flex-start;
-    width: 300px;
+  &__sidebar {
+    min-width: 220px;
+    height: min-content;
+    position: sticky;
+    top: 58px;
   }
 }

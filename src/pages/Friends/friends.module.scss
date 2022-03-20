@@ -1,20 +1,17 @@
 .friends {
   display: flex;
   gap: 10px;
-  height: calc(100vh - 60px);
-  max-height: 1920px;
 
   &__content {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  &__aside {
-    align-self: flex-start;
-    width: 300px;
+  &__paginator {
+    min-width: 164px;
+    height: min-content;
+    position: sticky;
+    top: 58px;
   }
 }

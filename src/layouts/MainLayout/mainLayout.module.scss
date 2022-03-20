@@ -1,0 +1,35 @@
+.layout {
+  &__header {
+    width: 100%;
+    height: 48px;
+    background-color: var(--blue);
+    position: fixed;
+    z-index: 2;
+  }
+
+  &__container {
+    max-width: 990px;
+    padding: 0 15px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__main {
+    position: relative;
+    top: 58px;
+    gap: 10px;
+  }
+
+  &__sidebar {
+    min-width: 164px;
+    height: min-content;
+    position: sticky;
+    top: 58px;
+  }
+
+  &__content {
+    width: 100%;
+  }
+}
