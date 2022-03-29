@@ -25,6 +25,8 @@ const instance = axios.create({
         return {items: response.items, totalCount: response.totalCount}
       } else if (typeof response === 'string' || response === null) {
         return response
+      } else if (response?.url) {
+        return response
       } else {
         throw Error(`[requestClient] Request failed with reason -  ${data}`)
       }
@@ -59,4 +61,8 @@ export const usersAPI = {
   // getOnlyFollowingUsers: () => instance.get('users?friend=true'),
   follow: (id) => instance.post(`follow/${id}`),
   unfollow: (id) => instance.delete(`follow/${id}`),
+}
+
+export const securityAPI = {
+  getCaptcha: () => instance.get('security/get-captcha-url'),
 }

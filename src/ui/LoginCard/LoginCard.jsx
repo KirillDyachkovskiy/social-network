@@ -14,9 +14,11 @@ const LoginCardForm = ({login = ANON_USER_NAME, authLogOut}) => {
     mode: 'onBlur',
   });
 
-  const onSubmit = () => {
-    login && authLogOut();
-  };
+  function onSubmit() {
+    if (login) {
+      authLogOut();
+    }
+  }
 
   return (
     <div className={s.loginCard}>

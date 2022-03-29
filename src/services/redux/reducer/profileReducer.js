@@ -24,20 +24,20 @@ export const changeVisitedProfile = (id) => async (dispatch) => {
   dispatch(changeProfileFetchingStatus(false));
 };
 
-export const changeAuthedUserStatus = (status) => async (dispatch) => {
+export const changeUserStatus = (status) => async (dispatch) => {
   await profileAPI.changeStatus(status);
   dispatch(setUserStatus(status));
 };
 
 export const changeAuthedUserAvatar = (id, avatar) => async (dispatch) => {
-  let response = await profileAPI.changeAvatar(avatar);
+  const response = await profileAPI.changeAvatar(avatar);
   if (response.status === 200) {
     dispatch(changeVisitedProfile(id));
   }
 };
 
-export const changeAuthedUserInfo = (id, info) => async (dispatch) => {
-  let response = await profileAPI.changeInfo(info);
+export const changeUserInfo = (id, info) => async (dispatch) => {
+  const response = await profileAPI.changeInfo(info);
   if (response.status === 200) {
     dispatch(changeVisitedProfile(id));
   }

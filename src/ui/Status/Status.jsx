@@ -1,27 +1,27 @@
 import {compose} from 'redux';
 import {connect} from 'react-redux'
-import {changeAuthedUserStatus} from '../../services/redux/reducer/profileReducer';
+import {changeUserStatus} from '../../services/redux/reducer/profileReducer';
 import {useEffect, useState} from 'react';
 import s from "./status.module.scss";
 import {ANON_USER_STATUS} from "../../constants";
 
-const StatusCombine = ({status, changeAuthedUserStatus, isOwner = false}) => {
+const StatusCombine = ({status, changeUserStatus, isOwner = false}) => {
   const [editMode, setEditMode] = useState(false);
   const [localStatus, setLocalStatus] = useState(status);
 
-  const toggleEditMode = () => {
+  function toggleEditMode() {
     if (editMode) {
-      changeAuthedUserStatus(status);
+      changeUserStatus(localStatus);
     }
     setEditMode(!editMode);
-  };
+  }
 
-  const onChange = (value) => {
-    setLocalStatus(value)
-  };
+  function onChange(value) {
+    setLocalStatus(value);
+  }
 
   useEffect(() => {
-      setLocalStatus(status)
+    setLocalStatus(status);
     }, [status]
   );
 
@@ -37,12 +37,12 @@ const StatusCombine = ({status, changeAuthedUserStatus, isOwner = false}) => {
           }}/>
         : <p
           className={s.label}
-          onDoubleClick={() => toggleEditMode()}>
+          onDoubleClick={toggleEditMode}>
           {status || ANON_USER_STATUS}
         </p> : <p className={s.label}>{status || ANON_USER_STATUS}</p>}
   </div>
 }
 
 export const Status = compose(
-  connect(null, {changeAuthedUserStatus})
+  connect(null, {changeUserStatus})
 )(StatusCombine)

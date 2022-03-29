@@ -1,29 +1,29 @@
 import c from './Login.module.scss';
 import {useForm} from 'react-hook-form';
 import {Button} from '../../ui/Button';
-import {authLogIn, getData} from '../../services/redux/reducer/authReducer';
+import {authLogIn, getCaptcha} from '../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {HOC} from "../../hoc";
 import {Field} from "../../ui/Field";
 
 const mapStateToProps = (state) => ({
-  email: getData(state)?.email,
-})
+  captcha: getCaptcha(state),
+});
 
-const LoginForm = ({authLogIn, email}) => {
-  const {register, handleSubmit, formState: {errors, isValid}} = useForm({
+const LoginForm = ({authLogIn, captcha}) => {
+  const {register, handleSubmit, formState: {errors}} = useForm({
     mode: 'all',
     defaultValues: {
       rememberMe: true,
     },
   });
 
-  const onSubmit = (data) => {
-    if (email !== data.email) {
-      authLogIn(data);
-    }
-  };
+  async function onSubmit(data) {
+    authLogIn(data);
+    console.log(captcha);
+  }
+
   return (
     <Field>
       <Field color='grey'>
@@ -57,8 +57,7 @@ const LoginForm = ({authLogIn, email}) => {
                    {...register('rememberMe')}
             />
           </div>
-          <Button disabled={!isValid} onClick={() => {
-          }}>Log In</Button>
+          <Button>Log In</Button>
         </form>
       </Field>
     </Field>
@@ -66,6 +65,6 @@ const LoginForm = ({authLogIn, email}) => {
 };
 
 export const Login = compose(
-  connect(mapStateToProps, {authLogIn}),
+  connect(mapStateToProps, {authLogIn, getCaptcha}),
   HOC.withRedirect(-1),
 )(LoginForm);

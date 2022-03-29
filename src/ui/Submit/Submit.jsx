@@ -4,9 +4,14 @@ import {Button} from '../Button';
 import {Field} from "../Field";
 
 export const Submit = ({placeholder, children, onSubmit}) => {
-  const {register, handleSubmit, reset, formState: {isValid}} = useForm({
+  const {register, handleSubmit, reset} = useForm({
     mode: 'onChange',
   });
+
+  function handleAction(value) {
+    onSubmit(value);
+    reset();
+  }
 
   return (
     <Field>
@@ -15,13 +20,13 @@ export const Submit = ({placeholder, children, onSubmit}) => {
           className={s.form}
           autoFocus
           autoComplete='off'
-          onSubmit={handleSubmit(({value}) => onSubmit(value) && reset())}>
+          onSubmit={handleSubmit(handleAction)}>
           <input
             placeholder={placeholder}
             {...register('value', {
               required: true,
             })} />
-          <Button disabled={!isValid}>{children}</Button>
+          <Button>{children}</Button>
         </form>
       </Field>
     </Field>

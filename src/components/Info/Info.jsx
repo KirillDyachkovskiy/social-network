@@ -3,34 +3,37 @@ import {useState} from "react";
 import {Button} from "../../ui/Button";
 import {useForm} from "react-hook-form";
 
-export const Info = ({userInfo, isOwner, id, changeAuthedUserInfo}) => {
-  const {register, handleSubmit, formState: {isValid}} = useForm({
+export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
+  const {register, handleSubmit} = useForm({
     mode: 'onBlur',
     defaultValues: {
       ...userInfo
     },
   });
+  
   const [editMode, setEditMode] = useState(false);
 
   const {fullName, contacts, ...mainInfo} = userInfo;
 
-  if (editMode) {
-    const onSubmit = async (formData) => {
-      await changeAuthedUserInfo(id, formData);
-      setEditMode(false);
-    }
+  async function onSubmit(formData) {
+    console.log(formData);
+    const response = await changeUserInfo(id, formData);
+    console.log(response);
+    setEditMode(false);
+  }
 
+  if (editMode) {
     return (
       <form className={c.info}
             onSubmit={handleSubmit(onSubmit)}>
         <div>
           <span>Nickname:</span>
-          <input {...register('fullName')} />
+          <input {...register('fullName')} defaultValue='-' />
         </div>
         <span className={c.subtitle}>Main info</span>
         {Object.keys(mainInfo).map(key => <div key={key}>
           <span>{key}:</span>
-          <input {...register(key)} />
+          <input {...register(key)} defaultValue='-' />
         </div>)}
         <span className={c.subtitle}>Contacts</span>
         {Object.keys(contacts).map(key => <div key={key}>
@@ -41,7 +44,7 @@ export const Info = ({userInfo, isOwner, id, changeAuthedUserInfo}) => {
             }
           })} />
         </div>)}
-        <Button disabled={!isValid}>Save</Button>
+        <Button>Save</Button>
       </form>
     )
   }
@@ -58,7 +61,7 @@ export const Info = ({userInfo, isOwner, id, changeAuthedUserInfo}) => {
         <span>{key}:</span>
         <span>{contacts[key]}</span>
       </div>)}
-      {isOwner ? <Button onClick={() => setEditMode(true)}>Edit</Button> : null}
+      {isOwner && <Button onClick={() => setEditMode(true)}>Edit</Button>}
     </section>
   )
 }

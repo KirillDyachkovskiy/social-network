@@ -4,7 +4,7 @@ import {Avatar} from "../../ui/Avatar";
 import {Status} from "../../ui/Status";
 import {Info} from "../Info";
 
-export const ProfileCard = ({visitedProfile, authedUserId, changeAuthedUserInfo}) => {
+export const ProfileCard = ({visitedProfile, authedUserId, changeUserInfo}) => {
   const {status, fullName, photos, userId, ...userInfo} = visitedProfile;
   const isOwner = authedUserId === userId;
 
@@ -17,7 +17,7 @@ export const ProfileCard = ({visitedProfile, authedUserId, changeAuthedUserInfo}
         <div className={c.card__data}>
           <h1>{fullName}</h1>
           <Status status={status} isOwner={isOwner} />
-          <Info userInfo={userInfo} isOwner={isOwner} id={authedUserId} changeAuthedUserInfo={changeAuthedUserInfo}/>
+          <Info userInfo={userInfo} isOwner={isOwner} id={authedUserId} changeUserInfo={changeUserInfo}/>
         </div>
       </div>
     </Field>

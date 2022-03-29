@@ -1,11 +1,14 @@
-import {authAPI} from "../../api";
+import {authAPI, securityAPI} from "../../api";
 
-const SET_AUTHED_USER_DATA = 'auth/setData';
-export const setAuthedUserData = (data) => ({type: SET_AUTHED_USER_DATA, data,});
+const SET_USER_DATA = 'auth/setData';
+export const setUserData = (data) => ({type: SET_USER_DATA, data});
+
+const SET_CAPTCHA = 'auth/captcha';
+export const setCaptchaSuccess = (data) => ({type: SET_CAPTCHA, data});
 
 export const authMe = () => async (dispatch) => {
   const response = await authAPI.authMe();
-  dispatch(setAuthedUserData(response.data));
+  dispatch(setUserData(response.data));
 }
 
 export const authLogIn = (formData) => async (dispatch) => {
@@ -18,6 +21,11 @@ export const authLogOut = () => async (dispatch) => {
   dispatch(authMe());
 }
 
+export const setCaptcha = () => async (dispatch) => {
+  const response = await securityAPI.getCaptcha();
+  dispatch(setCaptchaSuccess(response.data.url));
+}
+
 const initialState = {
   sidebar: [
     {id: 0, to: '/', text: 'Profile'},
@@ -28,17 +36,24 @@ const initialState = {
     {id: 5, to: '/settings', text: 'Settings'},
   ],
   data: null,
+  captcha: null,
 };
 
 export const getData = (state) => state.auth.data;
 export const getSidebar = (state) => state.auth.sidebar;
+export const getCaptcha = (state) => state.auth.captcha;
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_AUTHED_USER_DATA:
+    case SET_USER_DATA:
       return {
         ...state,
         data: action.data,
+      };
+    case SET_CAPTCHA:
+      return {
+        ...state,
+        captcha: action.data,
       };
     default:
       return state;
