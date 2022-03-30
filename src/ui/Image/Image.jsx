@@ -1,4 +1,3 @@
-import {ANON_USER_COVER} from "../../constants";
 import s from './image.module.scss';
 
 export const Image = ({ src, alt }) => {

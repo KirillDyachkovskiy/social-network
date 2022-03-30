@@ -32,7 +32,9 @@ const ProfileCombine = ({isFetching, visitedProfile, posts, authedUserId, change
 
   return (
     <section className={s.profile}>
-      <Image src={ANON_USER_COVER} alt='обложка пользователя' />
+      <div className={s.profile__cover}>
+        <Image src={ANON_USER_COVER} alt='обложка пользователя' />
+      </div>
       <ProfileCard visitedProfile={visitedProfile} authedUserId={authedUserId} changeUserAvatar={changeUserAvatar} changeUserInfo={changeUserInfo} />
       <ProfileWall visitedProfile={visitedProfile} posts={posts} />
     </section>

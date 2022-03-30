@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 10px;
 
   &__input {
     width: 200px;
@@ -19,6 +19,11 @@
 
   &__checkbox {
     margin: 5px;
+  }
+
+  &__captcha {
+    width: 200px;
+    height: 100px;
   }
 
   &__button {

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {HOC} from "../../hoc";
 import {Field} from "../../ui/Field";
 import s from './login.module.scss';
+import {Image} from "../../ui/Image";
 
 const mapStateToProps = (state) => ({
   captcha: getCaptcha(state),
@@ -58,7 +59,9 @@ const LoginForm = ({authLogIn, captcha}) => {
             className={s.form__checkbox} type='checkbox' {...register('rememberMe')} />
         </div>
         {captcha && <div>
-          <img src={captcha} alt='captcha'/>
+          <div className={s.form__captcha}>
+            <Image src={captcha} alt='captcha' width='fit-content' height='fit-content' />
+          </div>
           <input
             className={s.form__input}
             type='text'
