@@ -1,0 +1,25 @@
+.info {
+  &__subtitle {
+    color: black;
+  }
+
+  &__item {
+    display: flex;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    color: var(--grey-text);
+  }
+
+  &__p {
+    flex: 0 0 200px;
+  }
+
+  &__input {
+    background-color: var(--field);
+    margin: 3px 0;
+  }
+
+  &__button {
+    margin-top: 10px;
+  }
+}

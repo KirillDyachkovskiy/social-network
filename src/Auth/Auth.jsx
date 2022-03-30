@@ -14,7 +14,7 @@ const AuthStateless = ({authMe, authedUserData, sidebar}) => {
     authMe();
   }, [])
 
-  return authedUserData ? <MainLayout sidebar={sidebar} /> : null;
+  return authedUserData ? <MainLayout sidebar={sidebar} /> : <p>Загрузка</p>;
 }
 
 export const Auth = compose(

@@ -22,7 +22,7 @@ export const ProfileCard = ({visitedProfile, authedUserId, changeUserInfo, chang
           {isOwner &&
             <label  className={c.card__label}><input type='file' onChange={handleChange} className={c.card__file} />Изменить аватар</label>}
         </div>
-        <div>
+        <div style={{ width: '600px'}}>
           <h1>{fullName}</h1>
           <Status status={status} isOwner={isOwner}/>
           <Info userInfo={userInfo} isOwner={isOwner} id={authedUserId} changeUserInfo={changeUserInfo}/>

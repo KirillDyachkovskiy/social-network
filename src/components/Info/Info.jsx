@@ -1,4 +1,4 @@
-import c from './Info.module.scss';
+import s from './info.module.scss';
 import {useState} from "react";
 import {Button} from "../../ui/Button";
 import {useForm} from "react-hook-form";
@@ -10,10 +10,11 @@ export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
       ...userInfo
     },
   });
-  
+
   const [editMode, setEditMode] = useState(false);
 
-  const {fullName, contacts, ...mainInfo} = userInfo;
+  const {contacts, ...mainInfo} = userInfo;
+  console.log(userInfo)
 
   function onSubmit(formData) {
     changeUserInfo(id, formData);
@@ -22,26 +23,20 @@ export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
 
   if (editMode) {
     return (
-      <form className={c.info}
+      <form className={s.info}
             onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <span>Nickname:</span>
-          <input {...register('fullName', {
+        <p className={s.info__subtitle}>Main info</p>
+        {Object.keys(mainInfo).map(key => <div className={s.info__item} key={key}>
+          <p className={s.info__p}>{key}:</p>
+          <input className={s.info__input} {...register(key, {
             required: 'Это поле обязательно!',
           })} />
-        </div>
-        <span className={c.subtitle}>Main info</span>
-        {Object.keys(mainInfo).map(key => <div key={key}>
-          <span>{key}:</span>
-          <input {...register(key, {
-            required: 'Это поле обязательно!',
-          })} />
-          {errors[key] && <span>{errors[key]?.message || 'Error!'}</span>}
+          {errors[key] && <p className={s.info__p}>{errors[key]?.message || 'Error!'}</p>}
         </div>)}
-        <span className={c.subtitle}>Contacts</span>
-        {Object.keys(contacts).map(key => <div key={key}>
-          <span>{key}:</span>
-          <input {...register(`contacts.${key}`, {
+        <p className={s.info__subtitle}>Contacts</p>
+        {Object.keys(contacts).map(key => <div className={s.info__item} key={key}>
+          <p className={s.info__p}>{key}:</p>
+          <input className={s.info__input} {...register(`contacts.${key}`, {
             pattern: {
               value: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
             }
@@ -53,18 +48,21 @@ export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
   }
 
   return (
-    <section className={c.info}>
-      <span className={c.subtitle}>Main info</span>
-      {Object.keys(mainInfo).map(key => <div key={key}>
-        <span>{key}:</span>
-        <span>{mainInfo[key]}</span>
+    <section className={s.info}>
+      <p className={s.info__subtitle}>Main info</p>
+      {Object.keys(mainInfo).map(key => <div className={s.info__item} key={key}>
+        <p className={s.info__p}>{key}:</p>
+        <p>{mainInfo[key]}</p>
       </div>)}
-      <span className={c.subtitle}>Contacts</span>
-      {Object.keys(contacts).map(key => <div key={key}>
-        <span>{key}:</span>
-        <span>{contacts[key]}</span>
+      <p className={s.info__subtitle}>Contacts</p>
+      {Object.keys(contacts).map(key => <div className={s.info__item} key={key}>
+        <p className={s.info__p}>{key}:</p>
+        <p>{contacts[key]}</p>
       </div>)}
-      {isOwner && <Button onClick={() => setEditMode(true)}>Edit</Button>}
+      {isOwner && (
+        <div className={s.info__button}>
+          <Button onClick={() => setEditMode(true)}>Edit</Button>
+        </div>)}
     </section>
   )
 }
