@@ -1,5 +1,5 @@
 import {profileAPI} from "../../api";
-import {getData} from "./authReducer";
+import {getAuthedUserData} from "./authReducer";
 
 const ADD_POST = 'profile/addPost';
 export const addPost = (text) => ({type: ADD_POST, text});
@@ -17,28 +17,36 @@ const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
 export const changeProfileFetchingStatus = (isFetching) => ({type: CHANGE_PROFILE_FETCHING_STATUS, isFetching});
 
 export const changeVisitedProfile = (id) => async (dispatch) => {
-  const dataResponse = await profileAPI.getData(id);
+  const dataResponse = await profileAPI.getAuthedUserData(id);
+  if (dataResponse.status === 200) {
+    dispatch(setVisitedUserProfile({...dataResponse.data}));
+  }
+
   const statusResponse = await profileAPI.getStatus(id);
-  dispatch(setVisitedUserProfile({...dataResponse.data}));
-  dispatch(setUserStatus(statusResponse.data));
+  if (statusResponse.status === 200) {
+    dispatch(setUserStatus(statusResponse.data));
+  }
+
   dispatch(changeProfileFetchingStatus(false));
 };
 
 export const changeUserStatus = (status) => async (dispatch) => {
-  await profileAPI.changeStatus(status);
-  dispatch(setUserStatus(status));
+  const response = await profileAPI.changeStatus(status);
+  if (response.data.resultCode === 0) {
+    dispatch(setUserStatus(status));
+  }
 };
 
 export const changeUserAvatar = (id, avatar) => async (dispatch) => {
   const response = await profileAPI.changeAvatar(avatar);
-  if (response.status === 200) {
+  if (response.data.resultCode === 0) {
     dispatch(changeVisitedProfile(id));
   }
 };
 
 export const changeUserInfo = (id, info) => async (dispatch) => {
   const response = await profileAPI.changeInfo(info);
-  if (response.status === 200) {
+  if (response.data.resultCode === 0) {
     dispatch(changeVisitedProfile(id));
   }
 };

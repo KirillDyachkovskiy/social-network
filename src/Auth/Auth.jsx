@@ -1,24 +1,20 @@
-import {authMe, getData, getSidebar} from '../services/redux/reducer/authReducer';
+import {authMe, getAuthedUserData, getSidebar} from '../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {useEffect} from 'react';
 import {MainLayout} from "../layouts/MainLayout";
 
 const mapStateToProps = (state) => ({
-  data: getData(state),
+  authedUserData: getAuthedUserData(state),
   sidebar: getSidebar(state),
 });
 
-const AuthStateless = ({authMe, data, sidebar}) => {
+const AuthStateless = ({authMe, authedUserData, sidebar}) => {
   useEffect(() => {
     authMe();
   }, [])
 
-  if (!data) {
-    return null
-  }
-
-  return <MainLayout sidebar={sidebar} />
+  return authedUserData ? <MainLayout sidebar={sidebar} /> : null;
 }
 
 export const Auth = compose(

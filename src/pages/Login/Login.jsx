@@ -1,6 +1,6 @@
 import {useForm} from 'react-hook-form';
 import {Button} from '../../ui/Button';
-import {authLogIn, getCaptcha, setCaptcha} from '../../services/redux/reducer/authReducer';
+import {authLogIn, getCaptcha} from '../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {HOC} from "../../hoc";
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
   captcha: getCaptcha(state),
 });
 
-const LoginForm = ({authLogIn, captcha, setCaptcha}) => {
+const LoginForm = ({authLogIn, captcha}) => {
   const {register, handleSubmit, formState: {errors}} = useForm({
     mode: 'all',
     defaultValues: {
@@ -21,7 +21,6 @@ const LoginForm = ({authLogIn, captcha, setCaptcha}) => {
 
   async function onSubmit(data) {
     authLogIn(data);
-    setCaptcha();
   }
 
   return (
@@ -58,6 +57,17 @@ const LoginForm = ({authLogIn, captcha, setCaptcha}) => {
           <input
             className={s.form__checkbox} type='checkbox' {...register('rememberMe')} />
         </div>
+        {captcha && <div>
+          <img src={captcha} alt='captcha'/>
+          <input
+            className={s.form__input}
+            type='text'
+            {...register('captcha', {
+              required: 'Поле обязательно!',
+            })}
+          />
+          {errors.captcha && <span>{errors.captcha?.message || 'Error!'}</span>}
+        </div>}
         <div className={s.form__button}>
           <Button>Log In</Button>
         </div>
@@ -67,6 +77,6 @@ const LoginForm = ({authLogIn, captcha, setCaptcha}) => {
 };
 
 export const Login = compose(
-  connect(mapStateToProps, {authLogIn, setCaptcha}),
+  connect(mapStateToProps, {authLogIn}),
   HOC.withRedirect(-1),
 )(LoginForm);

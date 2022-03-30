@@ -1,24 +1,31 @@
 import {authAPI, securityAPI} from "../../api";
 
 const SET_USER_DATA = 'auth/setData';
-export const setUserData = (data) => ({type: SET_USER_DATA, data});
+const setUserData = (data) => ({type: SET_USER_DATA, data});
 
 const SET_CAPTCHA = 'auth/captcha';
-export const setCaptchaSuccess = (data) => ({type: SET_CAPTCHA, data});
+const setCaptchaSuccess = (data) => ({type: SET_CAPTCHA, data});
 
 export const authMe = () => async (dispatch) => {
   const response = await authAPI.authMe();
-  dispatch(setUserData(response.data));
+  dispatch(setUserData(response.data.data));
 }
 
 export const authLogIn = (formData) => async (dispatch) => {
-  await authAPI.authLogIn(formData);
-  dispatch(authMe());
+  const response = await authAPI.authLogIn(formData);
+  if (response.data.resultCode === 0) {
+    dispatch(authMe());
+  }
+  if (response.data.resultCode === 10) {
+    dispatch(setCaptcha());
+  }
 }
 
 export const authLogOut = () => async (dispatch) => {
-  await authAPI.authLogOut();
-  dispatch(authMe());
+  const response = await authAPI.authLogOut();
+  if (response.data.resultCode === 0) {
+    dispatch(authMe());
+  }
 }
 
 export const setCaptcha = () => async (dispatch) => {
@@ -35,11 +42,11 @@ const initialState = {
     {id: 4, to: '/friends', text: 'Friends'},
     {id: 5, to: '/settings', text: 'Settings'},
   ],
-  data: null,
+  authedUserData: null,
   captcha: null,
 };
 
-export const getData = (state) => state.auth.data;
+export const getAuthedUserData = (state) => state.auth.authedUserData;
 export const getSidebar = (state) => state.auth.sidebar;
 export const getCaptcha = (state) => state.auth.captcha;
 
@@ -48,7 +55,7 @@ export const authReducer = (state = initialState, action) => {
     case SET_USER_DATA:
       return {
         ...state,
-        data: action.data,
+        authedUserData: action.data,
       };
     case SET_CAPTCHA:
       return {

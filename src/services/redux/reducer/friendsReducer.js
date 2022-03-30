@@ -2,7 +2,7 @@ import {createSelector} from "reselect";
 import {usersAPI} from "../../api";
 
 const TOGGLE_FOLLOW = 'friends/toggleFollow';
-export const toggleFollowSuccess = (id) => ({type: TOGGLE_FOLLOW, id,});
+const toggleFollowSuccess = (id) => ({type: TOGGLE_FOLLOW, id,});
 
 const CHANGE_STATUS = 'friends/changeStatus';
 export const changeStatus = (text) => ({type: CHANGE_STATUS, text,});

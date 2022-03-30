@@ -4,7 +4,7 @@ import {Button} from "../../ui/Button";
 import {useForm} from "react-hook-form";
 
 export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
-  const {register, handleSubmit} = useForm({
+  const {register, handleSubmit, formState: {errors}} = useForm({
     mode: 'onBlur',
     defaultValues: {
       ...userInfo
@@ -15,8 +15,8 @@ export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
 
   const {fullName, contacts, ...mainInfo} = userInfo;
 
-  async function onSubmit(formData) {
-    const response = await changeUserInfo(id, formData);
+  function onSubmit(formData) {
+    changeUserInfo(id, formData);
     setEditMode(false);
   }
 
@@ -26,12 +26,17 @@ export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
             onSubmit={handleSubmit(onSubmit)}>
         <div>
           <span>Nickname:</span>
-          <input {...register('fullName')} defaultValue='-' />
+          <input {...register('fullName', {
+            required: 'Это поле обязательно!',
+          })} />
         </div>
         <span className={c.subtitle}>Main info</span>
         {Object.keys(mainInfo).map(key => <div key={key}>
           <span>{key}:</span>
-          <input {...register(key)} defaultValue='-' />
+          <input {...register(key, {
+            required: 'Это поле обязательно!',
+          })} />
+          {errors[key] && <span>{errors[key]?.message || 'Error!'}</span>}
         </div>)}
         <span className={c.subtitle}>Contacts</span>
         {Object.keys(contacts).map(key => <div key={key}>

@@ -2,11 +2,11 @@ import {useForm} from 'react-hook-form';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {ANON_USER_NAME} from '../../constants';
-import {authLogOut, getData} from '../../services/redux/reducer/authReducer';
+import {authLogOut, getAuthedUserData} from '../../services/redux/reducer/authReducer';
 import s from './loginCard.module.scss';
 
 const mapStateToProps = (state) => ({
-  login: getData(state)?.login,
+  login: getAuthedUserData(state)?.login,
 })
 
 const LoginCardForm = ({login = ANON_USER_NAME, authLogOut}) => {

@@ -14,9 +14,10 @@ import {useEffect} from 'react';
 import {compose} from 'redux';
 import {HOC} from '../../hoc';
 import {ProfileCard} from "../../components/ProfileCard";
-import {Cover} from "../../ui/Cover";
+import {Image} from "../../ui/Image";
 import {ProfileWall} from "../../components/ProfileWall";
 import s from './profile.module.scss';
+import {ANON_USER_COVER} from "../../constants";
 
 const mapStateToProps = (state) => ({
   isFetching: getProfileIsFetching(state),
@@ -31,7 +32,7 @@ const ProfileCombine = ({isFetching, visitedProfile, posts, authedUserId, change
 
   return (
     <section className={s.profile}>
-      <Cover />
+      <Image src={ANON_USER_COVER} alt='обложка пользователя' />
       <ProfileCard visitedProfile={visitedProfile} authedUserId={authedUserId} changeUserAvatar={changeUserAvatar} changeUserInfo={changeUserInfo} />
       <ProfileWall visitedProfile={visitedProfile} posts={posts} />
     </section>
