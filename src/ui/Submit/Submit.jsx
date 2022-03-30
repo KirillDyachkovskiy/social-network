@@ -4,11 +4,11 @@ import {Button} from '../Button';
 import {Field} from "../Field";
 
 export const Submit = ({placeholder, children, onSubmit}) => {
-  const {register, handleSubmit, reset} = useForm({
+  const {register, handleSubmit, reset, formState : {isValid}} = useForm({
     mode: 'onChange',
   });
 
-  function handleAction(value) {
+  function handleAction({value}) {
     onSubmit(value);
     reset();
   }
@@ -23,10 +23,13 @@ export const Submit = ({placeholder, children, onSubmit}) => {
           onSubmit={handleSubmit(handleAction)}>
           <input
             placeholder={placeholder}
+            className={s.form__input}
             {...register('value', {
               required: true,
             })} />
-          <Button>{children}</Button>
+          <div className={s.form__button}>
+            <Button disabled={!isValid}>{children}</Button>
+          </div>
         </form>
       </Field>
     </Field>

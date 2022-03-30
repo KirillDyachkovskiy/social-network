@@ -29,7 +29,7 @@ export const changeUserStatus = (status) => async (dispatch) => {
   dispatch(setUserStatus(status));
 };
 
-export const changeAuthedUserAvatar = (id, avatar) => async (dispatch) => {
+export const changeUserAvatar = (id, avatar) => async (dispatch) => {
   const response = await profileAPI.changeAvatar(avatar);
   if (response.status === 200) {
     dispatch(changeVisitedProfile(id));

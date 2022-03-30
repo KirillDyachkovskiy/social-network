@@ -20,11 +20,11 @@
     word-wrap: break-word;
 
     &_to {
-      margin-left: auto !important;
+      align-self: flex-end;
     }
 
     &_from {
-      margin-right: auto !important;
+      align-self: flex-start;
     }
   }
 

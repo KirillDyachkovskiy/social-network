@@ -5,7 +5,7 @@
   grid-template-areas: "input button";
   gap: 20px;
 
-  input {
+  &__input {
     border-radius: 5px;
     margin: -10px;
     padding: 10px;
@@ -16,7 +16,7 @@
     }
   }
 
-  button {
+  &__button {
     margin: -8px;
   }
 }

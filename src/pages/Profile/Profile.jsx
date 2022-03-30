@@ -1,5 +1,5 @@
 import {
-  addPost, changeAuthedUserAvatar, changeUserInfo,
+  addPost, changeUserAvatar, changeUserInfo,
   changeProfileFetchingStatus,
   changeVisitedProfile,
   deletePost,
@@ -24,7 +24,7 @@ const mapStateToProps = (state) => ({
   posts: getPosts(state),
 });
 
-const ProfileCombine = ({isFetching, visitedProfile, posts, authedUserId, changeAuthedUserAvatar, changeUserInfo}) => {
+const ProfileCombine = ({isFetching, visitedProfile, posts, authedUserId, changeUserAvatar, changeUserInfo}) => {
   if (isFetching) {
     return <Preloader/>
   }
@@ -32,7 +32,7 @@ const ProfileCombine = ({isFetching, visitedProfile, posts, authedUserId, change
   return (
     <section className={s.profile}>
       <Cover />
-      <ProfileCard visitedProfile={visitedProfile} authedUserId={authedUserId} changeAuthedUserAvatar={changeAuthedUserAvatar} changeUserInfo={changeUserInfo} />
+      <ProfileCard visitedProfile={visitedProfile} authedUserId={authedUserId} changeUserAvatar={changeUserAvatar} changeUserInfo={changeUserInfo} />
       <ProfileWall visitedProfile={visitedProfile} posts={posts} />
     </section>
   )
@@ -52,5 +52,5 @@ const ProfileRouter = (props) => {
 }
 
 export const Profile = compose(connect(mapStateToProps, {
-  changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost, changeAuthedUserAvatar, changeUserInfo,
+  changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost, changeUserAvatar, changeUserInfo,
 }), HOC.withRedirect('/login'))(ProfileRouter);
