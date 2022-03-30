@@ -1,10 +1,8 @@
 .button {
-  display: inline-block;
   border-radius: 7px;
   color: var(--white);
   background-color: var(--blue);
   padding: 7px 15px;
-  width: min-content;
 
   &:hover {
     background-color: var(--blue-hover);

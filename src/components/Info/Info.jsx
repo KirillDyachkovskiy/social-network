@@ -16,9 +16,7 @@ export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
   const {fullName, contacts, ...mainInfo} = userInfo;
 
   async function onSubmit(formData) {
-    console.log(formData);
     const response = await changeUserInfo(id, formData);
-    console.log(response);
     setEditMode(false);
   }
 
