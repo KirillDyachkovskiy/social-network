@@ -1,4 +1,4 @@
-import {profileAPI} from "../../api";
+import {authAPI, profileAPI} from "../../api";
 
 const ADD_POST = 'profile/addPost';
 export const addPost = (text) => ({type: ADD_POST, text});
@@ -16,7 +16,7 @@ const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
 export const changeProfileFetchingStatus = (isFetching) => ({type: CHANGE_PROFILE_FETCHING_STATUS, isFetching});
 
 export const changeVisitedProfile = (id) => async (dispatch) => {
-  const dataResponse = await profileAPI.getAuthedUserData(id);
+  const dataResponse = await profileAPI.getUserData(id);
   if (dataResponse.status === 200) {
     dispatch(setVisitedUserProfile({...dataResponse.data}));
   }
@@ -31,22 +31,31 @@ export const changeVisitedProfile = (id) => async (dispatch) => {
 
 export const changeUserStatus = (status) => async (dispatch) => {
   const response = await profileAPI.changeStatus(status);
+
   if (response.data.resultCode === 0) {
     dispatch(setUserStatus(status));
   }
 };
 
-export const changeUserAvatar = (id, avatar) => async (dispatch) => {
-  const response = await profileAPI.changeAvatar(avatar);
-  if (response.data.resultCode === 0) {
-    dispatch(changeVisitedProfile(id));
+export const changeUserAvatar = (avatar) => async (dispatch) => {
+  const idResponse = await authAPI.authMe();
+
+  if (idResponse.data.resultCode === 0) {
+    const response = await profileAPI.changeAvatar(avatar);
+    if (response.data.resultCode === 0) {
+      dispatch(changeVisitedProfile(idResponse.data.data.id));
+    }
   }
 };
 
-export const changeUserInfo = (id, info) => async (dispatch) => {
-  const response = await profileAPI.changeInfo(info);
-  if (response.data.resultCode === 0) {
-    dispatch(changeVisitedProfile(id));
+export const changeUserInfo = (info) => async (dispatch) => {
+  const idResponse = await authAPI.authMe();
+
+  if (idResponse.data.resultCode === 0) {
+    const response = await profileAPI.changeInfo(info);
+    if (response.data.resultCode === 0) {
+      dispatch(changeVisitedProfile(idResponse.data.data.id));
+    }
   }
 };
 

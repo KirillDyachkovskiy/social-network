@@ -16,7 +16,7 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-  getAuthedUserData: (id) => instance.get(`profile/${id}`),
+  getUserData: (id) => instance.get(`profile/${id}`),
   getStatus: (id) => instance.get(`profile/status/${id}`),
   changeStatus: (status) => instance.put('profile/status', {status}),
   changeAvatar: (avatar) => {

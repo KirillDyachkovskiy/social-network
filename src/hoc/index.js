@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
-import {getAuthedUserData} from "../services/redux/reducer/authReducer";
+import {getUserData} from "../services/redux/reducer/authReducer";
 
 export const HOC = {
   withRedirect: (to) => (WrappedComponent) => {
     const mapStateToProps = (state) => ({
-      authedUser: getAuthedUserData(state),
+      authedUser: getUserData(state),
     });
 
     const RedirectedComponent = (props) => {

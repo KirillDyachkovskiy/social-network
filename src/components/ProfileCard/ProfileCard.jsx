@@ -4,13 +4,12 @@ import {Avatar} from "../../ui/Avatar";
 import {Status} from "../../ui/Status";
 import {Info} from "../Info";
 
-export const ProfileCard = ({visitedProfile, authedUserId, changeUserInfo, changeUserAvatar}) => {
-  const {status, fullName, photos, userId, ...userInfo} = visitedProfile;
-  const isOwner = authedUserId === userId;
+export const ProfileCard = ({visitedProfile, changeUserInfo, changeUserAvatar, isOwner}) => {
+  const {status, photos, ...userInfo} = visitedProfile;
 
-  function handleChange(e) {
+  function onAvatarChange(e) {
     if (e.target.files.length) {
-      changeUserAvatar(userId, e.target.files[0])
+      changeUserAvatar(e.target.files[0])
     }
   }
 
@@ -19,13 +18,17 @@ export const ProfileCard = ({visitedProfile, authedUserId, changeUserInfo, chang
       <div className={s.card}>
         <div className={s.card__avatar}>
           <Avatar src={photos?.large} size='large' isOwner={isOwner}/>
-          {isOwner &&
-            <label  className={s.card__label}><input type='file' onChange={handleChange} className={s.card__file} />Изменить аватар</label>}
+          {isOwner && (
+            <label className={s.card__label}>
+              <input type='file' onChange={onAvatarChange} className={s.card__file}/>
+              <span>Изменить аватар</span>
+            </label>
+          )}
         </div>
-        <div style={{ width: '600px'}}>
-          <h1>{fullName}</h1>
+        <div>
+          <h1>{visitedProfile.fullName}</h1>
           <Status status={status} isOwner={isOwner}/>
-          <Info userInfo={userInfo} isOwner={isOwner} id={authedUserId} changeUserInfo={changeUserInfo}/>
+          <Info userInfo={userInfo} isOwner={isOwner} changeUserInfo={changeUserInfo}/>
         </div>
       </div>
     </Field>

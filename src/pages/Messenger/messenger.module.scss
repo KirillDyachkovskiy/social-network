@@ -15,19 +15,6 @@
     gap: 5px;
   }
 
-  &__message {
-    max-width: 85%;
-    word-wrap: break-word;
-
-    &_to {
-      align-self: flex-end;
-    }
-
-    &_from {
-      align-self: flex-start;
-    }
-  }
-
   &__submit {
     padding-top: 10px;
     bottom: 0;

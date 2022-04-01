@@ -1,15 +1,8 @@
 import {useForm} from 'react-hook-form';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
 import {ANON_USER_NAME} from '../../constants';
-import {authLogOut, getAuthedUserData} from '../../services/redux/reducer/authReducer';
 import s from './loginCard.module.scss';
 
-const mapStateToProps = (state) => ({
-  login: getAuthedUserData(state)?.login,
-})
-
-const LoginCardForm = ({login = ANON_USER_NAME, authLogOut}) => {
+export const LoginCard = ({login = ANON_USER_NAME, authLogOut}) => {
   const {handleSubmit} = useForm({
     mode: 'onBlur',
   });
@@ -32,7 +25,3 @@ const LoginCardForm = ({login = ANON_USER_NAME, authLogOut}) => {
     </div>
   )
 }
-
-export const LoginCard = compose(
-  connect(mapStateToProps, {authLogOut})
-)(LoginCardForm)

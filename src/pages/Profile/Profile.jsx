@@ -33,27 +33,31 @@ const ProfileRouter = ({
                          changeUserAvatar,
                          changeUserInfo,
                          posts,
-                         isFetching
+                         isFetching,
+                         addPost,
+                         deletePost,
                        }) => {
   const {id = authedUser.id} = useParams();
 
   useEffect(() => {
     changeProfileFetchingStatus(true);
     changeVisitedProfile(id);
-  }, [id,changeVisitedProfile, changeProfileFetchingStatus])
+  }, [id, changeVisitedProfile, changeProfileFetchingStatus])
 
   if (isFetching) {
     return <Preloader/>
   }
+
+  const {fullName, photos: {small: photo}} = visitedProfile;
 
   return (
     <section className={s.profile}>
       <div className={s.profile__cover}>
         <Image src={ANON_USER_COVER} alt='обложка пользователя'/>
       </div>
-      <ProfileCard visitedProfile={visitedProfile} authedUserId={authedUser.id} changeUserAvatar={changeUserAvatar}
-                   changeUserInfo={changeUserInfo}/>
-      <ProfileWall visitedProfile={visitedProfile} posts={posts}/>
+      <ProfileCard visitedProfile={visitedProfile} changeUserAvatar={changeUserAvatar}
+                   changeUserInfo={changeUserInfo} isOwner={id === authedUser.id} />
+      <ProfileWall name={fullName} photo={photo} posts={posts} addPost={addPost} deletePost={deletePost} />
     </section>
   )
 }

@@ -60,7 +60,7 @@ const FriendsStateless = ({
         </div>
       </Field>
       <div className={s.friends__paginator}>
-        <Sidebar paginator items={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
+        <Sidebar type='paginator' items={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
       </div>
     </section>
   )

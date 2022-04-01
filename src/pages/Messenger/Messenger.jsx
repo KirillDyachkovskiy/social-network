@@ -5,8 +5,9 @@ import {getMenu, getMessages, sendMessage} from '../../services/redux/reducer/me
 import {Submit} from '../../ui/Submit';
 import {Sidebar} from "../../ui/Sidebar";
 import {Field} from "../../ui/Field";
-import s from './messenger.module.scss';
 import {useEffect, useRef} from "react";
+import {Message} from "../../ui/Message";
+import s from './messenger.module.scss';
 
 const mapStateToProps = (state) => ({
   menu: getMenu(state),
@@ -16,12 +17,8 @@ const mapStateToProps = (state) => ({
 const MessengerStateless = ({menu, messages, sendMessage}) => {
   const messagesEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
-  };
-
   useEffect(() => {
-    scrollToBottom()
+    messagesEndRef.current?.scrollIntoView({behavior: "smooth"});
   }, [messages]);
 
   return (
@@ -29,11 +26,8 @@ const MessengerStateless = ({menu, messages, sendMessage}) => {
       <div className={s.messenger__content}>
         <Field>
           <div className={s.messenger__messages}>
-            {messages.map(m => (
-                <div key={m.id}
-                     className={`${s.messenger__message} ${(m.sender === 0) ? s.messenger__message_to : s.messenger__message_from}`}>
-                  <Field color={m.sender === 0 ? 'grey' : 'blue'}>{m.text}</Field>
-                </div>
+            {messages.map(message => (
+                <Message key={message.id} type={message.sender ? 'from' : 'to'}>{message.text}</Message>
               )
             )}
           </div>

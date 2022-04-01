@@ -1,13 +1,13 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 10px
-;
-  a, span {
+  gap: 10px;
+
+  &__item {
     cursor: pointer;
     color: var(--grey-text);
 
-    &:hover, &.active {
+    &:hover, &_active {
       color: #000000;
     }
   }

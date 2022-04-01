@@ -46,7 +46,7 @@ const initialState = {
   captcha: null,
 };
 
-export const getAuthedUserData = (state) => state.auth.authedUserData;
+export const getUserData = (state) => state.auth.authedUserData;
 export const getSidebar = (state) => state.auth.sidebar;
 export const getCaptcha = (state) => state.auth.captcha;
 
