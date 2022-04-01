@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {HOC} from '../../hoc';
+import {withRedirect} from '../../hoc';
 import {
   changePage,
   changeUsersFetchingStatus,
@@ -68,5 +68,5 @@ const FriendsStateless = ({
 
 export const Friends = compose(
   connect(mapStateToProps, {changePage, toggleFollow, changeUsersFetchingStatus}),
-  HOC.withRedirect('/login'),
+  withRedirect('/login'),
 )(FriendsStateless);

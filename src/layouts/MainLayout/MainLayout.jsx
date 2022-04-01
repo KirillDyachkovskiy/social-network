@@ -31,7 +31,7 @@ export const MainLayoutPure = ({sidebar, authedUserData, authMe, authLogOut}) =>
           <Sidebar items={sidebar}/>
         </div>
         <div className={s.layout__content}>
-          <Outlet/>
+          <Outlet lol={'adsfadf'} />
         </div>
       </main>
     </section>

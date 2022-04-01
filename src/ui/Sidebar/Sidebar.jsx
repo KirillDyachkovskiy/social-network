@@ -16,7 +16,7 @@ export const Sidebar = ({type = 'sidebar', items, currentPage, changePage, pageS
           </span>)
           : items.map(item => <NavLink
             key={item.id}
-            className={`${s.sidebar__item} ${({isActive}) => (isActive) ? s.sidebar__item_active : ''}`}
+            className={({isActive}) => `${s.sidebar__item} ${(isActive) ? s.sidebar__item_active : ''}`}
             to={item.to || item.id.toString()}
           >
             {item.text}

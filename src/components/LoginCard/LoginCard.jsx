@@ -12,7 +12,7 @@ export const LoginCard = ({login, authLogOut}) => {
     <div className={s.loginCard}>
       <p className={s.loginCard__nickname}>{login || ANON_USER_NAME}</p>
       <button className={s.loginCard__logout} onClick={onClick}>
-        <spanp className={s.loginCard__icon}/>
+        <p className={s.loginCard__icon}/>
       </button>
     </div>
   )

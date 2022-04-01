@@ -1,6 +1,6 @@
 import {Field} from "../../ui/Field";
 import {compose} from "redux";
-import {HOC} from "../../hoc";
+import {withRedirect} from "../../hoc";
 
 export const NotfoundPure = () => (
   <Field>
@@ -8,4 +8,4 @@ export const NotfoundPure = () => (
   </Field>
 );
 
-export const Notfound = compose(HOC.withRedirect('/login'))(NotfoundPure);
+export const Notfound = compose(withRedirect('/login'))(NotfoundPure);

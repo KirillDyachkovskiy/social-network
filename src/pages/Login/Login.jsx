@@ -3,7 +3,7 @@ import {Button} from '../../ui/Button';
 import {authLogIn, getCaptcha} from '../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {HOC} from "../../hoc";
+import {withRedirect} from "../../hoc";
 import {Field} from "../../ui/Field";
 import s from './login.module.scss';
 import {Image} from "../../ui/Image";
@@ -81,5 +81,5 @@ const LoginForm = ({authLogIn, captcha}) => {
 
 export const Login = compose(
   connect(mapStateToProps, {authLogIn}),
-  HOC.withRedirect(-1),
+  withRedirect(-1),
 )(LoginForm);

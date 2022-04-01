@@ -12,16 +12,18 @@ import Preloader from '../../ui/Preloader';
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {compose} from 'redux';
-import {HOC} from '../../hoc';
+import {withRedirect} from '../../hoc';
 import {ProfileCard} from "../../components/ProfileCard";
 import {Image} from "../../ui/Image";
 import {ProfileWall} from "../../components/ProfileWall";
 import s from './profile.module.scss';
 import {ANON_USER_COVER} from "../../constants";
+import {getUserData} from "../../services/redux/reducer/authReducer";
 
 const mapStateToProps = (state) => ({
   isFetching: getProfileIsFetching(state),
   visitedProfile: getVisitedProfile(state),
+  authedUser: getUserData(state),
   posts: getPosts(state),
 });
 
@@ -37,7 +39,7 @@ const ProfileRouter = ({
                          addPost,
                          deletePost,
                        }) => {
-  const {id = authedUser.id} = useParams();
+  const {id = authedUser?.id} = useParams();
 
   useEffect(() => {
     changeProfileFetchingStatus(true);
@@ -64,4 +66,4 @@ const ProfileRouter = ({
 
 export const Profile = compose(connect(mapStateToProps, {
   changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost, changeUserAvatar, changeUserInfo,
-}), HOC.withRedirect('/login'))(ProfileRouter);
+}), withRedirect('/login'))(ProfileRouter);

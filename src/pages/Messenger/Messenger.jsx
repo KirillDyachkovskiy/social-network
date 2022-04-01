@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {HOC} from '../../hoc';
+import {withRedirect} from '../../hoc';
 import {compose} from 'redux';
 import {getMenu, getMessages, sendMessage} from '../../services/redux/reducer/messengerReducer';
 import {Submit} from '../../ui/Submit';
@@ -48,5 +48,5 @@ const MessengerStateless = ({menu, messages, sendMessage}) => {
 
 export const Messenger = compose(
   connect(mapStateToProps, {sendMessage}),
-  HOC.withRedirect('/login'),
+  withRedirect('/login'),
 )(MessengerStateless);
