@@ -3,6 +3,7 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {useEffect} from 'react';
 import {MainLayout} from "../layouts/MainLayout";
+import Preloader from "../ui/Preloader";
 
 const mapStateToProps = (state) => ({
   authedUserData: getAuthedUserData(state),
@@ -12,9 +13,9 @@ const mapStateToProps = (state) => ({
 const AuthStateless = ({authMe, authedUserData, sidebar}) => {
   useEffect(() => {
     authMe();
-  }, [])
+  }, [authMe])
 
-  return authedUserData ? <MainLayout sidebar={sidebar} /> : <p>Загрузка</p>;
+  return authedUserData ? <MainLayout sidebar={sidebar} /> : <Preloader />;
 }
 
 export const Auth = compose(

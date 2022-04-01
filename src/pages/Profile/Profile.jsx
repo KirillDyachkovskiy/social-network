@@ -25,7 +25,23 @@ const mapStateToProps = (state) => ({
   posts: getPosts(state),
 });
 
-const ProfileCombine = ({isFetching, visitedProfile, posts, authedUserId, changeUserAvatar, changeUserInfo}) => {
+const ProfileRouter = ({
+                         changeProfileFetchingStatus,
+                         changeVisitedProfile,
+                         authedUser,
+                         visitedProfile,
+                         changeUserAvatar,
+                         changeUserInfo,
+                         posts,
+                         isFetching
+                       }) => {
+  const {id = authedUser.id} = useParams();
+
+  useEffect(() => {
+    changeProfileFetchingStatus(true);
+    changeVisitedProfile(id);
+  }, [id,changeVisitedProfile, changeProfileFetchingStatus])
+
   if (isFetching) {
     return <Preloader/>
   }
@@ -33,25 +49,13 @@ const ProfileCombine = ({isFetching, visitedProfile, posts, authedUserId, change
   return (
     <section className={s.profile}>
       <div className={s.profile__cover}>
-        <Image src={ANON_USER_COVER} alt='обложка пользователя' />
+        <Image src={ANON_USER_COVER} alt='обложка пользователя'/>
       </div>
-      <ProfileCard visitedProfile={visitedProfile} authedUserId={authedUserId} changeUserAvatar={changeUserAvatar} changeUserInfo={changeUserInfo} />
-      <ProfileWall visitedProfile={visitedProfile} posts={posts} />
+      <ProfileCard visitedProfile={visitedProfile} authedUserId={authedUser.id} changeUserAvatar={changeUserAvatar}
+                   changeUserInfo={changeUserInfo}/>
+      <ProfileWall visitedProfile={visitedProfile} posts={posts}/>
     </section>
   )
-}
-
-const ProfileRouter = (props) => {
-  const {changeProfileFetchingStatus, changeVisitedProfile, authedUser, ...childProps} = props;
-
-  const {id = authedUser.id} = useParams();
-
-  useEffect(() => {
-    changeProfileFetchingStatus(true);
-    changeVisitedProfile(id);
-  }, [id])
-
-  return <ProfileCombine {...childProps} authedUserId={authedUser.id} />
 }
 
 export const Profile = compose(connect(mapStateToProps, {

@@ -1,4 +1,4 @@
-import c from './profileCard.module.scss';
+import s from './profileCard.module.scss';
 import {Field} from "../../ui/Field";
 import {Avatar} from "../../ui/Avatar";
 import {Status} from "../../ui/Status";
@@ -16,11 +16,11 @@ export const ProfileCard = ({visitedProfile, authedUserId, changeUserInfo, chang
 
   return (
     <Field>
-      <div className={c.card}>
-        <div className={c.card__avatar}>
+      <div className={s.card}>
+        <div className={s.card__avatar}>
           <Avatar src={photos?.large} size='large' isOwner={isOwner}/>
           {isOwner &&
-            <label  className={c.card__label}><input type='file' onChange={handleChange} className={c.card__file} />Изменить аватар</label>}
+            <label  className={s.card__label}><input type='file' onChange={handleChange} className={s.card__file} />Изменить аватар</label>}
         </div>
         <div style={{ width: '600px'}}>
           <h1>{fullName}</h1>

@@ -41,11 +41,11 @@ const FriendsStateless = ({
                           }) => {
   useEffect(() => {
     changePage(currentPage, pageSize);
-  }, [])
+  }, [changePage, currentPage, pageSize])
 
   useEffect(() => () => {
     changeUsersFetchingStatus(true)
-  }, [])
+  }, [changeUsersFetchingStatus])
 
   return (
     <section className={s.friends}>

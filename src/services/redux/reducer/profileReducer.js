@@ -1,5 +1,4 @@
 import {profileAPI} from "../../api";
-import {getAuthedUserData} from "./authReducer";
 
 const ADD_POST = 'profile/addPost';
 export const addPost = (text) => ({type: ADD_POST, text});

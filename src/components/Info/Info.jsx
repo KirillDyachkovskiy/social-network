@@ -14,7 +14,6 @@ export const Info = ({userInfo, isOwner, id, changeUserInfo}) => {
   const [editMode, setEditMode] = useState(false);
 
   const {contacts, ...mainInfo} = userInfo;
-  console.log(userInfo)
 
   function onSubmit(formData) {
     changeUserInfo(id, formData);
