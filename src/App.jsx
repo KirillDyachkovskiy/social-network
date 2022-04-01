@@ -1,7 +1,6 @@
 import React, {Suspense} from 'react';
 import {Route, Routes, Navigate} from 'react-router-dom';
-import {Auth} from './Auth';
-import Preloader from "./ui/Preloader";
+import {MainLayout} from "./layouts/MainLayout";
 const Notfound = React.lazy(() => import('./pages/Notfound'));
 const Messenger = React.lazy(() => import('./pages/Messenger'));
 const Friends = React.lazy(() => import('./pages/Friends'));
@@ -10,9 +9,9 @@ const Login = React.lazy(() => import('./pages/Login'));
 
 export const App = () => {
   return (
-    <Suspense fallback={<Preloader/>}>
+    <Suspense fallback={null}>
       <Routes>
-        <Route path='/' element={<Auth/>}>
+        <Route path='/' element={<MainLayout/>}>
           <Route index element={<Profile/>}/>
           <Route path=':id' element={<Profile/>}/>
           <Route path='messenger/*' element={<Messenger/>}/>
