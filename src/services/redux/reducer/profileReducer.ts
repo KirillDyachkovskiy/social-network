@@ -1,26 +1,28 @@
-import {authAPI, profileAPI} from "../../api";
-import {AnyAction} from "redux";
-import {AuthData, ProfileInfoPayload, Status, UserId} from "../../../types/Api";
+import { AnyAction } from 'redux';
+import { authAPI, profileAPI } from '../../api';
+import {
+  AuthData, ProfileInfoPayload, Status, UserId,
+} from '../../../types/Api';
 
 const ADD_POST = 'profile/addPost';
-export const addPost = (text: string): AnyAction => ({type: ADD_POST, text});
+export const addPost = (text: string): AnyAction => ({ type: ADD_POST, text });
 
 const DELETE_POST = 'profile/deletePost';
-export const deletePost = (id: number): AnyAction => ({type: DELETE_POST, id});
+export const deletePost = (id: number): AnyAction => ({ type: DELETE_POST, id });
 
 const SET_VISITED_USER_PROFILE = 'profile/setVisitedUserProfile';
-export const setVisitedUserProfile = (data: AuthData): AnyAction => ({type: SET_VISITED_USER_PROFILE, data});
+export const setVisitedUserProfile = (data: AuthData): AnyAction => ({ type: SET_VISITED_USER_PROFILE, data });
 
 const SET_USER_STATUS = 'profile/setUserStatus';
-export const setUserStatus = (status: string): AnyAction => ({type: SET_USER_STATUS, status});
+export const setUserStatus = (status: string): AnyAction => ({ type: SET_USER_STATUS, status });
 
 const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
-export const changeProfileFetchingStatus = (isFetching: boolean): AnyAction => ({type: CHANGE_PROFILE_FETCHING_STATUS, isFetching});
+export const changeProfileFetchingStatus = (isFetching: boolean): AnyAction => ({ type: CHANGE_PROFILE_FETCHING_STATUS, isFetching });
 
 export const changeVisitedProfile = (id: UserId) => async (dispatch: any) => {
   const dataResponse = await profileAPI.getUserData(id);
   if (dataResponse.status === 200) {
-    dispatch(setVisitedUserProfile({...dataResponse.data}));
+    dispatch(setVisitedUserProfile({ ...dataResponse.data }));
   }
 
   const statusResponse = await profileAPI.getStatus(id);
@@ -65,35 +67,35 @@ type Post = {
   id: number;
   likes: number;
   text: string;
-}
+};
 
 type ProfileState = {
   posts: Array<Post>;
   visitedProfile: any;
   isFetching: boolean;
-}
+};
 
 const initialState: ProfileState = {
   posts: [
     {
       id: 0,
       likes: Math.ceil(Math.random() * 100),
-      text: 'Что разум человека может постигнуть и во что он может поверить, того он способен достичь. Наполеон Хилл'
+      text: 'Что разум человека может постигнуть и во что он может поверить, того он способен достичь. Наполеон Хилл',
     },
     {
       id: 1,
       likes: Math.ceil(Math.random() * 100),
-      text: 'Стремитесь не к успеху, а к ценностям, которые он дает. Альберт Эйнштейн'
+      text: 'Стремитесь не к успеху, а к ценностям, которые он дает. Альберт Эйнштейн',
     },
     {
       id: 2,
       likes: Math.ceil(Math.random() * 100),
-      text: 'Надо любить жизнь больше, чем смысл жизни. Фёдор Достоевский'
+      text: 'Надо любить жизнь больше, чем смысл жизни. Фёдор Достоевский',
     },
     {
       id: 3,
       likes: Math.ceil(Math.random() * 100),
-      text: 'За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан'
+      text: 'За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан',
     },
   ],
   visitedProfile: {},
@@ -114,7 +116,7 @@ export const profileReducer = (state: ProfileState = initialState, action: AnyAc
     case ADD_POST:
       return {
         ...state,
-        posts: [...state.posts, {id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: action.text,}],
+        posts: [...state.posts, { id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: action.text }],
       };
     case DELETE_POST:
       return {
@@ -127,7 +129,7 @@ export const profileReducer = (state: ProfileState = initialState, action: AnyAc
         visitedProfile: {
           ...action.data,
           status: state.visitedProfile.status,
-        }
+        },
       };
     case SET_USER_STATUS:
       return {
@@ -140,4 +142,4 @@ export const profileReducer = (state: ProfileState = initialState, action: AnyAc
     default:
       return state;
   }
-}
+};

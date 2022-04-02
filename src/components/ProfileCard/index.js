@@ -1,1 +1,1 @@
-export {ProfileCard} from './ProfileCard'
+export { ProfileCard } from './ProfileCard';

@@ -1,17 +1,19 @@
-import {AuthData, Captcha, LoginMePayload, ProfileInfoPayload} from "../../../types/Api";
-import {authAPI, securityAPI} from "../../api";
-import {AnyAction} from "redux";
+import { AnyAction } from 'redux';
+import {
+  AuthData, Captcha, LoginMePayload, ProfileInfoPayload,
+} from '../../../types/Api';
+import { authAPI, securityAPI } from '../../api';
 
 const SET_USER_DATA = 'auth/setData';
-const setUserData = (payload: AuthData): AnyAction => ({type: SET_USER_DATA, payload});
+const setUserData = (payload: AuthData): AnyAction => ({ type: SET_USER_DATA, payload });
 
 const SET_CAPTCHA = 'auth/captcha';
-const setCaptchaSuccess = (payload: Captcha): AnyAction => ({type: SET_CAPTCHA, payload});
+const setCaptchaSuccess = (payload: Captcha): AnyAction => ({ type: SET_CAPTCHA, payload });
 
 export const authMe = () => async (dispatch: any) => {
   const response = await authAPI.authMe();
   dispatch(setUserData(response.data.data));
-}
+};
 
 export const authLogIn = (formData: LoginMePayload) => async (dispatch: any) => {
   const response = await authAPI.authLogIn(formData);
@@ -21,36 +23,36 @@ export const authLogIn = (formData: LoginMePayload) => async (dispatch: any) => 
   if (response.data.resultCode === 10) {
     dispatch(setCaptcha());
   }
-}
+};
 
 export const authLogOut = () => async (dispatch: any) => {
   const response = await authAPI.authLogOut();
   if (response.data.resultCode === 0) {
     dispatch(authMe());
   }
-}
+};
 
 export const setCaptcha = () => async (dispatch: any) => {
   const response = await securityAPI.getCaptcha();
   dispatch(setCaptchaSuccess(response.data.url));
-}
+};
 
-type SidebarItem = {id: number; to: string, text: string};
+type SidebarItem = { id: number; to: string, text: string };
 
 type AuthState = {
   sidebar: Array<SidebarItem>;
   authedUserData: null | AuthData;
   captcha: null | Captcha;
-}
+};
 
 const initialState: AuthState = {
   sidebar: [
-    {id: 0, to: '/', text: 'Profile'},
-    {id: 1, to: '/messenger', text: 'Messenger'},
-    {id: 2, to: '/news', text: 'News'},
-    {id: 3, to: '/music', text: 'Music'},
-    {id: 4, to: '/friends', text: 'Friends'},
-    {id: 5, to: '/settings', text: 'Settings'},
+    { id: 0, to: '/', text: 'Profile' },
+    { id: 1, to: '/messenger', text: 'Messenger' },
+    { id: 2, to: '/news', text: 'News' },
+    { id: 3, to: '/music', text: 'Music' },
+    { id: 4, to: '/friends', text: 'Friends' },
+    { id: 5, to: '/settings', text: 'Settings' },
   ],
   authedUserData: null,
   captcha: null,
@@ -75,4 +77,4 @@ export const authReducer = (state: AuthState = initialState, action: AnyAction):
     default:
       return state;
   }
-}
+};

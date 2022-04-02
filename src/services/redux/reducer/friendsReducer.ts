@@ -1,25 +1,25 @@
-import {createSelector} from "reselect";
-import {usersAPI} from "../../api";
-import {User, UserId} from "../../../types/Api";
-import {AnyAction} from "redux";
+import { createSelector } from 'reselect';
+import { AnyAction } from 'redux';
+import { usersAPI } from '../../api';
+import { User, UserId } from '../../../types/Api';
 
 const TOGGLE_FOLLOW = 'friends/toggleFollow';
-const toggleFollowSuccess = (id: UserId): AnyAction => ({type: TOGGLE_FOLLOW, id});
+const toggleFollowSuccess = (id: UserId): AnyAction => ({ type: TOGGLE_FOLLOW, id });
 
 const SET_USERS = 'friends/setUsers';
-const setUsersList = (users: Array<User>, totalCount: number): AnyAction => ({type: SET_USERS, users, totalCount,});
+const setUsersList = (users: Array<User>, totalCount: number): AnyAction => ({ type: SET_USERS, users, totalCount });
 
 const SET_CURRENT_PAGE = 'friends/setCurrentPage';
-export const setCurrentPage = (currentPage: number): AnyAction => ({type: SET_CURRENT_PAGE, currentPage,});
+export const setCurrentPage = (currentPage: number): AnyAction => ({ type: SET_CURRENT_PAGE, currentPage });
 
 const CHANGE_FOLLOWING_STATUS = 'friends/setFollowingStatus';
-export const changeFollowingStatus = (id: UserId, isFollowing: boolean): AnyAction => ({type: CHANGE_FOLLOWING_STATUS, id, isFollowing});
+export const changeFollowingStatus = (id: UserId, isFollowing: boolean): AnyAction => ({ type: CHANGE_FOLLOWING_STATUS, id, isFollowing });
 
 const CHANGE_USERS_FETCHING_STATUS = 'friends/changeUsersFetchingStatus';
-export const changeUsersFetchingStatus = (isFetching: boolean): AnyAction => ({type: CHANGE_USERS_FETCHING_STATUS, isFetching});
+export const changeUsersFetchingStatus = (isFetching: boolean): AnyAction => ({ type: CHANGE_USERS_FETCHING_STATUS, isFetching });
 
 const SET_PAGES = 'friends/setPages';
-export const setPages = (pages: Array<number>): AnyAction => ({type: SET_PAGES, pages});
+export const setPages = (pages: Array<number>): AnyAction => ({ type: SET_PAGES, pages });
 
 export const toggleFollow = (id: UserId, followed: boolean) => async (dispatch: any) => {
   dispatch(changeFollowingStatus(id, true));
@@ -27,7 +27,7 @@ export const toggleFollow = (id: UserId, followed: boolean) => async (dispatch: 
     await usersAPI.unfollow(id);
     dispatch(toggleFollowSuccess(id));
   } else {
-    await usersAPI.follow(id)
+    await usersAPI.follow(id);
     dispatch(toggleFollowSuccess(id));
   }
   dispatch(changeFollowingStatus(id, false));
@@ -43,7 +43,7 @@ export const changePage = (page: number, pageSize: number) => async (dispatch: a
 
   const pages = [];
   for (let i = 1; i <= Math.ceil(response.data.totalCount / pageSize); i++) {
-    pages.push(i)
+    pages.push(i);
   }
   dispatch(setPages(pages));
 
@@ -58,8 +58,7 @@ type FriendsState = {
   pages: Array<number>;
   followingInProgress: Array<number>;
   isFetching: boolean;
-}
-
+};
 
 const initialState: FriendsState = {
   users: [],
@@ -76,7 +75,7 @@ export const getPageSize = (state: any) => state.friends.pageSize;
 export const getTotalCount = (state: any) => state.friends.totalCount;
 export const getCurrentPage = (state: any) => state.friends.currentPage;
 const getPages = (state: any) => state.friends.pages;
-export const getPagination = createSelector([getPages, getCurrentPage], (pages, currentPage) => pages.filter((page: number, id: number, arr: Array<number>) => page === 1 || page === arr.length || (page >= currentPage - 5 && page <= currentPage + 5) ));
+export const getPagination = createSelector([getPages, getCurrentPage], (pages, currentPage) => pages.filter((page: number, id: number, arr: Array<number>) => page === 1 || page === arr.length || (page >= currentPage - 5 && page <= currentPage + 5)));
 export const getFollowingInProgress = (state: any) => state.friends.followingInProgress;
 export const getFriendsIsFetching = (state: any) => state.friends.isFetching;
 
@@ -90,16 +89,15 @@ export const friendsReducer = (state: FriendsState = initialState, action: AnyAc
     case TOGGLE_FOLLOW:
       return {
         ...state,
-        users: state.users.map(user => {
+        users: state.users.map((user) => {
           if (user.id === action.id) {
             return {
               ...user,
               followed: !user.followed,
-            }
-          } else {
-            return user
+            };
           }
-        })
+          return user;
+        }),
       };
     case CHANGE_USERS_FETCHING_STATUS:
       return {
@@ -125,4 +123,4 @@ export const friendsReducer = (state: FriendsState = initialState, action: AnyAc
     default:
       return state;
   }
-}
+};

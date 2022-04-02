@@ -1,1 +1,1 @@
-export {LoginCard} from './LoginCard'
+export { LoginCard } from './LoginCard';

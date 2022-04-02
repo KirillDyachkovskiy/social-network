@@ -1,1 +1,1 @@
-export {cross} from './Cross'
+export { cross } from './Cross';

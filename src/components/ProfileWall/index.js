@@ -1,1 +1,1 @@
-export {ProfileWall} from './ProfileWall'
+export { ProfileWall } from './ProfileWall';
