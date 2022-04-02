@@ -7,6 +7,7 @@ import {authLogOut, authMe, getSidebar, getUserData} from "../../services/redux/
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {useEffect} from "react";
+import Preloader from "../../ui/Preloader";
 
 const mapStateToProps = (state) => ({
   authedUserData: getUserData(state),
@@ -17,6 +18,10 @@ export const MainLayoutPure = ({sidebar, authedUserData, authMe, authLogOut}) =>
   useEffect(() => {
     authMe();
   }, [authMe])
+
+  if (!authedUserData) {
+    return <Preloader />
+  }
 
   return (
     <section className={s.layout}>
@@ -31,7 +36,7 @@ export const MainLayoutPure = ({sidebar, authedUserData, authMe, authLogOut}) =>
           <Sidebar items={sidebar}/>
         </div>
         <div className={s.layout__content}>
-          <Outlet lol={'adsfadf'} />
+          <Outlet />
         </div>
       </main>
     </section>
