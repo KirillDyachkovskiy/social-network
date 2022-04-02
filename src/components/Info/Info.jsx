@@ -3,7 +3,7 @@ import {useState} from "react";
 import {Button} from "../../ui/Button";
 import {useForm} from "react-hook-form";
 
-export const Info = ({userInfo, isOwner, changeUserInfo}) => {
+export const Info = ({userInfo, isOwner, changeProfileInfo}) => {
   const {register, handleSubmit, formState: {errors}} = useForm({
     mode: 'onBlur',
     defaultValues: {
@@ -17,7 +17,7 @@ export const Info = ({userInfo, isOwner, changeUserInfo}) => {
   const {contacts, ...mainInfo} = userInfo;
 
   function onSubmit(formData) {
-    changeUserInfo(formData);
+    changeProfileInfo(formData);
     setEditMode(false);
   }
 

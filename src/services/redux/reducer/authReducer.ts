@@ -1,17 +1,19 @@
+import {AuthData, Captcha, LoginMePayload, ProfileInfoPayload} from "../../../types/Api";
 import {authAPI, securityAPI} from "../../api";
+import {AnyAction} from "redux";
 
 const SET_USER_DATA = 'auth/setData';
-const setUserData = (data) => ({type: SET_USER_DATA, data});
+const setUserData = (payload: AuthData): AnyAction => ({type: SET_USER_DATA, payload});
 
 const SET_CAPTCHA = 'auth/captcha';
-const setCaptchaSuccess = (data) => ({type: SET_CAPTCHA, data});
+const setCaptchaSuccess = (payload: Captcha): AnyAction => ({type: SET_CAPTCHA, payload});
 
-export const authMe = () => async (dispatch) => {
+export const authMe = () => async (dispatch: any) => {
   const response = await authAPI.authMe();
   dispatch(setUserData(response.data.data));
 }
 
-export const authLogIn = (formData) => async (dispatch) => {
+export const authLogIn = (formData: LoginMePayload) => async (dispatch: any) => {
   const response = await authAPI.authLogIn(formData);
   if (response.data.resultCode === 0) {
     dispatch(authMe());
@@ -21,19 +23,27 @@ export const authLogIn = (formData) => async (dispatch) => {
   }
 }
 
-export const authLogOut = () => async (dispatch) => {
+export const authLogOut = () => async (dispatch: any) => {
   const response = await authAPI.authLogOut();
   if (response.data.resultCode === 0) {
     dispatch(authMe());
   }
 }
 
-export const setCaptcha = () => async (dispatch) => {
+export const setCaptcha = () => async (dispatch: any) => {
   const response = await securityAPI.getCaptcha();
   dispatch(setCaptchaSuccess(response.data.url));
 }
 
-const initialState = {
+type SidebarItem = {id: number; to: string, text: string};
+
+type AuthState = {
+  sidebar: Array<SidebarItem>;
+  authedUserData: null | AuthData;
+  captcha: null | Captcha;
+}
+
+const initialState: AuthState = {
   sidebar: [
     {id: 0, to: '/', text: 'Profile'},
     {id: 1, to: '/messenger', text: 'Messenger'},
@@ -46,21 +56,21 @@ const initialState = {
   captcha: null,
 };
 
-export const getUserData = (state) => state.auth.authedUserData;
-export const getSidebar = (state) => state.auth.sidebar;
-export const getCaptcha = (state) => state.auth.captcha;
+export const getUserData = (state: any) => state.auth.authedUserData;
+export const getSidebar = (state: any) => state.auth.sidebar;
+export const getCaptcha = (state: any) => state.auth.captcha;
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state: AuthState = initialState, action: AnyAction): AuthState => {
   switch (action.type) {
     case SET_USER_DATA:
       return {
         ...state,
-        authedUserData: action.data,
+        authedUserData: action.payload,
       };
     case SET_CAPTCHA:
       return {
         ...state,
-        captcha: action.data,
+        captcha: action.payload,
       };
     default:
       return state;

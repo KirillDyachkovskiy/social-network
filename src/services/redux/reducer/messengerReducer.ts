@@ -1,7 +1,25 @@
-const SEND_MESSAGE = 'messenger/sendMessage';
-export const sendMessage = (text) => ({type: SEND_MESSAGE, text});
+import {AnyAction} from "redux";
 
-const initialState = {
+const SEND_MESSAGE = 'messenger/sendMessage';
+export const sendMessage = (text: string): AnyAction => ({type: SEND_MESSAGE, text});
+
+type Chat = {
+  id: number;
+  text: string;
+}
+
+export type Message = {
+  id: number;
+  sender: number;
+  text: string;
+}
+
+type MessengerState = {
+  menu: Array<Chat>;
+  messages: Array<Message>;
+};
+
+const initialState: MessengerState = {
   menu: [
     {id: 0, text: 'Алексей Захаров'},
     {id: 1, text: 'Петя Беляшёв'},
@@ -16,10 +34,10 @@ const initialState = {
   ],
 };
 
-export const getMenu = (state) => state.messenger.menu;
-export const getMessages = (state) => state.messenger.messages;
+export const getMenu = (state: any) => state.messenger.menu;
+export const getMessages = (state: any) => state.messenger.messages;
 
-export const messengerReducer = (state = initialState, action) => {
+export const messengerReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case SEND_MESSAGE:
       return {

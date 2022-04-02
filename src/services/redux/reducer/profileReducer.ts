@@ -1,21 +1,23 @@
 import {authAPI, profileAPI} from "../../api";
+import {AnyAction} from "redux";
+import {AuthData, ProfileInfoPayload, Status, UserId} from "../../../types/Api";
 
 const ADD_POST = 'profile/addPost';
-export const addPost = (text) => ({type: ADD_POST, text});
+export const addPost = (text: string): AnyAction => ({type: ADD_POST, text});
 
 const DELETE_POST = 'profile/deletePost';
-export const deletePost = (id) => ({type: DELETE_POST, id});
+export const deletePost = (id: number): AnyAction => ({type: DELETE_POST, id});
 
 const SET_VISITED_USER_PROFILE = 'profile/setVisitedUserProfile';
-export const setVisitedUserProfile = (data) => ({type: SET_VISITED_USER_PROFILE, data});
+export const setVisitedUserProfile = (data: AuthData): AnyAction => ({type: SET_VISITED_USER_PROFILE, data});
 
 const SET_USER_STATUS = 'profile/setUserStatus';
-export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
+export const setUserStatus = (status: string): AnyAction => ({type: SET_USER_STATUS, status});
 
 const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
-export const changeProfileFetchingStatus = (isFetching) => ({type: CHANGE_PROFILE_FETCHING_STATUS, isFetching});
+export const changeProfileFetchingStatus = (isFetching: boolean): AnyAction => ({type: CHANGE_PROFILE_FETCHING_STATUS, isFetching});
 
-export const changeVisitedProfile = (id) => async (dispatch) => {
+export const changeVisitedProfile = (id: UserId) => async (dispatch: any) => {
   const dataResponse = await profileAPI.getUserData(id);
   if (dataResponse.status === 200) {
     dispatch(setVisitedUserProfile({...dataResponse.data}));
@@ -29,7 +31,7 @@ export const changeVisitedProfile = (id) => async (dispatch) => {
   dispatch(changeProfileFetchingStatus(false));
 };
 
-export const changeUserStatus = (status) => async (dispatch) => {
+export const changeProfileStatus = (status: Status) => async (dispatch: any) => {
   const response = await profileAPI.changeStatus(status);
 
   if (response.data.resultCode === 0) {
@@ -37,7 +39,7 @@ export const changeUserStatus = (status) => async (dispatch) => {
   }
 };
 
-export const changeUserAvatar = (avatar) => async (dispatch) => {
+export const changeProfileAvatar = (avatar: File) => async (dispatch: any) => {
   const idResponse = await authAPI.authMe();
 
   if (idResponse.data.resultCode === 0) {
@@ -48,7 +50,7 @@ export const changeUserAvatar = (avatar) => async (dispatch) => {
   }
 };
 
-export const changeUserInfo = (info) => async (dispatch) => {
+export const changeProfileInfo = (info: ProfileInfoPayload) => async (dispatch: any) => {
   const idResponse = await authAPI.authMe();
 
   if (idResponse.data.resultCode === 0) {
@@ -59,7 +61,19 @@ export const changeUserInfo = (info) => async (dispatch) => {
   }
 };
 
-const initialState = {
+type Post = {
+  id: number;
+  likes: number;
+  text: string;
+}
+
+type ProfileState = {
+  posts: Array<Post>;
+  visitedProfile: any;
+  isFetching: boolean;
+}
+
+const initialState: ProfileState = {
   posts: [
     {
       id: 0,
@@ -86,11 +100,11 @@ const initialState = {
   isFetching: true,
 };
 
-export const getVisitedProfile = (state) => state.profile.visitedProfile;
-export const getProfileIsFetching = (state) => state.profile.isFetching;
-export const getPosts = (state) => state.profile.posts;
+export const getVisitedProfile = (state: any) => state.profile.visitedProfile;
+export const getProfileIsFetching = (state: any) => state.profile.isFetching;
+export const getPosts = (state: any) => state.profile.posts;
 
-export const profileReducer = (state = initialState, action) => {
+export const profileReducer = (state: ProfileState = initialState, action: AnyAction): ProfileState => {
   switch (action.type) {
     case CHANGE_PROFILE_FETCHING_STATUS:
       return {

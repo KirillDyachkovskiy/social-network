@@ -4,12 +4,12 @@ import {Avatar} from "../../ui/Avatar";
 import {Status} from "../../ui/Status";
 import {Info} from "../Info";
 
-export const ProfileCard = ({visitedProfile, changeUserInfo, changeUserAvatar, isOwner}) => {
+export const ProfileCard = ({visitedProfile, changeProfileInfo, changeProfileAvatar, isOwner}) => {
   const {status, photos, ...userInfo} = visitedProfile;
 
   function onAvatarChange(e) {
     if (e.target.files.length) {
-      changeUserAvatar(e.target.files[0])
+      changeProfileAvatar(e.target.files[0])
     }
   }
 
@@ -28,7 +28,7 @@ export const ProfileCard = ({visitedProfile, changeUserInfo, changeUserAvatar, i
         <div>
           <h1>{visitedProfile.fullName}</h1>
           <Status status={status} isOwner={isOwner}/>
-          <Info userInfo={userInfo} isOwner={isOwner} changeUserInfo={changeUserInfo}/>
+          <Info userInfo={userInfo} isOwner={isOwner} changeProfileInfo={changeProfileInfo}/>
         </div>
       </div>
     </Field>

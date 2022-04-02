@@ -1,5 +1,5 @@
 import {
-  addPost, changeUserAvatar, changeUserInfo,
+  addPost, changeProfileAvatar, changeProfileInfo,
   changeProfileFetchingStatus,
   changeVisitedProfile,
   deletePost,
@@ -32,8 +32,8 @@ const ProfileRouter = ({
                          changeVisitedProfile,
                          authedUser,
                          visitedProfile,
-                         changeUserAvatar,
-                         changeUserInfo,
+                         changeProfileAvatar,
+                         changeProfileInfo,
                          posts,
                          isFetching,
                          addPost,
@@ -57,13 +57,13 @@ const ProfileRouter = ({
       <div className={s.profile__cover}>
         <Image src={ANON_USER_COVER} alt='обложка пользователя'/>
       </div>
-      <ProfileCard visitedProfile={visitedProfile} changeUserAvatar={changeUserAvatar}
-                   changeUserInfo={changeUserInfo} isOwner={id === authedUser.id} />
+      <ProfileCard visitedProfile={visitedProfile} changeProfileAvatar={changeProfileAvatar}
+                   changeProfileInfo={changeProfileInfo} isOwner={id === authedUser.id} />
       <ProfileWall name={fullName} photo={photo} posts={posts} addPost={addPost} deletePost={deletePost} />
     </section>
   )
 }
 
 export const Profile = compose(connect(mapStateToProps, {
-  changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost, changeUserAvatar, changeUserInfo,
+  changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost, changeProfileAvatar, changeProfileInfo,
 }), withRedirect('/login'))(ProfileRouter);
