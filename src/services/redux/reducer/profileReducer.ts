@@ -5,27 +5,34 @@ import {
 } from '../../../types/Api';
 
 const ADD_POST = 'profile/addPost';
+
 export const addPost = (text: string): AnyAction => ({ type: ADD_POST, text });
 
 const DELETE_POST = 'profile/deletePost';
+
 export const deletePost = (id: number): AnyAction => ({ type: DELETE_POST, id });
 
 const SET_VISITED_USER_PROFILE = 'profile/setVisitedUserProfile';
+
 export const setVisitedUserProfile = (data: AuthData): AnyAction => ({ type: SET_VISITED_USER_PROFILE, data });
 
 const SET_USER_STATUS = 'profile/setUserStatus';
+
 export const setUserStatus = (status: string): AnyAction => ({ type: SET_USER_STATUS, status });
 
 const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
+
 export const changeProfileFetchingStatus = (isFetching: boolean): AnyAction => ({ type: CHANGE_PROFILE_FETCHING_STATUS, isFetching });
 
 export const changeVisitedProfile = (id: UserId) => async (dispatch: any) => {
   const dataResponse = await profileAPI.getUserData(id);
+
   if (dataResponse.status === 200) {
     dispatch(setVisitedUserProfile({ ...dataResponse.data }));
   }
 
   const statusResponse = await profileAPI.getStatus(id);
+
   if (statusResponse.status === 200) {
     dispatch(setUserStatus(statusResponse.data));
   }
@@ -46,6 +53,7 @@ export const changeProfileAvatar = (avatar: File) => async (dispatch: any) => {
 
   if (idResponse.data.resultCode === 0) {
     const response = await profileAPI.changeAvatar(avatar);
+
     if (response.data.resultCode === 0) {
       dispatch(changeVisitedProfile(idResponse.data.data.id));
     }
@@ -57,6 +65,7 @@ export const changeProfileInfo = (info: ProfileInfoPayload) => async (dispatch: 
 
   if (idResponse.data.resultCode === 0) {
     const response = await profileAPI.changeInfo(info);
+
     if (response.data.resultCode === 0) {
       dispatch(changeVisitedProfile(idResponse.data.data.id));
     }
@@ -113,16 +122,19 @@ export const profileReducer = (state: ProfileState = initialState, action: AnyAc
         ...state,
         isFetching: action.isFetching,
       };
+
     case ADD_POST:
       return {
         ...state,
         posts: [...state.posts, { id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: action.text }],
       };
+
     case DELETE_POST:
       return {
         ...state,
         posts: state.posts.filter((item, id) => id !== action.id),
       };
+
     case SET_VISITED_USER_PROFILE:
       return {
         ...state,
@@ -131,6 +143,7 @@ export const profileReducer = (state: ProfileState = initialState, action: AnyAc
           status: state.visitedProfile.status,
         },
       };
+
     case SET_USER_STATUS:
       return {
         ...state,
@@ -139,6 +152,7 @@ export const profileReducer = (state: ProfileState = initialState, action: AnyAc
           status: action.status,
         },
       };
+
     default:
       return state;
   }

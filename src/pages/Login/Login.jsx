@@ -4,9 +4,9 @@ import {authLogIn, getCaptcha} from '../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {withRedirect} from "../../hoc";
-import {Field} from "../../ui/Field";
+import Field from "../../ui/Field";
 import s from './login.module.scss';
-import {Image} from "../../ui/Image";
+import Image from "../../ui/Image";
 
 const mapStateToProps = (state) => ({
   captcha: getCaptcha(state),
@@ -72,7 +72,7 @@ const LoginForm = ({authLogIn, captcha}) => {
           {errors.captcha && <span>{errors.captcha?.message || 'Error!'}</span>}
         </div>}
         <div className={s.form__button}>
-          <Button>Log In</Button>
+          <Button type='submit'>Log In</Button>
         </div>
       </form>
     </Field>

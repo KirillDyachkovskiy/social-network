@@ -1,6 +1,6 @@
 import s from './profileCard.module.scss';
-import {Field} from "../../ui/Field";
-import {Avatar} from "../../ui/Avatar";
+import Field from "../../ui/Field";
+import Avatar from "../../ui/Avatar";
 import Status from "../../ui/Status";
 import {Info} from "../Info";
 

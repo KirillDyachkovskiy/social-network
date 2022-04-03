@@ -4,9 +4,9 @@ import {compose} from 'redux';
 import {getMenu, getMessages, sendMessage} from '../../services/redux/reducer/messengerReducer';
 import Submit from '../../components/Submit';
 import {Sidebar} from "../../ui/Sidebar";
-import {Field} from "../../ui/Field";
+import Field from "../../ui/Field";
 import {useEffect, useRef} from "react";
-import {Message} from "../../ui/Message";
+import Message from "../../ui/Message";
 import s from './messenger.module.scss';
 
 const mapStateToProps = (state) => ({

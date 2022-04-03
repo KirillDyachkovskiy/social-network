@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import s from './submit.module.scss';
 import Button from '../../ui/Button';
-import { Field } from '../../ui/Field';
+import Field from '../../ui/Field';
 
 interface ISubmit {
   placeholder: string;
@@ -12,14 +12,14 @@ interface ISubmit {
 export default function Submit({ placeholder, children, onSubmit }: ISubmit) {
   const [inputValue, setInputValue] = useState<string>('');
 
-  function onButtonClick() {
+  const onButtonClick = () => {
     onSubmit(inputValue);
     setInputValue('');
-  }
+  };
 
-  function onInputChange(e: ChangeEvent<HTMLInputElement>) {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-  }
+  };
 
   return (
     <Field>
@@ -27,7 +27,6 @@ export default function Submit({ placeholder, children, onSubmit }: ISubmit) {
         <div className={s.submit}>
           <input
             autoComplete="off"
-            autoFocus
             value={inputValue}
             onChange={onInputChange}
             placeholder={placeholder}

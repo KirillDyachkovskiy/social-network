@@ -1,12 +1,12 @@
-import React, { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
 
-const Notfound = React.lazy(():any => import('./pages/Notfound'));
-const Messenger = React.lazy(():any => import('./pages/Messenger'));
-const Friends = React.lazy(():any => import('./pages/Friends'));
-const Profile = React.lazy(():any => import('./pages/Profile'));
-const Login = React.lazy(():any => import('./pages/Login'));
+const Notfound = lazy(():any => import('./pages/Notfound'));
+const Messenger = lazy(():any => import('./pages/Messenger'));
+const Friends = lazy(():any => import('./pages/Friends'));
+const Profile = lazy(():any => import('./pages/Profile'));
+const Login = lazy(():any => import('./pages/Login'));
 
 export default function App() {
   return (

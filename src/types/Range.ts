@@ -1,5 +1,5 @@
 type ZERO = 0;
-type Iterate<tuple extends ZERO[]> = [...tuple, 0];
+type Iterate<Tuple extends ZERO[]> = [...Tuple, 0];
 
 export type NumberRange<
   FROM extends number,

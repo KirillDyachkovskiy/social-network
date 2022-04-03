@@ -1,8 +1,8 @@
 import s from './post.module.scss';
-import {Field} from "../../ui/Field";
+import Field from "../../ui/Field";
 import {ANON_USER_AVATAR} from "../../constants";
-import {Cross} from "../../ui/Cross/Cross";
-import {Avatar} from "../../ui/Avatar";
+import Cross from "../../ui/Cross/Cross";
+import Avatar from "../../ui/Avatar";
 
 export const Post = ({id, text, likes, onClick, name, photo}) => {
   return (

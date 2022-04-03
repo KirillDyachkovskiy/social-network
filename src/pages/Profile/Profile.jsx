@@ -14,7 +14,7 @@ import {useEffect} from 'react';
 import {compose} from 'redux';
 import {withRedirect} from '../../hoc';
 import {ProfileCard} from "../../components/ProfileCard";
-import {Image} from "../../ui/Image";
+import Image from "../../ui/Image";
 import {ProfileWall} from "../../components/ProfileWall";
 import s from './profile.module.scss';
 import {ANON_USER_COVER} from "../../constants";

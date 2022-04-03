@@ -29,20 +29,24 @@ const state = {
 
 it('length of posts should be incremented', () => {
   const newState = profileReducer(state, addPost('Check'));
+
   expect(newState.posts.length).toBe(5);
 });
 
 it('text of new post should be correct', () => {
   const newState = profileReducer(state, addPost('Check'));
+
   expect(newState.posts[4].text).toBe('Check');
 });
 
 it('after removal length of posts should be decrement', () => {
   const newState = profileReducer(state, deletePost(2));
+
   expect(newState.posts.length).toBe(3);
 });
 
 it("after removal post with incorrect id length of posts shouldn't be decrement", () => {
   const newState = profileReducer(state, deletePost(10));
+
   expect(newState.posts.length).toBe(4);
 });

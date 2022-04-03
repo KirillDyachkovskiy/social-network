@@ -7,7 +7,7 @@ type Photos = {
 };
 export type User = {
   name: string;
-  id: number;
+  id: UserId;
   photos: Photos;
   status: null | string;
   followed: boolean;

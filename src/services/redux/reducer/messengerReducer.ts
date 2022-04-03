@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
 
 const SEND_MESSAGE = 'messenger/sendMessage';
+
 export const sendMessage = (text: string): AnyAction => ({ type: SEND_MESSAGE, text });
 
 type Chat = {
@@ -48,6 +49,7 @@ export const messengerReducer = (state = initialState, action: AnyAction) => {
           text: action.text,
         }],
       };
+
     default:
       return state;
   }

@@ -35,7 +35,6 @@ export default function Status({ status = ANON_USER_STATUS, changeProfileStatus 
       {(editMode) ? (
         <input
           className={s.input}
-          autoFocus
           value={localStatus}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
           onBlur={() => {

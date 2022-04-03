@@ -1,10 +1,15 @@
-import {Field} from "../Field";
+import { Field } from '../Field';
 import s from './message.module.scss';
 
-export const Message = ({type = 'to', children}) => {
+interface IMessage {
+  type?: 'to' | 'from';
+  children: string;
+}
+
+export default function Message({ type = 'to', children } : IMessage) {
   return (
     <div className={`${s.message} ${s[`message__${type}`]}`}>
       <Field color={type === 'to' ? 'grey' : 'blue'}>{children}</Field>
     </div>
-  )
+  );
 }

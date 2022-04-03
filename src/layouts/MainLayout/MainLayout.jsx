@@ -1,4 +1,4 @@
-import {Logo} from "../../ui/Logo";
+import Logo from "../../ui/Logo";
 import {LoginCard} from "../../components/LoginCard";
 import {Sidebar} from "../../ui/Sidebar";
 import {Outlet} from "react-router-dom";

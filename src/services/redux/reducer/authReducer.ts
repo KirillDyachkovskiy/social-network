@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import {
-  AuthData, Captcha, LoginMePayload, ProfileInfoPayload,
+  AuthData, Captcha, LoginMePayload,
 } from '../../../types/Api';
 import { authAPI, securityAPI } from '../../api';
 
@@ -10,13 +10,21 @@ const setUserData = (payload: AuthData): AnyAction => ({ type: SET_USER_DATA, pa
 const SET_CAPTCHA = 'auth/captcha';
 const setCaptchaSuccess = (payload: Captcha): AnyAction => ({ type: SET_CAPTCHA, payload });
 
+export const setCaptcha = () => async (dispatch: any) => {
+  const response = await securityAPI.getCaptcha();
+
+  dispatch(setCaptchaSuccess(response.data.url));
+};
+
 export const authMe = () => async (dispatch: any) => {
   const response = await authAPI.authMe();
+
   dispatch(setUserData(response.data.data));
 };
 
 export const authLogIn = (formData: LoginMePayload) => async (dispatch: any) => {
   const response = await authAPI.authLogIn(formData);
+
   if (response.data.resultCode === 0) {
     dispatch(authMe());
   }
@@ -27,17 +35,13 @@ export const authLogIn = (formData: LoginMePayload) => async (dispatch: any) => 
 
 export const authLogOut = () => async (dispatch: any) => {
   const response = await authAPI.authLogOut();
+
   if (response.data.resultCode === 0) {
     dispatch(authMe());
   }
 };
 
-export const setCaptcha = () => async (dispatch: any) => {
-  const response = await securityAPI.getCaptcha();
-  dispatch(setCaptchaSuccess(response.data.url));
-};
-
-type SidebarItem = { id: number; to: string, text: string };
+export type SidebarItem = { id: number; to: string, text: string };
 
 type AuthState = {
   sidebar: Array<SidebarItem>;
@@ -69,11 +73,13 @@ export const authReducer = (state: AuthState = initialState, action: AnyAction):
         ...state,
         authedUserData: action.payload,
       };
+
     case SET_CAPTCHA:
       return {
         ...state,
         captcha: action.payload,
       };
+
     default:
       return state;
   }

@@ -14,10 +14,10 @@ import {
 } from "../../services/redux/reducer/friendsReducer";
 import {useEffect} from "react";
 import Preloader from "../../ui/Preloader";
-import {Field} from "../../ui/Field";
+import Field from "../../ui/Field";
 import s from './friends.module.scss';
-import {UserCard} from "../../components/UserCard";
-import {Sidebar} from "../../ui/Sidebar";
+import UserCard from "../../components/UserCard";
+import {Paginator} from "../../ui/Sidebar";
 
 const mapStateToProps = (state) => ({
   isFetching: getFriendsIsFetching(state),
@@ -60,7 +60,7 @@ const FriendsStateless = ({
         </div>
       </Field>
       <div className={s.friends__paginator}>
-        <Sidebar type='paginator' items={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
+        <Paginator items={pagination} currentPage={currentPage} changePage={changePage} pageSize={pageSize}/>
       </div>
     </section>
   )

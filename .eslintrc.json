@@ -23,7 +23,6 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "prettier/prettier": "error",
         "padding-line-between-statements": [
             "error",
             {
@@ -47,6 +46,8 @@
             { "blankLine": "always", "prev": "function", "next": "*" },
             { "blankLine": "always", "prev": "*", "next": "function" }
         ],
-        "react/jsx-fragments": 0
+        "react/require-default-props": 0,
+        "react/jsx-fragments": 0,
+        "react/react-in-jsx-scope": 0
     }
 }
