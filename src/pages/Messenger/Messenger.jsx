@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {withRedirect} from '../../hoc';
 import {compose} from 'redux';
 import {getMenu, getMessages, sendMessage} from '../../services/redux/reducer/messengerReducer';
-import {Submit} from '../../ui/Submit';
+import Submit from '../../components/Submit';
 import {Sidebar} from "../../ui/Sidebar";
 import {Field} from "../../ui/Field";
 import {useEffect, useRef} from "react";

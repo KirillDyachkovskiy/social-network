@@ -5,7 +5,7 @@ import {
   deletePost,
   getPosts,
   getProfileIsFetching,
-  getVisitedProfile,
+  getVisitedProfile, changeProfileStatus,
 } from '../../services/redux/reducer/profileReducer';
 import {connect} from 'react-redux';
 import Preloader from '../../ui/Preloader';
@@ -32,6 +32,7 @@ const ProfileRouter = ({
                          changeVisitedProfile,
                          authedUser,
                          visitedProfile,
+                         changeProfileStatus,
                          changeProfileAvatar,
                          changeProfileInfo,
                          posts,
@@ -58,12 +59,12 @@ const ProfileRouter = ({
         <Image src={ANON_USER_COVER} alt='обложка пользователя'/>
       </div>
       <ProfileCard visitedProfile={visitedProfile} changeProfileAvatar={changeProfileAvatar}
-                   changeProfileInfo={changeProfileInfo} isOwner={id === authedUser.id} />
+                   changeProfileInfo={changeProfileInfo} isOwner={id === authedUser.id} changeProfileStatus={changeProfileStatus} />
       <ProfileWall name={fullName} photo={photo} posts={posts} addPost={addPost} deletePost={deletePost} />
     </section>
   )
 }
 
 export const Profile = compose(connect(mapStateToProps, {
-  changeProfileFetchingStatus, changeVisitedProfile, addPost, deletePost, changeProfileAvatar, changeProfileInfo,
+  changeProfileFetchingStatus, changeVisitedProfile, changeProfileStatus, addPost, deletePost, changeProfileAvatar, changeProfileInfo,
 }), withRedirect('/login'))(ProfileRouter);

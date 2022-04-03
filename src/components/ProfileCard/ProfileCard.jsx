@@ -1,10 +1,10 @@
 import s from './profileCard.module.scss';
 import {Field} from "../../ui/Field";
 import {Avatar} from "../../ui/Avatar";
-import {Status} from "../../ui/Status";
+import Status from "../../ui/Status";
 import {Info} from "../Info";
 
-export const ProfileCard = ({visitedProfile, changeProfileInfo, changeProfileAvatar, isOwner}) => {
+export const ProfileCard = ({visitedProfile, changeProfileInfo, changeProfileAvatar, changeProfileStatus, isOwner}) => {
   const {status, photos, ...userInfo} = visitedProfile;
 
   function onAvatarChange(e) {
@@ -27,7 +27,7 @@ export const ProfileCard = ({visitedProfile, changeProfileInfo, changeProfileAva
         </div>
         <div>
           <h1>{visitedProfile.fullName}</h1>
-          <Status status={status} isOwner={isOwner}/>
+          <Status status={status} changeProfileStatus={isOwner ? changeProfileStatus : undefined} />
           <Info userInfo={userInfo} isOwner={isOwner} changeProfileInfo={changeProfileInfo}/>
         </div>
       </div>

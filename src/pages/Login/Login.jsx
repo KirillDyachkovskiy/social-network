@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form';
-import {Button} from '../../ui/Button';
+import Button from '../../ui/Button';
 import {authLogIn, getCaptcha} from '../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';

@@ -1,8 +1,6 @@
-.form {
+.submit {
   max-height: 64px;
-  display: grid;
-  grid-template: 1fr / 1fr auto;
-  grid-template-areas: "input button";
+  display: flex;
   gap: 20px;
 
   &__input {
@@ -17,6 +15,6 @@
   }
 
   &__button {
-    margin: -8px;
+    margin: -8px -8px -8px auto;
   }
 }

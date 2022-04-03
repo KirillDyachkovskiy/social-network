@@ -1,5 +1,5 @@
 import {Field} from "../../ui/Field";
-import {Submit} from "../../ui/Submit";
+import Submit from "../Submit";
 import {Post} from "../Post";
 import s from './profileWall.module.scss';
 

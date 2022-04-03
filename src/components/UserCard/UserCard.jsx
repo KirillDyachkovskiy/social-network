@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {Button} from '../../ui/Button';
+import Button from '../../ui/Button';
 import s from './userCard.module.scss';
 import {Field} from "../../ui/Field";
 import {Avatar} from "../../ui/Avatar";

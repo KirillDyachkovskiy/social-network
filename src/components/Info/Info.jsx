@@ -1,6 +1,6 @@
 import s from './info.module.scss';
 import {useState} from "react";
-import {Button} from "../../ui/Button";
+import Button from "../../ui/Button";
 import {useForm} from "react-hook-form";
 
 export const Info = ({userInfo, isOwner, changeProfileInfo}) => {
