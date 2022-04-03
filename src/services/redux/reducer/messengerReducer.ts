@@ -1,13 +1,9 @@
 import { AnyAction } from 'redux';
+import { SidebarItem } from '../../../types/Api';
 
 const SEND_MESSAGE = 'messenger/sendMessage';
 
 export const sendMessage = (text: string): AnyAction => ({ type: SEND_MESSAGE, text });
-
-type Chat = {
-  id: number;
-  text: string;
-};
 
 export type Message = {
   id: number;
@@ -15,18 +11,18 @@ export type Message = {
   text: string;
 };
 
-type MessengerState = {
-  menu: Array<Chat>;
+export type MessengerState = {
+  menu: Array<SidebarItem>;
   messages: Array<Message>;
 };
 
 const initialState: MessengerState = {
   menu: [
-    { id: 0, text: 'Алексей Захаров' },
-    { id: 1, text: 'Петя Беляшёв' },
-    { id: 2, text: 'Айсен Николаев' },
-    { id: 3, text: 'Сергей Мальцев' },
-    { id: 4, text: 'Николай Колесов' },
+    { id: 0, to: '/1', text: 'Алексей Захаров' },
+    { id: 1, to: '/1', text: 'Петя Беляшёв' },
+    { id: 2, to: '/1', text: 'Айсен Николаев' },
+    { id: 3, to: '/1', text: 'Сергей Мальцев' },
+    { id: 4, to: '/1', text: 'Николай Колесов' },
   ],
   messages: [
     { id: 0, sender: 0, text: 'Hi' },
@@ -38,7 +34,7 @@ const initialState: MessengerState = {
 export const getMenu = (state: any) => state.messenger.menu;
 export const getMessages = (state: any) => state.messenger.messages;
 
-export const messengerReducer = (state = initialState, action: AnyAction) => {
+export const messengerReducer = (state : MessengerState = initialState, action: AnyAction) => {
   switch (action.type) {
     case SEND_MESSAGE:
       return {

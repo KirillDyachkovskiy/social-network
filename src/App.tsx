@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { MainLayout } from './layouts/MainLayout';
+import MainLayout from './layouts/MainLayout';
 
 const Notfound = lazy(():any => import('./pages/Notfound'));
 const Messenger = lazy(():any => import('./pages/Messenger'));

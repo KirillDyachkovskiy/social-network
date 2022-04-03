@@ -12,16 +12,13 @@ export type User = {
   status: null | string;
   followed: boolean;
 };
-export type UserId = {
-  userId: number;
-};
+export type UserId = number;
 type Response<T = Object> = {
   resultCode: ResultCode;
   messages: Array<string>;
   data: T;
 };
-export type Info = {
-  userId: number;
+export type UserInfo = {
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
   fullName: string;
@@ -37,7 +34,8 @@ export type Info = {
   };
 };
 export type Status = string;
-export type Avatar = File;
+export type UserAvatar = File;
+export type SidebarItem = { id: number; to: string, text: string };
 
 export type Captcha = {
   url: string;
@@ -72,7 +70,7 @@ export type UsersResponse = {
   error: null | string;
 };
 
-export type ProfileInfoPayload = Info;
+export type ProfileInfoPayload = UserInfo;
 export type ProfileInfoResponse = Response;
 
 export type ProfilePhotoPayload = {
@@ -86,7 +84,7 @@ export type ProfileStatusPayload = {
 export type ProfileStatusResponse = Response;
 
 export type UserInfoPayload = UserId;
-export type UserInfoResponse = Info & Photos;
+export type UserInfoResponse = UserInfo & Photos;
 
 export type UserStatusPayload = UserId;
 export type UserStatusResponse = string;

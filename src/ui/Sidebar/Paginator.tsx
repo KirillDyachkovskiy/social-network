@@ -16,7 +16,7 @@ export default function Paginator({
       <aside className={s.sidebar}>
         {items.map((page: number) => (
           <span
-            role="menuitem"
+            role="option"
             key={page}
             className={`${s.sidebar__item} ${page === currentPage ? s.sidebar__item_active : ''}`}
             onClick={() => changePage(page, pageSize)}

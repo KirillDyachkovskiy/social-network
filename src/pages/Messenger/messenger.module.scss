@@ -28,3 +28,16 @@
     top: 58px;
   }
 }
+
+.message {
+  max-width: 85%;
+  word-wrap: break-word;
+
+  &__to {
+    align-self: flex-end;
+  }
+
+  &__from {
+    align-self: flex-start;
+  }
+}

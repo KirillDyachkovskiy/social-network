@@ -72,14 +72,14 @@ export const changeProfileInfo = (info: ProfileInfoPayload) => async (dispatch: 
   }
 };
 
-type Post = {
+export type UserPost = {
   id: number;
   likes: number;
   text: string;
 };
 
 type ProfileState = {
-  posts: Array<Post>;
+  posts: Array<UserPost>;
   visitedProfile: any;
   isFetching: boolean;
 };
@@ -104,7 +104,7 @@ const initialState: ProfileState = {
     {
       id: 3,
       likes: Math.ceil(Math.random() * 100),
-      text: 'За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан',
+      text: 'За свою карьеру я пропустил более 9000 бросков,проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан',
     },
   ],
   visitedProfile: {},

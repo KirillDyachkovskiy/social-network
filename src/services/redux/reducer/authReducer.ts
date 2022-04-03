@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import {
-  AuthData, Captcha, LoginMePayload,
+  AuthData, Captcha, LoginMePayload, SidebarItem,
 } from '../../../types/Api';
 import { authAPI, securityAPI } from '../../api';
 
@@ -40,8 +40,6 @@ export const authLogOut = () => async (dispatch: any) => {
     dispatch(authMe());
   }
 };
-
-export type SidebarItem = { id: number; to: string, text: string };
 
 type AuthState = {
   sidebar: Array<SidebarItem>;

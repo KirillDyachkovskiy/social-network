@@ -12,4 +12,4 @@ const reducers = combineReducers({
   auth: authReducer,
 });
 
-export const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+export default createStore(reducers, applyMiddleware(thunkMiddleware));

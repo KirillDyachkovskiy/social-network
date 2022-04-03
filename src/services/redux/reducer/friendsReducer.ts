@@ -82,7 +82,8 @@ export const getTotalCount = (state: any) => state.friends.totalCount;
 export const getCurrentPage = (state: any) => state.friends.currentPage;
 const getPages = (state: any) => state.friends.pages;
 
-export const getPagination = createSelector([getPages, getCurrentPage], (pages, currentPage) => pages.filter((page: number, id: number, arr: Array<number>) => page === 1 || page === arr.length || (page >= currentPage - 5 && page <= currentPage + 5)));
+export const getPagination = createSelector([getPages, getCurrentPage], (pages, currentPage) => pages
+  .filter((page: number, id: number, arr: Array<number>) => page === 1 || page === arr.length || (page >= currentPage - 5 && page <= currentPage + 5)));
 export const getFollowingInProgress = (state: any) => state.friends.followingInProgress;
 export const getFriendsIsFetching = (state: any) => state.friends.isFetching;
 
@@ -118,7 +119,9 @@ export const friendsReducer = (state: FriendsState = initialState, action: AnyAc
     case CHANGE_FOLLOWING_STATUS:
       return {
         ...state,
-        followingInProgress: (action.isFollowing) ? [...state.followingInProgress, action.id] : state.followingInProgress.filter((userId: number) => userId !== action.id),
+        followingInProgress: (action.isFollowing)
+          ? [...state.followingInProgress, action.id]
+          : state.followingInProgress.filter((userId: number) => userId !== action.id),
       };
 
     case SET_CURRENT_PAGE:

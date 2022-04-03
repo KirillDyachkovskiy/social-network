@@ -3,7 +3,6 @@ import Button from '../../ui/Button';
 import {authLogIn, getCaptcha} from '../../services/redux/reducer/authReducer';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {withRedirect} from "../../hoc";
 import Field from "../../ui/Field";
 import s from './login.module.scss';
 import Image from "../../ui/Image";
@@ -12,7 +11,7 @@ const mapStateToProps = (state) => ({
   captcha: getCaptcha(state),
 });
 
-const LoginForm = ({authLogIn, captcha}) => {
+function Login({authLogIn, captcha}) {
   const {register, handleSubmit, formState: {errors}} = useForm({
     mode: 'all',
     defaultValues: {
@@ -20,7 +19,7 @@ const LoginForm = ({authLogIn, captcha}) => {
     },
   });
 
-  async function onSubmit(data) {
+  function onSubmit(data) {
     authLogIn(data);
   }
 
@@ -77,9 +76,8 @@ const LoginForm = ({authLogIn, captcha}) => {
       </form>
     </Field>
   )
-};
+}
 
-export const Login = compose(
+export default compose(
   connect(mapStateToProps, {authLogIn}),
-  withRedirect(-1),
-)(LoginForm);
+)(Login);

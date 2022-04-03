@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import { ActionCreator } from 'redux';
 import s from './submit.module.scss';
 import Button from '../../ui/Button';
 import Field from '../../ui/Field';
@@ -6,7 +7,7 @@ import Field from '../../ui/Field';
 interface ISubmit {
   placeholder: string;
   children: string;
-  onSubmit: (value: string) => void;
+  onSubmit: ActionCreator<string>;
 }
 
 export default function Submit({ placeholder, children, onSubmit }: ISubmit) {
@@ -24,7 +25,7 @@ export default function Submit({ placeholder, children, onSubmit }: ISubmit) {
   return (
     <Field>
       <Field color="grey">
-        <div className={s.submit}>
+        <form className={s.submit}>
           <input
             autoComplete="off"
             value={inputValue}
@@ -33,9 +34,9 @@ export default function Submit({ placeholder, children, onSubmit }: ISubmit) {
             className={s.submit__input}
           />
           <div className={s.submit__button}>
-            <Button onClick={onButtonClick} disabled={!!inputValue}>{children}</Button>
+            <Button type='submit' onClick={onButtonClick} disabled={!inputValue}>{children}</Button>
           </div>
-        </div>
+        </form>
       </Field>
     </Field>
   );
