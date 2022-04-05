@@ -3,7 +3,10 @@ import { SidebarItem } from '../../../types/Api';
 
 const SEND_MESSAGE = 'messenger/sendMessage';
 
-export const sendMessage = (text: string): AnyAction => ({ type: SEND_MESSAGE, text });
+export const sendMessage = (text: string): AnyAction => ({
+  type: SEND_MESSAGE,
+  text,
+});
 
 export type Message = {
   id: number;
@@ -34,16 +37,22 @@ const initialState: MessengerState = {
 export const getMenu = (state: any) => state.messenger.menu;
 export const getMessages = (state: any) => state.messenger.messages;
 
-export const messengerReducer = (state : MessengerState = initialState, action: AnyAction) => {
+export const messengerReducer = (
+  state: MessengerState = initialState,
+  action: AnyAction
+) => {
   switch (action.type) {
     case SEND_MESSAGE:
       return {
         ...state,
-        messages: [...state.messages, {
-          id: state.messages.length,
-          sender: Math.round(Math.random()),
-          text: action.text,
-        }],
+        messages: [
+          ...state.messages,
+          {
+            id: state.messages.length,
+            sender: Math.round(Math.random()),
+            text: action.text,
+          },
+        ],
       };
 
     default:

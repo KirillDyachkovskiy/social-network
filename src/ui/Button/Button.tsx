@@ -9,8 +9,11 @@ interface IButton {
 }
 
 export default function Button({
-  children, type = 'button', disabled = false, onClick,
-} : IButton) {
+  children,
+  type = 'button',
+  disabled = false,
+  onClick,
+}: IButton) {
   return (
     <button
       type={type === 'button' ? 'button' : 'submit'}

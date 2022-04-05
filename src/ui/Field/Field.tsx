@@ -8,8 +8,6 @@ interface IField {
 
 export default function Field({ children, color = 'white' }: IField) {
   return (
-    <div className={`${s.field} ${s[`field_color_${color}`]}`}>
-      {children}
-    </div>
+    <div className={`${s.field} ${s[`field_color_${color}`]}`}>{children}</div>
   );
 }

@@ -9,21 +9,30 @@ interface IPaginator {
 }
 
 export default function Paginator({
-  items, currentPage, changePage, pageSize,
+  items,
+  currentPage,
+  changePage,
+  pageSize,
 }: IPaginator) {
   return (
     <Field>
-      <aside className={s.sidebar}>
-        {items.map((page: number) => (
-          <span
-            role="option"
-            key={page}
-            className={`${s.sidebar__item} ${page === currentPage ? s.sidebar__item_active : ''}`}
-            onClick={() => changePage(page, pageSize)}
-          >
-            {page}
-          </span>
-        ))}
+      <aside>
+        <ul className={s.sidebar}>
+          {items.map((page: number) => (
+            <li>
+              <button
+                key={page}
+                type='button'
+                className={`${s.sidebar__item} ${
+                  page === currentPage ? s.sidebar__item_active : ''
+                }`}
+                onClick={() => changePage(page, pageSize)}
+              >
+                {page}
+              </button>
+            </li>
+          ))}
+        </ul>
       </aside>
     </Field>
   );

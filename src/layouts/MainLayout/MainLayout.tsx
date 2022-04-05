@@ -7,7 +7,10 @@ import LoginCard from '../../components/LoginCard';
 import { Sidebar } from '../../ui/Sidebar';
 import s from './mainLayout.module.scss';
 import {
-  authLogOut, authMe, getSidebar, getUserData,
+  authLogOut,
+  authMe,
+  getSidebar,
+  getUserData,
 } from '../../services/redux/reducer/authReducer';
 import Preloader from '../../ui/Preloader';
 import { AuthData, SidebarItem } from '../../types/Api';
@@ -25,7 +28,10 @@ interface IMainLayout {
 }
 
 function MainLayout({
-  sidebar, authedUserData, authMe, authLogOut,
+  sidebar,
+  authedUserData,
+  authMe,
+  authLogOut,
 }: IMainLayout) {
   useEffect(() => {
     authMe();
@@ -55,6 +61,6 @@ function MainLayout({
   );
 }
 
-export default compose(
-  connect(mapStateToProps, { authMe, authLogOut }),
-)(MainLayout);
+export default compose(connect(mapStateToProps, { authMe, authLogOut }))(
+  MainLayout
+);

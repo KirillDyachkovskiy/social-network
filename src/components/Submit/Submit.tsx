@@ -24,17 +24,23 @@ export default function Submit({ placeholder, children, onSubmit }: ISubmit) {
 
   return (
     <Field>
-      <Field color="grey">
+      <Field color='grey'>
         <form className={s.submit}>
           <input
-            autoComplete="off"
+            autoComplete='off'
             value={inputValue}
             onChange={onInputChange}
             placeholder={placeholder}
             className={s.submit__input}
           />
           <div className={s.submit__button}>
-            <Button type='submit' onClick={onButtonClick} disabled={!inputValue}>{children}</Button>
+            <Button
+              type='submit'
+              onClick={onButtonClick}
+              disabled={!inputValue}
+            >
+              {children}
+            </Button>
           </div>
         </form>
       </Field>

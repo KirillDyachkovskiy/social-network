@@ -16,7 +16,7 @@ export default function LoginCard({ login, authLogOut }: ILoginCard) {
   return (
     <div className={s.loginCard}>
       <p className={s.loginCard__nickname}>{login || ANON_USER_NAME}</p>
-      <button type="button" className={s.loginCard__logout} onClick={onClick}>
+      <button type='button' className={s.loginCard__logout} onClick={onClick}>
         <p className={s.loginCard__icon} />
       </button>
     </div>

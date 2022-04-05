@@ -10,16 +10,22 @@ interface ISidebar {
 export default function Sidebar({ items }: ISidebar) {
   return (
     <Field>
-      <aside className={s.sidebar}>
-        {items.map((item: SidebarItem) => (
-          <NavLink
-            key={item.id}
-            className={({ isActive }) => `${s.sidebar__item} ${(isActive) ? s.sidebar__item_active : ''}`}
-            to={item.to}
-          >
-            {item.text}
-          </NavLink>
-        ))}
+      <aside>
+        <ul className={s.sidebar}>
+          {items.map((item: SidebarItem) => (
+            <li>
+              <NavLink
+                key={item.id}
+                className={({ isActive }) =>
+                  `${s.sidebar__item} ${isActive ? s.sidebar__item_active : ''}`
+                }
+                to={item.to}
+              >
+                {item.text}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </aside>
     </Field>
   );

@@ -7,7 +7,10 @@ interface IStatus {
   changeProfileStatus?: (value: string) => void;
 }
 
-export default function Status({ status = ANON_USER_STATUS, changeProfileStatus }: IStatus) {
+export default function Status({
+  status = ANON_USER_STATUS,
+  changeProfileStatus,
+}: IStatus) {
   const [editMode, setEditMode] = useState(false);
   const [localStatus, setLocalStatus] = useState(status);
 
@@ -32,7 +35,7 @@ export default function Status({ status = ANON_USER_STATUS, changeProfileStatus 
 
   return (
     <div className={s.status}>
-      {(editMode) ? (
+      {editMode ? (
         <input
           className={s.input}
           value={localStatus}
@@ -41,15 +44,11 @@ export default function Status({ status = ANON_USER_STATUS, changeProfileStatus 
             toggleEditMode();
           }}
         />
-      )
-        : (
-          <p
-            className={s.label}
-            onDoubleClick={toggleEditMode}
-          >
-            {status}
-          </p>
-        )}
+      ) : (
+        <p className={s.label} onDoubleClick={toggleEditMode}>
+          {status}
+        </p>
+      )}
     </div>
   );
 }

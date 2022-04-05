@@ -56,22 +56,29 @@ function Friends({
     changePage(currentPage, pageSize);
   }, [changePage, currentPage, pageSize]);
 
-  useEffect(() => () => {
-    changeUsersFetchingStatus(true);
-  }, [changeUsersFetchingStatus]);
+  useEffect(
+    () => () => {
+      changeUsersFetchingStatus(true);
+    },
+    [changeUsersFetchingStatus]
+  );
 
   return (
     <section className={s.friends}>
       <Field>
         <div className={s.friends__content}>
-          {isFetching ? <Preloader /> : users.map((u: User) => (
-            <UserCard
-              key={u.id}
-              user={u}
-              toggleFollow={toggleFollow}
-              followingInProgress={followingInProgress}
-            />
-          ))}
+          {isFetching ? (
+            <Preloader />
+          ) : (
+            users.map((u: User) => (
+              <UserCard
+                key={u.id}
+                user={u}
+                toggleFollow={toggleFollow}
+                followingInProgress={followingInProgress}
+              />
+            ))
+          )}
         </div>
       </Field>
       <div className={s.friends__paginator}>
@@ -87,7 +94,11 @@ function Friends({
 }
 
 export default compose(
-  connect(mapStateToProps, { changePage, toggleFollow, changeUsersFetchingStatus }),
-  withRedirect,
+  connect(mapStateToProps, {
+    changePage,
+    toggleFollow,
+    changeUsersFetchingStatus,
+  }),
+  withRedirect
   // @ts-ignore
 )(Friends);

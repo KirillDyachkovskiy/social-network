@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 import {
-  UserAvatar, LoginMePayload, ProfileInfoPayload, Status, UserId,
+  UserAvatar,
+  LoginMePayload,
+  ProfileInfoPayload,
+  Status,
+  UserId,
 } from '../types/Api';
 
 const instance = axios.create({
@@ -37,7 +41,8 @@ export const profileAPI = {
 };
 
 export const usersAPI = {
-  getCurrentPageData: (page: number, count: number) => instance.get(`users?page=${page}&count=${count}`),
+  getCurrentPageData: (page: number, count: number) =>
+    instance.get(`users?page=${page}&count=${count}`),
   follow: (id: UserId) => instance.post(`follow/${id}`),
   unfollow: (id: UserId) => instance.delete(`follow/${id}`),
 };

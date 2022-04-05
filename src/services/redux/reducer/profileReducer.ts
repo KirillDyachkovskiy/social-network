@@ -1,7 +1,10 @@
 import { AnyAction } from 'redux';
 import { authAPI, profileAPI } from '../../api';
 import {
-  AuthData, ProfileInfoPayload, Status, UserId,
+  AuthData,
+  ProfileInfoPayload,
+  Status,
+  UserId,
 } from '../../../types/Api';
 
 const ADD_POST = 'profile/addPost';
@@ -10,19 +13,33 @@ export const addPost = (text: string): AnyAction => ({ type: ADD_POST, text });
 
 const DELETE_POST = 'profile/deletePost';
 
-export const deletePost = (id: number): AnyAction => ({ type: DELETE_POST, id });
+export const deletePost = (id: number): AnyAction => ({
+  type: DELETE_POST,
+  id,
+});
 
 const SET_VISITED_USER_PROFILE = 'profile/setVisitedUserProfile';
 
-export const setVisitedUserProfile = (data: AuthData): AnyAction => ({ type: SET_VISITED_USER_PROFILE, data });
+export const setVisitedUserProfile = (data: AuthData): AnyAction => ({
+  type: SET_VISITED_USER_PROFILE,
+  data,
+});
 
 const SET_USER_STATUS = 'profile/setUserStatus';
 
-export const setUserStatus = (status: string): AnyAction => ({ type: SET_USER_STATUS, status });
+export const setUserStatus = (status: string): AnyAction => ({
+  type: SET_USER_STATUS,
+  status,
+});
 
 const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
 
-export const changeProfileFetchingStatus = (isFetching: boolean): AnyAction => ({ type: CHANGE_PROFILE_FETCHING_STATUS, isFetching });
+export const changeProfileFetchingStatus = (
+  isFetching: boolean
+): AnyAction => ({
+  type: CHANGE_PROFILE_FETCHING_STATUS,
+  isFetching,
+});
 
 export const changeVisitedProfile = (id: UserId) => async (dispatch: any) => {
   const dataResponse = await profileAPI.getUserData(id);
@@ -40,13 +57,14 @@ export const changeVisitedProfile = (id: UserId) => async (dispatch: any) => {
   dispatch(changeProfileFetchingStatus(false));
 };
 
-export const changeProfileStatus = (status: Status) => async (dispatch: any) => {
-  const response = await profileAPI.changeStatus(status);
+export const changeProfileStatus =
+  (status: Status) => async (dispatch: any) => {
+    const response = await profileAPI.changeStatus(status);
 
-  if (response.data.resultCode === 0) {
-    dispatch(setUserStatus(status));
-  }
-};
+    if (response.data.resultCode === 0) {
+      dispatch(setUserStatus(status));
+    }
+  };
 
 export const changeProfileAvatar = (avatar: File) => async (dispatch: any) => {
   const idResponse = await authAPI.authMe();
@@ -60,17 +78,18 @@ export const changeProfileAvatar = (avatar: File) => async (dispatch: any) => {
   }
 };
 
-export const changeProfileInfo = (info: ProfileInfoPayload) => async (dispatch: any) => {
-  const idResponse = await authAPI.authMe();
+export const changeProfileInfo =
+  (info: ProfileInfoPayload) => async (dispatch: any) => {
+    const idResponse = await authAPI.authMe();
 
-  if (idResponse.data.resultCode === 0) {
-    const response = await profileAPI.changeInfo(info);
+    if (idResponse.data.resultCode === 0) {
+      const response = await profileAPI.changeInfo(info);
 
-    if (response.data.resultCode === 0) {
-      dispatch(changeVisitedProfile(idResponse.data.data.id));
+      if (response.data.resultCode === 0) {
+        dispatch(changeVisitedProfile(idResponse.data.data.id));
+      }
     }
-  }
-};
+  };
 
 export type UserPost = {
   id: number;
@@ -115,7 +134,10 @@ export const getVisitedProfile = (state: any) => state.profile.visitedProfile;
 export const getProfileIsFetching = (state: any) => state.profile.isFetching;
 export const getPosts = (state: any) => state.profile.posts;
 
-export const profileReducer = (state: ProfileState = initialState, action: AnyAction): ProfileState => {
+export const profileReducer = (
+  state: ProfileState = initialState,
+  action: AnyAction
+): ProfileState => {
   switch (action.type) {
     case CHANGE_PROFILE_FETCHING_STATUS:
       return {
@@ -126,7 +148,14 @@ export const profileReducer = (state: ProfileState = initialState, action: AnyAc
     case ADD_POST:
       return {
         ...state,
-        posts: [...state.posts, { id: state.posts.length, likes: Math.ceil(Math.random() * 100), text: action.text }],
+        posts: [
+          ...state.posts,
+          {
+            id: state.posts.length,
+            likes: Math.ceil(Math.random() * 100),
+            text: action.text,
+          },
+        ],
       };
 
     case DELETE_POST:

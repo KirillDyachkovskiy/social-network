@@ -11,12 +11,16 @@ interface IUserCard {
   followingInProgress: Array<UserId>;
 }
 
-export default function UserCard({ user, toggleFollow, followingInProgress }: IUserCard) {
+export default function UserCard({
+  user,
+  toggleFollow,
+  followingInProgress,
+}: IUserCard) {
   return (
-    <Field color="grey">
+    <Field color='grey'>
       <div className={s.user}>
         <Link to={`/${user.id}`}>
-          <Avatar size="medium" src={user.photos.small} />
+          <Avatar size='medium' src={user.photos.small} />
         </Link>
         <div className={s.user__box}>
           <p>{user.name}</p>
@@ -25,7 +29,7 @@ export default function UserCard({ user, toggleFollow, followingInProgress }: IU
             onClick={() => toggleFollow(user.id, user.followed)}
             disabled={followingInProgress.some((item) => item === user.id)}
           >
-            {(user.followed) ? 'Unfollow' : 'Follow'}
+            {user.followed ? 'Unfollow' : 'Follow'}
           </Button>
         </div>
       </div>

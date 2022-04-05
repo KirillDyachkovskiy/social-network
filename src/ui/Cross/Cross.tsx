@@ -6,5 +6,9 @@ interface ICross {
 }
 
 export default function Cross({ onClick }: ICross) {
-  return <button className={s.deleter} type="button" onClick={onClick}>×</button>;
+  return (
+    <button className={s.deleter} type='button' onClick={onClick}>
+      ×
+    </button>
+  );
 }

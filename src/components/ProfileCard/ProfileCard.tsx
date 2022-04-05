@@ -15,7 +15,11 @@ interface IProfileCard {
 }
 
 export default function ProfileCard({
-  visitedProfile, changeProfileInfo, changeProfileAvatar, changeProfileStatus, isOwner,
+  visitedProfile,
+  changeProfileInfo,
+  changeProfileAvatar,
+  changeProfileStatus,
+  isOwner,
 }: IProfileCard) {
   const { status, photos, ...userInfo } = visitedProfile;
 
@@ -29,18 +33,30 @@ export default function ProfileCard({
     <Field>
       <div className={s.card}>
         <div className={s.card__avatar}>
-          <Avatar src={photos?.large} size="large" />
+          <Avatar src={photos?.large} size='large' />
           {isOwner && (
-            <label className={s.card__label} htmlFor="profileCard">
-              <input id="profileCard" type="file" onChange={onAvatarChange} className={s.card__file} />
+            <label className={s.card__label} htmlFor='profileCard'>
+              <input
+                id='profileCard'
+                type='file'
+                onChange={onAvatarChange}
+                className={s.card__file}
+              />
               <span>Изменить аватар</span>
             </label>
           )}
         </div>
         <div>
           <h1>{visitedProfile.fullName}</h1>
-          <Status status={status} changeProfileStatus={isOwner ? changeProfileStatus : undefined} />
-          <Info userInfo={userInfo} isOwner={isOwner} changeProfileInfo={changeProfileInfo} />
+          <Status
+            status={status}
+            changeProfileStatus={isOwner ? changeProfileStatus : undefined}
+          />
+          <Info
+            userInfo={userInfo}
+            isOwner={isOwner}
+            changeProfileInfo={changeProfileInfo}
+          />
         </div>
       </div>
     </Field>

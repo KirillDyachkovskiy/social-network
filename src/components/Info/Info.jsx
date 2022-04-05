@@ -8,8 +8,8 @@ export default function Info({ userInfo, isOwner, changeProfileInfo }) {
     mode: 'onBlur',
     defaultValues: {
       ...userInfo,
-      fullName: userInfo.fullName,
-    },
+      fullName: userInfo.fullName
+    }
   });
 
   const [editMode, setEditMode] = useState(false);
@@ -38,7 +38,7 @@ export default function Info({ userInfo, isOwner, changeProfileInfo }) {
             <input
               className={s.info__input}
               {...register(key, {
-                required: 'Это поле обязательно!',
+                required: 'Это поле обязательно!'
               })}
             />
             {/* @ts-ignore */}
@@ -57,8 +57,8 @@ export default function Info({ userInfo, isOwner, changeProfileInfo }) {
               className={s.info__input}
               {...register(`contacts.${key}`, {
                 pattern: {
-                  value: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-                },
+                  value: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/
+                }
               })}
             />
           </div>

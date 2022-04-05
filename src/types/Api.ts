@@ -35,7 +35,7 @@ export type UserInfo = {
 };
 export type Status = string;
 export type UserAvatar = File;
-export type SidebarItem = { id: number; to: string, text: string };
+export type SidebarItem = { id: number; to: string; text: string };
 
 export type Captcha = {
   url: string;

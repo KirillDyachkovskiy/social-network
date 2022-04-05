@@ -4,13 +4,17 @@ import { useEffect } from 'react';
 import { ActionCreator, compose } from 'redux';
 import Preloader from '../../ui/Preloader';
 import {
-  addPost, changeProfileAvatar, changeProfileInfo,
+  addPost,
+  changeProfileAvatar,
+  changeProfileInfo,
   changeProfileFetchingStatus,
   changeVisitedProfile,
   deletePost,
   getPosts,
   getProfileIsFetching,
-  getVisitedProfile, changeProfileStatus, UserPost,
+  getVisitedProfile,
+  changeProfileStatus,
+  UserPost,
 } from '../../services/redux/reducer/profileReducer';
 import withRedirect from '../../hoc';
 import ProfileCard from '../../components/ProfileCard';
@@ -66,12 +70,15 @@ function Profile({
     return <Preloader />;
   }
 
-  const { fullName, photos: { small: photo } } = visitedProfile;
+  const {
+    fullName,
+    photos: { small: photo },
+  } = visitedProfile;
 
   return (
     <section className={s.profile}>
       <div className={s.profile__cover}>
-        <Image src={ANON_USER_COVER} alt="обложка пользователя" />
+        <Image src={ANON_USER_COVER} alt='обложка пользователя' />
       </div>
       <ProfileCard
         visitedProfile={visitedProfile}
@@ -92,13 +99,16 @@ function Profile({
   );
 }
 
-export default compose(connect(mapStateToProps, {
-  changeProfileFetchingStatus,
-  changeVisitedProfile,
-  changeProfileStatus,
-  addPost,
-  deletePost,
-  changeProfileAvatar,
-  changeProfileInfo,
+export default compose(
+  connect(mapStateToProps, {
+    changeProfileFetchingStatus,
+    changeVisitedProfile,
+    changeProfileStatus,
+    addPost,
+    deletePost,
+    changeProfileAvatar,
+    changeProfileInfo,
+  }),
+  withRedirect
   // @ts-ignore
-}), withRedirect)(Profile);
+)(Profile);
