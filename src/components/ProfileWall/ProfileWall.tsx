@@ -1,4 +1,3 @@
-import { ActionCreator } from 'redux';
 import Field from '../../ui/Field';
 import Submit from '../Submit';
 import s from './profileWall.module.scss';
@@ -42,7 +41,7 @@ function Post({
 
 interface IProfileWall {
   posts: Array<UserPost>;
-  addPost: ActionCreator<any>;
+  addPost: (text: string) => void;
   deletePost: (id: number) => void;
   name?: string;
   photo?: string;

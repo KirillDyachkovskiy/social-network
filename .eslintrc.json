@@ -53,6 +53,9 @@
         "react/react-in-jsx-scope": 0,
         "@typescript-eslint/no-shadow": 0,
         "@typescript-eslint/default-param-last": 0,
-        "react/jsx-props-no-spreading": 0
+        "react/jsx-props-no-spreading": 0,
+        "import/no-cycle": 0,
+        "no-useless-escape": 0,
+        "no-control-regex": 0
     }
 }

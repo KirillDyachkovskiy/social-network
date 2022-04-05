@@ -6,15 +6,16 @@ import {
   SidebarItem,
 } from '../../../types/Api';
 import { authAPI, securityAPI } from '../../api';
+import { TState } from '../store';
 
 const SET_USER_DATA = 'auth/setData';
-const setUserData = (payload: AuthData): AnyAction => ({
+const setUserData = (payload: AuthData) => ({
   type: SET_USER_DATA,
   payload,
 });
 
 const SET_CAPTCHA = 'auth/captcha';
-const setCaptchaSuccess = (payload: Captcha): AnyAction => ({
+const setCaptchaSuccess = (payload: Captcha) => ({
   type: SET_CAPTCHA,
   payload,
 });
@@ -53,8 +54,8 @@ export const authLogOut = () => async (dispatch: any) => {
 
 type AuthState = {
   sidebar: Array<SidebarItem>;
-  authedUserData: null | AuthData;
-  captcha: null | Captcha;
+  authedUserData: AuthData | null;
+  captcha: Captcha | null;
 };
 
 const initialState: AuthState = {
@@ -70,9 +71,9 @@ const initialState: AuthState = {
   captcha: null,
 };
 
-export const getUserData = (state: any) => state.auth.authedUserData;
-export const getSidebar = (state: any) => state.auth.sidebar;
-export const getCaptcha = (state: any) => state.auth.captcha;
+export const getUserData = (state: TState) => state.auth.authedUserData;
+export const getSidebar = (state: TState) => state.auth.sidebar;
+export const getCaptcha = (state: TState) => state.auth.captcha;
 
 export const authReducer = (
   state: AuthState = initialState,

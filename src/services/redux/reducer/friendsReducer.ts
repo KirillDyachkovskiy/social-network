@@ -2,15 +2,16 @@ import { createSelector } from 'reselect';
 import { AnyAction } from 'redux';
 import { usersAPI } from '../../api';
 import { User, UserId } from '../../../types/Api';
+import { TState } from '../store';
 
 const TOGGLE_FOLLOW = 'friends/toggleFollow';
-const toggleFollowSuccess = (id: UserId): AnyAction => ({
+const toggleFollowSuccess = (id: UserId) => ({
   type: TOGGLE_FOLLOW,
   id,
 });
 
 const SET_USERS = 'friends/setUsers';
-const setUsersList = (users: Array<User>, totalCount: number): AnyAction => ({
+const setUsersList = (users: Array<User>, totalCount: number) => ({
   type: SET_USERS,
   users,
   totalCount,
@@ -18,17 +19,14 @@ const setUsersList = (users: Array<User>, totalCount: number): AnyAction => ({
 
 const SET_CURRENT_PAGE = 'friends/setCurrentPage';
 
-export const setCurrentPage = (currentPage: number): AnyAction => ({
+export const setCurrentPage = (currentPage: number) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
 
 const CHANGE_FOLLOWING_STATUS = 'friends/setFollowingStatus';
 
-export const changeFollowingStatus = (
-  id: UserId,
-  isFollowing: boolean
-): AnyAction => ({
+export const changeFollowingStatus = (id: UserId, isFollowing: boolean) => ({
   type: CHANGE_FOLLOWING_STATUS,
   id,
   isFollowing,
@@ -36,14 +34,14 @@ export const changeFollowingStatus = (
 
 const CHANGE_USERS_FETCHING_STATUS = 'friends/changeUsersFetchingStatus';
 
-export const changeUsersFetchingStatus = (isFetching: boolean): AnyAction => ({
+export const changeUsersFetchingStatus = (isFetching: boolean) => ({
   type: CHANGE_USERS_FETCHING_STATUS,
   isFetching,
 });
 
 const SET_PAGES = 'friends/setPages';
 
-export const setPages = (pages: Array<number>): AnyAction => ({
+export const setPages = (pages: Array<number>) => ({
   type: SET_PAGES,
   pages,
 });
@@ -105,11 +103,11 @@ const initialState: FriendsState = {
   isFetching: true,
 };
 
-export const getUsers = (state: any) => state.friends.users;
-export const getPageSize = (state: any) => state.friends.pageSize;
-export const getTotalCount = (state: any) => state.friends.totalCount;
-export const getCurrentPage = (state: any) => state.friends.currentPage;
-const getPages = (state: any) => state.friends.pages;
+export const getUsers = (state: TState) => state.friends.users;
+export const getPageSize = (state: TState) => state.friends.pageSize;
+export const getTotalCount = (state: TState) => state.friends.totalCount;
+export const getCurrentPage = (state: TState) => state.friends.currentPage;
+const getPages = (state: TState) => state.friends.pages;
 
 export const getPagination = createSelector(
   [getPages, getCurrentPage],
@@ -121,9 +119,9 @@ export const getPagination = createSelector(
         (page >= currentPage - 5 && page <= currentPage + 5)
     )
 );
-export const getFollowingInProgress = (state: any) =>
+export const getFollowingInProgress = (state: TState) =>
   state.friends.followingInProgress;
-export const getFriendsIsFetching = (state: any) => state.friends.isFetching;
+export const getFriendsIsFetching = (state: TState) => state.friends.isFetching;
 
 export const friendsReducer = (
   state: FriendsState = initialState,

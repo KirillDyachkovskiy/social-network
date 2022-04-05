@@ -12,4 +12,7 @@ const reducers = combineReducers({
   auth: authReducer,
 });
 
+export type TStore = typeof reducers;
+export type TState = ReturnType<TStore>;
+
 export default createStore(reducers, applyMiddleware(thunkMiddleware));

@@ -3,40 +3,39 @@ import { authAPI, profileAPI } from '../../api';
 import {
   AuthData,
   ProfileInfoPayload,
-  Status,
+  TStatus,
   UserId,
 } from '../../../types/Api';
+import { TState } from '../store';
 
 const ADD_POST = 'profile/addPost';
 
-export const addPost = (text: string): AnyAction => ({ type: ADD_POST, text });
+export const addPost = (text: string) => ({ type: ADD_POST, text });
 
 const DELETE_POST = 'profile/deletePost';
 
-export const deletePost = (id: number): AnyAction => ({
+export const deletePost = (id: number) => ({
   type: DELETE_POST,
   id,
 });
 
 const SET_VISITED_USER_PROFILE = 'profile/setVisitedUserProfile';
 
-export const setVisitedUserProfile = (data: AuthData): AnyAction => ({
+export const setVisitedUserProfile = (data: AuthData) => ({
   type: SET_VISITED_USER_PROFILE,
   data,
 });
 
 const SET_USER_STATUS = 'profile/setUserStatus';
 
-export const setUserStatus = (status: string): AnyAction => ({
+export const setUserStatus = (status: TStatus) => ({
   type: SET_USER_STATUS,
   status,
 });
 
 const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
 
-export const changeProfileFetchingStatus = (
-  isFetching: boolean
-): AnyAction => ({
+export const changeProfileFetchingStatus = (isFetching: boolean) => ({
   type: CHANGE_PROFILE_FETCHING_STATUS,
   isFetching,
 });
@@ -58,7 +57,7 @@ export const changeVisitedProfile = (id: UserId) => async (dispatch: any) => {
 };
 
 export const changeProfileStatus =
-  (status: Status) => async (dispatch: any) => {
+  (status: TStatus) => async (dispatch: any) => {
     const response = await profileAPI.changeStatus(status);
 
     if (response.data.resultCode === 0) {
@@ -126,13 +125,14 @@ const initialState: ProfileState = {
       text: 'За свою карьеру я пропустил более 9000 бросков,проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан',
     },
   ],
-  visitedProfile: {},
+  visitedProfile: null,
   isFetching: true,
 };
 
-export const getVisitedProfile = (state: any) => state.profile.visitedProfile;
-export const getProfileIsFetching = (state: any) => state.profile.isFetching;
-export const getPosts = (state: any) => state.profile.posts;
+export const getVisitedProfile = (state: TState) =>
+  state.profile.visitedProfile;
+export const getProfileIsFetching = (state: TState) => state.profile.isFetching;
+export const getPosts = (state: TState) => state.profile.posts;
 
 export const profileReducer = (
   state: ProfileState = initialState,

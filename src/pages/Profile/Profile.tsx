@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { ActionCreator, compose } from 'redux';
+import { compose } from 'redux';
 import Preloader from '../../ui/Preloader';
 import {
   addPost,
@@ -23,28 +23,40 @@ import ProfileWall from '../../components/ProfileWall';
 import s from './profile.module.scss';
 import { ANON_USER_COVER } from '../../constants';
 import { getUserData } from '../../services/redux/reducer/authReducer';
-import { AuthData } from '../../types/Api';
+import {
+  AuthData,
+  ProfileInfoPayload,
+  TAvatar,
+  TStatus,
+  UserId,
+} from '../../types/Api';
+import { TState } from '../../services/redux/store';
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: TState) => ({
   isFetching: getProfileIsFetching(state),
   visitedProfile: getVisitedProfile(state),
   authedUser: getUserData(state),
   posts: getPosts(state),
 });
 
-interface IProfile {
-  changeProfileFetchingStatus: ActionCreator<any>;
-  changeVisitedProfile: ActionCreator<any>;
+type TStateProps = {
   authedUser: AuthData;
   visitedProfile: any;
-  changeProfileStatus: ActionCreator<any>;
-  changeProfileAvatar: ActionCreator<any>;
-  changeProfileInfo: ActionCreator<any>;
   posts: Array<UserPost>;
   isFetching: boolean;
-  addPost: ActionCreator<any>;
-  deletePost: ActionCreator<any>;
-}
+};
+
+type TDispatchProps = {
+  changeProfileFetchingStatus: (isFetching: boolean) => void;
+  changeVisitedProfile: (id: UserId) => void;
+  changeProfileStatus: (status: TStatus) => void;
+  changeProfileAvatar: (avatar: TAvatar) => void;
+  changeProfileInfo: (info: ProfileInfoPayload) => void;
+  addPost: (text: string) => void;
+  deletePost: (id: number) => void;
+};
+
+type TProfile = TStateProps & TDispatchProps;
 
 function Profile({
   changeProfileFetchingStatus,
@@ -58,12 +70,12 @@ function Profile({
   isFetching,
   addPost,
   deletePost,
-}: IProfile) {
+}: TProfile) {
   const { id = authedUser?.id } = useParams();
 
   useEffect(() => {
     changeProfileFetchingStatus(true);
-    changeVisitedProfile(id);
+    changeVisitedProfile(+id);
   }, [id, changeVisitedProfile, changeProfileFetchingStatus]);
 
   if (isFetching) {
@@ -100,7 +112,8 @@ function Profile({
 }
 
 export default compose(
-  connect(mapStateToProps, {
+  // @ts-ignore
+  connect<TStateProps, TDispatchProps, any, TState>(mapStateToProps, {
     changeProfileFetchingStatus,
     changeVisitedProfile,
     changeProfileStatus,
@@ -110,5 +123,4 @@ export default compose(
     changeProfileInfo,
   }),
   withRedirect
-  // @ts-ignore
 )(Profile);

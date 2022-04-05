@@ -1,5 +1,3 @@
-import { NumberRange } from './Range';
-
 type ResultCode = 0 | 1 | 10;
 type Photos = {
   small: null | string;
@@ -33,8 +31,8 @@ export type UserInfo = {
     mainLink: string;
   };
 };
-export type Status = string;
-export type UserAvatar = File;
+export type TStatus = string;
+export type TAvatar = File;
 export type SidebarItem = { id: number; to: string; text: string };
 
 export type Captcha = {
@@ -59,7 +57,7 @@ export type LoginMeResponse = Response;
 export type LogoutMeResponse = Response;
 
 export type UsersPayload = {
-  count?: NumberRange<1, 100>;
+  count?: number;
   page?: number;
   term?: string;
   friend: boolean;
@@ -79,7 +77,7 @@ export type ProfilePhotoPayload = {
 export type ProfilePhotoResponse = Response;
 
 export type ProfileStatusPayload = {
-  status: Status;
+  status: TStatus;
 };
 export type ProfileStatusResponse = Response;
 

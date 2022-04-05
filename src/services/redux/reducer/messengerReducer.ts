@@ -1,14 +1,15 @@
 import { AnyAction } from 'redux';
 import { SidebarItem } from '../../../types/Api';
+import { TState } from '../store';
 
 const SEND_MESSAGE = 'messenger/sendMessage';
 
-export const sendMessage = (text: string): AnyAction => ({
+export const sendMessage = (text: string) => ({
   type: SEND_MESSAGE,
   text,
 });
 
-export type Message = {
+export type TMessage = {
   id: number;
   sender: number;
   text: string;
@@ -16,7 +17,7 @@ export type Message = {
 
 export type MessengerState = {
   menu: Array<SidebarItem>;
-  messages: Array<Message>;
+  messages: Array<TMessage>;
 };
 
 const initialState: MessengerState = {
@@ -34,8 +35,8 @@ const initialState: MessengerState = {
   ],
 };
 
-export const getMenu = (state: any) => state.messenger.menu;
-export const getMessages = (state: any) => state.messenger.messages;
+export const getMenu = (state: TState) => state.messenger.menu;
+export const getMessages = (state: TState) => state.messenger.messages;
 
 export const messengerReducer = (
   state: MessengerState = initialState,

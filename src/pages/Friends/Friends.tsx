@@ -19,8 +19,9 @@ import s from './friends.module.scss';
 import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';
 import { User, UserId } from '../../types/Api';
+import { TState } from '../../services/redux/store';
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: TState) => ({
   isFetching: getFriendsIsFetching(state),
   users: getUsers(state),
   followingInProgress: getFollowingInProgress(state),
@@ -29,17 +30,22 @@ const mapStateToProps = (state: any) => ({
   pagination: getPagination(state),
 });
 
-interface IFriends {
-  pagination: any;
-  currentPage: number;
-  pageSize: number;
-  changePage: (currentPage: number, pageSize: number) => void;
+type TStateProps = {
   isFetching: boolean;
-  toggleFollow: () => void;
-  changeUsersFetchingStatus: (value: boolean) => void;
-  followingInProgress: Array<UserId>;
   users: Array<User>;
-}
+  followingInProgress: Array<UserId>;
+  pageSize: number;
+  currentPage: number;
+  pagination: Array<number>;
+};
+
+type TDispatchProps = {
+  changePage: (currentPage: number, pageSize: number) => void;
+  toggleFollow: (id: UserId, followed: boolean) => void;
+  changeUsersFetchingStatus: (value: boolean) => void;
+};
+
+type TFriends = TStateProps & TDispatchProps;
 
 function Friends({
   pagination,
@@ -51,7 +57,7 @@ function Friends({
   changeUsersFetchingStatus,
   followingInProgress,
   users,
-}: IFriends) {
+}: TFriends) {
   useEffect(() => {
     changePage(currentPage, pageSize);
   }, [changePage, currentPage, pageSize]);
@@ -94,11 +100,10 @@ function Friends({
 }
 
 export default compose(
-  connect(mapStateToProps, {
+  connect<TStateProps, TDispatchProps, never, TState>(mapStateToProps, {
     changePage,
     toggleFollow,
     changeUsersFetchingStatus,
   }),
   withRedirect
-  // @ts-ignore
 )(Friends);

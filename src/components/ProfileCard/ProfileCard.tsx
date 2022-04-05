@@ -4,13 +4,13 @@ import Field from '../../ui/Field';
 import Avatar from '../../ui/Avatar';
 import Status from '../../ui/Status';
 import Info from '../Info';
-import { UserAvatar } from '../../types/Api';
+import { ProfileInfoPayload, TAvatar, TStatus } from '../../types/Api';
 
 interface IProfileCard {
   visitedProfile: any;
-  changeProfileInfo: () => void;
-  changeProfileAvatar: (file: UserAvatar) => void;
-  changeProfileStatus: () => void;
+  changeProfileStatus: (status: TStatus) => void;
+  changeProfileAvatar: (avatar: TAvatar) => void;
+  changeProfileInfo: (info: ProfileInfoPayload) => void;
   isOwner: boolean;
 }
 

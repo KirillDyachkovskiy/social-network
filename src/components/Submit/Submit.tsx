@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from 'react';
-import { ActionCreator } from 'redux';
 import s from './submit.module.scss';
 import Button from '../../ui/Button';
 import Field from '../../ui/Field';
@@ -7,7 +6,7 @@ import Field from '../../ui/Field';
 interface ISubmit {
   placeholder: string;
   children: string;
-  onSubmit: ActionCreator<string>;
+  onSubmit: (text: string) => void;
 }
 
 export default function Submit({ placeholder, children, onSubmit }: ISubmit) {

@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
-import { ActionCreator, compose } from 'redux';
+import { compose } from 'redux';
 import { useEffect, useRef } from 'react';
 import withRedirect from '../../hoc';
 import {
   getMenu,
   getMessages,
-  MessengerState,
   sendMessage,
+  TMessage,
 } from '../../services/redux/reducer/messengerReducer';
 import Submit from '../../components/Submit';
 import { Sidebar } from '../../ui/Sidebar';
 import Field from '../../ui/Field';
 import s from './messenger.module.scss';
+import { TState } from '../../services/redux/store';
+import { SidebarItem } from '../../types/Api';
 
 interface IMessage {
   type?: 'to' | 'from';
@@ -26,16 +28,23 @@ function Message({ type = 'to', children }: IMessage) {
   );
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: TState) => ({
   menu: getMenu(state),
   messages: getMessages(state),
 });
 
-interface IMenu extends MessengerState {
-  sendMessage: ActionCreator<any>;
-}
+type TStateProps = {
+  menu: Array<SidebarItem>;
+  messages: Array<TMessage>;
+};
 
-function Messenger({ menu, messages, sendMessage }: IMenu) {
+type TDispatchProps = {
+  sendMessage: (text: string) => void;
+};
+
+type TMessenger = TStateProps & TDispatchProps;
+
+function Messenger({ menu, messages, sendMessage }: TMessenger) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,7 +56,7 @@ function Messenger({ menu, messages, sendMessage }: IMenu) {
       <div className={s.messenger__content}>
         <Field>
           <div className={s.messenger__messages}>
-            {messages.map((message) => (
+            {messages.map((message: TMessage) => (
               <Message key={message.id} type={message.sender ? 'from' : 'to'}>
                 {message.text}
               </Message>
@@ -69,7 +78,8 @@ function Messenger({ menu, messages, sendMessage }: IMenu) {
 }
 
 export default compose(
-  connect(mapStateToProps, { sendMessage }),
+  connect<TStateProps, TDispatchProps, never, TState>(mapStateToProps, {
+    sendMessage,
+  }),
   withRedirect
-  // @ts-ignore
 )(Messenger);

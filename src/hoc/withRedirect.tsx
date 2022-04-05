@@ -2,24 +2,20 @@ import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ComponentType } from 'react';
 import { getUserData } from '../services/redux/reducer/authReducer';
-import { AuthData } from '../types/Api';
+import { TState } from '../services/redux/store';
 
-interface IWithRedirect {
-  authedUser: AuthData;
-}
-
-export default (WrappedComponent: ComponentType) => {
-  const mapStateToProps = (state: any) => ({
+export default function withRedirect<T>(WrappedComponent: ComponentType<T>) {
+  const mapStateToProps = (state: TState) => ({
     authedUser: getUserData(state),
   });
 
-  function RedirectedComponent({ authedUser, ...props }: IWithRedirect) {
+  function RedirectedComponent({ authedUser, ...props }: any) {
     return authedUser.id ? (
-      <WrappedComponent {...props} />
+      <WrappedComponent {...(props as T)} />
     ) : (
       <Navigate to='/login' />
     );
   }
 
   return connect(mapStateToProps)(RedirectedComponent);
-};
+}

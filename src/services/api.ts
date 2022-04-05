@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 import {
-  UserAvatar,
+  TAvatar,
   LoginMePayload,
   ProfileInfoPayload,
-  Status,
+  TStatus,
   UserId,
 } from '../types/Api';
 
@@ -25,8 +25,8 @@ export const authAPI = {
 export const profileAPI = {
   getUserData: (id: UserId) => instance.get(`profile/${id}`),
   getStatus: (id: UserId) => instance.get(`profile/status/${id}`),
-  changeStatus: (status: Status) => instance.put('profile/status', { status }),
-  changeAvatar: (avatar: UserAvatar) => {
+  changeStatus: (status: TStatus) => instance.put('profile/status', { status }),
+  changeAvatar: (avatar: TAvatar) => {
     const formData = new FormData();
 
     formData.append('image', avatar);

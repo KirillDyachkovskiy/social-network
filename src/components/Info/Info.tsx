@@ -1,64 +1,67 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import s from './info.module.scss';
 import Button from '../../ui/Button';
+import { ProfileInfoPayload, UserInfoPayload } from '../../types/Api';
 
-export default function Info({ userInfo, isOwner, changeProfileInfo }) {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+interface IInfo {
+  userInfo: UserInfoPayload;
+  isOwner: boolean;
+  changeProfileInfo: (info: ProfileInfoPayload) => void;
+}
+
+export default function Info({ userInfo, isOwner, changeProfileInfo }: IInfo) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     mode: 'onBlur',
     defaultValues: {
       ...userInfo,
-      fullName: userInfo.fullName
-    }
+      fullName: userInfo.fullName,
+    },
   });
 
   const [editMode, setEditMode] = useState(false);
 
   const { contacts, ...mainInfo } = userInfo;
 
-  function onSubmit(formData) {
+  function onSubmit(formData: UserInfoPayload) {
     changeProfileInfo(formData);
     setEditMode(false);
   }
 
   if (editMode) {
     return (
-      <form
-        className={s.info}
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className={s.info} onSubmit={handleSubmit(onSubmit)}>
         <p className={s.info__subtitle}>Main info</p>
         {Object.keys(mainInfo).map((key) => (
           <div className={s.info__item} key={key}>
-            <p className={s.info__p}>
-              {key}
-              :
-            </p>
-            {/* @ts-ignore */}
+            <p className={s.info__p}>{key}:</p>
             <input
               className={s.info__input}
               {...register(key, {
-                required: 'Это поле обязательно!'
+                required: 'Это поле обязательно!',
               })}
             />
-            {/* @ts-ignore */}
-            {errors[key] && <p className={s.info__p}>{errors[key]?.message || 'Error!'}</p>}
+            {errors[key] && (
+              <p className={s.info__p}>{errors[key]?.message || 'Error!'}</p>
+            )}
           </div>
         ))}
         <p className={s.info__subtitle}>Contacts</p>
         {Object.keys(contacts).map((key) => (
           <div className={s.info__item} key={key}>
-            <p className={s.info__p}>
-              {key}
-              :
-            </p>
-            {/* @ts-ignore */}
+            <p className={s.info__p}>{key}:</p>
             <input
               className={s.info__input}
               {...register(`contacts.${key}`, {
                 pattern: {
-                  value: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/
-                }
+                  value:
+                    /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+                },
               })}
             />
           </div>
@@ -73,22 +76,14 @@ export default function Info({ userInfo, isOwner, changeProfileInfo }) {
       <p className={s.info__subtitle}>Main info</p>
       {Object.keys(mainInfo).map((key) => (
         <div className={s.info__item} key={key}>
-          <p className={s.info__p}>
-            {key}
-            :
-          </p>
-          {/* @ts-ignore */}
+          <p className={s.info__p}>{key}:</p>
           <p>{mainInfo[key]}</p>
         </div>
       ))}
       <p className={s.info__subtitle}>Contacts</p>
       {Object.keys(contacts).map((key) => (
         <div className={s.info__item} key={key}>
-          <p className={s.info__p}>
-            {key}
-            :
-          </p>
-          {/* @ts-ignore */}
+          <p className={s.info__p}>{key}:</p>
           <p>{contacts[key]}</p>
         </div>
       ))}
