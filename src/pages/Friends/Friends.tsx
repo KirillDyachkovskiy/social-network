@@ -11,7 +11,7 @@ import {
   getPageSize,
   getPagination,
   getUsers,
-  toggleFollow,
+  toggleFollow
 } from '../../services/redux/reducer/friendsReducer';
 import Preloader from '../../ui/Preloader';
 import Field from '../../ui/Field';
@@ -27,7 +27,7 @@ const mapStateToProps = (state: TState) => ({
   followingInProgress: getFollowingInProgress(state),
   pageSize: getPageSize(state),
   currentPage: getCurrentPage(state),
-  pagination: getPagination(state),
+  pagination: getPagination(state)
 });
 
 type TStateProps = {
@@ -48,16 +48,16 @@ type TDispatchProps = {
 type TFriends = TStateProps & TDispatchProps;
 
 function Friends({
-  pagination,
-  currentPage,
-  pageSize,
-  changePage,
-  isFetching,
-  toggleFollow,
-  changeUsersFetchingStatus,
-  followingInProgress,
-  users,
-}: TFriends) {
+                   pagination,
+                   currentPage,
+                   pageSize,
+                   changePage,
+                   isFetching,
+                   toggleFollow,
+                   changeUsersFetchingStatus,
+                   followingInProgress,
+                   users
+                 }: TFriends) {
   useEffect(() => {
     changePage(currentPage, pageSize);
   }, [changePage, currentPage, pageSize]);
@@ -103,7 +103,7 @@ export default compose(
   connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, {
     changePage,
     toggleFollow,
-    changeUsersFetchingStatus,
+    changeUsersFetchingStatus
   }),
   withRedirect
 )(Friends);

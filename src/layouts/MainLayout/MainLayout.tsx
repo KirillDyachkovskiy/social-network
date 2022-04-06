@@ -24,12 +24,12 @@ const mapStateToProps = (state: TState) => ({
 type TStateProps = {
   sidebar: Array<SidebarItem>;
   authedUserData: AuthData;
-}
+};
 
 type TDispatchProps = {
   authMe: () => void;
   authLogOut: () => void;
-}
+};
 
 type TMainLayout = TStateProps & TDispatchProps;
 
@@ -67,6 +67,9 @@ function MainLayout({
   );
 }
 
-export default compose(connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, { authMe, authLogOut }))(
-  MainLayout
-);
+export default compose(
+  connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, {
+    authMe,
+    authLogOut,
+  })
+)(MainLayout);

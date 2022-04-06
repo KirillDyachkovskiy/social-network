@@ -8,7 +8,7 @@ import { AuthData } from '../types/Api';
 export default function withRedirect<T>(WrappedComponent: ComponentType<T>) {
   type TStateProps = {
     authedUser: AuthData;
-  }
+  };
 
   const mapStateToProps = (state: TState) => ({
     authedUser: getUserData(state),
@@ -22,5 +22,7 @@ export default function withRedirect<T>(WrappedComponent: ComponentType<T>) {
     return <Navigate to='/login' />;
   }
 
-  return connect<TStateProps, undefined, undefined, TState>(mapStateToProps)(RedirectedComponent);
+  return connect<TStateProps, undefined, undefined, TState>(mapStateToProps)(
+    RedirectedComponent
+  );
 }

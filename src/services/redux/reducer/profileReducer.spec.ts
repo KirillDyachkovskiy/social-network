@@ -34,7 +34,7 @@ const state = {
       twitter: null,
       website: null,
       youtube: null,
-      mainLink: null
+      mainLink: null,
     },
     fullName: null,
     userId: null,
@@ -42,8 +42,8 @@ const state = {
       small: null,
       large: null,
     },
-    status: null
-  }
+    status: null,
+  },
 };
 
 describe('tests for inserting and deleting posts', () => {
@@ -70,4 +70,4 @@ describe('tests for inserting and deleting posts', () => {
 
     expect(newState.posts.length).toBe(4);
   });
-})
+});
