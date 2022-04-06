@@ -7,11 +7,9 @@ import {
   addPost,
   changeProfileAvatar,
   changeProfileInfo,
-  changeProfileFetchingStatus,
   changeVisitedProfile,
   deletePost,
   getPosts,
-  getProfileIsFetching,
   getVisitedProfile,
   changeProfileStatus,
   UserPost,
@@ -33,21 +31,18 @@ import {
 import { TState } from '../../services/redux/store';
 
 const mapStateToProps = (state: TState) => ({
-  isFetching: getProfileIsFetching(state),
+  authedUserData: getUserData(state),
   visitedProfile: getVisitedProfile(state),
-  authedUser: getUserData(state),
   posts: getPosts(state),
 });
 
 type TStateProps = {
-  authedUser: AuthData;
+  authedUserData: AuthData;
   visitedProfile: any;
   posts: Array<UserPost>;
-  isFetching: boolean;
 };
 
 type TDispatchProps = {
-  changeProfileFetchingStatus: (isFetching: boolean) => void;
   changeVisitedProfile: (id: UserId) => void;
   changeProfileStatus: (status: TStatus) => void;
   changeProfileAvatar: (avatar: TAvatar) => void;
@@ -59,33 +54,27 @@ type TDispatchProps = {
 type TProfile = TStateProps & TDispatchProps;
 
 function Profile({
-  changeProfileFetchingStatus,
   changeVisitedProfile,
-  authedUser,
+  authedUserData,
   visitedProfile,
   changeProfileStatus,
   changeProfileAvatar,
   changeProfileInfo,
   posts,
-  isFetching,
   addPost,
   deletePost,
 }: TProfile) {
-  const { id = authedUser?.id } = useParams();
+  const { id = authedUserData.id } = useParams();
 
   useEffect(() => {
-    changeProfileFetchingStatus(true);
-    changeVisitedProfile(+id);
-  }, [id, changeVisitedProfile, changeProfileFetchingStatus]);
+    if (id) {
+      changeVisitedProfile(+id);
+    }
+  }, [id, changeVisitedProfile]);
 
-  if (isFetching) {
+  if (!visitedProfile) {
     return <Preloader />;
   }
-
-  const {
-    fullName,
-    photos: { small: photo },
-  } = visitedProfile;
 
   return (
     <section className={s.profile}>
@@ -96,13 +85,13 @@ function Profile({
         visitedProfile={visitedProfile}
         changeProfileAvatar={changeProfileAvatar}
         changeProfileInfo={changeProfileInfo}
-        isOwner={id === authedUser.id}
+        isOwner={id === authedUserData.id}
         changeProfileStatus={changeProfileStatus}
       />
       <ProfileWall
-        isOwner={id === authedUser.id}
-        name={fullName}
-        photo={photo}
+        isOwner={id === authedUserData.id}
+        name={visitedProfile.fullName}
+        photo={visitedProfile.photos?.small}
         posts={posts}
         addPost={addPost}
         deletePost={deletePost}
@@ -112,9 +101,7 @@ function Profile({
 }
 
 export default compose(
-  // @ts-ignore
   connect<TStateProps, TDispatchProps, any, TState>(mapStateToProps, {
-    changeProfileFetchingStatus,
     changeVisitedProfile,
     changeProfileStatus,
     addPost,

@@ -4,6 +4,7 @@ import {
   AuthData,
   ProfileInfoPayload,
   TStatus,
+  TVisitedProfile,
   UserId,
 } from '../../../types/Api';
 import { TState } from '../store';
@@ -33,13 +34,6 @@ export const setUserStatus = (status: TStatus) => ({
   status,
 });
 
-const CHANGE_PROFILE_FETCHING_STATUS = 'profile/changeProfileFetchingStatus';
-
-export const changeProfileFetchingStatus = (isFetching: boolean) => ({
-  type: CHANGE_PROFILE_FETCHING_STATUS,
-  isFetching,
-});
-
 export const changeVisitedProfile = (id: UserId) => async (dispatch: any) => {
   const dataResponse = await profileAPI.getUserData(id);
 
@@ -52,8 +46,6 @@ export const changeVisitedProfile = (id: UserId) => async (dispatch: any) => {
   if (statusResponse.status === 200) {
     dispatch(setUserStatus(statusResponse.data));
   }
-
-  dispatch(changeProfileFetchingStatus(false));
 };
 
 export const changeProfileStatus =
@@ -98,8 +90,7 @@ export type UserPost = {
 
 type ProfileState = {
   posts: Array<UserPost>;
-  visitedProfile: any;
-  isFetching: boolean;
+  visitedProfile: TVisitedProfile;
 };
 
 const initialState: ProfileState = {
@@ -125,13 +116,31 @@ const initialState: ProfileState = {
       text: 'За свою карьеру я пропустил более 9000 бросков,проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха. Майкл Джордан',
     },
   ],
-  visitedProfile: null,
-  isFetching: true,
+  visitedProfile: {
+    lookingForAJob: null,
+    lookingForAJobDescription: null,
+    contacts: {
+      github: null,
+      vk: null,
+      facebook: null,
+      instagram: null,
+      twitter: null,
+      website: null,
+      youtube: null,
+      mainLink: null,
+    },
+    fullName: null,
+    userId: null,
+    photos: {
+      small: null,
+      large: null,
+    },
+    status: null,
+  },
 };
 
 export const getVisitedProfile = (state: TState) =>
   state.profile.visitedProfile;
-export const getProfileIsFetching = (state: TState) => state.profile.isFetching;
 export const getPosts = (state: TState) => state.profile.posts;
 
 export const profileReducer = (
@@ -139,12 +148,6 @@ export const profileReducer = (
   action: AnyAction
 ): ProfileState => {
   switch (action.type) {
-    case CHANGE_PROFILE_FETCHING_STATUS:
-      return {
-        ...state,
-        isFetching: action.isFetching,
-      };
-
     case ADD_POST:
       return {
         ...state,

@@ -16,3 +16,6 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+// @ts-ignore
+window.store = store;

@@ -17,19 +17,25 @@ type Response<T = Object> = {
   data: T;
 };
 export type UserInfo = {
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
-  fullName: string;
+  lookingForAJob: boolean | null;
+  lookingForAJobDescription: string | null;
+  fullName: string | null;
   contacts: {
-    github: string;
-    vk: string;
-    facebook: string;
-    instagram: string;
-    twitter: string;
-    website: string;
-    youtube: string;
-    mainLink: string;
+    github: string | null;
+    vk: string | null;
+    facebook: string | null;
+    instagram: string | null;
+    twitter: string | null;
+    website: string | null;
+    youtube: string | null;
+    mainLink: string | null;
   };
+};
+export type TVisitedProfile = UserInfo & {
+  fullName: string | null;
+  userId: UserId | null;
+  photos: Photos;
+  status: TStatus | null;
 };
 export type TStatus = string;
 export type TAvatar = File;
@@ -40,9 +46,9 @@ export type Captcha = {
 };
 
 export type AuthData = {
-  id: number;
-  email: string;
-  login: string;
+  id: number | null;
+  email: string | null;
+  login: string | null;
 };
 export type AuthMeResponse = Response<AuthData>;
 

@@ -100,7 +100,7 @@ function Friends({
 }
 
 export default compose(
-  connect<TStateProps, TDispatchProps, never, TState>(mapStateToProps, {
+  connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, {
     changePage,
     toggleFollow,
     changeUsersFetchingStatus,

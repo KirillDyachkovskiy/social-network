@@ -29,7 +29,9 @@ export const setCaptcha = () => async (dispatch: any) => {
 export const authMe = () => async (dispatch: any) => {
   const response = await authAPI.authMe();
 
-  dispatch(setUserData(response.data.data));
+  if (response.data.resultCode === 0) {
+    dispatch(setUserData(response.data.data));
+  }
 };
 
 export const authLogIn =
@@ -54,7 +56,7 @@ export const authLogOut = () => async (dispatch: any) => {
 
 type AuthState = {
   sidebar: Array<SidebarItem>;
-  authedUserData: AuthData | null;
+  authedUserData: AuthData;
   captcha: Captcha | null;
 };
 
@@ -67,7 +69,11 @@ const initialState: AuthState = {
     { id: 4, to: '/friends', text: 'Friends' },
     { id: 5, to: '/settings', text: 'Settings' },
   ],
-  authedUserData: null,
+  authedUserData: {
+    id: null,
+    email: null,
+    login: null,
+  },
   captcha: null,
 };
 

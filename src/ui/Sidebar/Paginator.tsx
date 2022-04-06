@@ -19,9 +19,8 @@ export default function Paginator({
       <aside>
         <ul className={s.sidebar}>
           {items.map((page: number) => (
-            <li>
+            <li key={page}>
               <button
-                key={page}
                 type='button'
                 className={`${s.sidebar__item} ${
                   page === currentPage ? s.sidebar__item_active : ''

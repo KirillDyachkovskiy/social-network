@@ -21,19 +21,24 @@ const mapStateToProps = (state: TState) => ({
   sidebar: getSidebar(state),
 });
 
-interface IMainLayout {
+type TStateProps = {
   sidebar: Array<SidebarItem>;
   authedUserData: AuthData;
+}
+
+type TDispatchProps = {
   authMe: () => void;
   authLogOut: () => void;
 }
+
+type TMainLayout = TStateProps & TDispatchProps;
 
 function MainLayout({
   sidebar,
   authedUserData,
   authMe,
   authLogOut,
-}: IMainLayout) {
+}: TMainLayout) {
   useEffect(() => {
     authMe();
   }, [authMe]);
@@ -47,7 +52,7 @@ function MainLayout({
       <header className={s.layout__header}>
         <div className={s.layout__container}>
           <Logo />
-          <LoginCard login={authedUserData?.login} authLogOut={authLogOut} />
+          <LoginCard login={authedUserData.login} authLogOut={authLogOut} />
         </div>
       </header>
       <main className={`${s.layout__main} ${s.layout__container}`}>
@@ -62,7 +67,6 @@ function MainLayout({
   );
 }
 
-export default compose(connect(mapStateToProps, { authMe, authLogOut }))(
-  // @ts-ignore
+export default compose(connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, { authMe, authLogOut }))(
   MainLayout
 );

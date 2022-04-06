@@ -117,5 +117,5 @@ function Login({ authLogIn, captcha }: TLogin) {
 }
 
 export default compose(
-  connect<TStateProps, never, TOwnProps, TState>(mapStateToProps, { authLogIn })
+  connect<TStateProps, undefined, TOwnProps, TState>(mapStateToProps, { authLogIn })
 )(Login);

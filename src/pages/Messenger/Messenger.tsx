@@ -78,7 +78,7 @@ function Messenger({ menu, messages, sendMessage }: TMessenger) {
 }
 
 export default compose(
-  connect<TStateProps, TDispatchProps, never, TState>(mapStateToProps, {
+  connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, {
     sendMessage,
   }),
   withRedirect

@@ -13,9 +13,8 @@ export default function Sidebar({ items }: ISidebar) {
       <aside>
         <ul className={s.sidebar}>
           {items.map((item: SidebarItem) => (
-            <li>
+            <li key={item.id}>
               <NavLink
-                key={item.id}
                 className={({ isActive }) =>
                   `${s.sidebar__item} ${isActive ? s.sidebar__item_active : ''}`
                 }

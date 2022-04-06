@@ -2,7 +2,7 @@ import { ANON_USER_NAME } from '../../constants';
 import s from './loginCard.module.scss';
 
 interface ILoginCard {
-  login: string;
+  login: string | null;
   authLogOut: () => void;
 }
 
