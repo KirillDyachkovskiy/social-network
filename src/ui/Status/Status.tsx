@@ -3,7 +3,7 @@ import s from './status.module.scss';
 import { ANON_USER_STATUS } from '../../constants';
 
 interface IStatus {
-  status?: string;
+  status: string;
   changeProfileStatus?: (value: string) => void;
 }
 
@@ -12,10 +12,10 @@ export default function Status({
   changeProfileStatus,
 }: IStatus) {
   const [editMode, setEditMode] = useState(false);
-  const [localStatus, setLocalStatus] = useState(status);
+  const [localStatus, setLocalStatus] = useState(status || ANON_USER_STATUS);
 
   useEffect(() => {
-    setLocalStatus(status);
+    setLocalStatus(status || ANON_USER_STATUS);
   }, [status]);
 
   function toggleEditMode() {

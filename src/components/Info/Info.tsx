@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import s from './info.module.scss';
 import Button from '../../ui/Button';
-import { ProfileInfoPayload, UserInfoPayload } from '../../types/Api';
+import { ProfileInfoPayload, UserInfo } from '../../types/Api';
 
 interface IInfo {
-  userInfo: UserInfoPayload;
+  userInfo: UserInfo;
   isOwner: boolean;
   changeProfileInfo: (info: ProfileInfoPayload) => void;
 }
@@ -28,7 +28,7 @@ export default function Info({ userInfo, isOwner, changeProfileInfo }: IInfo) {
 
   const { contacts, ...mainInfo } = userInfo;
 
-  function onSubmit(formData: UserInfoPayload) {
+  function onSubmit(formData: UserInfo) {
     changeProfileInfo(formData);
     setEditMode(false);
   }

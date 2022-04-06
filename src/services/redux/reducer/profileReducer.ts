@@ -2,7 +2,7 @@ import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { profileAPI } from '../../api';
 import {
-  ProfileInfoPayload,
+  ResultCode,
   TStatus,
   TVisitedProfile,
   UserId,
@@ -59,7 +59,7 @@ export const changeProfileStatus =
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
     const response = await profileAPI.changeStatus(status);
 
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCode.Success) {
       dispatch(setUserStatus(status));
     }
   };
@@ -73,14 +73,14 @@ export const changeProfileAvatar =
     const response = await profileAPI.changeAvatar(avatar);
     const { id } = getUserData(getState());
 
-    if (response.data.resultCode === 0 && id) {
+    if (response.data.resultCode === ResultCode.Success && id) {
       await dispatch(changeVisitedProfile(id));
     }
   };
 
 export const changeProfileInfo =
   (
-    info: ProfileInfoPayload
+    info: UserInfo
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (
     dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
@@ -89,7 +89,7 @@ export const changeProfileInfo =
     const response = await profileAPI.changeInfo(info);
     const { id } = getUserData(getState());
 
-    if (response.data.resultCode === 0 && id) {
+    if (response.data.resultCode === ResultCode.Success && id) {
       await dispatch(changeVisitedProfile(id));
     }
   };
@@ -129,6 +129,7 @@ const initialState: ProfileState = {
     },
   ],
   visitedProfile: {
+    aboutMe: null,
     lookingForAJob: null,
     lookingForAJobDescription: null,
     contacts: {

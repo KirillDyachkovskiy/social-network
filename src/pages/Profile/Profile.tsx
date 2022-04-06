@@ -23,9 +23,10 @@ import { ANON_USER_COVER } from '../../constants';
 import { getUserData } from '../../services/redux/reducer/authReducer';
 import {
   AuthData,
-  ProfileInfoPayload,
+  UserInfo,
   TAvatar,
   TStatus,
+  TVisitedProfile,
   UserId,
 } from '../../types/Api';
 import { RootState } from '../../services/redux/store';
@@ -38,7 +39,7 @@ const mapStateToProps = (state: RootState) => ({
 
 type TStateProps = {
   authedUserData: AuthData;
-  visitedProfile: any;
+  visitedProfile: TVisitedProfile;
   posts: Array<UserPost>;
 };
 
@@ -46,7 +47,7 @@ type TDispatchProps = {
   changeVisitedProfile: (id: UserId) => void;
   changeProfileStatus: (status: TStatus) => void;
   changeProfileAvatar: (avatar: TAvatar) => void;
-  changeProfileInfo: (info: ProfileInfoPayload) => void;
+  changeProfileInfo: (info: UserInfo) => void;
   addPost: (text: string) => void;
   deletePost: (id: number) => void;
 };
@@ -72,7 +73,10 @@ function Profile({
     }
   }, [id, changeVisitedProfile]);
 
-  if (!visitedProfile) {
+  if (
+    visitedProfile.photos.small === null ||
+    visitedProfile.fullName === null
+  ) {
     return <Preloader />;
   }
 
@@ -91,7 +95,7 @@ function Profile({
       <ProfileWall
         isOwner={id === authedUserData.id}
         name={visitedProfile.fullName}
-        photo={visitedProfile.photos?.small}
+        photo={visitedProfile.photos.small}
         posts={posts}
         addPost={addPost}
         deletePost={deletePost}

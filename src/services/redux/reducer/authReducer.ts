@@ -2,9 +2,10 @@ import { AnyAction, Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
   AuthData,
-  TCaptcha,
   LoginMePayload,
+  ResultCode,
   SidebarItem,
+  TCaptcha,
 } from '../../../types/Api';
 import { authAPI, securityAPI } from '../../api';
 import { RootState } from '../store';
@@ -32,7 +33,7 @@ export const authMe =
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
     const response = await authAPI.authMe();
 
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCode.Success) {
       dispatch(setUserData(response.data.data));
     }
   };
@@ -44,10 +45,10 @@ export const authLogIn =
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
     const response = await authAPI.authLogIn(formData);
 
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCode.Success) {
       await dispatch(authMe());
     }
-    if (response.data.resultCode === 10) {
+    if (response.data.resultCode === ResultCode.CaptchaRequired) {
       await dispatch(setCaptcha());
     }
   };
@@ -57,7 +58,7 @@ export const authLogOut =
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
     const response = await authAPI.authLogOut();
 
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCode.Success) {
       await dispatch(authMe());
     }
   };

@@ -24,6 +24,7 @@ const state = {
     },
   ],
   visitedProfile: {
+    aboutMe: null,
     lookingForAJob: null,
     lookingForAJobDescription: null,
     contacts: {

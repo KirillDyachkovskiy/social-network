@@ -4,13 +4,14 @@ import Field from '../../ui/Field';
 import Avatar from '../../ui/Avatar';
 import Status from '../../ui/Status';
 import Info from '../Info';
-import { ProfileInfoPayload, TAvatar, TStatus } from '../../types/Api';
+import { TAvatar, TStatus, TVisitedProfile, UserInfo } from '../../types/Api';
+import { ANON_USER_STATUS } from '../../constants';
 
 interface IProfileCard {
-  visitedProfile: any;
+  visitedProfile: TVisitedProfile;
   changeProfileStatus: (status: TStatus) => void;
   changeProfileAvatar: (avatar: TAvatar) => void;
-  changeProfileInfo: (info: ProfileInfoPayload) => void;
+  changeProfileInfo: (info: UserInfo) => void;
   isOwner: boolean;
 }
 
@@ -49,7 +50,7 @@ export default function ProfileCard({
         <div>
           <h1>{visitedProfile.fullName}</h1>
           <Status
-            status={status}
+            status={status || ANON_USER_STATUS}
             changeProfileStatus={isOwner ? changeProfileStatus : undefined}
           />
           <Info

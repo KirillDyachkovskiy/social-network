@@ -1,4 +1,9 @@
-type ResultCode = 0 | 1 | 10;
+export enum ResultCode {
+  Success = 0,
+  Error = 1,
+  CaptchaRequired = 10,
+}
+
 type Photos = {
   small: null | string;
   large: null | string;
@@ -17,6 +22,7 @@ type Response<T = Object> = {
   data: T;
 };
 export type UserInfo = {
+  aboutMe: string | null;
   lookingForAJob: boolean | null;
   lookingForAJobDescription: string | null;
   fullName: string | null;

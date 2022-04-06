@@ -8,18 +8,11 @@ import { UserPost } from '../../services/redux/reducer/profileReducer';
 
 interface IPost extends UserPost {
   deletePost: (id: number) => void;
-  name?: string;
-  photo?: string;
+  name: string;
+  photo: string;
 }
 
-function Post({
-  id,
-  text,
-  likes,
-  deletePost,
-  name = ANON_USER_NAME,
-  photo = ANON_USER_AVATAR,
-}: IPost) {
+function Post({ id, text, likes, deletePost, name, photo }: IPost) {
   return (
     <Field>
       <div className={s.post}>
@@ -49,8 +42,8 @@ interface IProfileWall {
 }
 
 export default function ProfileWall({
-  name,
-  photo,
+  name = ANON_USER_NAME,
+  photo = ANON_USER_AVATAR,
   posts,
   addPost,
   deletePost,
