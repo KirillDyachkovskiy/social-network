@@ -1,12 +1,14 @@
 // @ts-nocheck
 import { useForm } from 'react-hook-form';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { useEffect } from 'react';
 import Button from '../../ui/Button';
 import {
   authLogIn,
-  getCaptcha, getUserData
+  getCaptcha,
+  getUserData,
 } from '../../services/redux/reducer/authReducer';
 import Field from '../../ui/Field';
 import s from './login.module.scss';
@@ -14,7 +16,6 @@ import Image from '../../ui/Image';
 import { TState } from '../../services/redux/store';
 import { AuthData, Captcha, LoginMePayload } from '../../types/Api';
 import withRedirect from '../../hoc';
-import { useEffect } from 'react';
 
 const mapStateToProps = (state: TState) => ({
   authedUserData: getUserData(state),
@@ -49,7 +50,7 @@ function Login({ authLogIn, authedUserData, captcha }: TLogin) {
     if (authedUserData.id) {
       navigate(-1);
     }
-  }, [authedUserData.id]);
+  }, [authedUserData, navigate]);
 
   function onSubmit(data: LoginMePayload) {
     authLogIn(data);
@@ -132,5 +133,5 @@ export default compose(
   connect<TStateProps, undefined, TOwnProps, TState>(mapStateToProps, {
     authLogIn,
   }),
-withRedirect
+  withRedirect
 )(Login);
