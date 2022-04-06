@@ -13,18 +13,18 @@ import {
 import Field from '../../ui/Field';
 import s from './login.module.scss';
 import Image from '../../ui/Image';
-import { TState } from '../../services/redux/store';
-import { AuthData, Captcha, LoginMePayload } from '../../types/Api';
+import { RootState } from '../../services/redux/store';
+import { AuthData, TCaptcha, LoginMePayload } from '../../types/Api';
 import withRedirect from '../../hoc';
 
-const mapStateToProps = (state: TState) => ({
+const mapStateToProps = (state: RootState) => ({
   authedUserData: getUserData(state),
   captcha: getCaptcha(state),
 });
 
 type TStateProps = {
   authedUserData: AuthData;
-  captcha: Captcha;
+  captcha: TCaptcha;
 };
 
 type TOwnProps = {
@@ -48,7 +48,7 @@ function Login({ authLogIn, authedUserData, captcha }: TLogin) {
 
   useEffect(() => {
     if (authedUserData.id) {
-      navigate(-1);
+      navigate('/');
     }
   }, [authedUserData, navigate]);
 
@@ -130,7 +130,7 @@ function Login({ authLogIn, authedUserData, captcha }: TLogin) {
 }
 
 export default compose(
-  connect<TStateProps, undefined, TOwnProps, TState>(mapStateToProps, {
+  connect<TStateProps, undefined, TOwnProps, RootState>(mapStateToProps, {
     authLogIn,
   }),
   withRedirect

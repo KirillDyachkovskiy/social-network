@@ -14,9 +14,9 @@ import {
 } from '../../services/redux/reducer/authReducer';
 import Preloader from '../../ui/Preloader';
 import { AuthData, SidebarItem } from '../../types/Api';
-import { TState } from '../../services/redux/store';
+import { RootState } from '../../services/redux/store';
 
-const mapStateToProps = (state: TState) => ({
+const mapStateToProps = (state: RootState) => ({
   authedUserData: getUserData(state),
   sidebar: getSidebar(state),
 });
@@ -68,7 +68,7 @@ function MainLayout({
 }
 
 export default compose(
-  connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, {
+  connect<TStateProps, TDispatchProps, undefined, RootState>(mapStateToProps, {
     authMe,
     authLogOut,
   })

@@ -32,7 +32,6 @@ export type UserInfo = {
   };
 };
 export type TVisitedProfile = UserInfo & {
-  fullName: string | null;
   userId: UserId | null;
   photos: Photos;
   status: TStatus | null;
@@ -41,15 +40,18 @@ export type TStatus = string;
 export type TAvatar = File;
 export type SidebarItem = { id: number; to: string; text: string };
 
-export type Captcha = {
-  url: string;
-};
+export type TCaptcha = string;
 
 export type AuthData = {
   id: number | null;
   email: string | null;
   login: string | null;
 };
+
+export type CaptchaResponse = {
+  url: TCaptcha;
+};
+
 export type AuthMeResponse = Response<AuthData>;
 
 export type LoginMePayload = {
@@ -62,12 +64,6 @@ export type LoginMeResponse = Response;
 
 export type LogoutMeResponse = Response;
 
-export type UsersPayload = {
-  count?: number;
-  page?: number;
-  term?: string;
-  friend: boolean;
-};
 export type UsersResponse = {
   items: Array<User>;
   totalCount: number;
@@ -77,23 +73,22 @@ export type UsersResponse = {
 export type ProfileInfoPayload = UserInfo;
 export type ProfileInfoResponse = Response;
 
-export type ProfilePhotoPayload = {
-  image: File;
-};
-export type ProfilePhotoResponse = Response;
+export type ProfilePhotoPayload = TAvatar;
+export type ProfilePhotoResponse = Response<Photos>;
 
-export type ProfileStatusPayload = {
-  status: TStatus;
-};
+export type ProfileStatusPayload = TStatus;
 export type ProfileStatusResponse = Response;
 
 export type UserInfoPayload = UserId;
 export type UserInfoResponse = UserInfo & Photos;
 
 export type UserStatusPayload = UserId;
-export type UserStatusResponse = string;
+export type UserStatusResponse = TStatus;
+
+export type UserCheckFollowResponse = boolean;
 
 export type UserFollowPayload = UserId;
-export type UserCheckFollowResponse = boolean;
+export type UserUnFollowPayload = UserId;
+
 export type UserFollowResponse = Response;
 export type UserUnfollowResponse = Response;

@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { SidebarItem } from '../../../types/Api';
-import { TState } from '../store';
+import { RootState } from '../store';
 
 const SEND_MESSAGE = 'messenger/sendMessage';
 
@@ -35,8 +35,8 @@ const initialState: MessengerState = {
   ],
 };
 
-export const getMenu = (state: TState) => state.messenger.menu;
-export const getMessages = (state: TState) => state.messenger.messages;
+export const getMenu = (state: RootState) => state.messenger.menu;
+export const getMessages = (state: RootState) => state.messenger.messages;
 
 export const messengerReducer = (
   state: MessengerState = initialState,

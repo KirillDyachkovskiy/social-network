@@ -1,11 +1,26 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 import {
-  TAvatar,
   LoginMePayload,
   ProfileInfoPayload,
-  TStatus,
-  UserId,
+  AuthMeResponse,
+  LoginMeResponse,
+  LogoutMeResponse,
+  ProfileInfoResponse,
+  ProfileStatusResponse,
+  ProfilePhotoResponse,
+  ProfileStatusPayload,
+  UserInfoPayload,
+  UserStatusPayload,
+  UserInfoResponse,
+  UserStatusResponse,
+  ProfilePhotoPayload,
+  UserFollowPayload,
+  UserUnFollowPayload,
+  UserUnfollowResponse,
+  UserFollowResponse,
+  UsersResponse,
+  CaptchaResponse,
 } from '../types/Api';
 
 const instance = axios.create({
@@ -17,36 +32,43 @@ const instance = axios.create({
 });
 
 export const authAPI = {
-  authMe: () => instance.get('auth/me'),
-  authLogIn: (data: LoginMePayload) => instance.post('/auth/login', data),
-  authLogOut: () => instance.delete('/auth/login'),
+  authMe: () => instance.get<AuthMeResponse>('auth/me'),
+  authLogIn: (data: LoginMePayload) =>
+    instance.post<LoginMeResponse>('/auth/login', data),
+  authLogOut: () => instance.delete<LogoutMeResponse>('/auth/login'),
 };
 
 export const profileAPI = {
-  getUserData: (id: UserId) => instance.get(`profile/${id}`),
-  getStatus: (id: UserId) => instance.get(`profile/status/${id}`),
-  changeStatus: (status: TStatus) => instance.put('profile/status', { status }),
-  changeAvatar: (avatar: TAvatar) => {
+  getUserData: (id: UserInfoPayload) =>
+    instance.get<UserInfoResponse>(`profile/${id}`),
+  getStatus: (id: UserStatusPayload) =>
+    instance.get<UserStatusResponse>(`profile/status/${id}`),
+  changeStatus: (status: ProfileStatusPayload) =>
+    instance.put<ProfileStatusResponse>('profile/status', { status }),
+  changeAvatar: (avatar: ProfilePhotoPayload) => {
     const formData = new FormData();
 
     formData.append('image', avatar);
 
-    return instance.put('profile/photo', formData, {
+    return instance.put<ProfilePhotoResponse>('profile/photo', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
   },
-  changeInfo: (info: ProfileInfoPayload) => instance.put('profile', info),
+  changeInfo: (info: ProfileInfoPayload) =>
+    instance.put<ProfileInfoResponse>('profile', info),
 };
 
 export const usersAPI = {
   getCurrentPageData: (page: number, count: number) =>
-    instance.get(`users?page=${page}&count=${count}`),
-  follow: (id: UserId) => instance.post(`follow/${id}`),
-  unfollow: (id: UserId) => instance.delete(`follow/${id}`),
+    instance.get<UsersResponse>(`users?page=${page}&count=${count}`),
+  follow: (id: UserFollowPayload) =>
+    instance.post<UserFollowResponse>(`follow/${id}`),
+  unfollow: (id: UserUnFollowPayload) =>
+    instance.delete<UserUnfollowResponse>(`follow/${id}`),
 };
 
 export const securityAPI = {
-  getCaptcha: () => instance.get('security/get-captcha-url'),
+  getCaptcha: () => instance.get<CaptchaResponse>('security/get-captcha-url'),
 };

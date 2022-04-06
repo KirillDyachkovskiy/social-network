@@ -12,7 +12,8 @@ const reducers = combineReducers({
   auth: authReducer,
 });
 
-export type TStore = typeof reducers;
-export type TState = ReturnType<TStore>;
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
-export default createStore(reducers, applyMiddleware(thunkMiddleware));
+export type RootState = ReturnType<typeof store.getState>;
+
+export default store;

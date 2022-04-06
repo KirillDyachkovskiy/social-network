@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ComponentType } from 'react';
 import { getUserData } from '../services/redux/reducer/authReducer';
-import { TState } from '../services/redux/store';
+import { RootState } from '../services/redux/store';
 import { AuthData } from '../types/Api';
 
 export default function withRedirect<T>(WrappedComponent: ComponentType<T>) {
@@ -10,7 +10,7 @@ export default function withRedirect<T>(WrappedComponent: ComponentType<T>) {
     authedUser: AuthData;
   };
 
-  const mapStateToProps = (state: TState) => ({
+  const mapStateToProps = (state: RootState) => ({
     authedUser: getUserData(state),
   });
 
@@ -22,7 +22,7 @@ export default function withRedirect<T>(WrappedComponent: ComponentType<T>) {
     return <Navigate to='/login' />;
   }
 
-  return connect<TStateProps, undefined, undefined, TState>(mapStateToProps)(
+  return connect<TStateProps, undefined, undefined, RootState>(mapStateToProps)(
     RedirectedComponent
   );
 }

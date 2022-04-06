@@ -28,9 +28,9 @@ import {
   TStatus,
   UserId,
 } from '../../types/Api';
-import { TState } from '../../services/redux/store';
+import { RootState } from '../../services/redux/store';
 
-const mapStateToProps = (state: TState) => ({
+const mapStateToProps = (state: RootState) => ({
   authedUserData: getUserData(state),
   visitedProfile: getVisitedProfile(state),
   posts: getPosts(state),
@@ -101,7 +101,7 @@ function Profile({
 }
 
 export default compose(
-  connect<TStateProps, TDispatchProps, any, TState>(mapStateToProps, {
+  connect<TStateProps, TDispatchProps, any, RootState>(mapStateToProps, {
     changeVisitedProfile,
     changeProfileStatus,
     addPost,

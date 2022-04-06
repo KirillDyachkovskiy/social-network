@@ -4,25 +4,21 @@ import { useEffect } from 'react';
 import withRedirect from '../../hoc';
 import {
   changePage,
-  changeUsersFetchingStatus,
   getCurrentPage,
   getFollowingInProgress,
-  getFriendsIsFetching,
   getPageSize,
   getPagination,
   getUsers,
   toggleFollow,
 } from '../../services/redux/reducer/friendsReducer';
-import Preloader from '../../ui/Preloader';
 import Field from '../../ui/Field';
 import s from './friends.module.scss';
 import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';
 import { User, UserId } from '../../types/Api';
-import { TState } from '../../services/redux/store';
+import { RootState } from '../../services/redux/store';
 
-const mapStateToProps = (state: TState) => ({
-  isFetching: getFriendsIsFetching(state),
+const mapStateToProps = (state: RootState) => ({
   users: getUsers(state),
   followingInProgress: getFollowingInProgress(state),
   pageSize: getPageSize(state),
@@ -31,7 +27,6 @@ const mapStateToProps = (state: TState) => ({
 });
 
 type TStateProps = {
-  isFetching: boolean;
   users: Array<User>;
   followingInProgress: Array<UserId>;
   pageSize: number;
@@ -42,7 +37,6 @@ type TStateProps = {
 type TDispatchProps = {
   changePage: (currentPage: number, pageSize: number) => void;
   toggleFollow: (id: UserId, followed: boolean) => void;
-  changeUsersFetchingStatus: (value: boolean) => void;
 };
 
 type TFriends = TStateProps & TDispatchProps;
@@ -52,9 +46,7 @@ function Friends({
   currentPage,
   pageSize,
   changePage,
-  isFetching,
   toggleFollow,
-  changeUsersFetchingStatus,
   followingInProgress,
   users,
 }: TFriends) {
@@ -62,29 +54,18 @@ function Friends({
     changePage(currentPage, pageSize);
   }, [changePage, currentPage, pageSize]);
 
-  useEffect(
-    () => () => {
-      changeUsersFetchingStatus(true);
-    },
-    [changeUsersFetchingStatus]
-  );
-
   return (
     <section className={s.friends}>
       <Field>
         <div className={s.friends__content}>
-          {isFetching ? (
-            <Preloader />
-          ) : (
-            users.map((u: User) => (
-              <UserCard
-                key={u.id}
-                user={u}
-                toggleFollow={toggleFollow}
-                followingInProgress={followingInProgress}
-              />
-            ))
-          )}
+          {users.map((u: User) => (
+            <UserCard
+              key={u.id}
+              user={u}
+              toggleFollow={toggleFollow}
+              followingInProgress={followingInProgress}
+            />
+          ))}
         </div>
       </Field>
       <div className={s.friends__paginator}>
@@ -100,10 +81,9 @@ function Friends({
 }
 
 export default compose(
-  connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, {
+  connect<TStateProps, TDispatchProps, undefined, RootState>(mapStateToProps, {
     changePage,
     toggleFollow,
-    changeUsersFetchingStatus,
   }),
   withRedirect
 )(Friends);

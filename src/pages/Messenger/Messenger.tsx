@@ -12,7 +12,7 @@ import Submit from '../../components/Submit';
 import { Sidebar } from '../../ui/Sidebar';
 import Field from '../../ui/Field';
 import s from './messenger.module.scss';
-import { TState } from '../../services/redux/store';
+import { RootState } from '../../services/redux/store';
 import { SidebarItem } from '../../types/Api';
 
 interface IMessage {
@@ -28,7 +28,7 @@ function Message({ type = 'to', children }: IMessage) {
   );
 }
 
-const mapStateToProps = (state: TState) => ({
+const mapStateToProps = (state: RootState) => ({
   menu: getMenu(state),
   messages: getMessages(state),
 });
@@ -78,7 +78,7 @@ function Messenger({ menu, messages, sendMessage }: TMessenger) {
 }
 
 export default compose(
-  connect<TStateProps, TDispatchProps, undefined, TState>(mapStateToProps, {
+  connect<TStateProps, TDispatchProps, undefined, RootState>(mapStateToProps, {
     sendMessage,
   }),
   withRedirect

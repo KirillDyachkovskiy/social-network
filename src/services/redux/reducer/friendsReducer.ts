@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect';
 import { AnyAction } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { usersAPI } from '../../api';
 import { User, UserId } from '../../../types/Api';
-import { TState } from '../store';
+import { RootState } from '../store';
 
 const TOGGLE_FOLLOW = 'friends/toggleFollow';
 const toggleFollowSuccess = (id: UserId) => ({
@@ -18,36 +19,30 @@ const setUsersList = (users: Array<User>, totalCount: number) => ({
 });
 
 const SET_CURRENT_PAGE = 'friends/setCurrentPage';
-
-export const setCurrentPage = (currentPage: number) => ({
+const setCurrentPage = (currentPage: number) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
 
 const CHANGE_FOLLOWING_STATUS = 'friends/setFollowingStatus';
-
-export const changeFollowingStatus = (id: UserId, isFollowing: boolean) => ({
+const changeFollowingStatus = (id: UserId, isFollowing: boolean) => ({
   type: CHANGE_FOLLOWING_STATUS,
   id,
   isFollowing,
 });
 
-const CHANGE_USERS_FETCHING_STATUS = 'friends/changeUsersFetchingStatus';
-
-export const changeUsersFetchingStatus = (isFetching: boolean) => ({
-  type: CHANGE_USERS_FETCHING_STATUS,
-  isFetching,
-});
-
 const SET_PAGES = 'friends/setPages';
-
-export const setPages = (pages: Array<number>) => ({
+const setPages = (pages: Array<number>) => ({
   type: SET_PAGES,
   pages,
 });
 
 export const toggleFollow =
-  (id: UserId, followed: boolean) => async (dispatch: any) => {
+  (
+    id: UserId,
+    followed: boolean
+  ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
+  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
     dispatch(changeFollowingStatus(id, true));
     if (followed) {
       await usersAPI.unfollow(id);
@@ -60,54 +55,45 @@ export const toggleFollow =
   };
 
 export const changePage =
-  (page: number, pageSize: number) => async (dispatch: any) => {
-    dispatch(changeUsersFetchingStatus(true));
-
+  (
+    page: number,
+    pageSize: number
+  ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
+  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
     dispatch(setCurrentPage(page));
 
     const response = await usersAPI.getCurrentPageData(page, pageSize);
 
     dispatch(setUsersList(response.data.items, response.data.totalCount));
 
-    const pages = [];
+    const pages = Array.from(
+      Array(Math.ceil(response.data.totalCount / pageSize)),
+      (_, i: number) => i + 1
+    );
 
-    for (
-      let i = 1;
-      i <= Math.ceil(response.data.totalCount / pageSize);
-      i += 1
-    ) {
-      pages.push(i);
-    }
     dispatch(setPages(pages));
-
-    dispatch(changeUsersFetchingStatus(false));
   };
 
 type FriendsState = {
   users: Array<User>;
   pageSize: number;
-  totalCount: number;
   currentPage: number;
   pages: Array<number>;
   followingInProgress: Array<number>;
-  isFetching: boolean;
 };
 
 const initialState: FriendsState = {
   users: [],
   pageSize: 20,
-  totalCount: 0,
   currentPage: 1,
   pages: [],
   followingInProgress: [],
-  isFetching: true,
 };
 
-export const getUsers = (state: TState) => state.friends.users;
-export const getPageSize = (state: TState) => state.friends.pageSize;
-export const getTotalCount = (state: TState) => state.friends.totalCount;
-export const getCurrentPage = (state: TState) => state.friends.currentPage;
-const getPages = (state: TState) => state.friends.pages;
+export const getUsers = (state: RootState) => state.friends.users;
+export const getPageSize = (state: RootState) => state.friends.pageSize;
+export const getCurrentPage = (state: RootState) => state.friends.currentPage;
+const getPages = (state: RootState) => state.friends.pages;
 
 export const getPagination = createSelector(
   [getPages, getCurrentPage],
@@ -119,9 +105,8 @@ export const getPagination = createSelector(
         (page >= currentPage - 5 && page <= currentPage + 5)
     )
 );
-export const getFollowingInProgress = (state: TState) =>
+export const getFollowingInProgress = (state: RootState) =>
   state.friends.followingInProgress;
-export const getFriendsIsFetching = (state: TState) => state.friends.isFetching;
 
 export const friendsReducer = (
   state: FriendsState = initialState,
@@ -149,12 +134,6 @@ export const friendsReducer = (
         }),
       };
 
-    case CHANGE_USERS_FETCHING_STATUS:
-      return {
-        ...state,
-        isFetching: action.isFetching,
-      };
-
     case CHANGE_FOLLOWING_STATUS:
       return {
         ...state,
@@ -175,7 +154,6 @@ export const friendsReducer = (
       return {
         ...state,
         users: [...action.users],
-        totalCount: action.totalCount,
       };
 
     default:
