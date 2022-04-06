@@ -5,35 +5,25 @@ import { usersAPI } from '../../api';
 import { User, UserId } from '../../../types/Api';
 import { RootState } from '../store';
 
-const TOGGLE_FOLLOW = 'friends/toggleFollow';
 const toggleFollowSuccess = (id: UserId) => ({
-  type: TOGGLE_FOLLOW,
+  type: 'friends/toggleFollow',
   id,
 });
-
-const SET_USERS = 'friends/setUsers';
 const setUsersList = (users: Array<User>, totalCount: number) => ({
-  type: SET_USERS,
+  type: 'friends/setUsers',
   users,
   totalCount,
 });
-
-const SET_CURRENT_PAGE = 'friends/setCurrentPage';
 const setCurrentPage = (currentPage: number) => ({
-  type: SET_CURRENT_PAGE,
+  type: 'friends/setCurrentPage',
   currentPage,
 });
-
-const CHANGE_FOLLOWING_STATUS = 'friends/setFollowingStatus';
-const changeFollowingStatus = (id: UserId, isFollowing: boolean) => ({
-  type: CHANGE_FOLLOWING_STATUS,
+const changeFollowingStatus = (id: UserId) => ({
+  type: 'friends/setFollowingStatus',
   id,
-  isFollowing,
 });
-
-const SET_PAGES = 'friends/setPages';
 const setPages = (pages: Array<number>) => ({
-  type: SET_PAGES,
+  type: 'friends/setPages',
   pages,
 });
 
@@ -43,7 +33,7 @@ export const toggleFollow =
     followed: boolean
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    dispatch(changeFollowingStatus(id, true));
+    dispatch(changeFollowingStatus(id));
     if (followed) {
       await usersAPI.unfollow(id);
       dispatch(toggleFollowSuccess(id));
@@ -51,7 +41,7 @@ export const toggleFollow =
       await usersAPI.follow(id);
       dispatch(toggleFollowSuccess(id));
     }
-    dispatch(changeFollowingStatus(id, false));
+    dispatch(changeFollowingStatus(id));
   };
 
 export const changePage =
@@ -113,13 +103,13 @@ export const friendsReducer = (
   action: AnyAction
 ): FriendsState => {
   switch (action.type) {
-    case SET_PAGES:
+    case 'friends/setPages':
       return {
         ...state,
         pages: action.pages,
       };
 
-    case TOGGLE_FOLLOW:
+    case 'friends/toggleFollow':
       return {
         ...state,
         users: state.users.map((user) => {
@@ -134,23 +124,23 @@ export const friendsReducer = (
         }),
       };
 
-    case CHANGE_FOLLOWING_STATUS:
+    case 'friends/setFollowingStatus':
       return {
         ...state,
-        followingInProgress: action.isFollowing
-          ? [...state.followingInProgress, action.id]
-          : state.followingInProgress.filter(
+        followingInProgress: state.followingInProgress.includes(action.id)
+          ? state.followingInProgress.filter(
               (userId: number) => userId !== action.id
-            ),
+            )
+          : [...state.followingInProgress, action.id],
       };
 
-    case SET_CURRENT_PAGE:
+    case 'friends/setCurrentPage':
       return {
         ...state,
         currentPage: action.currentPage,
       };
 
-    case SET_USERS:
+    case 'friends/setUsers':
       return {
         ...state,
         users: [...action.users],

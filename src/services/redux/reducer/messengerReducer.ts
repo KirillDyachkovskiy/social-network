@@ -2,10 +2,8 @@ import { AnyAction } from 'redux';
 import { SidebarItem } from '../../../types/Api';
 import { RootState } from '../store';
 
-const SEND_MESSAGE = 'messenger/sendMessage';
-
 export const sendMessage = (text: string) => ({
-  type: SEND_MESSAGE,
+  type: 'messenger/sendMessage',
   text,
 });
 
@@ -43,7 +41,7 @@ export const messengerReducer = (
   action: AnyAction
 ) => {
   switch (action.type) {
-    case SEND_MESSAGE:
+    case 'messenger/sendMessage':
       return {
         ...state,
         messages: [

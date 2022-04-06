@@ -11,28 +11,17 @@ import {
 import { RootState } from '../store';
 import { getUserData } from './authReducer';
 
-const ADD_POST = 'profile/addPost';
-
-export const addPost = (text: string) => ({ type: ADD_POST, text });
-
-const DELETE_POST = 'profile/deletePost';
-
+export const addPost = (text: string) => ({ type: 'profile/addPost', text });
 export const deletePost = (id: number) => ({
-  type: DELETE_POST,
+  type: 'profile/deletePost',
   id,
 });
-
-const SET_VISITED_USER_PROFILE = 'profile/setVisitedUserProfile';
-
 export const setVisitedUserProfile = (data: UserInfo) => ({
-  type: SET_VISITED_USER_PROFILE,
+  type: 'profile/setVisitedUserProfile',
   data,
 });
-
-const SET_USER_STATUS = 'profile/setUserStatus';
-
 export const setUserStatus = (status: TStatus) => ({
-  type: SET_USER_STATUS,
+  type: 'profile/setUserStatus',
   status,
 });
 
@@ -161,7 +150,7 @@ export const profileReducer = (
   action: AnyAction
 ): ProfileState => {
   switch (action.type) {
-    case ADD_POST:
+    case 'profile/addPost':
       return {
         ...state,
         posts: [
@@ -174,13 +163,13 @@ export const profileReducer = (
         ],
       };
 
-    case DELETE_POST:
+    case 'profile/deletePost':
       return {
         ...state,
         posts: state.posts.filter((item, id) => id !== action.id),
       };
 
-    case SET_VISITED_USER_PROFILE:
+    case 'profile/setVisitedUserProfile':
       return {
         ...state,
         visitedProfile: {
@@ -189,7 +178,7 @@ export const profileReducer = (
         },
       };
 
-    case SET_USER_STATUS:
+    case 'profile/setUserStatus':
       return {
         ...state,
         visitedProfile: {

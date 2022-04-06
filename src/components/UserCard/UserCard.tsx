@@ -27,7 +27,9 @@ export default function UserCard({
           <p>{user.status}</p>
           <Button
             onClick={() => toggleFollow(user.id, user.followed)}
-            disabled={followingInProgress.some((item) => item === user.id)}
+            disabled={followingInProgress.some(
+              (userId: UserId) => userId === user.id
+            )}
           >
             {user.followed ? 'Unfollow' : 'Follow'}
           </Button>

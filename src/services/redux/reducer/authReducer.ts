@@ -10,15 +10,12 @@ import {
 import { authAPI, securityAPI } from '../../api';
 import { RootState } from '../store';
 
-const SET_USER_DATA = 'auth/setData';
 const setUserData = (payload: AuthData): AnyAction => ({
-  type: SET_USER_DATA,
+  type: 'auth/setData',
   payload,
 });
-
-const SET_CAPTCHA = 'auth/captcha';
 const setCaptchaSuccess = (payload: TCaptcha): AnyAction => ({
-  type: SET_CAPTCHA,
+  type: 'auth/captcha',
   payload,
 });
 
@@ -95,13 +92,13 @@ export const authReducer = (
   action: AnyAction
 ): AuthState => {
   switch (action.type) {
-    case SET_USER_DATA:
+    case 'auth/setData':
       return {
         ...state,
         authedUserData: action.payload,
       };
 
-    case SET_CAPTCHA:
+    case 'auth/captcha':
       return {
         ...state,
         captcha: action.payload,
