@@ -7,13 +7,13 @@ import { User, UserId } from '../../types/Api';
 
 interface IUserCard {
   user: User;
-  toggleFollow: (id: UserId, followed: boolean) => void;
+  onClick: (id: UserId, followed: boolean) => void;
   followingInProgress: Array<UserId>;
 }
 
 export default function UserCard({
   user,
-  toggleFollow,
+  onClick,
   followingInProgress,
 }: IUserCard) {
   return (
@@ -26,7 +26,7 @@ export default function UserCard({
           <p>{user.name}</p>
           <p>{user.status}</p>
           <Button
-            onClick={() => toggleFollow(user.id, user.followed)}
+            onClick={() => onClick(user.id, user.followed)}
             disabled={followingInProgress.some(
               (userId: UserId) => userId === user.id
             )}

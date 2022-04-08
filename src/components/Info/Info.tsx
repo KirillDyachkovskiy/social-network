@@ -8,10 +8,10 @@ import { ProfileInfoPayload, UserInfo } from '../../types/Api';
 interface IInfo {
   userInfo: UserInfo;
   isOwner: boolean;
-  changeProfileInfo: (info: ProfileInfoPayload) => void;
+  changeInfo: (info: ProfileInfoPayload) => void;
 }
 
-export default function Info({ userInfo, isOwner, changeProfileInfo }: IInfo) {
+export default function Info({ userInfo, isOwner, changeInfo }: IInfo) {
   const {
     register,
     handleSubmit,
@@ -29,7 +29,7 @@ export default function Info({ userInfo, isOwner, changeProfileInfo }: IInfo) {
   const { contacts, ...mainInfo } = userInfo;
 
   function onSubmit(formData: UserInfo) {
-    changeProfileInfo(formData);
+    changeInfo(formData);
     setEditMode(false);
   }
 

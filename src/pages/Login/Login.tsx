@@ -1,39 +1,17 @@
 // @ts-nocheck
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/Button';
 import {
   authLogIn,
   getCaptcha,
-  getUserData,
 } from '../../services/redux/reducer/authReducer';
 import Field from '../../ui/Field';
 import s from './login.module.scss';
 import Image from '../../ui/Image';
-import { RootState } from '../../services/redux/store';
-import { AuthData, TCaptcha, LoginMePayload } from '../../types/Api';
-import withRedirect from '../../hoc';
+import { LoginMePayload } from '../../types/Api';
 
-const mapStateToProps = (state: RootState) => ({
-  authedUserData: getUserData(state),
-  captcha: getCaptcha(state),
-});
-
-type TStateProps = {
-  authedUserData: AuthData;
-  captcha: TCaptcha;
-};
-
-type TOwnProps = {
-  authLogIn: () => void;
-};
-
-type TLogin = TStateProps & TOwnProps;
-
-function Login({ authLogIn, authedUserData, captcha }: TLogin) {
+export default function Login() {
   const {
     register,
     handleSubmit,
@@ -44,17 +22,13 @@ function Login({ authLogIn, authedUserData, captcha }: TLogin) {
       rememberMe: true,
     },
   });
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (authedUserData.id) {
-      navigate('/');
-    }
-  }, [authedUserData, navigate]);
+  const captcha = useSelector(getCaptcha);
 
-  function onSubmit(data: LoginMePayload) {
-    authLogIn(data);
-  }
+  const dispatch = useDispatch();
+  const onSubmit = (data: LoginMePayload) => {
+    dispatch(authLogIn(data));
+  };
 
   return (
     <Field>
@@ -128,10 +102,3 @@ function Login({ authLogIn, authedUserData, captcha }: TLogin) {
     </Field>
   );
 }
-
-export default compose(
-  connect<TStateProps, undefined, TOwnProps, RootState>(mapStateToProps, {
-    authLogIn,
-  }),
-  withRedirect
-)(Login);

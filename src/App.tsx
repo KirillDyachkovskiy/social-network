@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Preloader from './ui/Preloader';
 
 const MainLayout = lazy((): any => import('./layouts/MainLayout'));

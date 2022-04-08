@@ -1,18 +1,11 @@
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { compose } from 'redux';
 import Preloader from '../../ui/Preloader';
 import {
-  addPost,
-  changeProfileAvatar,
-  changeProfileInfo,
   changeVisitedProfile,
-  deletePost,
   getPosts,
   getVisitedProfile,
-  changeProfileStatus,
-  UserPost,
 } from '../../services/redux/reducer/profileReducer';
 import withRedirect from '../../hoc';
 import ProfileCard from '../../components/ProfileCard';
@@ -21,62 +14,23 @@ import ProfileWall from '../../components/ProfileWall';
 import s from './profile.module.scss';
 import { ANON_USER_COVER } from '../../constants';
 import { getUserData } from '../../services/redux/reducer/authReducer';
-import {
-  AuthData,
-  UserInfo,
-  TAvatar,
-  TStatus,
-  TVisitedProfile,
-  UserId,
-} from '../../types/Api';
-import { RootState } from '../../services/redux/store';
 
-const mapStateToProps = (state: RootState) => ({
-  authedUserData: getUserData(state),
-  visitedProfile: getVisitedProfile(state),
-  posts: getPosts(state),
-});
+function Profile() {
+  const authedUserData = useSelector(getUserData);
+  const visitedProfile = useSelector(getVisitedProfile);
+  const posts = useSelector(getPosts);
 
-type TStateProps = {
-  authedUserData: AuthData;
-  visitedProfile: TVisitedProfile;
-  posts: Array<UserPost>;
-};
+  const dispatch = useDispatch();
 
-type TDispatchProps = {
-  changeVisitedProfile: (id: UserId) => void;
-  changeProfileStatus: (status: TStatus) => void;
-  changeProfileAvatar: (avatar: TAvatar) => void;
-  changeProfileInfo: (info: UserInfo) => void;
-  addPost: (text: string) => void;
-  deletePost: (id: number) => void;
-};
-
-type TProfile = TStateProps & TDispatchProps;
-
-function Profile({
-  changeVisitedProfile,
-  authedUserData,
-  visitedProfile,
-  changeProfileStatus,
-  changeProfileAvatar,
-  changeProfileInfo,
-  posts,
-  addPost,
-  deletePost,
-}: TProfile) {
   const { id = authedUserData.id } = useParams();
 
   useEffect(() => {
     if (id) {
-      changeVisitedProfile(+id);
+      dispatch(changeVisitedProfile(+id));
     }
-  }, [id, changeVisitedProfile]);
+  }, [dispatch, id, changeVisitedProfile]);
 
-  if (
-    visitedProfile.photos.small === null ||
-    visitedProfile.fullName === null
-  ) {
+  if (visitedProfile.userId === null) {
     return <Preloader />;
   }
 
@@ -87,31 +41,16 @@ function Profile({
       </div>
       <ProfileCard
         visitedProfile={visitedProfile}
-        changeProfileAvatar={changeProfileAvatar}
-        changeProfileInfo={changeProfileInfo}
         isOwner={id === authedUserData.id}
-        changeProfileStatus={changeProfileStatus}
       />
       <ProfileWall
         isOwner={id === authedUserData.id}
-        name={visitedProfile.fullName}
-        photo={visitedProfile.photos.small}
+        name={visitedProfile.fullName || undefined}
+        photo={visitedProfile.photos.small || undefined}
         posts={posts}
-        addPost={addPost}
-        deletePost={deletePost}
       />
     </section>
   );
 }
 
-export default compose(
-  connect<TStateProps, TDispatchProps, any, RootState>(mapStateToProps, {
-    changeVisitedProfile,
-    changeProfileStatus,
-    addPost,
-    deletePost,
-    changeProfileAvatar,
-    changeProfileInfo,
-  }),
-  withRedirect
-)(Profile);
+export default withRedirect(Profile);

@@ -4,12 +4,12 @@ import { ANON_USER_STATUS } from '../../constants';
 
 interface IStatus {
   status: string;
-  changeProfileStatus?: (value: string) => void;
+  changeStatus?: (value: string) => void;
 }
 
 export default function Status({
   status = ANON_USER_STATUS,
-  changeProfileStatus,
+  changeStatus,
 }: IStatus) {
   const [editMode, setEditMode] = useState(false);
   const [localStatus, setLocalStatus] = useState(status || ANON_USER_STATUS);
@@ -19,8 +19,8 @@ export default function Status({
   }, [status]);
 
   function toggleEditMode() {
-    if (editMode && changeProfileStatus) {
-      changeProfileStatus(localStatus);
+    if (editMode && changeStatus) {
+      changeStatus(localStatus);
     }
     setEditMode(!editMode);
   }
@@ -29,7 +29,7 @@ export default function Status({
     setLocalStatus(event.target.value);
   }
 
-  if (!changeProfileStatus) {
+  if (!changeStatus) {
     return <p className={s.label}>{status}</p>;
   }
 

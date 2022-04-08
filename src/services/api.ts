@@ -1,26 +1,26 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 import {
-  LoginMePayload,
-  ProfileInfoPayload,
   AuthMeResponse,
+  CaptchaResponse,
+  LoginMePayload,
   LoginMeResponse,
   LogoutMeResponse,
+  ProfileInfoPayload,
   ProfileInfoResponse,
-  ProfileStatusResponse,
+  ProfilePhotoPayload,
   ProfilePhotoResponse,
   ProfileStatusPayload,
-  UserInfoPayload,
-  UserStatusPayload,
-  UserInfoResponse,
-  UserStatusResponse,
-  ProfilePhotoPayload,
+  ProfileStatusResponse,
   UserFollowPayload,
+  UserFollowResponse,
+  UserInfoPayload,
+  UserInfoResponse,
+  UsersResponse,
+  UserStatusPayload,
+  UserStatusResponse,
   UserUnFollowPayload,
   UserUnfollowResponse,
-  UserFollowResponse,
-  UsersResponse,
-  CaptchaResponse,
 } from '../types/Api';
 
 const instance = axios.create({

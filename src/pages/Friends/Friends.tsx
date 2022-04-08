@@ -1,5 +1,4 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import withRedirect from '../../hoc';
 import {
@@ -16,42 +15,26 @@ import s from './friends.module.scss';
 import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';
 import { User, UserId } from '../../types/Api';
-import { RootState } from '../../services/redux/store';
 
-const mapStateToProps = (state: RootState) => ({
-  users: getUsers(state),
-  followingInProgress: getFollowingInProgress(state),
-  pageSize: getPageSize(state),
-  currentPage: getCurrentPage(state),
-  pagination: getPagination(state),
-});
+function Friends() {
+  const users = useSelector(getUsers);
+  const followingInProgress = useSelector(getFollowingInProgress);
+  const pageSize = useSelector(getPageSize);
+  const currentPage = useSelector(getCurrentPage);
+  const pagination = useSelector(getPagination);
 
-type TStateProps = {
-  users: Array<User>;
-  followingInProgress: Array<UserId>;
-  pageSize: number;
-  currentPage: number;
-  pagination: Array<number>;
-};
+  const dispatch = useDispatch();
 
-type TDispatchProps = {
-  changePage: (currentPage: number, pageSize: number) => void;
-  toggleFollow: (id: UserId, followed: boolean) => void;
-};
+  const onClick = (id: UserId, followed: boolean) => {
+    dispatch(toggleFollow(id, followed));
+  };
 
-type TFriends = TStateProps & TDispatchProps;
+  const changeCurrentPage = (page: number, pageSize: number) => {
+    dispatch(changePage(page, pageSize));
+  };
 
-function Friends({
-  pagination,
-  currentPage,
-  pageSize,
-  changePage,
-  toggleFollow,
-  followingInProgress,
-  users,
-}: TFriends) {
   useEffect(() => {
-    changePage(currentPage, pageSize);
+    changeCurrentPage(currentPage, pageSize);
   }, [changePage, currentPage, pageSize]);
 
   return (
@@ -62,7 +45,7 @@ function Friends({
             <UserCard
               key={u.id}
               user={u}
-              toggleFollow={toggleFollow}
+              onClick={onClick}
               followingInProgress={followingInProgress}
             />
           ))}
@@ -72,7 +55,7 @@ function Friends({
         <Paginator
           items={pagination}
           currentPage={currentPage}
-          changePage={changePage}
+          changePage={changeCurrentPage}
           pageSize={pageSize}
         />
       </div>
@@ -80,10 +63,4 @@ function Friends({
   );
 }
 
-export default compose(
-  connect<TStateProps, TDispatchProps, undefined, RootState>(mapStateToProps, {
-    changePage,
-    toggleFollow,
-  }),
-  withRedirect
-)(Friends);
+export default withRedirect(Friends);

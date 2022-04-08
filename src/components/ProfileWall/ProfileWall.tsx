@@ -1,10 +1,15 @@
+import { useDispatch } from 'react-redux';
 import Field from '../../ui/Field';
 import Submit from '../Submit';
 import s from './profileWall.module.scss';
 import { ANON_USER_AVATAR, ANON_USER_NAME } from '../../constants';
 import Cross from '../../ui/Cross';
 import Avatar from '../../ui/Avatar';
-import { UserPost } from '../../services/redux/reducer/profileReducer';
+import {
+  addPost,
+  deletePost,
+  UserPost,
+} from '../../services/redux/reducer/profileReducer';
 
 interface IPost extends UserPost {
   deletePost: (id: number) => void;
@@ -34,8 +39,6 @@ function Post({ id, text, likes, deletePost, name, photo }: IPost) {
 
 interface IProfileWall {
   posts: Array<UserPost>;
-  addPost: (text: string) => void;
-  deletePost: (id: number) => void;
   name?: string;
   photo?: string;
   isOwner: boolean;
@@ -45,14 +48,17 @@ export default function ProfileWall({
   name = ANON_USER_NAME,
   photo = ANON_USER_AVATAR,
   posts,
-  addPost,
-  deletePost,
   isOwner,
 }: IProfileWall) {
+  const dispatch = useDispatch();
+
   return (
     <section className={s.wall}>
       {isOwner && (
-        <Submit onSubmit={addPost} placeholder="What's new?">
+        <Submit
+          onSubmit={(text: string) => dispatch(addPost(text))}
+          placeholder="What's new?"
+        >
           Post
         </Submit>
       )}
@@ -64,7 +70,7 @@ export default function ProfileWall({
             likes={p.likes}
             text={p.text}
             id={p.id}
-            deletePost={deletePost}
+            deletePost={(id: number) => dispatch(deletePost(id))}
             name={name}
             photo={photo}
           />
