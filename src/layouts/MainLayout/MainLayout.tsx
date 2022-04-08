@@ -5,7 +5,12 @@ import Logo from '../../ui/Logo';
 import LoginCard from '../../components/LoginCard';
 import { Sidebar } from '../../ui/Sidebar';
 import s from './mainLayout.module.scss';
-import { authLogOut, authMe, getSidebar, getUserData } from '../../services/redux/reducer/authReducer';
+import {
+  authLogOut,
+  authMe,
+  getSidebar,
+  getUserData,
+} from '../../services/redux/reducer/authReducer';
 import Preloader from '../../ui/Preloader';
 
 export default function MainLayout() {
@@ -16,9 +21,9 @@ export default function MainLayout() {
 
   useEffect(() => {
     dispatch(authMe());
-  }, [dispatch, authMe]);
+  }, [dispatch]);
 
-  if (!authedUserData) {
+  if (!authedUserData.id) {
     return <Preloader />;
   }
 
@@ -27,7 +32,10 @@ export default function MainLayout() {
       <header className={s.layout__header}>
         <div className={s.layout__container}>
           <Logo />
-          <LoginCard login={authedUserData.login} authLogOut={() => dispatch(authLogOut)} />
+          <LoginCard
+            login={authedUserData.login}
+            authLogOut={() => dispatch(authLogOut)}
+          />
         </div>
       </header>
       <main className={`${s.layout__main} ${s.layout__container}`}>
@@ -41,4 +49,3 @@ export default function MainLayout() {
     </section>
   );
 }
-

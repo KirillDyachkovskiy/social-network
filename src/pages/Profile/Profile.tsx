@@ -28,9 +28,9 @@ function Profile() {
     if (id) {
       dispatch(changeVisitedProfile(+id));
     }
-  }, [dispatch, id, changeVisitedProfile]);
+  }, [dispatch, id]);
 
-  if (visitedProfile.userId === null) {
+  if (!visitedProfile.userId) {
     return <Preloader />;
   }
 

@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import withRedirect from '../../hoc';
 import {
   changePage,
   getCurrentPage,
   getFollowingInProgress,
-  getPageSize,
   getPagination,
   getUsers,
   toggleFollow,
@@ -19,23 +18,25 @@ import { User, UserId } from '../../types/Api';
 function Friends() {
   const users = useSelector(getUsers);
   const followingInProgress = useSelector(getFollowingInProgress);
-  const pageSize = useSelector(getPageSize);
   const currentPage = useSelector(getCurrentPage);
   const pagination = useSelector(getPagination);
 
   const dispatch = useDispatch();
 
-  const onClick = (id: UserId, followed: boolean) => {
+  const changeFollow = (id: UserId, followed: boolean) => {
     dispatch(toggleFollow(id, followed));
   };
 
-  const changeCurrentPage = (page: number, pageSize: number) => {
-    dispatch(changePage(page, pageSize));
-  };
+  const changeCurrentPage = useCallback(
+    (page: number) => {
+      dispatch(changePage(page));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
-    changeCurrentPage(currentPage, pageSize);
-  }, [changePage, currentPage, pageSize]);
+    changeCurrentPage(currentPage);
+  }, [changeCurrentPage, currentPage]);
 
   return (
     <section className={s.friends}>
@@ -45,7 +46,7 @@ function Friends() {
             <UserCard
               key={u.id}
               user={u}
-              onClick={onClick}
+              onClick={changeFollow}
               followingInProgress={followingInProgress}
             />
           ))}
@@ -56,7 +57,6 @@ function Friends() {
           items={pagination}
           currentPage={currentPage}
           changePage={changeCurrentPage}
-          pageSize={pageSize}
         />
       </div>
     </section>

@@ -27,6 +27,24 @@ const setPages = (pages: Array<number>) => ({
   pages,
 });
 
+export const getUsers = (state: RootState) => state.friends.users;
+export const getPageSize = (state: RootState) => state.friends.pageSize;
+export const getCurrentPage = (state: RootState) => state.friends.currentPage;
+const getPages = (state: RootState) => state.friends.pages;
+
+export const getPagination = createSelector(
+  [getPages, getCurrentPage],
+  (pages, currentPage) =>
+    pages.filter(
+      (page: number, id: number, arr: Array<number>) =>
+        page === 1 ||
+        page === arr.length ||
+        (page >= currentPage - 5 && page <= currentPage + 5)
+    )
+);
+export const getFollowingInProgress = (state: RootState) =>
+  state.friends.followingInProgress;
+
 export const toggleFollow =
   (
     id: UserId,
@@ -45,11 +63,13 @@ export const toggleFollow =
   };
 
 export const changePage =
-  (
-    page: number,
-    pageSize: number
-  ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+  (page: number): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
+  async (
+    dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
+    getState
+  ) => {
+    const pageSize = getPageSize(getState());
+
     dispatch(setCurrentPage(page));
 
     const response = await usersAPI.getCurrentPageData(page, pageSize);
@@ -79,24 +99,6 @@ const initialState: FriendsState = {
   pages: [],
   followingInProgress: [],
 };
-
-export const getUsers = (state: RootState) => state.friends.users;
-export const getPageSize = (state: RootState) => state.friends.pageSize;
-export const getCurrentPage = (state: RootState) => state.friends.currentPage;
-const getPages = (state: RootState) => state.friends.pages;
-
-export const getPagination = createSelector(
-  [getPages, getCurrentPage],
-  (pages, currentPage) =>
-    pages.filter(
-      (page: number, id: number, arr: Array<number>) =>
-        page === 1 ||
-        page === arr.length ||
-        (page >= currentPage - 5 && page <= currentPage + 5)
-    )
-);
-export const getFollowingInProgress = (state: RootState) =>
-  state.friends.followingInProgress;
 
 export const friendsReducer = (
   state: FriendsState = initialState,
