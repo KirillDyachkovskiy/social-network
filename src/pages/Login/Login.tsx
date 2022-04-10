@@ -1,10 +1,13 @@
 // @ts-nocheck
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Button from '../../ui/Button';
 import {
   authLogIn,
   getCaptcha,
+  getUserData,
 } from '../../services/redux/reducer/authReducer';
 import Field from '../../ui/Field';
 import s from './login.module.scss';
@@ -23,12 +26,22 @@ export default function Login() {
     },
   });
 
+  const navigate = useNavigate();
+
   const captcha = useSelector(getCaptcha);
+  const { id } = useSelector(getUserData);
 
   const dispatch = useDispatch();
+
   const onSubmit = (data: LoginMePayload) => {
     dispatch(authLogIn(data));
   };
+
+  useEffect(() => {
+    if (id) {
+      navigate(-1);
+    }
+  }, [navigate, id]);
 
   return (
     <Field>

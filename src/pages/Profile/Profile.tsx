@@ -16,13 +16,13 @@ import { ANON_USER_COVER } from '../../constants';
 import { getUserData } from '../../services/redux/reducer/authReducer';
 
 function Profile() {
-  const authedUserData = useSelector(getUserData);
+  const { id: authedId } = useSelector(getUserData);
   const visitedProfile = useSelector(getVisitedProfile);
   const posts = useSelector(getPosts);
 
   const dispatch = useDispatch();
 
-  const { id = authedUserData.id } = useParams();
+  const { id = authedId } = useParams();
 
   useEffect(() => {
     if (id) {
@@ -39,12 +39,9 @@ function Profile() {
       <div className={s.profile__cover}>
         <Image src={ANON_USER_COVER} alt='обложка пользователя' />
       </div>
-      <ProfileCard
-        visitedProfile={visitedProfile}
-        isOwner={id === authedUserData.id}
-      />
+      <ProfileCard visitedProfile={visitedProfile} isOwner={id === authedId} />
       <ProfileWall
-        isOwner={id === authedUserData.id}
+        isOwner={id === authedId}
         name={visitedProfile.fullName || undefined}
         photo={visitedProfile.photos.small || undefined}
         posts={posts}

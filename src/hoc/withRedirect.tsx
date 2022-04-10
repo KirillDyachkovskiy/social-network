@@ -5,9 +5,9 @@ import { getUserData } from '../services/redux/reducer/authReducer';
 
 export default function withRedirect<T>(WrappedComponent: ComponentType<T>) {
   function RedirectedComponent(props: T) {
-    const authedUser = useSelector(getUserData);
+    const { id } = useSelector(getUserData);
 
-    if (authedUser.id) {
+    if (id) {
       return <WrappedComponent {...props} />;
     }
 

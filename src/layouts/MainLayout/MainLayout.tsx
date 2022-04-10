@@ -11,10 +11,9 @@ import {
   getSidebar,
   getUserData,
 } from '../../services/redux/reducer/authReducer';
-import Preloader from '../../ui/Preloader';
 
 export default function MainLayout() {
-  const authedUserData = useSelector(getUserData);
+  const { login } = useSelector(getUserData);
   const sidebar = useSelector(getSidebar);
 
   const dispatch = useDispatch();
@@ -23,19 +22,12 @@ export default function MainLayout() {
     dispatch(authMe());
   }, [dispatch]);
 
-  if (!authedUserData.id) {
-    return <Preloader />;
-  }
-
   return (
     <section className={s.layout}>
       <header className={s.layout__header}>
         <div className={s.layout__container}>
           <Logo />
-          <LoginCard
-            login={authedUserData.login}
-            authLogOut={() => dispatch(authLogOut)}
-          />
+          <LoginCard login={login} authLogOut={() => dispatch(authLogOut())} />
         </div>
       </header>
       <main className={`${s.layout__main} ${s.layout__container}`}>

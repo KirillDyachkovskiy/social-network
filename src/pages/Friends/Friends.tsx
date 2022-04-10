@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import withRedirect from '../../hoc';
 import {
   changePage,
   getFollowingInProgress,
@@ -14,7 +13,7 @@ import Field from '../../ui/Field';
 import s from './friends.module.scss';
 import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';
-import { User, UserId } from '../../types/Api';
+import { User, UserId, UsersPayload } from '../../types/Api';
 import FriendsSearch from '../../components/FriendsSearch/FriendsSearch';
 
 function Friends() {
@@ -23,41 +22,46 @@ function Friends() {
   const users = useSelector(getUsers);
   const followingInProgress = useSelector(getFollowingInProgress);
   const pagination = useSelector(getPagination);
-  let query = useSelector(getQuery);
-
-  query = {
-    ...query,
-    page: Number(searchParams.get('page')) || query.page,
-    term: searchParams.get('term') || query.term,
-    friend: searchParams.has('friend') || query.friend,
-  };
-
-  const { page, term, friend } = query;
+  const { page, count, term, friend } = useSelector(getQuery);
 
   const dispatch = useDispatch();
 
   const changeCurrentPage = useCallback(
-    (page: number, term?: string, friend?: boolean) =>
-      dispatch(changePage(page, term, friend)),
+    (query: UsersPayload) => dispatch(changePage(query)),
     [dispatch]
   );
 
+  const actualPage =
+    (searchParams.has('page') && Number(searchParams.get('page'))) || page;
+  const actualTerm = searchParams.get('term') || term;
+  const actualFriend = !!searchParams.get('friend') || friend;
+
   useEffect(() => {
-    changeCurrentPage(page, term, friend);
+    changeCurrentPage({
+      page: actualPage,
+      count,
+      term: actualTerm,
+      friend: actualFriend,
+    });
+  }, [changeCurrentPage, count, actualTerm, actualFriend, actualPage]);
+
+  useEffect(() => {
     setSearchParams({
       page: String(page),
-      ...(term && { term: String(term) }),
-      ...(friend && { friend: String(friend) }),
+      ...(term && { term }),
+      ...(friend && { friend: 'true' }),
     });
-  }, [changeCurrentPage, page, term, friend, setSearchParams]);
+  }, [page, term, friend, setSearchParams]);
 
   return (
     <section className={s.friends}>
       <div className={s.friends__content}>
         <FriendsSearch
-          changePage={changeCurrentPage}
-          query={query}
-          setSearchParams={setSearchParams}
+          changePage={(term: string, friend: boolean) =>
+            changeCurrentPage({ page: 1, count, term, friend })
+          }
+          term={actualTerm}
+          friend={!!actualFriend}
         />
         <Field>
           <div className={s.friends__users}>
@@ -78,11 +82,13 @@ function Friends() {
         <Paginator
           items={pagination}
           page={page}
-          changePage={changeCurrentPage}
+          changePage={(page: number) =>
+            changeCurrentPage({ page, count, term, friend })
+          }
         />
       </div>
     </section>
   );
 }
 
-export default withRedirect(Friends);
+export default Friends;

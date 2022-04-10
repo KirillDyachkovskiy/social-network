@@ -32,6 +32,14 @@ export const authMe =
 
     if (response.data.resultCode === ResultCode.Success) {
       dispatch(setUserData(response.data.data));
+    } else {
+      dispatch(
+        setUserData({
+          id: null,
+          email: null,
+          login: null,
+        })
+      );
     }
   };
 

@@ -64,30 +64,19 @@ export const toggleFollow =
 
 export const changePage =
   (
-    page: number,
-    term?: string,
-    friend?: boolean
+    query: UsersPayload
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (
-    dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
-    getState
-  ) => {
-    const query = getQuery(getState());
-
+  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
     dispatch(
       setQuery({
-        count: query.count,
-        page,
-        term: term ?? query.term,
-        friend: friend ?? query.friend,
+        ...query,
+        ...(!query.friend && { friend: null }),
       })
     );
 
     const response = await usersAPI.getCurrentPageData({
-      count: query.count,
-      page,
-      term: term ?? query.term,
-      friend: friend ?? query.friend,
+      ...query,
+      ...(!query.friend && { friend: null }),
     });
 
     dispatch(setUsersList(response.data.items, response.data.totalCount));

@@ -3,39 +3,29 @@ import Field from '../../ui/Field';
 import Submit from '../Submit';
 import Checkbox from '../../ui/Checkbox';
 import s from './friendsSearch.module.scss';
-import { UsersPayload } from '../../types/Api';
 
 interface IFriendsSearch {
-  changePage: (page: number, term: string, friend: boolean) => void;
-  query: UsersPayload;
-  setSearchParams: (value: {}) => void;
+  changePage: (term: string, friend: boolean) => void;
+  term: string;
+  friend: boolean;
 }
 
 export default function FriendsSearch({
   changePage,
-  query,
-  setSearchParams,
+  term,
+  friend,
 }: IFriendsSearch) {
-  const [filter, setFilter] = useState<string>(query.term);
-  const [isFriendsOnly, setIsFriendsOnly] = useState<boolean>(query.friend);
-
-  const onSubmit = (page: number, term: string, friend: boolean) => {
-    setSearchParams({
-      page: String(page),
-      ...(term && { term: String(term) }),
-      ...(friend && { friend: String(friend) }),
-    });
-    changePage(page, term, friend);
-  };
+  const [filter, setFilter] = useState<string>(term);
+  const [isFriendsOnly, setIsFriendsOnly] = useState<boolean>(friend);
 
   return (
     <div className={s.friendsSearch}>
       <Field>
         <Submit
-          placeholder='Search for friend'
+          placeholder='Only friends'
           value={filter}
           onChange={setFilter}
-          onSubmit={() => onSubmit(query.page, filter, isFriendsOnly)}
+          onSubmit={() => changePage(filter, isFriendsOnly)}
         >
           Find
         </Submit>

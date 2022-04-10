@@ -74,13 +74,13 @@ export type UsersPayload = {
   count: number;
   page: number;
   term: string;
-  friend: boolean;
+  friend: boolean | null;
 };
 
 export type UsersResponse = {
   items: Array<User>;
   totalCount: number;
-  error: null | string;
+  error: string | null;
 };
 
 export type ProfileInfoPayload = UserInfo;
