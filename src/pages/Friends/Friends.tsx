@@ -49,7 +49,7 @@ function Friends() {
       ...(term && { term: String(term) }),
       ...(friend && { friend: String(friend) }),
     });
-  }, [changeCurrentPage, page, term, friend, searchParams]);
+  }, [changeCurrentPage, page, term, friend, setSearchParams]);
 
   return (
     <section className={s.friends}>
