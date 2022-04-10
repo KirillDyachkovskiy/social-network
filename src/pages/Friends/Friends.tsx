@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import withRedirect from '../../hoc';
 import {
   changePage,
@@ -14,35 +15,41 @@ import s from './friends.module.scss';
 import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';
 import { User, UserId } from '../../types/Api';
-import Submit from '../../components/Submit';
-import Checkbox from '../../ui/Checkbox';
+import FriendsSearch from '../../components/FriendsSearch/FriendsSearch';
 
 function Friends() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const users = useSelector(getUsers);
   const followingInProgress = useSelector(getFollowingInProgress);
-  const { page, term, friend } = useSelector(getQuery);
   const pagination = useSelector(getPagination);
+  let query = useSelector(getQuery);
 
-  const [filter, setFilter] = useState<string>(term);
-  const [isFriendsOnly, setIsFriendsOnly] = useState<boolean>(!!friend);
+  query = {
+    ...query,
+    page: Number(searchParams.get('page')) || query.page,
+    term: searchParams.get('term') || query.term,
+    friend: searchParams.has('friend') || query.friend,
+  };
+
+  const { page, term, friend } = query;
 
   const dispatch = useDispatch();
 
-  const changeFollow = (id: UserId, followed: boolean) => {
-    dispatch(toggleFollow(id, followed));
-  };
-
   const changeCurrentPage = useCallback(
-    (page: number) => dispatch(changePage(page)),
+    (page: number, term?: string, friend?: boolean) =>
+      dispatch(changePage(page, term, friend)),
     [dispatch]
   );
 
-  const onSubmit = useCallback(
-    (page: number, term: string, friend: boolean | null) => {
-      dispatch(changePage(page, term, friend));
-    },
-    [dispatch]
-  );
+  useEffect(() => {
+    changeCurrentPage(page, term, friend);
+    setSearchParams({
+      page: String(page),
+      ...(term && { term: String(term) }),
+      ...(friend && { friend: String(friend) }),
+    });
+  }, []);
 
   useEffect(() => {
     changeCurrentPage(page);
@@ -51,33 +58,20 @@ function Friends() {
   return (
     <section className={s.friends}>
       <div className={s.friends__content}>
-        <div className={s.friends__search}>
-          <Field>
-            <Submit
-              placeholder='Search for friend'
-              value={filter}
-              onChange={setFilter}
-              onSubmit={() => onSubmit(page, filter, isFriendsOnly)}
-            >
-              Find
-            </Submit>
-            <div className={s.friends__checkbox}>
-              <Checkbox
-                id='friendsOnly'
-                label='Only friends'
-                checked={isFriendsOnly}
-                onChange={setIsFriendsOnly}
-              />
-            </div>
-          </Field>
-        </div>
+        <FriendsSearch
+          changePage={changeCurrentPage}
+          query={query}
+          setSearchParams={setSearchParams}
+        />
         <Field>
           <div className={s.friends__users}>
             {users.map((u: User) => (
               <UserCard
                 key={u.id}
                 user={u}
-                onClick={changeFollow}
+                onClick={(id: UserId, followed: boolean) =>
+                  dispatch(toggleFollow(id, followed))
+                }
                 followingInProgress={followingInProgress}
               />
             ))}

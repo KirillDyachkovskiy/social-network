@@ -66,7 +66,7 @@ export const changePage =
   (
     page: number,
     term?: string,
-    friend?: boolean | null
+    friend?: boolean
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (
     dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
@@ -112,8 +112,8 @@ const initialState: FriendsState = {
   query: {
     count: 20,
     page: 1,
-    term: 'a',
-    friend: true,
+    term: '',
+    friend: false,
   },
   pages: [],
   followingInProgress: [],

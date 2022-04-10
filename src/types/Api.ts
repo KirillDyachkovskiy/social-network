@@ -74,7 +74,7 @@ export type UsersPayload = {
   count: number;
   page: number;
   term: string;
-  friend: boolean | null;
+  friend: boolean;
 };
 
 export type UsersResponse = {
