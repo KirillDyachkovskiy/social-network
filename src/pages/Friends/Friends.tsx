@@ -15,6 +15,7 @@ import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';
 import { User, UserId, UsersPayload } from '../../types/Api';
 import FriendsSearch from '../../components/FriendsSearch/FriendsSearch';
+import withRedirect from '../../hoc';
 
 function Friends() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -91,4 +92,4 @@ function Friends() {
   );
 }
 
-export default Friends;
+export default withRedirect(Friends);
