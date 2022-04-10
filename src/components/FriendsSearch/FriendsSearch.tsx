@@ -23,7 +23,7 @@ export default function FriendsSearch({
     setSearchParams({
       page: String(page),
       ...(term && { term: String(term) }),
-      ...(friend && { term: String(friend) }),
+      ...(friend && { friend: String(friend) }),
     });
     changePage(page, term, friend);
   };

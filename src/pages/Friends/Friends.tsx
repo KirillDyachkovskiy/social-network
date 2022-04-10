@@ -49,11 +49,7 @@ function Friends() {
       ...(term && { term: String(term) }),
       ...(friend && { friend: String(friend) }),
     });
-  }, []);
-
-  useEffect(() => {
-    changeCurrentPage(page);
-  }, [changeCurrentPage, page]);
+  }, [changeCurrentPage, page, term, friend, searchParams]);
 
   return (
     <section className={s.friends}>
