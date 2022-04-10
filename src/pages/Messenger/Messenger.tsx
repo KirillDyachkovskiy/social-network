@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import withRedirect from '../../hoc';
 import {
   getMenu,
@@ -26,11 +26,12 @@ function Message({ type = 'to', children }: IMessage) {
 }
 
 function Messenger() {
+  const [messageText, setMessageText] = useState<string>('');
+
   const menu = useSelector(getMenu);
   const messages = useSelector(getMessages);
 
   const dispatch = useDispatch();
-  const onSubmit = (text: string) => dispatch(sendMessage(text));
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -52,9 +53,18 @@ function Messenger() {
           <div ref={messagesEndRef} />
         </Field>
         <div className={s.messenger__submit}>
-          <Submit placeholder='Write a message' onSubmit={onSubmit}>
-            Send
-          </Submit>
+          <Field>
+            <Submit
+              reset
+              placeholder='Write a message'
+              value={messageText}
+              onChange={setMessageText}
+              onSubmit={() => dispatch(sendMessage(messageText))}
+              disabled={!messageText}
+            >
+              Send
+            </Submit>
+          </Field>
         </div>
       </div>
       <div className={s.messenger__sidebar}>

@@ -3,29 +3,25 @@ import s from './sidebar.module.scss';
 
 interface IPaginator {
   items: Array<number>;
-  currentPage: number;
+  page: number;
   changePage: (page: number) => void;
 }
 
-export default function Paginator({
-  items,
-  currentPage,
-  changePage,
-}: IPaginator) {
+export default function Paginator({ items, page, changePage }: IPaginator) {
   return (
     <Field>
       <aside>
         <ul className={s.sidebar}>
-          {items.map((page: number) => (
-            <li key={page}>
+          {items.map((item: number) => (
+            <li key={item}>
               <button
                 type='button'
                 className={`${s.sidebar__item} ${
-                  page === currentPage ? s.sidebar__item_active : ''
+                  item === page ? s.sidebar__item_active : ''
                 }`}
-                onClick={() => changePage(page)}
+                onClick={() => changePage(item)}
               >
-                {page}
+                {item}
               </button>
             </li>
           ))}

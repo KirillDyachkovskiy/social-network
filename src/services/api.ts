@@ -16,6 +16,7 @@ import {
   UserFollowResponse,
   UserInfoPayload,
   UserInfoResponse,
+  UsersPayload,
   UsersResponse,
   UserStatusPayload,
   UserStatusResponse,
@@ -61,8 +62,10 @@ export const profileAPI = {
 };
 
 export const usersAPI = {
-  getCurrentPageData: (page: number, count: number) =>
-    instance.get<UsersResponse>(`users?page=${page}&count=${count}`),
+  getCurrentPageData: ({ count, page, term, friend }: UsersPayload) =>
+    instance.get<UsersResponse>(
+      `users?page=${page}&count=${count}&term=${term}&friend=${friend}`
+    ),
   follow: (id: UserFollowPayload) =>
     instance.post<UserFollowResponse>(`follow/${id}`),
   unfollow: (id: UserUnFollowPayload) =>

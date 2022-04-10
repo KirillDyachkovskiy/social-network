@@ -3,6 +3,22 @@
   gap: 10px;
 
   &__content {
+    width: 100%;
+    height: max-content;
+  }
+
+  &__search {
+    z-index: 10;
+    position: sticky;
+    top: 58px;
+    padding-bottom: 10px;
+  }
+
+  &__checkbox {
+    margin-top: 10px;
+  }
+
+  &__users {
     display: flex;
     flex-direction: column;
     gap: 10px;

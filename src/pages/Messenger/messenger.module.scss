@@ -4,11 +4,11 @@
 
   &__content {
     width: 100%;
-    min-height: calc(100vh - 58px - 74px);
+    height: max-content;
   }
 
   &__messages {
-    height: 100%;
+    min-height: calc(100vh - 58px - 98px);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

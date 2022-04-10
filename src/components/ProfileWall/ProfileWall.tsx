@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import Field from '../../ui/Field';
 import Submit from '../Submit';
 import s from './profileWall.module.scss';
@@ -50,17 +51,25 @@ export default function ProfileWall({
   posts,
   isOwner,
 }: IProfileWall) {
+  const [inputValue, setInputValue] = useState<string>('');
+
   const dispatch = useDispatch();
 
   return (
     <section className={s.wall}>
       {isOwner && (
-        <Submit
-          onSubmit={(text: string) => dispatch(addPost(text))}
-          placeholder="What's new?"
-        >
-          Post
-        </Submit>
+        <Field>
+          <Submit
+            reset
+            placeholder="What's new?"
+            value={inputValue}
+            onChange={setInputValue}
+            onSubmit={() => dispatch(addPost(inputValue))}
+            disabled={!inputValue}
+          >
+            Post
+          </Submit>
+        </Field>
       )}
       <Field>{isOwner ? 'My posts' : `${name}'s posts`}</Field>
       <div className={s.wall__posts}>

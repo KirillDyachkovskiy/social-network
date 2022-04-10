@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { usersAPI } from '../../api';
-import { User, UserId } from '../../../types/Api';
+import { User, UserId, UsersPayload } from '../../../types/Api';
 import { RootState } from '../store';
 
 const toggleFollowSuccess = (id: UserId) => ({
@@ -14,9 +14,10 @@ const setUsersList = (users: Array<User>, totalCount: number) => ({
   users,
   totalCount,
 });
-const setCurrentPage = (currentPage: number) => ({
-  type: 'friends/setCurrentPage',
-  currentPage,
+
+export const setQuery = (query: UsersPayload) => ({
+  type: 'friends/setQuery',
+  query,
 });
 const changeFollowingStatus = (id: UserId) => ({
   type: 'friends/setFollowingStatus',
@@ -28,18 +29,17 @@ const setPages = (pages: Array<number>) => ({
 });
 
 export const getUsers = (state: RootState) => state.friends.users;
-export const getPageSize = (state: RootState) => state.friends.pageSize;
-export const getCurrentPage = (state: RootState) => state.friends.currentPage;
+export const getQuery = (state: RootState) => state.friends.query;
 const getPages = (state: RootState) => state.friends.pages;
 
 export const getPagination = createSelector(
-  [getPages, getCurrentPage],
-  (pages, currentPage) =>
+  [getPages, getQuery],
+  (pages, query) =>
     pages.filter(
       (page: number, id: number, arr: Array<number>) =>
         page === 1 ||
         page === arr.length ||
-        (page >= currentPage - 5 && page <= currentPage + 5)
+        (page >= query.page - 5 && page <= query.page + 5)
     )
 );
 export const getFollowingInProgress = (state: RootState) =>
@@ -63,21 +63,37 @@ export const toggleFollow =
   };
 
 export const changePage =
-  (page: number): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
+  (
+    page: number,
+    term?: string,
+    friend?: boolean | null
+  ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (
     dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
     getState
   ) => {
-    const pageSize = getPageSize(getState());
+    const query = getQuery(getState());
 
-    dispatch(setCurrentPage(page));
+    dispatch(
+      setQuery({
+        count: query.count,
+        page,
+        term: term ?? query.term,
+        friend: friend ?? query.friend,
+      })
+    );
 
-    const response = await usersAPI.getCurrentPageData(page, pageSize);
+    const response = await usersAPI.getCurrentPageData({
+      count: query.count,
+      page,
+      term: term ?? query.term,
+      friend: friend ?? query.friend,
+    });
 
     dispatch(setUsersList(response.data.items, response.data.totalCount));
 
     const pages = Array.from(
-      Array(Math.ceil(response.data.totalCount / pageSize)),
+      Array(Math.ceil(response.data.totalCount / query.count)),
       (_, i: number) => i + 1
     );
 
@@ -86,16 +102,19 @@ export const changePage =
 
 type FriendsState = {
   users: Array<User>;
-  pageSize: number;
-  currentPage: number;
+  query: UsersPayload;
   pages: Array<number>;
   followingInProgress: Array<number>;
 };
 
 const initialState: FriendsState = {
   users: [],
-  pageSize: 20,
-  currentPage: 1,
+  query: {
+    count: 20,
+    page: 1,
+    term: 'a',
+    friend: true,
+  },
   pages: [],
   followingInProgress: [],
 };
@@ -136,10 +155,13 @@ export const friendsReducer = (
           : [...state.followingInProgress, action.id],
       };
 
-    case 'friends/setCurrentPage':
+    case 'friends/setQuery':
       return {
         ...state,
-        currentPage: action.currentPage,
+        query: {
+          ...state.query,
+          ...action.query,
+        },
       };
 
     case 'friends/setUsers':

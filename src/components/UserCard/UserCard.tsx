@@ -18,7 +18,7 @@ export default function UserCard({
 }: IUserCard) {
   return (
     <Field color='grey'>
-      <div className={s.user}>
+      <article className={s.user}>
         <Link to={`/${user.id}`}>
           <Avatar size='medium' src={user.photos.small} />
         </Link>
@@ -34,7 +34,7 @@ export default function UserCard({
             {user.followed ? 'Unfollow' : 'Follow'}
           </Button>
         </div>
-      </div>
+      </article>
     </Field>
   );
 }

@@ -70,6 +70,13 @@ export type LoginMeResponse = Response;
 
 export type LogoutMeResponse = Response;
 
+export type UsersPayload = {
+  count: number;
+  page: number;
+  term: string;
+  friend: boolean | null;
+};
+
 export type UsersResponse = {
   items: Array<User>;
   totalCount: number;
