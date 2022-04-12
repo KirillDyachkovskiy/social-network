@@ -18,19 +18,3 @@
     position: sticky;
   }
 }
-
-.message {
-  max-width: 85%;
-  word-break: break-word;
-
-  &_to {
-    align-self: flex-end;
-  }
-
-  &_from {
-    align-self: flex-start;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-}

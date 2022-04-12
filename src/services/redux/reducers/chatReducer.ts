@@ -1,15 +1,48 @@
-import { AnyAction } from 'redux';
+import { AnyAction, Dispatch } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { chatWS } from '../../api/Api';
 import { RootState } from '../store';
 
-export const sendMessage = (text: string) => ({
-  type: 'messenger/sendMessage',
-  text,
+const messagesReceived = (payload: Array<TMessage>) => ({
+  type: 'chat/receiveMessages',
+  payload,
 });
 
+let storedHandleMessage: ((messages: Array<TMessage>) => void) | null = null;
+
+function handleMessage(dispatch: Dispatch) {
+  if (!storedHandleMessage) {
+    storedHandleMessage = (messages: Array<TMessage>) =>
+      dispatch(messagesReceived(messages));
+  }
+
+  return storedHandleMessage;
+}
+
+export const startMessageListening =
+  (): ThunkAction<void, RootState, undefined, AnyAction> =>
+  (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+    chatWS.start();
+    chatWS.subscribe(handleMessage(dispatch));
+  };
+
+export const stopMessageListening =
+  (): ThunkAction<void, RootState, undefined, AnyAction> =>
+  (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+    chatWS.unsubscribe(handleMessage(dispatch));
+    chatWS.stop();
+  };
+
+export const sendMessage =
+  (message: string): ThunkAction<void, RootState, undefined, AnyAction> =>
+  () =>
+    chatWS.send(message);
+
 export type TMessage = {
-  id: number;
-  sender: number;
-  text: string;
+  userId: number;
+  userName: string;
+  photo: string;
+  message: string;
 };
 
 export type MessengerState = {
@@ -17,31 +50,20 @@ export type MessengerState = {
 };
 
 const initialState: MessengerState = {
-  messages: [
-    { id: 0, sender: 0, text: 'Hi' },
-    { id: 1, sender: 1, text: "I'm glad to see you" },
-    { id: 2, sender: 0, text: "We'll go to the gym tomorrow" },
-  ],
+  messages: [],
 };
 
-export const getMessages = (state: RootState) => state.messenger.messages;
+export const getMessages = (state: RootState) => state.chat.messages;
 
 export const chatReducer = (
   state: MessengerState = initialState,
   action: AnyAction
 ) => {
   switch (action.type) {
-    case 'messenger/sendMessage':
+    case 'chat/receiveMessages':
       return {
         ...state,
-        messages: [
-          ...state.messages,
-          {
-            id: state.messages.length,
-            sender: Math.round(Math.random()),
-            text: action.text,
-          },
-        ],
+        messages: [...state.messages, ...action.payload],
       };
 
     default:

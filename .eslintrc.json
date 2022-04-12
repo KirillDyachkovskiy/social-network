@@ -1,61 +1,101 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "react-app",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "react-app",
-        "airbnb",
-        "airbnb-typescript",
-        "plugin:import/typescript",
-        "plugin:prettier/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": "./tsconfig.json"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "prettier"
-    ],
-    "rules": {
-        "padding-line-between-statements": [
-            "error",
-            {
-                "blankLine": "always",
-                "prev": "*",
-                "next": "return"
-            },
-            {
-                "blankLine": "always",
-                "prev": ["const", "let", "var", "import"],
-                "next": "*"
-            },
-            {
-                "blankLine": "any",
-                "prev": ["const", "let", "var", "import"],
-                "next": ["const", "let", "var", "import"]
-            },
-            { "blankLine": "always", "prev": "directive", "next": "*" },
-            { "blankLine": "any", "prev": "directive", "next": "directive" },
-            { "blankLine": "always", "prev": ["case", "default"], "next": "*" },
-            { "blankLine": "always", "prev": "function", "next": "*" },
-            { "blankLine": "always", "prev": "*", "next": "function" }
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "rules": {
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return"
+      },
+      {
+        "blankLine": "always",
+        "prev": [
+          "const",
+          "let",
+          "var",
+          "import"
         ],
-        "react/require-default-props": 0,
-        "react/jsx-fragments": 0,
-        "react/react-in-jsx-scope": 0,
-        "@typescript-eslint/no-shadow": 0,
-        "@typescript-eslint/default-param-last": 0,
-        "react/jsx-props-no-spreading": 0,
-        "import/no-cycle": 0,
-        "no-useless-escape": 0,
-        "no-control-regex": 0
-    }
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": [
+          "const",
+          "let",
+          "var",
+          "import"
+        ],
+        "next": [
+          "const",
+          "let",
+          "var",
+          "import"
+        ]
+      },
+      {
+        "blankLine": "always",
+        "prev": "directive",
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": "directive",
+        "next": "directive"
+      },
+      {
+        "blankLine": "always",
+        "prev": [
+          "case",
+          "default"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "function",
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "function"
+      }
+    ],
+    "react/require-default-props": 0,
+    "react/jsx-fragments": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/no-array-index-key": 0,
+    "@typescript-eslint/no-shadow": 0,
+    "@typescript-eslint/default-param-last": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "react/jsx-props-no-spreading": 0,
+    "import/no-cycle": 0,
+    "no-useless-escape": 0,
+    "no-control-regex": 0
+  }
 }

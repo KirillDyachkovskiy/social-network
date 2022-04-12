@@ -7,7 +7,7 @@ import { profileReducer } from './reducers/profileReducer';
 
 const reducers = combineReducers({
   profile: profileReducer,
-  messenger: chatReducer,
+  chat: chatReducer,
   friends: friendsReducer,
   auth: authReducer,
 });
