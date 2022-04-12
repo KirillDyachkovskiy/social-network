@@ -8,10 +8,10 @@ interface IStatus {
 
 export default function Status({ status, changeStatus }: IStatus) {
   const [editMode, setEditMode] = useState(false);
-  const [localStatus, setLocalStatus] = useState<string>(status || 'no status');
+  const [localStatus, setLocalStatus] = useState<string>(status || '');
 
   useEffect(() => {
-    setLocalStatus(status || 'no status');
+    setLocalStatus(status || '');
   }, [status]);
 
   function toggleEditMode() {

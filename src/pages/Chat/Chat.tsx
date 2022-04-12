@@ -9,6 +9,7 @@ import {
 import Submit from '../../components/Submit';
 import Field from '../../ui/Field';
 import s from './chat.module.scss';
+import Avatar from '../../ui/Avatar';
 
 interface IMessage {
   type?: 'to' | 'from';
@@ -16,10 +17,21 @@ interface IMessage {
 }
 
 function Message({ type = 'to', children }: IMessage) {
+  if (type === 'to') {
+    return (
+      <article className={`${s.message} ${s.message_to}`}>
+        <Field color='grey'>{children}</Field>
+      </article>
+    );
+  }
+
   return (
-    <div className={`${s.message} ${s[`message__${type}`]}`}>
-      <Field color={type === 'to' ? 'grey' : 'blue'}>{children}</Field>
-    </div>
+    <article className={s.message_from}>
+      <Avatar size='small' />
+      <div className={s.message}>
+        <Field color='blue'>{children}</Field>
+      </div>
+    </article>
   );
 }
 
@@ -37,10 +49,10 @@ function Chat() {
   }, [messages]);
 
   return (
-    <section className={s.messenger}>
-      <div className={s.messenger__content}>
+    <section>
+      <div className={s.chat__content}>
         <Field>
-          <div className={s.messenger__messages}>
+          <div className={s.chat__messages}>
             {messages.map((message: TMessage) => (
               <Message key={message.id} type={message.sender ? 'from' : 'to'}>
                 {message.text}
@@ -49,7 +61,7 @@ function Chat() {
           </div>
           <div ref={messagesEndRef} />
         </Field>
-        <div className={s.messenger__submit}>
+        <div className={s.chat__submit}>
           <Field>
             <Submit
               reset

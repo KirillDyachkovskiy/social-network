@@ -1,4 +1,4 @@
-.messenger {
+.chat {
   &__content {
     width: 100%;
     height: max-content;
@@ -21,13 +21,16 @@
 
 .message {
   max-width: 85%;
-  word-wrap: break-word;
+  word-break: break-word;
 
-  &__to {
+  &_to {
     align-self: flex-end;
   }
 
-  &__from {
+  &_from {
     align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 }
