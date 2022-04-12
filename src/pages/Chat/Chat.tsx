@@ -2,15 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import withRedirect from '../../components/withRedirect';
 import {
-  getMenu,
   getMessages,
   sendMessage,
   TMessage,
-} from '../../services/redux/reducer/messengerReducer';
+} from '../../services/redux/reducers/chatReducer';
 import Submit from '../../components/Submit';
-import { Sidebar } from '../../ui/Sidebar';
 import Field from '../../ui/Field';
-import s from './messenger.module.scss';
+import s from './chat.module.scss';
 
 interface IMessage {
   type?: 'to' | 'from';
@@ -25,10 +23,9 @@ function Message({ type = 'to', children }: IMessage) {
   );
 }
 
-function Messenger() {
+function Chat() {
   const [messageText, setMessageText] = useState<string>('');
 
-  const menu = useSelector(getMenu);
   const messages = useSelector(getMessages);
 
   const dispatch = useDispatch();
@@ -67,11 +64,8 @@ function Messenger() {
           </Field>
         </div>
       </div>
-      <div className={s.messenger__sidebar}>
-        <Sidebar items={menu} />
-      </div>
     </section>
   );
 }
 
-export default withRedirect(Messenger);
+export default withRedirect(Chat);

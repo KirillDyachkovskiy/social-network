@@ -8,11 +8,11 @@ import {
   authLogIn,
   getCaptcha,
   getUserData,
-} from '../../services/redux/reducer/authReducer';
+} from '../../services/redux/reducers/authReducer';
 import Field from '../../ui/Field';
-import s from './login.module.scss';
 import Image from '../../ui/Image';
-import { LoginMePayload } from '../../types/Api';
+import { LoginMePayload } from '../../services/api/Api';
+import s from './login.module.scss';
 
 export default function Login() {
   const {
@@ -35,7 +35,6 @@ export default function Login() {
 
   const onSubmit = (data: LoginMePayload) => {
     dispatch(authLogIn(data));
-
   };
 
   useEffect(() => {

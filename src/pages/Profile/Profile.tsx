@@ -6,12 +6,12 @@ import {
   changeVisitedProfile,
   getPosts,
   getVisitedProfile,
-} from '../../services/redux/reducer/profileReducer';
+} from '../../services/redux/reducers/profileReducer';
 import withRedirect from '../../components/withRedirect';
 import ProfileCard from '../../components/ProfileCard';
 import Image from '../../ui/Image';
 import ProfileWall from '../../components/ProfileWall';
-import { getUserData } from '../../services/redux/reducer/authReducer';
+import { getUserData } from '../../services/redux/reducers/authReducer';
 import cover from '../../images/default_cover.jpg';
 import s from './profile.module.scss';
 

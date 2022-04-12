@@ -8,7 +8,7 @@ import {
   getQuery,
   getUsers,
   toggleFollow,
-} from '../../services/redux/reducer/friendsReducer';
+} from '../../services/redux/reducers/friendsReducer';
 import Field from '../../ui/Field';
 import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';

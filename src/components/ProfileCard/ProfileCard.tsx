@@ -8,7 +8,7 @@ import {
   changeProfileAvatar,
   changeProfileInfo,
   changeProfileStatus,
-} from '../../services/redux/reducer/profileReducer';
+} from '../../services/redux/reducers/profileReducer';
 import { TStatus, TVisitedProfile, UserInfo } from '../../services/api/Api';
 import s from './profileCard.module.scss';
 

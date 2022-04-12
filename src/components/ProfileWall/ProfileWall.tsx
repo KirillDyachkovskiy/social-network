@@ -9,7 +9,7 @@ import {
   addPost,
   deletePost,
   UserPost,
-} from '../../services/redux/reducer/profileReducer';
+} from '../../services/redux/reducers/profileReducer';
 
 interface IPost extends UserPost {
   deletePost: (id: number) => void;

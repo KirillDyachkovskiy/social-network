@@ -1,9 +1,9 @@
 // @ts-nocheck
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import s from './info.module.scss';
 import Button from '../../ui/Button';
-import { ProfileInfoPayload, UserInfo } from '../../types/Api';
+import { UserInfo, ProfileInfoPayload } from '../../services/api/Api';
+import s from './info.module.scss';
 
 interface IInfo {
   userInfo: UserInfo;

@@ -1,7 +1,4 @@
 .messenger {
-  display: flex;
-  gap: 10px;
-
   &__content {
     width: 100%;
     height: max-content;
@@ -19,13 +16,6 @@
     padding-top: 10px;
     bottom: 0;
     position: sticky;
-  }
-
-  &__sidebar {
-    min-width: 220px;
-    height: min-content;
-    position: sticky;
-    top: 58px;
   }
 }
 
