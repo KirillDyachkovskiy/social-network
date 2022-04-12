@@ -1,8 +1,7 @@
 import { createSelector } from 'reselect';
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { usersAPI } from '../../api';
-import { User, UserId, UsersPayload } from '../../../types/Api';
+import { usersAPI, User, UserId, UsersPayload } from '../../api/Api';
 import { RootState } from '../store';
 
 const toggleFollowSuccess = (id: UserId) => ({

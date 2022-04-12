@@ -7,13 +7,13 @@ import {
   getPosts,
   getVisitedProfile,
 } from '../../services/redux/reducer/profileReducer';
-import withRedirect from '../../hoc';
+import withRedirect from '../../components/withRedirect';
 import ProfileCard from '../../components/ProfileCard';
 import Image from '../../ui/Image';
 import ProfileWall from '../../components/ProfileWall';
-import s from './profile.module.scss';
-import { ANON_USER_COVER } from '../../constants';
 import { getUserData } from '../../services/redux/reducer/authReducer';
+import cover from '../../images/default_cover.jpg';
+import s from './profile.module.scss';
 
 function Profile() {
   const { id: authedId } = useSelector(getUserData);
@@ -37,7 +37,7 @@ function Profile() {
   return (
     <section className={s.profile}>
       <div className={s.profile__cover}>
-        <Image src={ANON_USER_COVER} alt='обложка пользователя' />
+        <Image src={cover} alt='обложка пользователя' />
       </div>
       <ProfileCard visitedProfile={visitedProfile} isOwner={id === authedId} />
       <ProfileWall

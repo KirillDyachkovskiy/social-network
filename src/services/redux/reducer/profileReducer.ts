@@ -1,13 +1,13 @@
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { profileAPI } from '../../api';
 import {
+  profileAPI,
   ResultCode,
   TStatus,
   TVisitedProfile,
   UserId,
   UserInfo,
-} from '../../../types/Api';
+} from '../../api/Api';
 import { RootState } from '../store';
 import { getUserData } from './authReducer';
 

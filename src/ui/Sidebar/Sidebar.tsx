@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
+import { SidebarItem } from '../../services/api/Api';
 import Field from '../Field';
 import s from './sidebar.module.scss';
-import { SidebarItem } from '../../types/Api';
 
 interface ISidebar {
   items: Array<SidebarItem>;

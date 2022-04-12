@@ -6,8 +6,9 @@ import {
   ResultCode,
   SidebarItem,
   TCaptcha,
-} from '../../../types/Api';
-import { authAPI, securityAPI } from '../../api';
+  authAPI,
+  securityAPI,
+} from '../../api/Api';
 import { RootState } from '../store';
 
 const setUserData = (payload: AuthData): AnyAction => ({

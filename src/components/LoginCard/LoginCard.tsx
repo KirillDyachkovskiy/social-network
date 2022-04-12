@@ -1,4 +1,3 @@
-import { ANON_USER_NAME } from '../../constants';
 import s from './loginCard.module.scss';
 
 interface ILoginCard {
@@ -9,7 +8,7 @@ interface ILoginCard {
 export default function LoginCard({ login, authLogOut }: ILoginCard) {
   return (
     <div className={s.loginCard}>
-      <p className={s.loginCard__nickname}>{login || ANON_USER_NAME}</p>
+      <p className={s.loginCard__nickname}>{login || 'Anonymous'}</p>
       {login && (
         <button
           type='button'

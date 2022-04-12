@@ -10,12 +10,12 @@ import {
   toggleFollow,
 } from '../../services/redux/reducer/friendsReducer';
 import Field from '../../ui/Field';
-import s from './friends.module.scss';
 import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';
-import { User, UserId, UsersPayload } from '../../types/Api';
 import FriendsSearch from '../../components/FriendsSearch/FriendsSearch';
-import withRedirect from '../../hoc';
+import withRedirect from '../../components/withRedirect';
+import { UserId, User, UsersPayload } from '../../services/api/Api';
+import s from './friends.module.scss';
 
 function Friends() {
   const [searchParams, setSearchParams] = useSearchParams();

@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Field from '../../ui/Field';
 import Submit from '../Submit';
 import s from './profileWall.module.scss';
-import { ANON_USER_AVATAR, ANON_USER_NAME } from '../../constants';
 import Cross from '../../ui/Cross';
 import Avatar from '../../ui/Avatar';
 import {
@@ -14,11 +13,18 @@ import {
 
 interface IPost extends UserPost {
   deletePost: (id: number) => void;
-  name: string;
-  photo: string;
+  name?: string;
+  photo?: string;
 }
 
-function Post({ id, text, likes, deletePost, name, photo }: IPost) {
+function Post({
+  id,
+  text,
+  likes,
+  deletePost,
+  name = 'Anonymous',
+  photo,
+}: IPost) {
   return (
     <Field>
       <div className={s.post}>
@@ -46,8 +52,8 @@ interface IProfileWall {
 }
 
 export default function ProfileWall({
-  name = ANON_USER_NAME,
-  photo = ANON_USER_AVATAR,
+  name,
+  photo,
   posts,
   isOwner,
 }: IProfileWall) {
@@ -71,7 +77,7 @@ export default function ProfileWall({
           </Submit>
         </Field>
       )}
-      <Field>{isOwner ? 'My posts' : `${name}'s posts`}</Field>
+      <Field>{name && (isOwner ? 'My posts' : `${name}'s posts`)}</Field>
       <div className={s.wall__posts}>
         {posts.map((p: UserPost) => (
           <Post

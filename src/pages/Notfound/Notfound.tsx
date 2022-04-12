@@ -1,6 +1,6 @@
 import { compose } from 'redux';
 import Field from '../../ui/Field';
-import withRedirect from '../../hoc';
+import withRedirect from '../../components/withRedirect';
 
 function Notfound() {
   return <Field>Страница не найдена!</Field>;

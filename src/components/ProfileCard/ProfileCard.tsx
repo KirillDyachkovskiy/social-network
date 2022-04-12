@@ -1,17 +1,16 @@
 import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import s from './profileCard.module.scss';
 import Field from '../../ui/Field';
 import Avatar from '../../ui/Avatar';
 import Status from '../../ui/Status';
 import Info from '../Info';
-import { TStatus, TVisitedProfile, UserInfo } from '../../types/Api';
-import { ANON_USER_STATUS } from '../../constants';
 import {
   changeProfileAvatar,
   changeProfileInfo,
   changeProfileStatus,
 } from '../../services/redux/reducer/profileReducer';
+import { TStatus, TVisitedProfile, UserInfo } from '../../services/api/Api';
+import s from './profileCard.module.scss';
 
 interface IProfileCard {
   visitedProfile: TVisitedProfile;
@@ -54,7 +53,7 @@ export default function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
         <div>
           <h1>{visitedProfile.fullName}</h1>
           <Status
-            status={status || ANON_USER_STATUS}
+            status={status}
             changeStatus={isOwner ? changeStatus : undefined}
           />
           <Info userInfo={userInfo} isOwner={isOwner} changeInfo={changeInfo} />

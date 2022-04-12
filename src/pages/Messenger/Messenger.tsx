@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import withRedirect from '../../hoc';
+import withRedirect from '../../components/withRedirect';
 import {
   getMenu,
   getMessages,

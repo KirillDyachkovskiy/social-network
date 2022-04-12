@@ -35,6 +35,7 @@ export default function Login() {
 
   const onSubmit = (data: LoginMePayload) => {
     dispatch(authLogIn(data));
+
   };
 
   useEffect(() => {

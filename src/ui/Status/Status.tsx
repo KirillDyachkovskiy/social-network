@@ -1,21 +1,17 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import s from './status.module.scss';
-import { ANON_USER_STATUS } from '../../constants';
 
 interface IStatus {
-  status: string;
+  status: string | null;
   changeStatus?: (value: string) => void;
 }
 
-export default function Status({
-  status = ANON_USER_STATUS,
-  changeStatus,
-}: IStatus) {
+export default function Status({ status, changeStatus }: IStatus) {
   const [editMode, setEditMode] = useState(false);
-  const [localStatus, setLocalStatus] = useState(status || ANON_USER_STATUS);
+  const [localStatus, setLocalStatus] = useState<string>(status || 'no status');
 
   useEffect(() => {
-    setLocalStatus(status || ANON_USER_STATUS);
+    setLocalStatus(status || 'no status');
   }, [status]);
 
   function toggleEditMode() {

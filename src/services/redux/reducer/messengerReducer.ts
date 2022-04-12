@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { SidebarItem } from '../../../types/Api';
+import { SidebarItem } from '../../api/Api';
 import { RootState } from '../store';
 
 export const sendMessage = (text: string) => ({
