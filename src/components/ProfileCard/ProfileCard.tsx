@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import Field from '../../ui/Field';
 import Avatar from '../../ui/Avatar';
 import Status from '../../ui/Status';
-import Info from '../Info';
+import ProfileInfo from '../ProfileInfo';
 import {
   changeProfileAvatar,
   changeProfileInfo,
@@ -56,7 +56,11 @@ export default function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
             status={status}
             changeStatus={isOwner ? changeStatus : undefined}
           />
-          <Info userInfo={userInfo} isOwner={isOwner} changeInfo={changeInfo} />
+          <ProfileInfo
+            userInfo={userInfo}
+            isOwner={isOwner}
+            changeInfo={changeInfo}
+          />
         </div>
       </div>
     </Field>

@@ -9,32 +9,3 @@
     gap: 10px;
   }
 }
-
-.post {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  position: relative;
-
-  &__deleter {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-  }
-
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  &__footer {
-    border-top: 1px solid var(--field);
-  }
-
-  &__likes {
-    margin-top: 10px;
-    font-size: 0.9em;
-    color: var(--grey-text);
-  }
-}

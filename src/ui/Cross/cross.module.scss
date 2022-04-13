@@ -1,4 +1,8 @@
 .deleter {
-  color: var(--grey-text);
+  color: var(--field-hover);
   font-size: 40px;
+
+  &:hover {
+    color: var(--grey-text);
+  }
 }

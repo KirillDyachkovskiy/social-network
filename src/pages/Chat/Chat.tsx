@@ -34,7 +34,7 @@ function Chat() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+  }, [messages]);
 
   return (
     <section>

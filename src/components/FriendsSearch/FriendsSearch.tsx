@@ -22,7 +22,7 @@ export default function FriendsSearch({
     <div className={s.friendsSearch}>
       <Field>
         <Submit
-          placeholder='Only friends'
+          placeholder='Find a friend'
           value={filter}
           onChange={setFilter}
           onSubmit={() => changePage(filter, isFriendsOnly)}
@@ -32,7 +32,7 @@ export default function FriendsSearch({
         <div className={s.friendsSearch__checkbox}>
           <Checkbox
             id='friendsOnly'
-            label='My friends'
+            label='Only friends'
             checked={isFriendsOnly}
             onChange={setIsFriendsOnly}
           />

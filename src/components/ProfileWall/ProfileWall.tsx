@@ -3,46 +3,12 @@ import { useState } from 'react';
 import Field from '../../ui/Field';
 import Submit from '../Submit';
 import s from './profileWall.module.scss';
-import Cross from '../../ui/Cross';
-import Avatar from '../../ui/Avatar';
 import {
   addPost,
   deletePost,
   UserPost,
 } from '../../services/redux/reducers/profileReducer';
-
-interface IPost extends UserPost {
-  deletePost: (id: number) => void;
-  name?: string;
-  photo?: string;
-}
-
-function Post({
-  id,
-  text,
-  likes,
-  deletePost,
-  name = 'Anonymous',
-  photo,
-}: IPost) {
-  return (
-    <Field>
-      <div className={s.post}>
-        <div className={s.post__deleter}>
-          <Cross onClick={() => deletePost(id)} />
-        </div>
-        <div className={s.post__header}>
-          <Avatar src={photo} />
-          <h1>{name}</h1>
-        </div>
-        <p>{text}</p>
-        <div className={s.post__footer}>
-          <p className={s.post__likes}>❤{likes}</p>
-        </div>
-      </div>
-    </Field>
-  );
-}
+import ProfilePost from '../ProfilePost';
 
 interface IProfileWall {
   posts: Array<UserPost>;
@@ -80,7 +46,7 @@ export default function ProfileWall({
       <Field>{name && (isOwner ? 'My posts' : `${name}'s posts`)}</Field>
       <div className={s.wall__posts}>
         {posts.map((p: UserPost) => (
-          <Post
+          <ProfilePost
             key={p.id}
             likes={p.likes}
             text={p.text}

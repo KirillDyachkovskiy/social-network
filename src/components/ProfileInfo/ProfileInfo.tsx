@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../../ui/Button';
 import { UserInfo, ProfileInfoPayload } from '../../services/api/Api';
-import s from './info.module.scss';
+import s from './profileInfo.module.scss';
 
 interface IInfo {
   userInfo: UserInfo;
@@ -11,7 +11,7 @@ interface IInfo {
   changeInfo: (info: ProfileInfoPayload) => void;
 }
 
-export default function Info({ userInfo, isOwner, changeInfo }: IInfo) {
+export default function ProfileInfo({ userInfo, isOwner, changeInfo }: IInfo) {
   const {
     register,
     handleSubmit,
