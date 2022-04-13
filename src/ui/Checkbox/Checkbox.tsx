@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
+import { ChangeEventHandler } from 'react';
 import s from './checkbox.module.scss';
 
 interface ICheckbox {
   id: string;
   checked?: boolean;
-  onChange?: Dispatch<SetStateAction<boolean>>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   label?: string;
   disabled?: boolean;
 }
@@ -24,7 +24,7 @@ export default function Checkbox({
         className={s.check__input}
         checked={checked}
         disabled={disabled}
-        onChange={() => onChange && onChange((prev) => !prev)}
+        onChange={onChange}
       />
       <span className={s.check__box} />
       {label}

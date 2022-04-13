@@ -1,0 +1,7 @@
+.chatRoom {
+  min-height: calc(100vh - 58px - 98px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 5px;
+}

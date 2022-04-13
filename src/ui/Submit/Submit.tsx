@@ -1,14 +1,14 @@
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import s from './submit.module.scss';
-import Button from '../../ui/Button';
-import Field from '../../ui/Field';
+import Button from '../Button';
+import Field from '../Field';
 
 interface ISubmit {
   placeholder: string;
   children: string;
-  value: string;
-  onChange: (value: string) => void;
-  onSubmit?: () => void;
+  onSubmit: (text: string) => void;
+  defaultValue?: string;
+  required?: boolean;
   disabled?: boolean;
   reset?: boolean;
 }
@@ -16,18 +16,18 @@ interface ISubmit {
 export default function Submit({
   placeholder,
   children,
-  value,
-  onChange,
   onSubmit,
+  defaultValue = '',
+  required = false,
   disabled = false,
   reset = false,
 }: ISubmit) {
+  const [value, setValue] = useState<string>(defaultValue);
+
   const onClick = () => {
-    if (onSubmit) {
-      onSubmit();
-    }
+    onSubmit(value);
     if (reset) {
-      onChange('');
+      setValue('');
     }
   };
 
@@ -41,13 +41,17 @@ export default function Submit({
           autoComplete='off'
           value={value}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onChange(e.target.value)
+            setValue(e.target.value)
           }
           placeholder={placeholder}
           className={s.submit__input}
         />
         <div className={s.submit__button}>
-          <Button type='submit' onClick={onClick} disabled={disabled}>
+          <Button
+            type='submit'
+            onClick={onClick}
+            disabled={disabled || (required && !value)}
+          >
             {children}
           </Button>
         </div>
