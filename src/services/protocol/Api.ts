@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { TMessage } from '../redux/reducers/chatReducer';
 
 const instance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -52,55 +51,6 @@ export const usersAPI = {
 export const securityAPI = {
   getCaptcha: () => instance.get<CaptchaResponse>('security/get-captcha-url'),
 };
-
-let subscribers: Array<TSubscriber> = [];
-
-let ws: WebSocket | null = null;
-
-function handleClose() {
-  setTimeout(createChannel, 3000);
-}
-
-function handleMessage(e: MessageEvent) {
-  const newMessages = JSON.parse(e.data);
-
-  subscribers.forEach((subscriber: TSubscriber) => subscriber(newMessages));
-}
-
-function createChannel() {
-  ws?.removeEventListener('close', handleClose);
-  ws?.close();
-
-  ws = new WebSocket(
-    'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
-  );
-
-  ws.addEventListener('close', handleClose);
-  ws.addEventListener('message', handleMessage);
-}
-
-export const chatWS = {
-  subscribe: (callback: TSubscriber) => {
-    subscribers.push(callback);
-  },
-  unsubscribe: (callback: TSubscriber) => {
-    subscribers = subscribers.filter((subscriber) => subscriber !== callback);
-  },
-  start: () => {
-    createChannel();
-  },
-  stop: () => {
-    subscribers = [];
-    ws?.removeEventListener('close', handleClose);
-    ws?.removeEventListener('message', handleMessage);
-    ws?.close();
-  },
-  send: (message: string) => {
-    ws?.send(message);
-  },
-};
-
-type TSubscriber = (messages: Array<TMessage>) => void;
 
 export enum ResultCode {
   Success = 0,

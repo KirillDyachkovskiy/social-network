@@ -11,7 +11,7 @@ import {
 } from '../../services/redux/reducers/authReducer';
 import Field from '../../ui/Field';
 import Image from '../../ui/Image';
-import { LoginMePayload } from '../../services/api/Api';
+import { LoginMePayload } from '../../services/protocol/Api';
 import s from './login.module.scss';
 
 export default function Login() {

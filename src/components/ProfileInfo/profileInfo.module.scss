@@ -1,4 +1,6 @@
 .info {
+  min-width: 450px;
+
   &__subtitle {
     color: black;
   }
@@ -10,8 +12,12 @@
     color: var(--grey-text);
   }
 
-  &__p {
+  &__property {
     flex: 0 0 200px;
+  }
+
+  &__value {
+    flex: 1 1 auto;
   }
 
   &__input {

@@ -7,7 +7,7 @@ import {
   TVisitedProfile,
   UserId,
   UserInfo,
-} from '../../api/Api';
+} from '../../protocol/Api';
 import { RootState } from '../store';
 import { getUserData } from './authReducer';
 

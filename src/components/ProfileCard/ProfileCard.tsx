@@ -9,7 +9,11 @@ import {
   changeProfileInfo,
   changeProfileStatus,
 } from '../../services/redux/reducers/profileReducer';
-import { TStatus, TVisitedProfile, UserInfo } from '../../services/api/Api';
+import {
+  TStatus,
+  TVisitedProfile,
+  UserInfo,
+} from '../../services/protocol/Api';
 import s from './profileCard.module.scss';
 
 interface IProfileCard {

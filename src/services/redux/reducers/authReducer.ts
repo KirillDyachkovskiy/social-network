@@ -8,7 +8,7 @@ import {
   TCaptcha,
   authAPI,
   securityAPI,
-} from '../../api/Api';
+} from '../../protocol/Api';
 import { RootState } from '../store';
 
 const setUserData = (payload: AuthData): AnyAction => ({

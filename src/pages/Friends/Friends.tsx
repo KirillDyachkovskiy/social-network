@@ -14,7 +14,7 @@ import UserCard from '../../components/UserCard';
 import { Paginator } from '../../ui/Sidebar';
 import FriendsSearch from '../../components/FriendsSearch/FriendsSearch';
 import withRedirect from '../../components/withRedirect';
-import { UserId, User, UsersPayload } from '../../services/api/Api';
+import { UserId, User, UsersPayload } from '../../services/protocol/Api';
 import s from './friends.module.scss';
 
 function Friends() {

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../../ui/Button';
-import { UserInfo, ProfileInfoPayload } from '../../services/api/Api';
+import { UserInfo, ProfileInfoPayload } from '../../services/protocol/Api';
 import s from './profileInfo.module.scss';
 
 interface IInfo {
@@ -39,7 +39,7 @@ export default function ProfileInfo({ userInfo, isOwner, changeInfo }: IInfo) {
         <p className={s.info__subtitle}>Main info</p>
         {Object.keys(mainInfo).map((key) => (
           <div className={s.info__item} key={key}>
-            <p className={s.info__p}>{key}:</p>
+            <p className={s.info__property}>{key}:</p>
             <input
               className={s.info__input}
               {...register(key, {
@@ -47,14 +47,16 @@ export default function ProfileInfo({ userInfo, isOwner, changeInfo }: IInfo) {
               })}
             />
             {errors[key] && (
-              <p className={s.info__p}>{errors[key]?.message || 'Error!'}</p>
+              <p className={s.info__property}>
+                {errors[key]?.message || 'Error!'}
+              </p>
             )}
           </div>
         ))}
         <p className={s.info__subtitle}>Contacts</p>
         {Object.keys(contacts).map((key) => (
           <div className={s.info__item} key={key}>
-            <p className={s.info__p}>{key}:</p>
+            <p className={s.info__property}>{key}:</p>
             <input
               className={s.info__input}
               {...register(`contacts.${key}`, {
@@ -76,15 +78,15 @@ export default function ProfileInfo({ userInfo, isOwner, changeInfo }: IInfo) {
       <p className={s.info__subtitle}>Main info</p>
       {Object.keys(mainInfo).map((key) => (
         <div className={s.info__item} key={key}>
-          <p className={s.info__p}>{key}:</p>
-          <p>{mainInfo[key]}</p>
+          <p className={s.info__property}>{key}:</p>
+          <p className={s.info__value}>{mainInfo[key]}</p>
         </div>
       ))}
       <p className={s.info__subtitle}>Contacts</p>
       {Object.keys(contacts).map((key) => (
         <div className={s.info__item} key={key}>
-          <p className={s.info__p}>{key}:</p>
-          <p>{contacts[key]}</p>
+          <p className={s.info__property}>{key}:</p>
+          <p className={s.info__value}>{contacts[key]}</p>
         </div>
       ))}
       {isOwner && (

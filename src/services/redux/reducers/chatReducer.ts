@@ -1,10 +1,15 @@
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { chatWS } from '../../api/Api';
+import { chatWS, TMessage } from '../../protocol/Websocket';
 import { RootState } from '../store';
 
 const messagesReceived = (payload: Array<TMessage>) => ({
   type: 'chat/receiveMessages',
+  payload,
+});
+
+export const websocketStatus = (payload: boolean) => ({
+  type: 'chat/websocketStatus',
   payload,
 });
 
@@ -38,19 +43,14 @@ export const sendMessage =
   () =>
     chatWS.send(message);
 
-export type TMessage = {
-  userId: number;
-  userName: string;
-  photo: string;
-  message: string;
-};
-
 export type MessengerState = {
   messages: Array<TMessage>;
+  isWebsocketOpen: boolean;
 };
 
 const initialState: MessengerState = {
   messages: [],
+  isWebsocketOpen: false,
 };
 
 export const getMessages = (state: RootState) => state.chat.messages;
@@ -64,6 +64,12 @@ export const chatReducer = (
       return {
         ...state,
         messages: [...state.messages, ...action.payload],
+      };
+
+    case 'chat/websocketStatus':
+      return {
+        ...state,
+        isWebsocketOpen: action.payload,
       };
 
     default:

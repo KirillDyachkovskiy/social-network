@@ -1,20 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import withRedirect from '../../components/withRedirect';
 import {
-  getMessages,
   sendMessage,
   startMessageListening,
   stopMessageListening,
 } from '../../services/redux/reducers/chatReducer';
 import Submit from '../../ui/Submit';
 import Field from '../../ui/Field';
-import s from './chat.module.scss';
 import ChatRoom from '../../components/ChatRoom/ChatRoom';
+import s from './chat.module.scss';
 
 function Chat() {
-  const messages = useSelector(getMessages);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,17 +22,10 @@ function Chat() {
     };
   }, [dispatch]);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
   return (
     <section>
       <div className={s.chat__content}>
-        <ChatRoom messages={messages} />
-        <div ref={messagesEndRef} />
+        <ChatRoom />
         <div className={s.chat__submit}>
           <Field>
             <Submit
