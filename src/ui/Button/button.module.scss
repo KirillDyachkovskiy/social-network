@@ -4,6 +4,10 @@
   background-color: var(--blue);
   padding: 7px 15px;
 
+  &:active:not(:disabled) {
+    transform: scale(0.9);
+  }
+
   &:hover {
     background-color: var(--blue-hover);
   }
