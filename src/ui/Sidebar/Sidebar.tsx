@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { SidebarItem } from '../../services/protocol/Api';
 import Field from '../Field';
+import { SidebarItem } from '../../services/protocol/Api';
 import s from './sidebar.module.scss';
 
 interface ISidebar {
