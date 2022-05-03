@@ -1,13 +1,13 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Preloader from './ui/Preloader';
+import Preloader from './views/ui/Preloader';
 
-const MainLayout = lazy((): any => import('./layout/Layout'));
-const Notfound = lazy((): any => import('./pages/Notfound'));
-const Chat = lazy((): any => import('./pages/Chat'));
-const Friends = lazy((): any => import('./pages/Friends'));
-const Profile = lazy((): any => import('./pages/Profile'));
-const Login = lazy((): any => import('./pages/Login'));
+const MainLayout = lazy((): any => import('./views/layout/Layout'));
+const Notfound = lazy((): any => import('./views/pages/Notfound'));
+const Chat = lazy((): any => import('./views/pages/Chat'));
+const Friends = lazy((): any => import('./views/pages/Friends'));
+const Profile = lazy((): any => import('./views/pages/Profile'));
+const Login = lazy((): any => import('./views/pages/Login'));
 
 export default function App() {
   return (
