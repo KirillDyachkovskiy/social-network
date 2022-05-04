@@ -1,14 +1,14 @@
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
+  authAPI,
   AuthData,
   LoginMePayload,
   ResultCode,
+  securityAPI,
   SidebarItem,
   TCaptcha,
-  authAPI,
-  securityAPI,
-} from '../../protocol/Api';
+} from '../../api/Api';
 import { RootState } from '../store';
 
 const setUserData = (payload: AuthData): AnyAction => ({

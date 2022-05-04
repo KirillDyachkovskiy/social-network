@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { getMessages } from '../../../services/redux/reducers/chatReducer';
-import Field from '../../ui/Field';
-import { getUserData } from '../../../services/redux/reducers/authReducer';
-import { TMessage } from '../../../services/protocol/Websocket';
-import Message from '../../ui/Message';
+import { TMessage } from '../../../data/api/Websocket';
+import { getMessages } from '../../../data/redux/reducers/chatReducer';
+import { getUserData } from '../../../data/redux/reducers/authReducer';
+import { Field, Message } from '../../ui';
 import s from './chatRoom.module.scss';
 
 export default function ChatRoom() {

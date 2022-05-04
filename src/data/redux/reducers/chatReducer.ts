@@ -1,6 +1,6 @@
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { chatWS, TMessage } from '../../protocol/Websocket';
+import { chatWS, TMessage } from '../../api/Websocket';
 import { RootState } from '../store';
 
 const messagesReceived = (payload: Array<TMessage>) => ({

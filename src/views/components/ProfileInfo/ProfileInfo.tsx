@@ -1,8 +1,8 @@
 // @ts-nocheck
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Button from '../../ui/Button';
-import { UserInfo, ProfileInfoPayload } from '../../../services/protocol/Api';
+import { Button } from '../../ui';
+import { ProfileInfoPayload, UserInfo } from '../../../data/api/Api';
 import s from './profileInfo.module.scss';
 
 interface IInfo {

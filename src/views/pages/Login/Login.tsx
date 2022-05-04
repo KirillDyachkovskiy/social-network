@@ -1,17 +1,15 @@
 // @ts-nocheck
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import Button from '../../ui/Button';
 import {
   authLogIn,
   getCaptcha,
   getUserData,
-} from '../../../services/redux/reducers/authReducer';
-import Field from '../../ui/Field';
-import Image from '../../ui/Image';
-import { LoginMePayload } from '../../../services/protocol/Api';
+} from '../../../data/redux/reducers/authReducer';
+import { LoginMePayload } from '../../../data/api/Api';
+import { Button, Field, Image } from '../../ui';
 import s from './login.module.scss';
 
 export default function Login() {

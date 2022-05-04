@@ -1,7 +1,5 @@
-import Field from '../../ui/Field';
-import Cross from '../../ui/Cross';
-import Avatar from '../../ui/Avatar';
-import { UserPost } from '../../../services/redux/reducers/profileReducer';
+import { UserPost } from '../../../data/redux/reducers/profileReducer';
+import { Avatar, Cross, Field } from '../../ui';
 import s from './profilePost.module.scss';
 
 interface IPost extends UserPost {

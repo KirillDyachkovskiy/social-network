@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import Field from '../../ui/Field';
-import Submit from '../../ui/Submit';
-import Checkbox from '../../ui/Checkbox';
+import { Checkbox, Field, Submit } from '../../ui';
 import s from './friendsSearch.module.scss';
 
 interface IFriendsSearch {

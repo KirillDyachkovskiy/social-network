@@ -1,5 +1,5 @@
 import { compose } from 'redux';
-import Field from '../../ui/Field';
+import { Field } from '../../ui';
 import withRedirect from '../../components/withRedirect';
 
 function Notfound() {

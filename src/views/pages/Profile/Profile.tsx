@@ -1,17 +1,14 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import Preloader from '../../ui/Preloader';
 import {
   changeVisitedProfile,
   getPosts,
   getVisitedProfile,
-} from '../../../services/redux/reducers/profileReducer';
-import withRedirect from '../../components/withRedirect';
-import ProfileCard from '../../components/ProfileCard';
-import Image from '../../ui/Image';
-import ProfileWall from '../../components/ProfileWall';
-import { getUserData } from '../../../services/redux/reducers/authReducer';
+} from '../../../data/redux/reducers/profileReducer';
+import { getUserData } from '../../../data/redux/reducers/authReducer';
+import { ProfileCard, ProfileWall, withRedirect } from '../../components';
+import { Image, Preloader } from '../../ui';
 import cover from '../../images/default_cover.jpg';
 import s from './profile.module.scss';
 

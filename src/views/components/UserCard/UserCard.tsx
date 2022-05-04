@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import Button from '../../ui/Button';
-import Field from '../../ui/Field';
-import Avatar from '../../ui/Avatar';
-import { UserId, User } from '../../../services/protocol/Api';
+import { User, UserId } from '../../../data/api/Api';
+import { Avatar, Button, Field } from '../../ui';
 import s from './userCard.module.scss';
 
 interface IUserCard {

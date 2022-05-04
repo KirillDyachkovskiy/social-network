@@ -1,14 +1,12 @@
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import withRedirect from '../../components/withRedirect';
+import { useDispatch } from 'react-redux';
 import {
   sendMessage,
   startMessageListening,
   stopMessageListening,
-} from '../../../services/redux/reducers/chatReducer';
-import Submit from '../../ui/Submit';
-import Field from '../../ui/Field';
-import ChatRoom from '../../components/ChatRoom/ChatRoom';
+} from '../../../data/redux/reducers/chatReducer';
+import { ChatRoom, withRedirect } from '../../components';
+import { Field, Submit } from '../../ui';
 import s from './chat.module.scss';
 
 function Chat() {

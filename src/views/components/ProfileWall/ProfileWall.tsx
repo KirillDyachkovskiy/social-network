@@ -1,13 +1,12 @@
 import { useDispatch } from 'react-redux';
-import Field from '../../ui/Field';
-import Submit from '../../ui/Submit';
-import s from './profileWall.module.scss';
 import {
   addPost,
   deletePost,
   UserPost,
-} from '../../../services/redux/reducers/profileReducer';
+} from '../../../data/redux/reducers/profileReducer';
 import ProfilePost from '../ProfilePost';
+import { Field, Submit } from '../../ui';
+import s from './profileWall.module.scss';
 
 interface IProfileWall {
   posts: Array<UserPost>;

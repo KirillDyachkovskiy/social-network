@@ -1,19 +1,13 @@
 import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import Field from '../../ui/Field';
-import Avatar from '../../ui/Avatar';
-import Status from '../../ui/Status';
-import ProfileInfo from '../ProfileInfo';
+import { TStatus, TVisitedProfile, UserInfo } from '../../../data/api/Api';
 import {
   changeProfileAvatar,
   changeProfileInfo,
   changeProfileStatus,
-} from '../../../services/redux/reducers/profileReducer';
-import {
-  TStatus,
-  TVisitedProfile,
-  UserInfo,
-} from '../../../services/protocol/Api';
+} from '../../../data/redux/reducers/profileReducer';
+import ProfileInfo from '../ProfileInfo';
+import { Avatar, Field, Status } from '../../ui';
 import s from './profileCard.module.scss';
 
 interface IProfileCard {

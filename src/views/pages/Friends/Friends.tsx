@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import {
   changePage,
@@ -8,13 +8,10 @@ import {
   getQuery,
   getUsers,
   toggleFollow,
-} from '../../../services/redux/reducers/friendsReducer';
-import Field from '../../ui/Field';
-import UserCard from '../../components/UserCard';
-import { Paginator } from '../../ui/Sidebar';
-import FriendsSearch from '../../components/FriendsSearch/FriendsSearch';
-import withRedirect from '../../components/withRedirect';
-import { UserId, User, UsersPayload } from '../../../services/protocol/Api';
+} from '../../../data/redux/reducers/friendsReducer';
+import { User, UserId, UsersPayload } from '../../../data/api/Api';
+import { FriendsSearch, UserCard, withRedirect } from '../../components';
+import { Field, Paginator } from '../../ui';
 import s from './friends.module.scss';
 
 function Friends() {

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Preloader from './views/ui/Preloader';
+import { Preloader } from './views/ui';
 
 const MainLayout = lazy((): any => import('./views/layout/Layout'));
 const Notfound = lazy((): any => import('./views/pages/Notfound'));

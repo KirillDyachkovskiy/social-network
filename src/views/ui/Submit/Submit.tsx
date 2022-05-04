@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import s from './submit.module.scss';
 import Button from '../Button';
 import Field from '../Field';
+import s from './submit.module.scss';
 
 interface ISubmit {
   placeholder: string;

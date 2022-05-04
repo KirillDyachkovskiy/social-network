@@ -9,7 +9,7 @@ import {
   authMe,
   getSidebar,
   getUserData,
-} from '../../services/redux/reducers/authReducer';
+} from '../../data/redux/reducers/authReducer';
 import s from './layout.module.scss';
 
 export default function Layout() {
