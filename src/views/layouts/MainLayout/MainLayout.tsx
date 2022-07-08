@@ -1,18 +1,18 @@
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import Logo from '../ui/Logo';
-import LoginCard from '../components/LoginCard';
-import { Sidebar } from '../ui/Sidebar';
+import Logo from '../../ui/Logo';
+import LoginCard from '../../components/LoginCard';
+import { Sidebar } from '../../ui/Sidebar';
 import {
   authLogOut,
   authMe,
   getSidebar,
   getUserData,
-} from '../../data/redux/reducers/authReducer';
-import s from './layout.module.scss';
+} from '../../../data/redux/reducers/authReducer';
+import s from './mainLayout.module.scss';
 
-export default function Layout() {
+export default function MainLayout() {
   const { login } = useSelector(getUserData);
   const sidebar = useSelector(getSidebar);
 

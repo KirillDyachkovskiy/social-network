@@ -9,7 +9,7 @@ import {
 import { getUserData } from '../../../data/redux/reducers/authReducer';
 import { ProfileCard, ProfileWall, withRedirect } from '../../components';
 import { Image, Preloader } from '../../ui';
-import cover from '../../images/default_cover.jpg';
+import cover from '../../assets/images/default_cover.jpg';
 import s from './profile.module.scss';
 
 function Profile() {

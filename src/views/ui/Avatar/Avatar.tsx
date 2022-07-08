@@ -1,4 +1,4 @@
-import avatar from '../../images/default_avatar.jpg';
+import avatar from '../../assets/images/default_avatar.jpg';
 import s from './avatar.module.scss';
 
 interface IAvatar {

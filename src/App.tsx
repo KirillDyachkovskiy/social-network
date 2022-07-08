@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Preloader } from './views/ui';
 
-const MainLayout = lazy((): any => import('./views/layout/Layout'));
+const MainLayout = lazy((): any => import('./views/layouts/MainLayout'));
 const Notfound = lazy((): any => import('./views/pages/Notfound'));
 const Chat = lazy((): any => import('./views/pages/Chat'));
 const Friends = lazy((): any => import('./views/pages/Friends'));
