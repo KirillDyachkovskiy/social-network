@@ -21,7 +21,7 @@ type Res<T = object> = {
   messages: Array<string>;
   data: T;
 };
-export type UserInfo = {
+export type TUserInfo = {
   aboutMe: string | null;
   lookingForAJob: boolean | null;
   lookingForAJobDescription: string | null;
@@ -37,7 +37,7 @@ export type UserInfo = {
     mainLink: string | null;
   };
 };
-export type TVisitedProfile = UserInfo & {
+export type TVisitedProfile = TUserInfo & {
   userId: UserId | null;
   photos: Photos;
   status?: TStatus | null;
@@ -83,7 +83,7 @@ export type UsersRes = {
   error: string | null;
 };
 
-export type ProfileInfoReq = UserInfo;
+export type ProfileInfoReq = TUserInfo;
 export type ProfileInfoRes = Res;
 
 export type ProfilePhotoReq = TAvatar;
@@ -92,8 +92,8 @@ export type ProfilePhotoRes = Res<Photos>;
 export type ProfileStatusReq = TStatus;
 export type ProfileStatusRes = Res;
 
-export type UserInfoReq = UserId;
-export type UserInfoRes = UserInfo & { photos: Photos };
+export type TUserInfoReq = UserId;
+export type TUserInfoRes = TUserInfo & { photos: Photos };
 
 export type UserStatusReq = UserId;
 export type UserStatusRes = TStatus;

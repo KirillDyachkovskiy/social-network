@@ -14,20 +14,19 @@ export default function Status({ status, changeStatus }: IStatus) {
     setLocalStatus(status || '');
   }, [status]);
 
+  if (!changeStatus) {
+    return <p className={s.label}>{status}</p>;
+  }
+
   function toggleEditMode() {
-    if (editMode && changeStatus) {
-      changeStatus(localStatus);
+    if (editMode) {
+      changeStatus?.(localStatus);
     }
     setEditMode(!editMode);
   }
 
-  function onChange(event: ChangeEvent<HTMLInputElement>) {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) =>
     setLocalStatus(event.target.value);
-  }
-
-  if (!changeStatus) {
-    return <p className={s.label}>{status}</p>;
-  }
 
   return (
     <div className={s.status}>
@@ -35,10 +34,8 @@ export default function Status({ status, changeStatus }: IStatus) {
         <input
           className={s.input}
           value={localStatus}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
-          onBlur={() => {
-            toggleEditMode();
-          }}
+          onChange={onChange}
+          onBlur={toggleEditMode}
         />
       ) : (
         <p className={s.label} onDoubleClick={toggleEditMode}>

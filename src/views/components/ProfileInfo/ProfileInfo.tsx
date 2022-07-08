@@ -2,11 +2,12 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../ui';
-import { ProfileInfoReq, UserInfo } from '../../../data/api/Api';
+import { ProfileInfoReq, userInfo } from '../../../data/api/Api';
 import s from './profileInfo.module.scss';
+import { TUserInfo } from '../../../data/types/Api';
 
 interface IInfo {
-  userInfo: UserInfo;
+  userInfo: TUserInfo;
   isOwner: boolean;
   changeInfo: (info: ProfileInfoReq) => void;
 }
@@ -28,7 +29,7 @@ export default function ProfileInfo({ userInfo, isOwner, changeInfo }: IInfo) {
 
   const { contacts, ...mainInfo } = userInfo;
 
-  function onSubmit(formData: UserInfo) {
+  function onSubmit(formData: userInfo) {
     changeInfo(formData);
     setEditMode(false);
   }

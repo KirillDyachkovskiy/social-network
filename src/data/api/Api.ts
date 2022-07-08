@@ -11,10 +11,10 @@ import {
   ProfilePhotoRes,
   ProfileStatusReq,
   ProfileStatusRes,
+  TUserInfoReq,
+  TUserInfoRes,
   UserFollowReq,
   UserFollowRes,
-  UserInfoReq,
-  UserInfoRes,
   UsersReq,
   UsersRes,
   UserStatusReq,
@@ -38,8 +38,8 @@ export const authService = {
 };
 
 export const profileService = {
-  async getData(id: UserInfoReq) {
-    const { data } = await instance.get<UserInfoRes>(`profile/${id}`);
+  async getData(id: TUserInfoReq) {
+    const { data } = await instance.get<TUserInfoRes>(`profile/${id}`);
 
     return data;
   },
@@ -48,8 +48,13 @@ export const profileService = {
 
     return data;
   },
-  updateStatus: (status: ProfileStatusReq) =>
-    instance.put<ProfileStatusRes>('profile/status', { status }),
+  async updateStatus(status: ProfileStatusReq) {
+    const { data } = await instance.put<ProfileStatusRes>('profile/status', {
+      status,
+    });
+
+    return data;
+  },
   updateAvatar: (avatar: ProfilePhotoReq) => {
     const formData = new FormData();
 
@@ -61,8 +66,11 @@ export const profileService = {
       },
     });
   },
-  changeInfo: (info: ProfileInfoReq) =>
-    instance.put<ProfileInfoRes>('profile', info),
+  async updateInfo(info: ProfileInfoReq) {
+    const { data } = await instance.put<ProfileInfoRes>('profile', info);
+
+    return data;
+  },
 };
 
 export const usersService = {

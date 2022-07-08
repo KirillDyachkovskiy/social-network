@@ -1,22 +1,22 @@
 import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  changeProfileAvatar,
-  changeProfileInfo,
-  changeProfileStatus,
-} from '../../../data/redux/reducers/profileReducer';
+import { changeProfileAvatar } from '../../../data/redux/reducers/profileReducer';
 import ProfileInfo from '../ProfileInfo';
 import { Avatar, Field, Status } from '../../ui';
+import { TStatus, TUserInfo, TVisitedProfile } from '../../../data/types/Api';
+import { useUserProfileMutate, useUserStatusMutate } from '../../../data/hooks';
 import s from './profileCard.module.scss';
-import { TStatus, TVisitedProfile, UserInfo } from '../../../data/types/Api';
 
 interface IProfileCard {
   visitedProfile: TVisitedProfile;
   isOwner: boolean;
 }
 
-export default function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
-  const { status, photos, ...userInfo } = visitedProfile;
+function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
+  const { status = '', photos, ...userInfo } = visitedProfile;
+
+  const { mutate: updateStatus } = useUserStatusMutate();
+  const { mutate: updateProfile } = useUserProfileMutate();
 
   const dispatch = useDispatch();
 
@@ -26,10 +26,13 @@ export default function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
     }
   };
 
-  const changeInfo = (info: UserInfo) => dispatch(changeProfileInfo(info));
+  const changeInfo = (userInfo: TUserInfo) => {
+    updateProfile(userInfo);
+  };
 
-  const changeStatus = (status: TStatus) =>
-    dispatch(changeProfileStatus(status));
+  const changeStatus = (status: TStatus) => {
+    updateStatus(status);
+  };
 
   return (
     <Field>
@@ -51,7 +54,7 @@ export default function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
         <div>
           <h1>{visitedProfile.fullName}</h1>
           <Status
-            status={status}
+            status={status || 'lol'}
             changeStatus={isOwner ? changeStatus : undefined}
           />
           <ProfileInfo
@@ -64,3 +67,5 @@ export default function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
     </Field>
   );
 }
+
+export default ProfileCard;

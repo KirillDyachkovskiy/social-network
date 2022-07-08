@@ -3,35 +3,13 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { profileService } from '../../api/Api';
 import { RootState } from '../store';
 import { getUserData } from './authReducer';
-import {
-  ResultCode,
-  TStatus,
-  TVisitedProfile,
-  UserInfo,
-} from '../../types/Api';
+import { ResultCode, TVisitedProfile } from '../../types/Api';
 
 export const addPost = (text: string) => ({ type: 'profile/addPost', text });
 export const deletePost = (id: number) => ({
   type: 'profile/deletePost',
   id,
 });
-
-export const setUserStatus = (status: TStatus) => ({
-  type: 'profile/setUserStatus',
-  status,
-});
-
-export const changeProfileStatus =
-  (
-    status: TStatus
-  ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const Res = await profileService.updateStatus(status);
-
-    if (Res.data.resultCode === ResultCode.Success) {
-      dispatch(setUserStatus(status));
-    }
-  };
 
 export const changeProfileAvatar =
   (avatar: File): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
@@ -40,22 +18,6 @@ export const changeProfileAvatar =
     getState
   ) => {
     const Res = await profileService.updateAvatar(avatar);
-    const { id } = getUserData(getState());
-
-    if (Res.data.resultCode === ResultCode.Success && id) {
-      // await dispatch(changeVisitedProfile(id));
-    }
-  };
-
-export const changeProfileInfo =
-  (
-    info: UserInfo
-  ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (
-    dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
-    getState
-  ) => {
-    const Res = await profileService.changeInfo(info);
     const { id } = getUserData(getState());
 
     if (Res.data.resultCode === ResultCode.Success && id) {
@@ -121,8 +83,6 @@ const initialState: ProfileState = {
   },
 };
 
-export const getVisitedProfile = (state: RootState) =>
-  state.profile.visitedProfile;
 export const getPosts = (state: RootState) => state.profile.posts;
 
 export const profileReducer = (

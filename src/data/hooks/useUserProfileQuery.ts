@@ -1,11 +1,10 @@
 import { useQuery } from 'react-query';
 import { profileService } from '../api/Api';
-import { UserInfoRes } from '../types/Api';
+import { TUserInfoRes } from '../types/Api';
 
-const useUserProfileQuery = (userId: number) => {
-  return useQuery<UserInfoRes>(['userProfile', userId], () =>
+const useUserProfileQuery = (userId: number) =>
+  useQuery<TUserInfoRes>(['userProfile', userId], () =>
     profileService.getData(userId)
   );
-};
 
 export default useUserProfileQuery;
