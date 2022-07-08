@@ -40,7 +40,7 @@ export type UserInfo = {
 export type TVisitedProfile = UserInfo & {
   userId: UserId | null;
   photos: Photos;
-  status: TStatus | null;
+  status?: TStatus | null;
 };
 export type TStatus = string;
 export type TAvatar = File;
@@ -93,7 +93,7 @@ export type ProfileStatusReq = TStatus;
 export type ProfileStatusRes = Res;
 
 export type UserInfoReq = UserId;
-export type UserInfoRes = UserInfo & Photos;
+export type UserInfoRes = UserInfo & { photos: Photos };
 
 export type UserStatusReq = UserId;
 export type UserStatusRes = TStatus;

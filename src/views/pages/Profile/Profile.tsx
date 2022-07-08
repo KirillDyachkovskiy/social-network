@@ -1,35 +1,31 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  changeVisitedProfile,
-  getPosts,
-  getVisitedProfile,
-} from '../../../data/redux/reducers/profileReducer';
+import { getPosts } from '../../../data/redux/reducers/profileReducer';
 import { getUserData } from '../../../data/redux/reducers/authReducer';
 import { ProfileCard, ProfileWall, withRedirect } from '../../components';
 import { Image, Preloader } from '../../ui';
 import cover from '../../assets/images/default_cover.jpg';
 import s from './profile.module.scss';
+import { useUserProfileQuery, useUserStatusQuery } from '../../../data/hooks';
 
 function Profile() {
   const { id: authedId } = useSelector(getUserData);
-  const visitedProfile = useSelector(getVisitedProfile);
   const posts = useSelector(getPosts);
-
-  const dispatch = useDispatch();
 
   const { id = authedId } = useParams();
 
-  useEffect(() => {
-    if (id) {
-      dispatch(changeVisitedProfile(+id));
-    }
-  }, [dispatch, id]);
+  const { data: profile } = useUserProfileQuery(id as number);
+  const { data: status } = useUserStatusQuery(id as number);
 
-  if (!visitedProfile.userId) {
+  if (!profile) {
     return <Preloader />;
   }
+
+  const visitedProfile = {
+    ...profile,
+    userId: Number(id),
+    status,
+  };
 
   return (
     <section className={s.profile}>

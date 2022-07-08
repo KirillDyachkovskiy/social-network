@@ -38,9 +38,16 @@ export const authService = {
 };
 
 export const profileService = {
-  getData: (id: UserInfoReq) => instance.get<UserInfoRes>(`profile/${id}`),
-  getStatus: (id: UserStatusReq) =>
-    instance.get<UserStatusRes>(`profile/status/${id}`),
+  async getData(id: UserInfoReq) {
+    const { data } = await instance.get<UserInfoRes>(`profile/${id}`);
+
+    return data;
+  },
+  async getStatus(id: UserStatusReq) {
+    const { data } = await instance.get<UserStatusRes>(`profile/status/${id}`);
+
+    return data;
+  },
   updateStatus: (status: ProfileStatusReq) =>
     instance.put<ProfileStatusRes>('profile/status', { status }),
   updateAvatar: (avatar: ProfilePhotoReq) => {

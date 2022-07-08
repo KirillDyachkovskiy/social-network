@@ -3,7 +3,7 @@ import { getFollowingInProgress } from '../../../data/redux/reducers/friendsRedu
 import { FriendsSearch, UserCard, withRedirect } from '../../components';
 import { Field, Paginator, Preloader } from '../../ui';
 import { User, UserId } from '../../../data/types/Api';
-import { useSearchParamsObject, useUsersPage } from '../../../data/hooks';
+import { useSearchParamsObject, useUsersPageQuery } from '../../../data/hooks';
 import s from './friends.module.scss';
 
 function Friends() {
@@ -19,7 +19,7 @@ function Friends() {
 
   const followingInProgress = useSelector(getFollowingInProgress);
 
-  const { data, isSuccess, isFetching } = useUsersPage(page, term, friend);
+  const { data, isSuccess, isFetching } = useUsersPageQuery(page, term, friend);
 
   const onSearchChange = (term: string, friend: boolean) => {
     // @ts-ignore

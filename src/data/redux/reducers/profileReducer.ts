@@ -7,7 +7,6 @@ import {
   ResultCode,
   TStatus,
   TVisitedProfile,
-  UserId,
   UserInfo,
 } from '../../types/Api';
 
@@ -16,30 +15,11 @@ export const deletePost = (id: number) => ({
   type: 'profile/deletePost',
   id,
 });
-export const setVisitedUserProfile = (data: UserInfo) => ({
-  type: 'profile/setVisitedUserProfile',
-  data,
-});
+
 export const setUserStatus = (status: TStatus) => ({
   type: 'profile/setUserStatus',
   status,
 });
-
-export const changeVisitedProfile =
-  (id: UserId): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const dataRes = await profileService.getData(id);
-
-    if (dataRes.status === 200) {
-      dispatch(setVisitedUserProfile({ ...dataRes.data }));
-    }
-
-    const statusRes = await profileService.getStatus(id);
-
-    if (statusRes.status === 200) {
-      dispatch(setUserStatus(statusRes.data));
-    }
-  };
 
 export const changeProfileStatus =
   (
@@ -63,7 +43,7 @@ export const changeProfileAvatar =
     const { id } = getUserData(getState());
 
     if (Res.data.resultCode === ResultCode.Success && id) {
-      await dispatch(changeVisitedProfile(id));
+      // await dispatch(changeVisitedProfile(id));
     }
   };
 
@@ -79,7 +59,7 @@ export const changeProfileInfo =
     const { id } = getUserData(getState());
 
     if (Res.data.resultCode === ResultCode.Success && id) {
-      await dispatch(changeVisitedProfile(id));
+      // await dispatch(changeVisitedProfile(id));
     }
   };
 
