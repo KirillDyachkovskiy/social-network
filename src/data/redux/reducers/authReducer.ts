@@ -1,11 +1,11 @@
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
-  authAPI,
   AuthData,
+  authService,
   LoginMePayload,
   ResultCode,
-  securityAPI,
+  securityService,
   SidebarItem,
   TCaptcha,
 } from '../../api/Api';
@@ -21,7 +21,7 @@ const setCaptchaSuccess = (payload: TCaptcha): AnyAction => ({
 });
 
 export const setCaptcha = () => async (dispatch: Dispatch) => {
-  const response = await securityAPI.getCaptcha();
+  const response = await securityService.getCaptcha();
 
   dispatch(setCaptchaSuccess(response.data.url));
 };
@@ -29,7 +29,7 @@ export const setCaptcha = () => async (dispatch: Dispatch) => {
 export const authMe =
   (): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const response = await authAPI.authMe();
+    const response = await authService.me();
 
     if (response.data.resultCode === ResultCode.Success) {
       dispatch(setUserData(response.data.data));
@@ -49,7 +49,7 @@ export const authLogIn =
     formData: LoginMePayload
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const response = await authAPI.authLogIn(formData);
+    const response = await authService.login(formData);
 
     if (response.data.resultCode === ResultCode.Success) {
       await dispatch(authMe());
@@ -62,7 +62,7 @@ export const authLogIn =
 export const authLogOut =
   (): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const response = await authAPI.authLogOut();
+    const response = await authService.logout();
 
     if (response.data.resultCode === ResultCode.Success) {
       await dispatch(authMe());

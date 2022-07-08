@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { User, UserId, usersAPI, UsersPayload } from '../../api/Api';
+import { User, UserId, UsersPayload, usersService } from '../../api/Api';
 import { RootState } from '../store';
 
 const toggleFollowSuccess = (id: UserId) => ({
@@ -52,10 +52,10 @@ export const toggleFollow =
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
     dispatch(changeFollowingStatus(id));
     if (followed) {
-      await usersAPI.unfollow(id);
+      await usersService.unsubscribeById(id);
       dispatch(toggleFollowSuccess(id));
     } else {
-      await usersAPI.follow(id);
+      await usersService.subscribeById(id);
       dispatch(toggleFollowSuccess(id));
     }
     dispatch(changeFollowingStatus(id));
@@ -73,7 +73,7 @@ export const changePage =
       })
     );
 
-    const response = await usersAPI.getCurrentPageData({
+    const response = await usersService.getByPage({
       ...query,
       ...(!query.friend && { friend: null }),
     });

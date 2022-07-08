@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
-  profileAPI,
+  profileService,
   ResultCode,
   TStatus,
   TVisitedProfile,
@@ -28,13 +28,13 @@ export const setUserStatus = (status: TStatus) => ({
 export const changeVisitedProfile =
   (id: UserId): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const dataResponse = await profileAPI.getUserData(id);
+    const dataResponse = await profileService.getData(id);
 
     if (dataResponse.status === 200) {
       dispatch(setVisitedUserProfile({ ...dataResponse.data }));
     }
 
-    const statusResponse = await profileAPI.getStatus(id);
+    const statusResponse = await profileService.getStatus(id);
 
     if (statusResponse.status === 200) {
       dispatch(setUserStatus(statusResponse.data));
@@ -46,7 +46,7 @@ export const changeProfileStatus =
     status: TStatus
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const response = await profileAPI.changeStatus(status);
+    const response = await profileService.updateStatus(status);
 
     if (response.data.resultCode === ResultCode.Success) {
       dispatch(setUserStatus(status));
@@ -59,7 +59,7 @@ export const changeProfileAvatar =
     dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
     getState
   ) => {
-    const response = await profileAPI.changeAvatar(avatar);
+    const response = await profileService.updateAvatar(avatar);
     const { id } = getUserData(getState());
 
     if (response.data.resultCode === ResultCode.Success && id) {
@@ -75,7 +75,7 @@ export const changeProfileInfo =
     dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
     getState
   ) => {
-    const response = await profileAPI.changeInfo(info);
+    const response = await profileService.changeInfo(info);
     const { id } = getUserData(getState());
 
     if (response.data.resultCode === ResultCode.Success && id) {
