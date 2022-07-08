@@ -2,13 +2,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../ui';
-import { ProfileInfoPayload, UserInfo } from '../../../data/api/Api';
+import { ProfileInfoReq, UserInfo } from '../../../data/api/Api';
 import s from './profileInfo.module.scss';
 
 interface IInfo {
   userInfo: UserInfo;
   isOwner: boolean;
-  changeInfo: (info: ProfileInfoPayload) => void;
+  changeInfo: (info: ProfileInfoReq) => void;
 }
 
 export default function ProfileInfo({ userInfo, isOwner, changeInfo }: IInfo) {

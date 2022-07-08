@@ -1,15 +1,15 @@
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { profileService } from '../../api/Api';
+import { RootState } from '../store';
+import { getUserData } from './authReducer';
 import {
-  profileService,
   ResultCode,
   TStatus,
   TVisitedProfile,
   UserId,
   UserInfo,
-} from '../../api/Api';
-import { RootState } from '../store';
-import { getUserData } from './authReducer';
+} from '../../types/Api';
 
 export const addPost = (text: string) => ({ type: 'profile/addPost', text });
 export const deletePost = (id: number) => ({
@@ -28,16 +28,16 @@ export const setUserStatus = (status: TStatus) => ({
 export const changeVisitedProfile =
   (id: UserId): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const dataResponse = await profileService.getData(id);
+    const dataRes = await profileService.getData(id);
 
-    if (dataResponse.status === 200) {
-      dispatch(setVisitedUserProfile({ ...dataResponse.data }));
+    if (dataRes.status === 200) {
+      dispatch(setVisitedUserProfile({ ...dataRes.data }));
     }
 
-    const statusResponse = await profileService.getStatus(id);
+    const statusRes = await profileService.getStatus(id);
 
-    if (statusResponse.status === 200) {
-      dispatch(setUserStatus(statusResponse.data));
+    if (statusRes.status === 200) {
+      dispatch(setUserStatus(statusRes.data));
     }
   };
 
@@ -46,9 +46,9 @@ export const changeProfileStatus =
     status: TStatus
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const response = await profileService.updateStatus(status);
+    const Res = await profileService.updateStatus(status);
 
-    if (response.data.resultCode === ResultCode.Success) {
+    if (Res.data.resultCode === ResultCode.Success) {
       dispatch(setUserStatus(status));
     }
   };
@@ -59,10 +59,10 @@ export const changeProfileAvatar =
     dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
     getState
   ) => {
-    const response = await profileService.updateAvatar(avatar);
+    const Res = await profileService.updateAvatar(avatar);
     const { id } = getUserData(getState());
 
-    if (response.data.resultCode === ResultCode.Success && id) {
+    if (Res.data.resultCode === ResultCode.Success && id) {
       await dispatch(changeVisitedProfile(id));
     }
   };
@@ -75,10 +75,10 @@ export const changeProfileInfo =
     dispatch: ThunkDispatch<RootState, undefined, AnyAction>,
     getState
   ) => {
-    const response = await profileService.changeInfo(info);
+    const Res = await profileService.changeInfo(info);
     const { id } = getUserData(getState());
 
-    if (response.data.resultCode === ResultCode.Success && id) {
+    if (Res.data.resultCode === ResultCode.Success && id) {
       await dispatch(changeVisitedProfile(id));
     }
   };

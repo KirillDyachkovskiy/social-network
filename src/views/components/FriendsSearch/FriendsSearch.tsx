@@ -3,21 +3,21 @@ import { Checkbox, Field, Submit } from '../../ui';
 import s from './friendsSearch.module.scss';
 
 interface IFriendsSearch {
-  changePage: (term: string, friend: boolean) => void;
+  onSubmit: (term: string, friend: boolean) => void;
   term: string;
   friend: boolean;
 }
 
 export default function FriendsSearch({
-  changePage,
+  onSubmit,
   term,
   friend,
 }: IFriendsSearch) {
   const [isFriendsOnly, setIsFriendsOnly] = useState<boolean>(friend);
 
-  const handleCheck = () => {
-    setIsFriendsOnly((prevState) => !prevState);
-  };
+  const onCheck = () => setIsFriendsOnly((prevState: boolean) => !prevState);
+
+  const handleSubmit = (text: string) => onSubmit(text, isFriendsOnly);
 
   return (
     <div className={s.friendsSearch}>
@@ -25,7 +25,7 @@ export default function FriendsSearch({
         <Submit
           defaultValue={term}
           placeholder='Find a friend'
-          onSubmit={(text: string) => changePage(text, isFriendsOnly)}
+          onSubmit={handleSubmit}
         >
           Find
         </Submit>
@@ -34,7 +34,7 @@ export default function FriendsSearch({
             id='friendsOnly'
             label='Only friends'
             checked={isFriendsOnly}
-            onChange={handleCheck}
+            onChange={onCheck}
           />
         </div>
       </Field>

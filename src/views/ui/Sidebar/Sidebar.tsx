@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import Field from '../Field';
-import { SidebarItem } from '../../../data/api/Api';
 import s from './sidebar.module.scss';
+import { SidebarItem } from '../../../data/types/Api';
 
 interface ISidebar {
-  items: Array<SidebarItem>;
+  items: SidebarItem[];
 }
 
 export default function Sidebar({ items }: ISidebar) {

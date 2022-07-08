@@ -8,9 +8,9 @@ import {
   getCaptcha,
   getUserData,
 } from '../../../data/redux/reducers/authReducer';
-import { LoginMePayload } from '../../../data/api/Api';
 import { Button, Field, Image } from '../../ui';
 import s from './login.module.scss';
+import { LoginMeReq } from '../../../data/types/Api';
 
 export default function Login() {
   const {
@@ -31,7 +31,7 @@ export default function Login() {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data: LoginMePayload) => {
+  const onSubmit = (data: LoginMeReq) => {
     dispatch(authLogIn(data));
   };
 

@@ -1,89 +1,67 @@
-import { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
-import {
-  changePage,
-  getFollowingInProgress,
-  getPagination,
-  getQuery,
-  getUsers,
-  toggleFollow,
-} from '../../../data/redux/reducers/friendsReducer';
-import { User, UserId, UsersPayload } from '../../../data/api/Api';
+import { useSelector } from 'react-redux';
+import { getFollowingInProgress } from '../../../data/redux/reducers/friendsReducer';
 import { FriendsSearch, UserCard, withRedirect } from '../../components';
-import { Field, Paginator } from '../../ui';
+import { Field, Paginator, Preloader } from '../../ui';
+import { User, UserId } from '../../../data/types/Api';
+import { useSearchParamsObject, useUsersPage } from '../../../data/hooks';
 import s from './friends.module.scss';
 
 function Friends() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParamsObject({
+    page: '1',
+    count: '10',
+    term: '',
+    friend: 'false',
+  });
 
-  const users = useSelector(getUsers);
+  // @ts-ignore
+  const { page, term, friend } = searchParams;
+
   const followingInProgress = useSelector(getFollowingInProgress);
-  const pagination = useSelector(getPagination);
-  const { page, count, term, friend } = useSelector(getQuery);
 
-  const dispatch = useDispatch();
+  const { data, isSuccess, isFetching } = useUsersPage(page, term, friend);
 
-  const changeCurrentPage = useCallback(
-    (query: UsersPayload) => dispatch(changePage(query)),
-    [dispatch]
-  );
+  const onSearchChange = (term: string, friend: boolean) => {
+    // @ts-ignore
+    setSearchParams({ page: String(page), term, friend: String(friend) });
+  };
 
-  const actualPage =
-    (searchParams.has('page') && Number(searchParams.get('page'))) || page;
-  const actualTerm = searchParams.get('term') || term;
-  const actualFriend = !!searchParams.get('friend') || friend;
+  const onPaginate = (page: number) => {
+    // @ts-ignore
+    setSearchParams({ page: String(page), term, friend: String(friend) });
+  };
 
-  useEffect(() => {
-    changeCurrentPage({
-      page: actualPage,
-      count,
-      term: actualTerm,
-      friend: actualFriend,
-    });
-  }, [changeCurrentPage, count, actualTerm, actualFriend, actualPage]);
-
-  useEffect(() => {
-    setSearchParams({
-      page: String(page),
-      ...(term && { term }),
-      ...(friend && { friend: 'true' }),
-    });
-  }, [page, term, friend, setSearchParams]);
+  const toggleSubscribe = (id: UserId, followed: boolean) => {
+    console.log(id, followed);
+  };
 
   return (
     <section className={s.friends}>
       <div className={s.friends__content}>
         <FriendsSearch
-          changePage={(term: string, friend: boolean) =>
-            changeCurrentPage({ page: 1, count, term, friend })
-          }
-          term={actualTerm}
-          friend={!!actualFriend}
+          onSubmit={onSearchChange}
+          term={term}
+          friend={friend === 'true'}
         />
         <Field>
-          <div className={s.friends__users}>
-            {users.map((u: User) => (
-              <UserCard
-                key={u.id}
-                user={u}
-                onClick={(id: UserId, followed: boolean) =>
-                  dispatch(toggleFollow(id, followed))
-                }
-                followingInProgress={followingInProgress}
-              />
-            ))}
-          </div>
+          {!isSuccess || isFetching || !data ? (
+            <Preloader />
+          ) : (
+            <div className={s.friends__users}>
+              {data.users?.map((u: User) => (
+                <UserCard
+                  key={u.id}
+                  user={u}
+                  onClick={toggleSubscribe}
+                  followingInProgress={followingInProgress}
+                />
+              ))}
+            </div>
+          )}
         </Field>
       </div>
       <div className={s.friends__paginator}>
-        <Paginator
-          items={pagination}
-          page={page}
-          changePage={(page: number) =>
-            changeCurrentPage({ page, count, term, friend })
-          }
-        />
+        <Paginator total={data?.pages} value={page} onChange={onPaginate} />
       </div>
     </section>
   );

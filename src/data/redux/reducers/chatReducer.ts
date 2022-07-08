@@ -3,14 +3,14 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { chatWS, TMessage } from '../../api/Websocket';
 import { RootState } from '../store';
 
-const messagesReceived = (payload: Array<TMessage>) => ({
+const messagesReceived = (Req: Array<TMessage>) => ({
   type: 'chat/receiveMessages',
-  payload,
+  Req,
 });
 
-export const websocketStatus = (payload: boolean) => ({
+export const websocketStatus = (Req: boolean) => ({
   type: 'chat/websocketStatus',
-  payload,
+  Req,
 });
 
 let storedHandleMessage: ((messages: Array<TMessage>) => void) | null = null;
@@ -63,13 +63,13 @@ export const chatReducer = (
     case 'chat/receiveMessages':
       return {
         ...state,
-        messages: [...state.messages, ...action.payload],
+        messages: [...state.messages, ...action.Req],
       };
 
     case 'chat/websocketStatus':
       return {
         ...state,
-        isWebsocketOpen: action.payload,
+        isWebsocketOpen: action.Req,
       };
 
     default:

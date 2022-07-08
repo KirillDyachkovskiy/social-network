@@ -1,46 +1,19 @@
-import { createSelector } from 'reselect';
 import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { User, UserId, UsersPayload, usersService } from '../../api/Api';
 import { RootState } from '../store';
+import { User, UserId, UsersReq } from '../../types/Api';
+import { usersService } from '../../api/Api';
 
 const toggleFollowSuccess = (id: UserId) => ({
   type: 'friends/toggleFollow',
   id,
 });
-const setUsersList = (users: Array<User>, totalCount: number) => ({
-  type: 'friends/setUsers',
-  users,
-  totalCount,
-});
 
-export const setQuery = (query: UsersPayload) => ({
-  type: 'friends/setQuery',
-  query,
-});
 const changeFollowingStatus = (id: UserId) => ({
   type: 'friends/setFollowingStatus',
   id,
 });
-const setPages = (pages: Array<number>) => ({
-  type: 'friends/setPages',
-  pages,
-});
 
-export const getUsers = (state: RootState) => state.friends.users;
-export const getQuery = (state: RootState) => state.friends.query;
-const getPages = (state: RootState) => state.friends.pages;
-
-export const getPagination = createSelector(
-  [getPages, getQuery],
-  (pages, query) =>
-    pages.filter(
-      (page: number, id: number, arr: Array<number>) =>
-        page === 1 ||
-        page === arr.length ||
-        (page >= query.page - 5 && page <= query.page + 5)
-    )
-);
 export const getFollowingInProgress = (state: RootState) =>
   state.friends.followingInProgress;
 
@@ -61,36 +34,9 @@ export const toggleFollow =
     dispatch(changeFollowingStatus(id));
   };
 
-export const changePage =
-  (
-    query: UsersPayload
-  ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    dispatch(
-      setQuery({
-        ...query,
-        ...(!query.friend && { friend: null }),
-      })
-    );
-
-    const response = await usersService.getByPage({
-      ...query,
-      ...(!query.friend && { friend: null }),
-    });
-
-    dispatch(setUsersList(response.data.items, response.data.totalCount));
-
-    const pages = Array.from(
-      Array(Math.ceil(response.data.totalCount / query.count)),
-      (_, i: number) => i + 1
-    );
-
-    dispatch(setPages(pages));
-  };
-
 type FriendsState = {
   users: Array<User>;
-  query: UsersPayload;
+  query: UsersReq;
   pages: Array<number>;
   followingInProgress: Array<number>;
 };
@@ -112,12 +58,6 @@ export const friendsReducer = (
   action: AnyAction
 ): FriendsState => {
   switch (action.type) {
-    case 'friends/setPages':
-      return {
-        ...state,
-        pages: action.pages,
-      };
-
     case 'friends/toggleFollow':
       return {
         ...state,
@@ -141,21 +81,6 @@ export const friendsReducer = (
               (userId: number) => userId !== action.id
             )
           : [...state.followingInProgress, action.id],
-      };
-
-    case 'friends/setQuery':
-      return {
-        ...state,
-        query: {
-          ...state.query,
-          ...action.query,
-        },
-      };
-
-    case 'friends/setUsers':
-      return {
-        ...state,
-        users: [...action.users],
       };
 
     default:

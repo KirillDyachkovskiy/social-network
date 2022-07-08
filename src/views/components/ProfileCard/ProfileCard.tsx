@@ -1,6 +1,5 @@
 import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { TStatus, TVisitedProfile, UserInfo } from '../../../data/api/Api';
 import {
   changeProfileAvatar,
   changeProfileInfo,
@@ -9,6 +8,7 @@ import {
 import ProfileInfo from '../ProfileInfo';
 import { Avatar, Field, Status } from '../../ui';
 import s from './profileCard.module.scss';
+import { TStatus, TVisitedProfile, UserInfo } from '../../../data/types/Api';
 
 interface IProfileCard {
   visitedProfile: TVisitedProfile;
