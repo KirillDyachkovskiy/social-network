@@ -1,10 +1,12 @@
 import { ChangeEvent } from 'react';
-import { useDispatch } from 'react-redux';
-import { changeProfileAvatar } from '../../../data/redux/reducers/profileReducer';
 import ProfileInfo from '../ProfileInfo';
 import { Avatar, Field, Status } from '../../ui';
-import { TStatus, TUserInfo, TVisitedProfile } from '../../../data/types/Api';
-import { useUserProfileMutate, useUserStatusMutate } from '../../../data/hooks';
+import { TVisitedProfile } from '../../../data/types/Api';
+import {
+  useUserAvatarMutate,
+  useUserInfoMutate,
+  useUserStatusMutate,
+} from '../../../data/hooks';
 import s from './profileCard.module.scss';
 
 interface IProfileCard {
@@ -16,22 +18,13 @@ function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
   const { status = '', photos, ...userInfo } = visitedProfile;
 
   const { mutate: updateStatus } = useUserStatusMutate();
-  const { mutate: updateProfile } = useUserProfileMutate();
-
-  const dispatch = useDispatch();
+  const { mutate: updateInfo } = useUserInfoMutate();
+  const { mutate: updateAvatar } = useUserAvatarMutate();
 
   const changeAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      dispatch(changeProfileAvatar(e.target.files[0]));
+      updateAvatar(e.target.files[0]);
     }
-  };
-
-  const changeInfo = (userInfo: TUserInfo) => {
-    updateProfile(userInfo);
-  };
-
-  const changeStatus = (status: TStatus) => {
-    updateStatus(status);
   };
 
   return (
@@ -55,12 +48,12 @@ function ProfileCard({ visitedProfile, isOwner }: IProfileCard) {
           <h1>{visitedProfile.fullName}</h1>
           <Status
             status={status || 'lol'}
-            changeStatus={isOwner ? changeStatus : undefined}
+            changeStatus={isOwner ? updateStatus : undefined}
           />
           <ProfileInfo
             userInfo={userInfo}
             isOwner={isOwner}
-            changeInfo={changeInfo}
+            changeInfo={updateInfo}
           />
         </div>
       </div>

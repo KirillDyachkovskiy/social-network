@@ -2,18 +2,18 @@ import { useMutation, useQueryClient } from 'react-query';
 import { profileService } from '../api/Api';
 import { TUserInfo } from '../types/Api';
 
-const useUserProfileMutate = () => {
+const useUserInfoMutate = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    'updateUserProfile',
+    'updateUserInfo',
     (userInfo: TUserInfo) => profileService.updateInfo(userInfo),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(['userProfile']);
+        queryClient.invalidateQueries(['userInfo']);
       },
     }
   );
 };
 
-export default useUserProfileMutate;
+export default useUserInfoMutate;

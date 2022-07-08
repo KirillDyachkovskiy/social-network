@@ -6,7 +6,7 @@ import { ProfileCard, ProfileWall, withRedirect } from '../../components';
 import { Image, Preloader } from '../../ui';
 import cover from '../../assets/images/default_cover.jpg';
 import s from './profile.module.scss';
-import { useUserProfileQuery, useUserStatusQuery } from '../../../data/hooks';
+import { useUserInfoQuery, useUserStatusQuery } from '../../../data/hooks';
 
 function Profile() {
   const { id: authedId } = useSelector(getUserData);
@@ -14,7 +14,7 @@ function Profile() {
 
   const { id = authedId } = useParams();
 
-  const { data: profile } = useUserProfileQuery(id as number);
+  const { data: profile } = useUserInfoQuery(id as number);
   const { data: status } = useUserStatusQuery(id as number);
 
   if (!profile) {
