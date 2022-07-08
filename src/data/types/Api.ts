@@ -83,6 +83,8 @@ export type UsersRes = {
   error: string | null;
 };
 
+export type UserSubscribeRes = { userId: UserId; followed: boolean };
+
 export type ProfileInfoReq = TUserInfo;
 export type ProfileInfoRes = Res;
 

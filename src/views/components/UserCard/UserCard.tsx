@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom';
 import { Avatar, Button, Field } from '../../ui';
 import s from './userCard.module.scss';
-import { User, UserId } from '../../../data/types/Api';
+import { User, UserId, UserSubscribeRes } from '../../../data/types/Api';
 
 interface IUserCard {
   user: User;
-  onClick: (id: UserId, followed: boolean) => void;
+  onClick: ({ userId, followed }: UserSubscribeRes) => void;
   followingInProgress: Array<UserId>;
 }
 
-export default function UserCard({
-  user,
-  onClick,
-  followingInProgress,
-}: IUserCard) {
+function UserCard({ user, onClick, followingInProgress }: IUserCard) {
+  const handleClick = (userId: UserId, followed: boolean) => () => {
+    onClick({ userId, followed });
+  };
+
   return (
     <Field color='grey'>
       <article className={s.user}>
@@ -24,7 +24,7 @@ export default function UserCard({
           <p>{user.name}</p>
           <p>{user.status}</p>
           <Button
-            onClick={() => onClick(user.id, user.followed)}
+            onClick={handleClick(user.id, user.followed)}
             disabled={followingInProgress.some(
               (userId: UserId) => userId === user.id
             )}
@@ -36,3 +36,5 @@ export default function UserCard({
     </Field>
   );
 }
+
+export default UserCard;

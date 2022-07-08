@@ -7,14 +7,13 @@ import { Sidebar } from '../../ui/Sidebar';
 import {
   authLogOut,
   authMe,
-  getSidebar,
   getUserData,
 } from '../../../data/redux/reducers/authReducer';
+import SIDEBAR from '../../../data/constants';
 import s from './mainLayout.module.scss';
 
 export default function MainLayout() {
   const { login } = useSelector(getUserData);
-  const sidebar = useSelector(getSidebar);
 
   const dispatch = useDispatch();
 
@@ -32,7 +31,7 @@ export default function MainLayout() {
       </header>
       <main className={`${s.layout__main} ${s.layout__container}`}>
         <div className={s.layout__sidebar}>
-          <Sidebar items={sidebar} />
+          <Sidebar items={SIDEBAR} />
         </div>
         <div className={s.layout__content}>
           <Outlet />

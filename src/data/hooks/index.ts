@@ -1,3 +1,4 @@
+export { default as useUserSubscribeMutate } from './useUserSubscribeMutate';
 export { default as useSearchParamsObject } from './useSearchParamsObject';
 export { default as useUserInfoMutate } from './useUserInfoMutate';
 export { default as useUserAvatarMutate } from './useUserAvatarMutate';

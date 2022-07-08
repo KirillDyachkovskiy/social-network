@@ -2,9 +2,10 @@ import { useSelector } from 'react-redux';
 import { getFollowingInProgress } from '../../../data/redux/reducers/friendsReducer';
 import { FriendsSearch, UserCard, withRedirect } from '../../components';
 import { Field, Paginator, Preloader } from '../../ui';
-import { User, UserId } from '../../../data/types/Api';
+import { User } from '../../../data/types/Api';
 import { useSearchParamsObject, useUsersPageQuery } from '../../../data/hooks';
 import s from './friends.module.scss';
+import useUserSubscribeMutate from '../../../data/hooks/useUserSubscribeMutate';
 
 function Friends() {
   const [searchParams, setSearchParams] = useSearchParamsObject({
@@ -20,6 +21,7 @@ function Friends() {
   const followingInProgress = useSelector(getFollowingInProgress);
 
   const { data, isSuccess, isFetching } = useUsersPageQuery(page, term, friend);
+  const { mutate: toggleSubscribe } = useUserSubscribeMutate();
 
   const onSearchChange = (term: string, friend: boolean) => {
     // @ts-ignore
@@ -29,10 +31,6 @@ function Friends() {
   const onPaginate = (page: number) => {
     // @ts-ignore
     setSearchParams({ page: String(page), term, friend: String(friend) });
-  };
-
-  const toggleSubscribe = (id: UserId, followed: boolean) => {
-    console.log(id, followed);
   };
 
   return (

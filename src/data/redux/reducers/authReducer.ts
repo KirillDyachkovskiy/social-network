@@ -1,13 +1,7 @@
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../store';
-import {
-  AuthData,
-  LoginMeReq,
-  ResultCode,
-  SidebarItem,
-  TCaptcha,
-} from '../../types/Api';
+import { AuthData, LoginMeReq, ResultCode, TCaptcha } from '../../types/Api';
 import { authService, securityService } from '../../api/Api';
 
 const setUserData = (Req: AuthData): AnyAction => ({
@@ -27,62 +21,55 @@ export const setCaptcha = () => async (dispatch: Dispatch) => {
 
 export const authMe =
   (): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const Res = await authService.me();
+    async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+      const Res = await authService.me();
 
-    if (Res.data.resultCode === ResultCode.Success) {
-      dispatch(setUserData(Res.data.data));
-    } else {
-      dispatch(
-        setUserData({
-          id: null,
-          email: null,
-          login: null,
-        })
-      );
-    }
-  };
+      if (Res.data.resultCode === ResultCode.Success) {
+        dispatch(setUserData(Res.data.data));
+      } else {
+        dispatch(
+          setUserData({
+            id: null,
+            email: null,
+            login: null,
+          })
+        );
+      }
+    };
 
 export const authLogIn =
   (
     formData: LoginMeReq
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const Res = await authService.login(formData);
+    async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+      const Res = await authService.login(formData);
 
-    if (Res.data.resultCode === ResultCode.Success) {
-      await dispatch(authMe());
-    }
-    if (Res.data.resultCode === ResultCode.CaptchaRequired) {
-      await dispatch(setCaptcha());
-    }
-  };
+      if (Res.data.resultCode === ResultCode.Success) {
+        await dispatch(authMe());
+      }
+      if (Res.data.resultCode === ResultCode.CaptchaRequired) {
+        await dispatch(setCaptcha());
+      }
+    };
 
 export const authLogOut =
   (): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-    const Res = await authService.logout();
+    async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+      const Res = await authService.logout();
 
-    if (Res.data.resultCode === ResultCode.Success) {
-      await dispatch(authMe());
-    }
-  };
+      console.log(Res);
+
+      if (Res.data.resultCode === ResultCode.Success) {
+        await dispatch(authMe());
+      }
+    };
 
 type AuthState = {
-  sidebar: SidebarItem[];
   authedUserData: AuthData;
   captcha: TCaptcha | null;
 };
 
 const initialState: AuthState = {
-  sidebar: [
-    { id: 0, to: '/', text: 'Profile' },
-    { id: 1, to: '/chat', text: 'Chat' },
-    { id: 2, to: '/news', text: 'News' },
-    { id: 3, to: '/music', text: 'Music' },
-    { id: 4, to: '/friends', text: 'Friends' },
-    { id: 5, to: '/settings', text: 'Settings' },
-  ],
   authedUserData: {
     id: null,
     email: null,
@@ -92,7 +79,6 @@ const initialState: AuthState = {
 };
 
 export const getUserData = (state: RootState) => state.auth.authedUserData;
-export const getSidebar = (state: RootState) => state.auth.sidebar;
 export const getCaptcha = (state: RootState) => state.auth.captcha;
 
 export const authReducer = (
