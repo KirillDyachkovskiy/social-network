@@ -9,9 +9,9 @@ import s from './profile.module.scss';
 import { useUserInfoQuery, useUserStatusQuery } from '../../../data/hooks';
 
 function Profile() {
-  const { id: authedId } = useSelector(getUserData);
   const posts = useSelector(getPosts);
 
+  const { id: authedId } = useSelector(getUserData);
   const { id = authedId } = useParams();
 
   const { data: profile } = useUserInfoQuery(id as number);
