@@ -4,13 +4,13 @@ import {
   CaptchaRes,
   LoginMeReq,
   LoginMeRes,
-  LogoutMeRes,
   ProfileInfoReq,
   ProfileInfoRes,
   ProfilePhotoReq,
   ProfilePhotoRes,
   ProfileStatusReq,
   ProfileStatusRes,
+  TLogoutRes,
   TUserInfoReq,
   TUserInfoRes,
   UserFollowReq,
@@ -32,9 +32,17 @@ const instance = axios.create({
 });
 
 export const authService = {
-  me: () => instance.get<AuthMeRes>('auth/me'),
-  login: (data: LoginMeReq) => instance.post<LoginMeRes>('/auth/login', data),
-  logout: () => instance.delete<LogoutMeRes>('/auth/login'),
+  async me() {
+    const { data } = await instance.get<AuthMeRes>('auth/me');
+
+    return data;
+  },
+  async login(data: LoginMeReq) {
+    await instance.post<LoginMeRes>('/auth/login', data);
+  },
+  async logout() {
+    await instance.delete<TLogoutRes>('/auth/login');
+  },
 };
 
 export const profileService = {
@@ -49,18 +57,16 @@ export const profileService = {
     return data;
   },
   async updateStatus(status: ProfileStatusReq) {
-    const { data } = await instance.put<ProfileStatusRes>('profile/status', {
+    await instance.put<ProfileStatusRes>('profile/status', {
       status,
     });
-
-    return data;
   },
-  updateAvatar: (avatar: ProfilePhotoReq) => {
+  async updateAvatar(avatar: ProfilePhotoReq) {
     const formData = new FormData();
 
     formData.append('image', avatar);
 
-    return instance.put<ProfilePhotoRes>('profile/photo', formData, {
+    await instance.put<ProfilePhotoRes>('profile/photo', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

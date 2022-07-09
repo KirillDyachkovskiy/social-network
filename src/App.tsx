@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Preloader } from './views/ui';
+import { useAuthLogoutMutate, useAuthMeQuery } from './data/hooks';
 
 const MainLayout = lazy((): any => import('./views/layouts/MainLayout'));
 const Notfound = lazy((): any => import('./views/pages/Notfound'));
@@ -10,10 +11,14 @@ const Profile = lazy((): any => import('./views/pages/Profile'));
 const Login = lazy((): any => import('./views/pages/Login'));
 
 export default function App() {
+  const { data } = useAuthMeQuery();
+  const name = data?.data?.login;
+  const { mutate: logout } = useAuthLogoutMutate();
+
   return (
     <Suspense fallback={<Preloader />}>
       <Routes>
-        <Route path='/' element={<MainLayout />}>
+        <Route path='/' element={<MainLayout name={name} logout={logout} />}>
           <Route index element={<Profile />} />
           <Route path=':id' element={<Profile />} />
           <Route path='chat/*' element={<Chat />} />

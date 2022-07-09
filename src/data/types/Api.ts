@@ -4,6 +4,12 @@ export enum ResultCode {
   CaptchaRequired = 10,
 }
 
+export type UserPost = {
+  id: number;
+  text: string;
+  likes: number;
+};
+
 type Photos = {
   small: null | string;
   large: null | string;
@@ -68,7 +74,7 @@ export type LoginMeReq = {
 };
 export type LoginMeRes = Res;
 
-export type LogoutMeRes = Res;
+export type TLogoutRes = Res;
 
 export type UsersReq = {
   count: number;

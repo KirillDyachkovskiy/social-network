@@ -1,42 +1,32 @@
 import { Outlet } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import Logo from '../../ui/Logo';
+import { FC } from 'react';
+import { Logo, Sidebar } from '../../ui';
 import LoginCard from '../../components/LoginCard';
-import { Sidebar } from '../../ui/Sidebar';
-import {
-  authLogOut,
-  authMe,
-  getUserData,
-} from '../../../data/redux/reducers/authReducer';
-import SIDEBAR from '../../../data/constants';
+import { SIDEBAR } from '../../../data/constants';
 import s from './mainLayout.module.scss';
 
-export default function MainLayout() {
-  const { login } = useSelector(getUserData);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(authMe());
-  }, [dispatch]);
-
-  return (
-    <section className={s.layout}>
-      <header className={s.layout__header}>
-        <div className={s.layout__container}>
-          <Logo />
-          <LoginCard login={login} authLogOut={() => dispatch(authLogOut())} />
-        </div>
-      </header>
-      <main className={`${s.layout__main} ${s.layout__container}`}>
-        <div className={s.layout__sidebar}>
-          <Sidebar items={SIDEBAR} />
-        </div>
-        <div className={s.layout__content}>
-          <Outlet />
-        </div>
-      </main>
-    </section>
-  );
+interface IMainLayout {
+  name: string | null;
+  logout: () => void;
 }
+
+const MainLayout: FC<IMainLayout> = ({ name, logout }) => (
+  <section className={s.layout}>
+    <header className={s.layout__header}>
+      <div className={s.layout__container}>
+        <Logo />
+        <LoginCard name={name} logout={logout} />
+      </div>
+    </header>
+    <main className={`${s.layout__main} ${s.layout__container}`}>
+      <div className={s.layout__sidebar}>
+        <Sidebar items={SIDEBAR} />
+      </div>
+      <div className={s.layout__content}>
+        <Outlet />
+      </div>
+    </main>
+  </section>
+);
+
+export default MainLayout;

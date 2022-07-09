@@ -1,17 +1,17 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getPosts } from '../../../data/redux/reducers/profileReducer';
-import { getUserData } from '../../../data/redux/reducers/authReducer';
 import { ProfileCard, ProfileWall, withRedirect } from '../../components';
 import { Image, Preloader } from '../../ui';
 import cover from '../../assets/images/default_cover.jpg';
 import s from './profile.module.scss';
-import { useUserInfoQuery, useUserStatusQuery } from '../../../data/hooks';
+import {
+  useAuthMeQuery,
+  useUserInfoQuery,
+  useUserStatusQuery,
+} from '../../../data/hooks';
 
 function Profile() {
-  const posts = useSelector(getPosts);
-
-  const { id: authedId } = useSelector(getUserData);
+  const { data } = useAuthMeQuery();
+  const authedId = data?.data?.id;
   const { id = authedId } = useParams();
 
   const { data: profile } = useUserInfoQuery(id as number);
@@ -37,7 +37,6 @@ function Profile() {
         isOwner={id === authedId}
         name={visitedProfile.fullName || undefined}
         photo={visitedProfile.photos.small || undefined}
-        posts={posts}
       />
     </section>
   );

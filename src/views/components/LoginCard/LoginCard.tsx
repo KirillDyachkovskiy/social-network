@@ -1,23 +1,21 @@
 import s from './loginCard.module.scss';
 
 interface ILoginCard {
-  login: string | null;
-  authLogOut: () => void;
+  name: string | null;
+  logout: () => void;
 }
 
-export default function LoginCard({ login, authLogOut }: ILoginCard) {
+function LoginCard({ name, logout }: ILoginCard) {
   return (
     <div className={s.loginCard}>
-      <p className={s.loginCard__nickname}>{login || 'Anonymous'}</p>
-      {login && (
-        <button
-          type='button'
-          className={s.loginCard__logout}
-          onClick={authLogOut}
-        >
+      <p className={s.loginCard__nickname}>{name}</p>
+      {name && (
+        <button type='button' className={s.loginCard__logout} onClick={logout}>
           <p className={s.loginCard__icon} />
         </button>
       )}
     </div>
   );
 }
+
+export default LoginCard;

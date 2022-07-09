@@ -1,6 +1,6 @@
-import { UserPost } from '../../../data/redux/reducers/profileReducer';
 import { Avatar, Cross, Field } from '../../ui';
 import s from './profilePost.module.scss';
+import { UserPost } from '../../../data/types/Api';
 
 interface IPost extends UserPost {
   deletePost: (id: number) => void;
@@ -8,7 +8,7 @@ interface IPost extends UserPost {
   photo?: string;
 }
 
-export default function ProfilePost({
+function ProfilePost({
   id,
   text,
   likes,
@@ -34,3 +34,5 @@ export default function ProfilePost({
     </Field>
   );
 }
+
+export default ProfilePost;

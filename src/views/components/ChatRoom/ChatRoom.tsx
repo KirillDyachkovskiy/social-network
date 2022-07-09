@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { TMessage } from '../../../data/api/Websocket';
 import { getMessages } from '../../../data/redux/reducers/chatReducer';
-import { getUserData } from '../../../data/redux/reducers/authReducer';
 import { Field, Message } from '../../ui';
 import s from './chatRoom.module.scss';
+import { useAuthMeQuery } from '../../../data/hooks';
 
 export default function ChatRoom() {
-  const { id: authedUserId } = useSelector(getUserData);
+  const { data } = useAuthMeQuery();
+  const authedId = data?.data?.id;
   const messages = useSelector(getMessages);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -23,7 +24,7 @@ export default function ChatRoom() {
           <Message
             key={id}
             sender={message.userId}
-            type={message.userId === authedUserId ? 'to' : 'from'}
+            type={message.userId === authedId ? 'to' : 'from'}
             name={message.userName}
             photo={message.photo}
           >

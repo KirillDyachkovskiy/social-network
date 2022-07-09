@@ -5,4 +5,8 @@ export { default as useUserAvatarMutate } from './useUserAvatarMutate';
 export { default as useUserStatusMutate } from './useUserStatusMutate';
 export { default as useUserInfoQuery } from './useUserInfoQuery';
 export { default as useUserStatusQuery } from './useUserStatusQuery';
+export { default as useAuthMeQuery } from './useAuthMeQuery';
 export { default as useUsersPageQuery } from './useUsersPageQuery';
+export { default as useAuthLogoutMutate } from './useAuthLogoutMutate';
+export { default as useCaptchaQuery } from './useCaptchaQuery';
+export { default as useAuth } from './useAuth';

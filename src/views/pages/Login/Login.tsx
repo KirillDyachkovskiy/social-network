@@ -1,18 +1,12 @@
 // @ts-nocheck
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  authLogIn,
-  getCaptcha,
-  getUserData,
-} from '../../../data/redux/reducers/authReducer';
 import { Button, Field, Image } from '../../ui';
 import s from './login.module.scss';
-import { LoginMeReq } from '../../../data/types/Api';
+import useAuthLoginMutate from '../../../data/hooks/useAuthLoginMutate';
+import { useAuthMeQuery, useCaptchaQuery } from '../../../data/hooks';
 
-export default function Login() {
+function Login() {
   const {
     register,
     handleSubmit,
@@ -26,24 +20,22 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const captcha = useSelector(getCaptcha);
-  const { id } = useSelector(getUserData);
+  const { data: captchaData } = useCaptchaQuery();
+  const captcha = captchaData?.data.url;
+  const { data } = useAuthMeQuery();
+  const authedId = data?.data?.id;
 
-  const dispatch = useDispatch();
+  console.log('render');
 
-  const onSubmit = (data: LoginMeReq) => {
-    dispatch(authLogIn(data));
-  };
+  const { mutate: authLogin } = useAuthLoginMutate();
 
-  useEffect(() => {
-    if (id) {
-      navigate(-1);
-    }
-  }, [navigate, id]);
+  if (authedId) {
+    navigate('/', { replace: true });
+  }
 
   return (
     <Field>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmit(authLogin)}>
         <div>
           <p>Email</p>
           <input
@@ -113,3 +105,5 @@ export default function Login() {
     </Field>
   );
 }
+
+export default Login;

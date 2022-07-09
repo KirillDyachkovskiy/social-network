@@ -1,38 +1,38 @@
-import { useDispatch } from 'react-redux';
-import {
-  addPost,
-  deletePost,
-  UserPost,
-} from '../../../data/redux/reducers/profileReducer';
+import { useState } from 'react';
 import ProfilePost from '../ProfilePost';
 import { Field, Submit } from '../../ui';
+import { POSTS } from '../../../data/constants';
+import { UserPost } from '../../../data/types/Api';
 import s from './profileWall.module.scss';
 
 interface IProfileWall {
-  posts: Array<UserPost>;
   name?: string;
   photo?: string;
   isOwner: boolean;
 }
 
-export default function ProfileWall({
-  name,
-  photo,
-  posts,
-  isOwner,
-}: IProfileWall) {
-  const dispatch = useDispatch();
+function ProfileWall({ name, photo, isOwner }: IProfileWall) {
+  const [posts, setPosts] = useState<UserPost[]>(POSTS); // вынести в контекст
+
+  const addPost = (text: string) =>
+    setPosts((prevPosts) => [
+      ...prevPosts,
+      {
+        id: prevPosts.length,
+        text,
+        likes: Math.trunc(Math.random() * 100),
+      },
+    ]);
+
+  const deletePost = (id: number) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
+  };
 
   return (
     <section className={s.wall}>
       {isOwner && (
         <Field>
-          <Submit
-            reset
-            required
-            placeholder="What's new?"
-            onSubmit={(text: string) => dispatch(addPost(text))}
-          >
+          <Submit reset required placeholder="What's new?" onSubmit={addPost}>
             Post
           </Submit>
         </Field>
@@ -45,7 +45,7 @@ export default function ProfileWall({
             likes={p.likes}
             text={p.text}
             id={p.id}
-            deletePost={(id: number) => dispatch(deletePost(id))}
+            deletePost={deletePost}
             name={name}
             photo={photo}
           />
@@ -54,3 +54,5 @@ export default function ProfileWall({
     </section>
   );
 }
+
+export default ProfileWall;
