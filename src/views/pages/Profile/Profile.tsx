@@ -4,14 +4,14 @@ import { Image, Preloader } from '../../ui';
 import cover from '../../assets/images/default_cover.jpg';
 import s from './profile.module.scss';
 import {
-  useAuthMeQuery,
+  useAuth,
   useUserInfoQuery,
   useUserStatusQuery,
 } from '../../../data/hooks';
 
 function Profile() {
-  const { data } = useAuthMeQuery();
-  const authedId = data?.data?.id;
+  const { user } = useAuth();
+  const authedId = user?.id;
   const { id = authedId } = useParams();
 
   const { data: profile } = useUserInfoQuery(id as number);

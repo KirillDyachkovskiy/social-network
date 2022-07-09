@@ -4,11 +4,11 @@ import { TMessage } from '../../../data/api/Websocket';
 import { getMessages } from '../../../data/redux/reducers/chatReducer';
 import { Field, Message } from '../../ui';
 import s from './chatRoom.module.scss';
-import { useAuthMeQuery } from '../../../data/hooks';
+import { useAuth } from '../../../data/hooks';
 
-export default function ChatRoom() {
-  const { data } = useAuthMeQuery();
-  const authedId = data?.data?.id;
+function ChatRoom() {
+  const { user } = useAuth();
+  const authedId = user?.id;
   const messages = useSelector(getMessages);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -36,3 +36,5 @@ export default function ChatRoom() {
     </Field>
   );
 }
+
+export default ChatRoom;

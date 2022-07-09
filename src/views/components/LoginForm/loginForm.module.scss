@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__input {
+    width: 200px;
+    border: 1px solid rgba($color: rgb(0, 0, 0), $alpha: 0.1);
+    border-radius: 4px;
+    padding: 7px;
+  }
+
+  &__error {
+    margin-left: 5px;
+    color: var(--liked-red);
+    font-size: small;
+    font-weight: bolder;
+  }
+
+  &__captcha {
+    width: 200px;
+    height: 100px;
+  }
+
+  &__button {
+    align-self: center;
+  }
+}

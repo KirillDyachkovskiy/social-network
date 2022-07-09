@@ -5,8 +5,15 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import store from './data/redux';
 import App from './App';
+import AuthProvider from './data/hocs/AuthProvider';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const root = createRoot(document.getElementById('root') as HTMLDivElement);
 
@@ -15,7 +22,9 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Provider store={store}>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </Provider>
       </BrowserRouter>
     </QueryClientProvider>

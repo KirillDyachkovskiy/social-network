@@ -1,7 +1,10 @@
 import { useQuery } from 'react-query';
 import { authService } from '../api/Api';
-import { AuthMeRes } from '../types/Api';
+import { AuthData } from '../types/Api';
 
-const useAuthMeQuery = () => useQuery<AuthMeRes>('authMe', authService.me);
+const useAuthMeQuery = () =>
+  useQuery<AuthData | null>('authMe', authService.me, {
+    select: (data) => (data?.id ? data : null),
+  });
 
 export default useAuthMeQuery;

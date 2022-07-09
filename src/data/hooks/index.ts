@@ -9,4 +9,5 @@ export { default as useAuthMeQuery } from './useAuthMeQuery';
 export { default as useUsersPageQuery } from './useUsersPageQuery';
 export { default as useAuthLogoutMutate } from './useAuthLogoutMutate';
 export { default as useCaptchaQuery } from './useCaptchaQuery';
+export { default as useAuthLoginMutate } from './useAuthLoginMutate';
 export { default as useAuth } from './useAuth';

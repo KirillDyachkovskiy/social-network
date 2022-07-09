@@ -35,7 +35,7 @@ export const authService = {
   async me() {
     const { data } = await instance.get<AuthMeRes>('auth/me');
 
-    return data;
+    return data.data;
   },
   async login(data: LoginMeReq) {
     await instance.post<LoginMeRes>('/auth/login', data);
