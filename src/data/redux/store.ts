@@ -1,14 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { authReducer } from './reducers/authReducer';
-import { friendsReducer } from './reducers/friendsReducer';
 import { chatReducer } from './reducers/chatReducer';
 import { profileReducer } from './reducers/profileReducer';
 
 const reducers = combineReducers({
   profile: profileReducer,
   chat: chatReducer,
-  friends: friendsReducer,
   auth: authReducer,
 });
 

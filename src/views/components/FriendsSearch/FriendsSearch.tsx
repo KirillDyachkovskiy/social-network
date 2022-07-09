@@ -8,11 +8,7 @@ interface IFriendsSearch {
   friend: boolean;
 }
 
-export default function FriendsSearch({
-  onSubmit,
-  term,
-  friend,
-}: IFriendsSearch) {
+function FriendsSearch({ onSubmit, term, friend }: IFriendsSearch) {
   const [isFriendsOnly, setIsFriendsOnly] = useState<boolean>(friend);
 
   const onCheck = () => setIsFriendsOnly((prevState: boolean) => !prevState);
@@ -41,3 +37,5 @@ export default function FriendsSearch({
     </div>
   );
 }
+
+export default FriendsSearch;

@@ -1,31 +1,28 @@
-import { useSelector } from 'react-redux';
-import { getFollowingInProgress } from '../../../data/redux/reducers/friendsReducer';
 import { FriendsSearch, UserCard, withRedirect } from '../../components';
 import { Field, Paginator, Preloader } from '../../ui';
 import { User } from '../../../data/types/Api';
 import { useSearchParamsObject, useUsersPageQuery } from '../../../data/hooks';
 import s from './friends.module.scss';
-import useUserSubscribeMutate from '../../../data/hooks/useUserSubscribeMutate';
 
 function Friends() {
   const [searchParams, setSearchParams] = useSearchParamsObject({
     page: '1',
     count: '10',
     term: '',
-    friend: 'false',
   });
 
   // @ts-ignore
   const { page, term, friend } = searchParams;
 
-  const followingInProgress = useSelector(getFollowingInProgress);
-
-  const { data, isSuccess, isFetching } = useUsersPageQuery(page, term, friend);
-  const { mutate: toggleSubscribe } = useUserSubscribeMutate();
+  const { data, isLoading } = useUsersPageQuery(page, term, friend);
 
   const onSearchChange = (term: string, friend: boolean) => {
     // @ts-ignore
-    setSearchParams({ page: String(page), term, friend: String(friend) });
+    setSearchParams({
+      page: String(page),
+      term,
+      ...(friend && { friend: String(friend) }),
+    });
   };
 
   const onPaginate = (page: number) => {
@@ -42,17 +39,12 @@ function Friends() {
           friend={friend === 'true'}
         />
         <Field>
-          {!isSuccess || isFetching || !data ? (
+          {isLoading || !data ? (
             <Preloader />
           ) : (
             <div className={s.friends__users}>
-              {data.users?.map((u: User) => (
-                <UserCard
-                  key={u.id}
-                  user={u}
-                  onClick={toggleSubscribe}
-                  followingInProgress={followingInProgress}
-                />
+              {data.users?.map((user: User) => (
+                <UserCard key={user.id} user={user} />
               ))}
             </div>
           )}

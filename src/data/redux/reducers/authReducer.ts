@@ -21,48 +21,48 @@ export const setCaptcha = () => async (dispatch: Dispatch) => {
 
 export const authMe =
   (): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-    async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-      const Res = await authService.me();
+  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+    const Res = await authService.me();
 
-      if (Res.data.resultCode === ResultCode.Success) {
-        dispatch(setUserData(Res.data.data));
-      } else {
-        dispatch(
-          setUserData({
-            id: null,
-            email: null,
-            login: null,
-          })
-        );
-      }
-    };
+    if (Res.data.resultCode === ResultCode.Success) {
+      dispatch(setUserData(Res.data.data));
+    } else {
+      dispatch(
+        setUserData({
+          id: null,
+          email: null,
+          login: null,
+        })
+      );
+    }
+  };
 
 export const authLogIn =
   (
     formData: LoginMeReq
   ): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-    async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-      const Res = await authService.login(formData);
+  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+    const Res = await authService.login(formData);
 
-      if (Res.data.resultCode === ResultCode.Success) {
-        await dispatch(authMe());
-      }
-      if (Res.data.resultCode === ResultCode.CaptchaRequired) {
-        await dispatch(setCaptcha());
-      }
-    };
+    if (Res.data.resultCode === ResultCode.Success) {
+      await dispatch(authMe());
+    }
+    if (Res.data.resultCode === ResultCode.CaptchaRequired) {
+      await dispatch(setCaptcha());
+    }
+  };
 
 export const authLogOut =
   (): ThunkAction<Promise<void>, RootState, undefined, AnyAction> =>
-    async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
-      const Res = await authService.logout();
+  async (dispatch: ThunkDispatch<RootState, undefined, AnyAction>) => {
+    const Res = await authService.logout();
 
-      console.log(Res);
+    console.log(Res);
 
-      if (Res.data.resultCode === ResultCode.Success) {
-        await dispatch(authMe());
-      }
-    };
+    if (Res.data.resultCode === ResultCode.Success) {
+      await dispatch(authMe());
+    }
+  };
 
 type AuthState = {
   authedUserData: AuthData;

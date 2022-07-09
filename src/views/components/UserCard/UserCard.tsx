@@ -1,35 +1,32 @@
 import { Link } from 'react-router-dom';
 import { Avatar, Button, Field } from '../../ui';
 import s from './userCard.module.scss';
-import { User, UserId, UserSubscribeRes } from '../../../data/types/Api';
+import { User, UserId } from '../../../data/types/Api';
+import useUserSubscribeMutate from '../../../data/hooks/useUserSubscribeMutate';
 
 interface IUserCard {
   user: User;
-  onClick: ({ userId, followed }: UserSubscribeRes) => void;
-  followingInProgress: Array<UserId>;
 }
 
-function UserCard({ user, onClick, followingInProgress }: IUserCard) {
+function UserCard({ user }: IUserCard) {
+  const { id, name, status, followed, photos } = user;
+  const { mutate: toggleSubscribe, isLoading } = useUserSubscribeMutate();
+
   const handleClick = (userId: UserId, followed: boolean) => () => {
-    onClick({ userId, followed });
+    toggleSubscribe({ userId, followed });
   };
 
   return (
     <Field color='grey'>
       <article className={s.user}>
-        <Link to={`/${user.id}`}>
-          <Avatar size='medium' src={user.photos.small} />
+        <Link to={`/${id}`}>
+          <Avatar size='medium' src={photos.small} />
         </Link>
         <div className={s.user__box}>
-          <p>{user.name}</p>
-          <p>{user.status}</p>
-          <Button
-            onClick={handleClick(user.id, user.followed)}
-            disabled={followingInProgress.some(
-              (userId: UserId) => userId === user.id
-            )}
-          >
-            {user.followed ? 'Unfollow' : 'Follow'}
+          <p>{name}</p>
+          <p>{status}</p>
+          <Button onClick={handleClick(id, followed)} disabled={isLoading}>
+            {followed ? 'Unfollow' : 'Follow'}
           </Button>
         </div>
       </article>
